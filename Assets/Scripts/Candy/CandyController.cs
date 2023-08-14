@@ -4,6 +4,12 @@ public class CandyController : MonoBehaviour
 {
     private bool isDragging;
 
+    RaycastHit2D hit;
+
+    Vector3 positionVec;
+
+    [SerializeField] GameObject temp;
+
     private void Start()
     {
         // Collider2D 컴포넌트 가져오기 (캔디에 Collider2D가 있어야 함)
@@ -17,37 +23,48 @@ public class CandyController : MonoBehaviour
 
     private void Update()
     {
-        
-        if (isDragging)
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-            transform.position = new Vector3(mousePosition.x, mousePosition.y, transform.position.z);
-        }
-    }
+            Vector2 wolrdPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            hit = Physics2D.Raycast(wolrdPoint, transform.forward, Mathf.Infinity);
 
-    private void OnMouseDown()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+            Debug.DrawRay(wolrdPoint, transform.forward, Color.red, Mathf.Infinity);
 
-        Debug.Log(hit.collider.gameObject.name);
-        if (hit.collider != null)
-        {
-            string layerName = LayerMask.LayerToName(hit.collider.gameObject.layer);
-            Debug.Log($"Hit layer: {layerName}");
-
-            if (hit.collider.gameObject == this.gameObject && layerName == "Candy")
+            if (hit.collider != null)
             {
-                CandyStatus status = GetComponent<CandyStatus>();
-                Debug.Log($"Lv.{status.level} Candy");
-                isDragging = true; // 'Candy' 레이어에 속한 오브젝트만 드래그 가능
+                Debug.Log(hit.collider.gameObject.name);
+                positionVec = hit.collider.transform.position;
             }
         }
-    }
+
+        if (Input.GetMouseButton(0))
+        {
+            temp.transform.localPosition = Input.mousePosition;
+            if (hit.collider != null)
+            {
+                Debug.Log(Camera.main.WorldToViewportPoint(Input.mousePosition));
+                var world = Camera.main.WorldToViewportPoint(Input.mousePosition);
+
+                hit.collider.transform.localPosition = world;
 
 
-    private void OnMouseUp()
-    {
-        isDragging = false; // 마우스 버튼을 뗄 때 드래그 중단
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (hit.collider != null)
+            {
+                hit.collider.transform.position = positionVec;
+            }
+        }
+        //if (isDragging)
+        //{
+        //    Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+        //    transform.position = new Vector3(mousePosition.x, mousePosition.y, transform.position.z);
+        //}
+
+
+
     }
 }
