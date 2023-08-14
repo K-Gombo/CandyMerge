@@ -33,10 +33,10 @@ public class GiftBox : MonoBehaviour
         {
             float timeElapsed = 0f;
 
-            while (timeElapsed < 10f)
+            while (timeElapsed < 1f)
             {
                 timeElapsed += Time.deltaTime;
-                giftBoxFill.fillAmount = timeElapsed / 10f;
+                giftBoxFill.fillAmount = timeElapsed / 1f;
                 yield return null;
             }
 
