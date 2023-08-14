@@ -42,11 +42,11 @@ public class CandyController : MonoBehaviour
             temp.transform.localPosition = Input.mousePosition;
             if (hit.collider != null)
             {
-                Debug.Log(Input.mousePosition + "\t" + hit.collider.transform.localPosition);
+                Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + "\t" + hit.collider.transform.position);
                 //Debug.Log(Camera.main.WorldToScreenPoint(Input.mousePosition));
-                var world = Camera.main.WorldToScreenPoint(Input.mousePosition);
+                var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                hit.collider.transform.localPosition = world;
+                hit.collider.transform.position = new Vector3(world.x,world.y,90);
 
 
             }
