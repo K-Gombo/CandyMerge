@@ -1,9 +1,20 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class CandyController : MonoBehaviour
 {
     RaycastHit2D hit;
     Vector3 startPosition;
+    private List<Transform> boxTransforms; // 박스 Transform 리스트
+
+    private void Start()
+    {
+        // 시작할 때 모든 박스를 가져와서 리스트에 저장
+        boxTransforms = new List<Transform>();
+        foreach (var box in GameObject.FindGameObjectsWithTag("Box"))
+        {
+            boxTransforms.Add(box.transform);
+        }
+    }
 
     private void Update()
     {
@@ -51,16 +62,16 @@ public class CandyController : MonoBehaviour
         Transform closestBox = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach (var box in GameObject.FindGameObjectsWithTag("Box"))
+        foreach (var boxTransform in boxTransforms) // 미리 저장한 박스 Transform 리스트 사용
         {
-            if (box.transform.childCount == 0) // 빈 박스만 확인
+            if (boxTransform.childCount == 0) // 빈 박스만 확인
             {
-                float distance = Vector3.Distance(candyTransform.position, box.transform.position);
+                float distance = Vector3.Distance(candyTransform.position, boxTransform.position);
 
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestBox = box.transform;
+                    closestBox = boxTransform;
                 }
             }
         }
