@@ -5,57 +5,99 @@ using System.Collections.Generic;
 
 public class GiftBox : MonoBehaviour
 {
-    public GameObject candyPrefab; // Candy 프리팹을 참조
-    public Transform boxTile; // Boxtile 오브젝트의 Transform을 참조
-    public Image giftBoxFill; // GiftBox(fill)의 Image 컴포넌트를 참조
-    public Text createCandyText; // CreateCandy 텍스트를 참조
+    public GameObject candyPrefab;
+    public Transform boxTile;
+    public Image giftBoxFill;
+    public Text createCandyText;
     private int candiesRemaining = 0;
+    private int maxCandies = 11;
 
     private void Start()
     {
         StartCoroutine(FillAndCreateCandies());
-        createCandyText.text = candiesRemaining + "/11";
-    }
-
-    public void OnGiftBoxClick()
-    {
-        if (candiesRemaining > 0)
-        {
-            CreateCandy();
-            candiesRemaining--;
-            createCandyText.text = candiesRemaining + "/11";
-        }
+        createCandyText.text = candiesRemaining + "/" + maxCandies;
     }
 
     private IEnumerator FillAndCreateCandies()
     {
-        while (candiesRemaining < 11)
+        while (true)
         {
-            float timeElapsed = 0f;
-
-            while (timeElapsed < 1f)
+            if (candiesRemaining < maxCandies)
             {
-                timeElapsed += Time.deltaTime;
-                giftBoxFill.fillAmount = timeElapsed / 1f;
+                float timeElapsed = 0f;
+
+                while (timeElapsed < 1f)
+                {
+                    timeElapsed += Time.deltaTime;
+                    giftBoxFill.fillAmount = timeElapsed / 1f;
+                    yield return null;
+                }
+
+                candiesRemaining++;
+                createCandyText.text = candiesRemaining + "/" + maxCandies;
+
+                if (candiesRemaining == maxCandies)
+                {
+                    giftBoxFill.fillAmount = 1f; // 최대 개수에 도달하면 fillAmount를 1로 유지
+                }
+                else
+                {
+                    giftBoxFill.fillAmount = 0f;
+                }
+            }
+            else
+            {
                 yield return null;
             }
-
-            giftBoxFill.fillAmount = 0f;
-            candiesRemaining++;
-            createCandyText.text = candiesRemaining + "/11";
         }
     }
 
-    private void CreateCandy()
+    public void OnGiftBoxClick()
+    {
+        if (candiesRemaining > 0 && IsSpaceAvailableInBox())
+        {
+            CreateCandy();
+            candiesRemaining--;
+            createCandyText.text = candiesRemaining + "/" + maxCandies;
+
+            if (candiesRemaining == maxCandies - 1)
+            {
+                giftBoxFill.fillAmount = 0f; // 유저가 클릭해서 개수가 줄면 fillAmount를 0으로 초기화
+            }
+        }
+    }
+
+    private bool IsSpaceAvailableInBox()
     {
         for (int i = 0; i < boxTile.childCount; i++)
         {
             Transform child = boxTile.GetChild(i);
-            if (child.childCount == 0)
+            if (child.childCount == 0 && child.CompareTag("Box"))
             {
-                Instantiate(candyPrefab, child.position, Quaternion.identity, child);
-                return; // 캔디를 생성했으므로 함수를 빠져나옵니다.
+                return true; // 빈 공간이 있는 경우
             }
+        }
+        return false; // 빈 공간이 없는 경우
+    }
+
+    private void CreateCandy()
+    {
+        List<Transform> availableBoxes = new List<Transform>();
+    
+        for (int i = 0; i < boxTile.childCount; i++)
+        {
+            Transform child = boxTile.GetChild(i);
+            if (child.childCount == 0 && child.CompareTag("Box"))
+            {
+                availableBoxes.Add(child);
+            }
+        }
+
+        if (availableBoxes.Count > 0)
+        {
+            int randomIndex = Random.Range(0, availableBoxes.Count);
+            Transform selectedBox = availableBoxes[randomIndex];
+            Instantiate(candyPrefab, selectedBox.position, Quaternion.identity, selectedBox);
         }
     }
 }
