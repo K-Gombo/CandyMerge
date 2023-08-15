@@ -2,22 +2,8 @@ using UnityEngine;
 
 public class CandyController : MonoBehaviour
 {
-    private bool isDragging;
-
     RaycastHit2D hit;
-
-    Vector3 positionVec;
-
-    private void Start()
-    {
-        // Collider2D 컴포넌트 가져오기 (캔디에 Collider2D가 있어야 함)
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        
-        if (collider != null) // Collider2D가 존재하면
-        {
-            collider.isTrigger = true; // 트리거 활성화
-        }
-    }
+    Vector3 startPosition;
 
     private void Update()
     {
@@ -26,36 +12,59 @@ public class CandyController : MonoBehaviour
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             hit = Physics2D.Raycast(worldPoint, transform.forward, Mathf.Infinity);
 
-            Debug.DrawRay(worldPoint, transform.forward, Color.red, Mathf.Infinity);
-
-            if (hit.collider != null)
+            if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
-                Debug.Log(hit.collider.gameObject.name);
-                positionVec = hit.collider.transform.position;
+                startPosition = hit.collider.transform.position;
             }
         }
 
         if (Input.GetMouseButton(0))
         {
-            if (hit.collider != null)
+            if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
-                Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + "\t" + hit.collider.transform.position);
-                
                 var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                hit.collider.transform.position = new Vector3(world.x,world.y,90);
-
-
+                hit.collider.transform.position = new Vector3(world.x, world.y, 90);
             }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (hit.collider != null)
+            if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
-                hit.collider.transform.position = positionVec;
+                Transform closestBox = FindClosestEmptyBox(hit.collider.transform);
+
+                if (closestBox != null)
+                {
+                    hit.collider.transform.SetParent(closestBox);
+                    hit.collider.transform.position = closestBox.position; // 박스 위치로 옮김
+                }
+                else
+                {
+                    hit.collider.transform.position = startPosition; // 빈 박스가 없으면 원래 위치로 돌림
+                }
             }
         }
-        
+    }
+
+    private Transform FindClosestEmptyBox(Transform candyTransform)
+    {
+        Transform closestBox = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var box in GameObject.FindGameObjectsWithTag("Box"))
+        {
+            if (box.transform.childCount == 0) // 빈 박스만 확인
+            {
+                float distance = Vector3.Distance(candyTransform.position, box.transform.position);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestBox = box.transform;
+                }
+            }
+        }
+
+        return closestBox;
     }
 }

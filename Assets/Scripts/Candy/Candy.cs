@@ -13,6 +13,5 @@ public class Candy : MonoBehaviour
         CandyManager.instance.SetAppearance(this.gameObject);
         Debug.Log($"Lv.{status.level} Candy");
     }
-
    
 }
