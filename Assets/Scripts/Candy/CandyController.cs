@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 public class CandyController : MonoBehaviour
 {
     RaycastHit2D hit;
     Vector3 startPosition;
-    private List<Transform> boxTransforms; // 박스 Transform 리스트
+    private List<Transform> boxTransforms;
 
     private void Start()
     {
-        // 시작할 때 모든 박스를 가져와서 리스트에 저장
         boxTransforms = new List<Transform>();
         foreach (var box in GameObject.FindGameObjectsWithTag("Box"))
         {
@@ -26,17 +26,20 @@ public class CandyController : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
                 startPosition = hit.collider.transform.position;
+                hit.collider.transform.SetParent(null);
             }
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && hit.collider != null && hit.collider.CompareTag("Candy"))
         {
-            if (hit.collider != null && hit.collider.CompareTag("Candy"))
+            var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (hit.collider.transform == null) // 이 조건을 추가하여 문제가 있는 경우를 확인
             {
-                var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                hit.collider.transform.position = new Vector3(world.x, world.y, 90);
+                Debug.LogError("Collider's transform is null");
             }
+            hit.collider.transform.position = new Vector3(world.x, world.y, 90);
         }
+
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -46,36 +49,90 @@ public class CandyController : MonoBehaviour
 
                 if (closestBox != null)
                 {
-                    hit.collider.transform.SetParent(closestBox);
-                    hit.collider.transform.position = closestBox.position; // 박스 위치로 옮김
+                    Transform mergeTarget = GetMergeTarget(hit.collider.transform);
+
+                    if (mergeTarget != null)
+                    {
+                        MergeCandies(hit.collider.transform, mergeTarget);
+                        hit.collider.transform.position = startPosition;
+                    }
+                    else
+                    {
+                        float distanceToStart = Vector3.Distance(hit.collider.transform.position, startPosition);
+                        float distanceToClosestBox = Vector3.Distance(hit.collider.transform.position, closestBox.position);
+
+                        if (distanceToStart < distanceToClosestBox)
+                        {
+                            hit.collider.transform.position = startPosition;
+                        }
+                        else
+                        {
+                            hit.collider.transform.SetParent(closestBox);
+                            hit.collider.transform.position = closestBox.position;
+                        }
+                    }
                 }
                 else
                 {
-                    hit.collider.transform.position = startPosition; // 빈 박스가 없으면 원래 위치로 돌림
+                    hit.collider.transform.position = startPosition;
                 }
             }
         }
     }
 
-    private Transform FindClosestEmptyBox(Transform candyTransform)
+    private Transform FindClosestEmptyBox(Transform candy)
     {
-        Transform closestBox = null;
-        float closestDistance = Mathf.Infinity;
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = candy.position;
 
-        foreach (var boxTransform in boxTransforms) // 미리 저장한 박스 Transform 리스트 사용
+        foreach (Transform t in boxTransforms)
         {
-            if (boxTransform.childCount == 0) // 빈 박스만 확인
+            if (t.childCount == 0)
             {
-                float distance = Vector3.Distance(candyTransform.position, boxTransform.position);
-
-                if (distance < closestDistance)
+                float dist = Vector3.Distance(t.position, currentPos);
+                if (dist < minDist)
                 {
-                    closestDistance = distance;
-                    closestBox = boxTransform;
+                    tMin = t;
+                    minDist = dist;
                 }
             }
         }
+        return tMin;
+    }
 
-        return closestBox;
+    private Transform GetMergeTarget(Transform candy)
+    {
+        foreach (Transform t in boxTransforms)
+        {
+            if (t.childCount > 0 && t.GetChild(0).name == candy.name)
+            {
+                float dist = Vector3.Distance(t.position, candy.position);
+                if (dist < 0.5f)
+                {
+                    return t.GetChild(0);
+                }
+            }
+        }
+        return null;
+    }
+
+    private void MergeCandies(Transform candy1, Transform candy2)
+    {
+        CandyStatus candyStatus1 = candy1.GetComponent<CandyStatus>();
+        CandyStatus candyStatus2 = candy2.GetComponent<CandyStatus>();
+
+        if (candyStatus1.level == candyStatus2.level)
+        {
+            candyStatus2.level++;
+            CandyManager.instance.SetAppearance(candy2.gameObject);
+        
+            // 참조를 먼저 제거한 후에 캔디 파괴
+            boxTransforms.Remove(candy1);
+            Destroy(candy1.gameObject);
+
+            // 캔디가 병합되어 파괴될 때 CandyManager의 CandyDestroyed 메서드 호출
+            CandyManager.instance.CandyDestroyed();
+        }
     }
 }
