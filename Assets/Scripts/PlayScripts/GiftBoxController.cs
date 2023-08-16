@@ -11,6 +11,8 @@ public class GiftBoxController : MonoBehaviour
     public Text createCandyText;
     private int candiesRemaining = 0;
     private int maxCandies = 11;
+    public bool autoCreateEnabled = false; // 자동 생성 활성화 플래그, 초기값을 false로 설정
+    private Coroutine autoCreateCoroutine; // 코루틴 참조를 저장할 변수
 
     private void Start()
     {
@@ -38,7 +40,7 @@ public class GiftBoxController : MonoBehaviour
 
                 if (candiesRemaining == maxCandies)
                 {
-                    giftBoxFill.fillAmount = 1f; // 최대 개수에 도달하면 fillAmount를 1로 유지
+                    giftBoxFill.fillAmount = 1f;
                 }
                 else
                 {
@@ -52,6 +54,24 @@ public class GiftBoxController : MonoBehaviour
         }
     }
 
+    private IEnumerator AutoCreateCandy(int timesPer10Seconds)
+    {
+        while (true)
+        {
+            for (int i = 0; i < timesPer10Seconds; i++)
+            {
+                if (candiesRemaining > 0 && IsSpaceAvailableInBox())
+                {
+                    CreateCandy();
+                    candiesRemaining--;
+                    createCandyText.text = candiesRemaining + "/" + maxCandies;
+                }
+
+                yield return new WaitForSeconds(10f / timesPer10Seconds);
+            }
+        }
+    }
+
     public void OnGiftBoxClick()
     {
         if (candiesRemaining > 0 && IsSpaceAvailableInBox())
@@ -59,11 +79,6 @@ public class GiftBoxController : MonoBehaviour
             CreateCandy();
             candiesRemaining--;
             createCandyText.text = candiesRemaining + "/" + maxCandies;
-
-            if (candiesRemaining == maxCandies - 1)
-            {
-                giftBoxFill.fillAmount = 0f; // 유저가 클릭해서 개수가 줄면 fillAmount를 0으로 초기화
-            }
         }
     }
 
@@ -74,16 +89,16 @@ public class GiftBoxController : MonoBehaviour
             Transform child = boxTile.GetChild(i);
             if (child.childCount == 0 && child.CompareTag("Box"))
             {
-                return true; // 빈 공간이 있는 경우
+                return true;
             }
         }
-        return false; // 빈 공간이 없는 경우
+        return false;
     }
 
     private void CreateCandy()
     {
         List<Transform> availableBoxes = new List<Transform>();
-    
+
         for (int i = 0; i < boxTile.childCount; i++)
         {
             Transform child = boxTile.GetChild(i);
@@ -98,6 +113,19 @@ public class GiftBoxController : MonoBehaviour
             int randomIndex = Random.Range(0, availableBoxes.Count);
             Transform selectedBox = availableBoxes[randomIndex];
             Instantiate(candyPrefab, selectedBox.position, Quaternion.identity, selectedBox);
+        }
+    }
+
+    public void ToggleAutoCreate(bool isEnabled)
+    {
+        autoCreateEnabled = isEnabled;
+        if (isEnabled)
+        {
+            autoCreateCoroutine = StartCoroutine(AutoCreateCandy(3)); // 코루틴 시작
+        }
+        else
+        {
+            StopCoroutine(autoCreateCoroutine); // 코루틴 중지
         }
     }
 }

@@ -8,7 +8,7 @@ public class CandyController : MonoBehaviour
     private Transform originalParent; // 원래 있던 박스를 저장하기 위한 변수
     private List<Transform> boxTransforms;
     private int originalSortingOrder;
-    
+
     private void Start()
     {
         boxTransforms = new List<Transform>();
@@ -41,6 +41,7 @@ public class CandyController : MonoBehaviour
             {
                 Debug.LogError("Collider's transform is null");
             }
+
             hit.collider.transform.position = new Vector3(world.x, world.y, 90);
         }
 
@@ -53,7 +54,8 @@ public class CandyController : MonoBehaviour
                 Transform closestBox = FindClosestEmptyBox(hit.collider.transform);
                 float thresholdDistance = 0.5f;
 
-                if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level == mergeTarget.GetComponent<CandyStatus>().level)
+                if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level ==
+                    mergeTarget.GetComponent<CandyStatus>().level)
                 {
                     Debug.Log("여기다!");
                     MergeCandies(hit.collider.transform, mergeTarget);
@@ -61,8 +63,10 @@ public class CandyController : MonoBehaviour
                 }
                 else
                 {
-                    float distanceToBox = closestBox != null ? Vector3.Distance(hit.collider.transform.position, closestBox.position) : Mathf.Infinity;
-            
+                    float distanceToBox = closestBox != null
+                        ? Vector3.Distance(hit.collider.transform.position, closestBox.position)
+                        : Mathf.Infinity;
+
                     if (mergeTarget == null && distanceToBox < thresholdDistance)
                     {
                         hit.collider.transform.SetParent(closestBox);
@@ -96,6 +100,7 @@ public class CandyController : MonoBehaviour
                 }
             }
         }
+
         return tMin;
     }
 
@@ -112,6 +117,7 @@ public class CandyController : MonoBehaviour
                 }
             }
         }
+
         return null;
     }
 
@@ -143,4 +149,7 @@ public class CandyController : MonoBehaviour
         Debug.LogWarning(originalParent);
         candy.transform.position = startPosition;
     }
+
+   
+    
 }
