@@ -149,54 +149,66 @@ public class CandyController : MonoBehaviour
     
     
     private IEnumerator AutoMergeCandies(int timesPerNSeconds, int n)
+{
+    while (true)
     {
-     
-        while (true)
+        for (int i = 0; i < timesPerNSeconds; i++)
         {
-            for (int i = 0; i < timesPerNSeconds; i++)
+            for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
             {
-                for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
-                {
-                    Transform lowestLevelCandy = null;
-                    Transform mergeTarget = null;
-                    float closestDistance = float.MaxValue;
+                Transform lowestLevelCandy = null;
+                Transform mergeTarget = null;
+                float closestDistance = float.MaxValue;
 
-                    foreach (Transform box in boxTransforms)
+                foreach (Transform box in boxTransforms)
+                {
+                    if (box.childCount > 0)
                     {
-                        if (box.childCount > 0)
+                        CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
+                        if (candyStatus != null && candyStatus.level == targetLevel)
                         {
-                            CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
-                            if (candyStatus != null && candyStatus.level == targetLevel)
+                            if (lowestLevelCandy == null)
                             {
-                                if (lowestLevelCandy == null)
+                                lowestLevelCandy = box.GetChild(0);
+                            }
+                            else
+                            {
+                                float distance = Vector3.Distance(lowestLevelCandy.position, box.GetChild(0).position);
+                                if (distance < closestDistance)
                                 {
-                                    lowestLevelCandy = box.GetChild(0);
-                                }
-                                else
-                                {
-                                    float distance = Vector3.Distance(lowestLevelCandy.position, box.GetChild(0).position);
-                                    if (distance < closestDistance)
-                                    {
-                                        closestDistance = distance;
-                                        mergeTarget = box.GetChild(0);
-                                    }
+                                    closestDistance = distance;
+                                    mergeTarget = box.GetChild(0);
                                 }
                             }
                         }
                     }
-
-                    if (lowestLevelCandy != null && mergeTarget != null)
-                    {
-                       
-                        MergeCandies(lowestLevelCandy, mergeTarget);
-                        break;
-                    }
                 }
 
-                yield return new WaitForSeconds((float)n / timesPerNSeconds);
+                if (lowestLevelCandy != null && mergeTarget != null)
+                {
+                    float duration = 0.4f; // 이동에 걸리는 시간
+                    float elapsedTime = 0f;
+                    Vector3 startPosition = lowestLevelCandy.position;
+                    Vector3 endPosition = mergeTarget.position;
+
+                    // 원하는 시간 동안 캔디를 다른 캔디 쪽으로 이동
+                    while (elapsedTime < duration)
+                    {
+                        float t = elapsedTime / duration;
+                        lowestLevelCandy.position = Vector3.MoveTowards(startPosition, endPosition, t);
+                        elapsedTime += Time.deltaTime;
+                        yield return null;
+                    }
+
+                    MergeCandies(lowestLevelCandy, mergeTarget);
+                    break;
+                }
             }
+
+            yield return new WaitForSeconds((float)n / timesPerNSeconds);
         }
     }
+}
     
     public void ToggleFastAutoMerge(bool isEnabled)
     {
