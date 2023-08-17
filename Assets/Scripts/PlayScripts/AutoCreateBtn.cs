@@ -22,7 +22,7 @@ public class AutoCreateBtn : MonoBehaviour
         Debug.Log("ACOffBtn 클릭됨!");
         ACOffBtn.gameObject.SetActive(false);
         ACOnBtn.gameObject.SetActive(true);
-        giftBoxController.ToggleAutoCreate(true); // 자동 생성 활성화
+        giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
     }
 
     private void OnACOnBtnClick()
@@ -30,6 +30,6 @@ public class AutoCreateBtn : MonoBehaviour
         Debug.Log("ACOnBtn 클릭됨!");
         ACOffBtn.gameObject.SetActive(true);
         ACOnBtn.gameObject.SetActive(false);
-        giftBoxController.ToggleAutoCreate(false); // 자동 생성 비활성화
+        giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
     }
 }

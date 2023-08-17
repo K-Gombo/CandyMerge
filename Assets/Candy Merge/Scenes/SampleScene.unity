@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21475,6 +21475,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1490596928}
   - {fileID: 790111753}
   - {fileID: 1555466534}
   m_Father: {fileID: 1716769350}
@@ -24398,6 +24399,7 @@ MonoBehaviour:
   giftBoxFill: {fileID: 1505396484}
   createCandyText: {fileID: 1498248997}
   autoCreateEnabled: 1
+  passiveAutoCreateEnabled: 1
 --- !u!1 &829064840
 GameObject:
   m_ObjectHideFlags: 0
@@ -41586,7 +41588,7 @@ GameObject:
   - component: {fileID: 1403784717}
   - component: {fileID: 1403784718}
   m_Layer: 5
-  m_Name: AutoMergeBtn
+  m_Name: LevelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41626,8 +41628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa584a5e25f79e4f91494e127e094fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AMOffBtn: {fileID: 1431377818}
-  AMOnBtn: {fileID: 1220139096}
+  LevelOffBtn: {fileID: 1431377818}
+  LevelOnBtn: {fileID: 1220139096}
 --- !u!1 &1404255704
 GameObject:
   m_ObjectHideFlags: 0
@@ -41720,6 +41722,7 @@ GameObject:
   - component: {fileID: 1404947465}
   - component: {fileID: 1404947464}
   - component: {fileID: 1404947463}
+  - component: {fileID: 1404947466}
   m_Layer: 5
   m_Name: Box_1 (8)
   m_TagString: Box
@@ -44177,7 +44180,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1716769350}
+  m_Father: {fileID: 751400242}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -50667,7 +50670,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1490596928}
   - {fileID: 751400242}
   - {fileID: 374069529}
   - {fileID: 1665994794}

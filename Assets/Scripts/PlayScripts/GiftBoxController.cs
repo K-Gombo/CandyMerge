@@ -11,8 +11,8 @@ public class GiftBoxController : MonoBehaviour
     public Text createCandyText;
     private int candiesRemaining = 0;
     private int maxCandies = 11;
-    public bool autoCreateEnabled = false; // 자동 생성 활성화 플래그, 초기값을 false로 설정
-    private Coroutine autoCreateCoroutine; // 코루틴 참조를 저장할 변수
+    public bool autoCreateEnabled = false;
+    private Coroutine autoCreateCoroutine;
 
     private void Start()
     {
@@ -116,16 +116,16 @@ public class GiftBoxController : MonoBehaviour
         }
     }
 
-    public void ToggleAutoCreate(bool isEnabled)
+    public void ToggleFastAutoCreate(bool isEnabled) 
     {
         autoCreateEnabled = isEnabled;
         if (isEnabled)
         {
-            autoCreateCoroutine = StartCoroutine(AutoCreateCandy(3)); // 코루틴 시작
+            autoCreateCoroutine = StartCoroutine(AutoCreateCandy(3));
         }
         else
         {
-            StopCoroutine(autoCreateCoroutine); // 코루틴 중지
+            StopCoroutine(autoCreateCoroutine);
         }
     }
 }

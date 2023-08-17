@@ -24,6 +24,8 @@ public class CurrencyUI : MonoBehaviour
             
 
         }
+        
+        
         // 다른 재화들에 대한 처리도 여기서 추가할 수 있습니다.
     }
 }
