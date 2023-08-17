@@ -9,9 +9,10 @@ public class CandyStatus : MonoBehaviour
 
     private void Start()
     {
-        ToggleLevelText(false); // 레벨 텍스트 오브젝트를 비활성화
+        ToggleLevelText(LevelBtn.IsLevelOn); // LevelBtn 클래스의 IsLevelOn 변수를 사용하여 레벨 텍스트 오브젝트의 활성화 상태 설정
         UpdateLevelText();
     }
+
 
     private void Update()
     {

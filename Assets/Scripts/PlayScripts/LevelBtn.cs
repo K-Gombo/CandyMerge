@@ -5,11 +5,12 @@ public class LevelBtn : MonoBehaviour
 {
     public Button LevelOffBtn;
     public Button LevelOnBtn;
+    public static bool IsLevelOn = false; // 현재 레벨 표시 상태를 저장하는 정적 변수
 
     private void Start()
     {
-        LevelOffBtn.gameObject.SetActive(true);
-        LevelOnBtn.gameObject.SetActive(false);
+        LevelOffBtn.gameObject.SetActive(!IsLevelOn);
+        LevelOnBtn.gameObject.SetActive(IsLevelOn);
 
         LevelOffBtn.onClick.AddListener(OnLevelOffBtnClick);
         LevelOnBtn.onClick.AddListener(OnLevelOnBtnClick);
@@ -18,6 +19,7 @@ public class LevelBtn : MonoBehaviour
     private void OnLevelOffBtnClick()
     {
         Debug.Log("LevelOffBtn 클릭됨!");
+        IsLevelOn = true;
         LevelOffBtn.gameObject.SetActive(false);
         LevelOnBtn.gameObject.SetActive(true);
         ToggleLevelText(true);
@@ -26,6 +28,7 @@ public class LevelBtn : MonoBehaviour
     private void OnLevelOnBtnClick()
     {
         Debug.Log("LevelOnBtn 클릭됨!");
+        IsLevelOn = false;
         LevelOffBtn.gameObject.SetActive(true);
         LevelOnBtn.gameObject.SetActive(false);
         ToggleLevelText(false);
