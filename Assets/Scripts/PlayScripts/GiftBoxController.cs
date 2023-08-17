@@ -118,14 +118,24 @@ public class GiftBoxController : MonoBehaviour
 
     public void ToggleFastAutoCreate(bool isEnabled) 
     {
-        autoCreateEnabled = isEnabled;
+        if (autoCreateCoroutine != null)
+        {
+            StopCoroutine(autoCreateCoroutine); // 이미 실행 중인 코루틴이 있다면 중지
+        }
+
         if (isEnabled)
         {
-            autoCreateCoroutine = StartCoroutine(AutoCreateCandy(1));
+            autoCreateCoroutine = StartCoroutine(DelayedAutoCreateCandy(1));
         }
         else
         {
             StopCoroutine(autoCreateCoroutine);
         }
+    }
+
+    private IEnumerator DelayedAutoCreateCandy(int timesPer10Seconds)
+    {
+        yield return new WaitForSeconds(1f); // 1초의 딜레이
+        yield return AutoCreateCandy(timesPer10Seconds); // 생성 시작
     }
 }

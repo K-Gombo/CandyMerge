@@ -18,7 +18,6 @@ public class LevelBtn : MonoBehaviour
 
     private void OnLevelOffBtnClick()
     {
-        Debug.Log("LevelOffBtn 클릭됨!");
         IsLevelOn = true;
         LevelOffBtn.gameObject.SetActive(false);
         LevelOnBtn.gameObject.SetActive(true);
@@ -27,7 +26,6 @@ public class LevelBtn : MonoBehaviour
 
     private void OnLevelOnBtnClick()
     {
-        Debug.Log("LevelOnBtn 클릭됨!");
         IsLevelOn = false;
         LevelOffBtn.gameObject.SetActive(true);
         LevelOnBtn.gameObject.SetActive(false);

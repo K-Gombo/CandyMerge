@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
 
 public class CandyController : MonoBehaviour
@@ -10,7 +9,7 @@ public class CandyController : MonoBehaviour
     private Transform originalParent; // 원래 있던 박스를 저장하기 위한 변수
     private List<Transform> boxTransforms;
     private int originalSortingOrder;
-
+    private Coroutine autoMergeCoroutine;
     private void Start()
     {
         boxTransforms = new List<Transform>();
@@ -201,15 +200,25 @@ public class CandyController : MonoBehaviour
     
     public void ToggleFastAutoMerge(bool isEnabled)
     {
-        
+        if (autoMergeCoroutine != null)
+        {
+            StopCoroutine(autoMergeCoroutine); // 이미 실행 중인 코루틴이 있다면 중지
+        }
+
         if (isEnabled)
         {
-            StartCoroutine(AutoMergeCandies(1, 1)); // 1초에 1번 병합
+            autoMergeCoroutine = StartCoroutine(DelayedAutoMerge(1, 1));
         }
         else
         {
             StopAllCoroutines(); // 자동 병합 코루틴 중지
         }
+    }
+
+    private IEnumerator DelayedAutoMerge(int timesPerNSeconds, int n)
+    {
+        yield return new WaitForSeconds(1f); // 1초의 딜레이
+        yield return AutoMergeCandies(timesPerNSeconds, n); // 병합 시작
     }
     
 }
