@@ -10,6 +10,9 @@ public class CandyController : MonoBehaviour
     private List<Transform> boxTransforms;
     private int originalSortingOrder;
     private Coroutine autoMergeCoroutine;
+    private bool isAutoMergeEnabled = false;
+    private bool isMergingInProgress = false;
+
     private void Start()
     {
         boxTransforms = new List<Transform>();
@@ -38,7 +41,7 @@ public class CandyController : MonoBehaviour
         if (Input.GetMouseButton(0) && hit.collider != null && hit.collider.CompareTag("Candy"))
         {
             var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-          
+
             hit.collider.transform.position = new Vector3(world.x, world.y, 90);
         }
 
@@ -146,91 +149,105 @@ public class CandyController : MonoBehaviour
         Debug.LogWarning(originalParent);
         candy.transform.position = startPosition;
     }
-    
-    
+
+
     private IEnumerator AutoMergeCandies(int timesPerNSeconds, int n)
 {
     while (true)
     {
-        for (int i = 0; i < timesPerNSeconds; i++)
+        if (isAutoMergeEnabled || isMergingInProgress)
         {
-            for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
+            for (int i = 0; i < timesPerNSeconds; i++)
             {
-                Transform lowestLevelCandy = null;
-                Transform mergeTarget = null;
-                float closestDistance = float.MaxValue;
-
-                foreach (Transform box in boxTransforms)
+                for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
                 {
-                    if (box.childCount > 0)
+                    Transform lowestLevelCandy = null;
+                    Transform mergeTarget = null;
+                    float closestDistance = float.MaxValue;
+
+                    foreach (Transform box in boxTransforms)
                     {
-                        CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
-                        if (candyStatus != null && candyStatus.level == targetLevel)
+                        if (box.childCount > 0)
                         {
-                            if (lowestLevelCandy == null)
+                            CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
+                            if (candyStatus != null && candyStatus.level == targetLevel)
                             {
-                                lowestLevelCandy = box.GetChild(0);
-                            }
-                            else
-                            {
-                                float distance = Vector3.Distance(lowestLevelCandy.position, box.GetChild(0).position);
-                                if (distance < closestDistance)
+                                if (lowestLevelCandy == null)
                                 {
-                                    closestDistance = distance;
-                                    mergeTarget = box.GetChild(0);
+                                    lowestLevelCandy = box.GetChild(0);
+                                }
+                                else
+                                {
+                                    float distance = Vector3.Distance(lowestLevelCandy.position,
+                                        box.GetChild(0).position);
+                                    if (distance < closestDistance)
+                                    {
+                                        closestDistance = distance;
+                                        mergeTarget = box.GetChild(0);
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if (lowestLevelCandy != null && mergeTarget != null)
-                {
-                    float duration = 0.4f; // 이동에 걸리는 시간
-                    float elapsedTime = 0f;
-                    Vector3 startPosition = lowestLevelCandy.position;
-                    Vector3 endPosition = mergeTarget.position;
-
-                    // 원하는 시간 동안 캔디를 다른 캔디 쪽으로 이동
-                    while (elapsedTime < duration)
+                    if (lowestLevelCandy != null && mergeTarget != null)
                     {
-                        float t = elapsedTime / duration;
-                        lowestLevelCandy.position = Vector3.MoveTowards(startPosition, endPosition, t);
-                        elapsedTime += Time.deltaTime;
-                        yield return null;
+                        isMergingInProgress = true;
+
+                        float duration = 0.2f;
+                        float elapsedTime = 0f;
+                        Vector3 startPosition = lowestLevelCandy.position;
+                        Vector3 endPosition = mergeTarget.position;
+
+                        while (elapsedTime < duration)
+                        {
+                            float t = elapsedTime / duration;
+                            lowestLevelCandy.position = Vector3.Lerp(startPosition, endPosition, t);
+                            elapsedTime += Time.deltaTime;
+                            yield return null;
+                        }
+
+                        MergeCandies(lowestLevelCandy, mergeTarget);
+                        isMergingInProgress = false;
+
+                        if (!isAutoMergeEnabled)
+                        {
+                            yield break; // 자동 병합이 비활성화된 경우 코루틴 종료
+                        }
+                        break;
                     }
-
-                    MergeCandies(lowestLevelCandy, mergeTarget);
-                    break;
                 }
-            }
 
-            yield return new WaitForSeconds((float)n / timesPerNSeconds);
+                yield return new WaitForSeconds((float)n / timesPerNSeconds);
+            }
+        }
+        else
+        {
+            yield return null; // 자동 병합이 활성화되지 않았을 경우 대기
         }
     }
 }
     
     public void ToggleFastAutoMerge(bool isEnabled)
     {
-        if (autoMergeCoroutine != null)
-        {
-            StopCoroutine(autoMergeCoroutine); // 이미 실행 중인 코루틴이 있다면 중지
-        }
+                if (autoMergeCoroutine != null && !isMergingInProgress)
+                {
+                    StopCoroutine(autoMergeCoroutine);
+                }
 
-        if (isEnabled)
-        {
-            autoMergeCoroutine = StartCoroutine(DelayedAutoMerge(1, 1));
-        }
-        else
-        {
-            StopAllCoroutines(); // 자동 병합 코루틴 중지
-        }
+                isAutoMergeEnabled = isEnabled;
+
+                if (isEnabled)
+                {
+                    autoMergeCoroutine = StartCoroutine(DelayedAutoMerge(1, 1));
+                }
     }
 
     private IEnumerator DelayedAutoMerge(int timesPerNSeconds, int n)
     {
-        yield return new WaitForSeconds(1f); // 1초의 딜레이
-        yield return AutoMergeCandies(timesPerNSeconds, n); // 병합 시작
+            yield return new WaitForSeconds(1f);
+            yield return AutoMergeCandies(timesPerNSeconds, n);
     }
-    
 }
+
+

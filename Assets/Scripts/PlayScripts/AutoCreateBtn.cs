@@ -19,6 +19,7 @@ public class AutoCreateBtn : MonoBehaviour
 
     private void OnACOffBtnClick()
     {
+       
         ACOffBtn.gameObject.SetActive(false);
         ACOnBtn.gameObject.SetActive(true);
         giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
@@ -26,9 +27,9 @@ public class AutoCreateBtn : MonoBehaviour
         
     }
 
-    private void OnACOnBtnClick()
-    {
-     ACOffBtn.gameObject.SetActive(true);
+    private void OnACOnBtnClick() {
+       
+        ACOffBtn.gameObject.SetActive(true);
         ACOnBtn.gameObject.SetActive(false);
         giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
         candycontroller.ToggleFastAutoMerge(false); // 빠른 자동 머지 비활성화
