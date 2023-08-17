@@ -112,8 +112,32 @@ public class GiftBoxController : MonoBehaviour
         {
             int randomIndex = Random.Range(0, availableBoxes.Count);
             Transform selectedBox = availableBoxes[randomIndex];
-            Instantiate(candyPrefab, selectedBox.position, Quaternion.identity, selectedBox);
+            GameObject candy = Instantiate(candyPrefab, transform.position, Quaternion.identity); // 선물상자 위치에서 생성
+            candy.transform.localScale = selectedBox.lossyScale; // Box의 전역 크기로 설정
+            StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox)); // 생성된 캔디를 이동
         }
+    }
+
+
+    
+    private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox)
+    {
+        float timeElapsed = 0f;
+        float duration = 0.2f; // 이동에 걸리는 시간 (1초)
+
+        Vector3 startPosition = candy.position;
+
+        while (timeElapsed < duration)
+        {
+            timeElapsed += Time.deltaTime;
+            float t = timeElapsed / duration;
+            candy.position = Vector3.Lerp(startPosition, targetPosition, t); // 선형 보간을 사용해 부드럽게 이동
+            yield return null;
+        }
+
+        candy.SetParent(targetBox); // 최종 위치에 도달하면 부모를 설정
+        candy.localPosition = Vector3.zero; // 로컬 위치를 0으로 설정
+        candy.localScale = Vector3.one; // 로컬 크기를 1로 설정
     }
 
     public void ToggleFastAutoCreate(bool isEnabled) 

@@ -194,7 +194,7 @@ public class CandyController : MonoBehaviour
                     {
                         isMergingInProgress = true;
 
-                        float duration = 0.2f;
+                        float duration = 0.05f;
                         float elapsedTime = 0f;
                         Vector3 startPosition = lowestLevelCandy.position;
                         Vector3 endPosition = mergeTarget.position;
