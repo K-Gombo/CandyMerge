@@ -67,7 +67,7 @@ public class GiftBoxController : MonoBehaviour
                     createCandyText.text = candiesRemaining + "/" + maxCandies;
                 }
 
-                yield return new WaitForSeconds(10f / timesPer10Seconds);
+                yield return new WaitForSeconds(1f / timesPer10Seconds);
             }
         }
     }
@@ -121,7 +121,7 @@ public class GiftBoxController : MonoBehaviour
         autoCreateEnabled = isEnabled;
         if (isEnabled)
         {
-            autoCreateCoroutine = StartCoroutine(AutoCreateCandy(3));
+            autoCreateCoroutine = StartCoroutine(AutoCreateCandy(1));
         }
         else
         {

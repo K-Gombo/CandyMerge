@@ -149,6 +149,8 @@ public class CandyController : MonoBehaviour
         Debug.LogWarning(originalParent);
         candy.transform.position = startPosition;
     }
+    
+    
 
    
     
