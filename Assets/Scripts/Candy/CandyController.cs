@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 public class CandyController : MonoBehaviour
@@ -37,11 +39,7 @@ public class CandyController : MonoBehaviour
         if (Input.GetMouseButton(0) && hit.collider != null && hit.collider.CompareTag("Candy"))
         {
             var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (hit.collider.transform == null)
-            {
-                Debug.LogError("Collider's transform is null");
-            }
-
+          
             hit.collider.transform.position = new Vector3(world.x, world.y, 90);
         }
 
@@ -151,7 +149,67 @@ public class CandyController : MonoBehaviour
     }
     
     
+    private IEnumerator AutoMergeCandies(int timesPerNSeconds, int n)
+    {
+     
+        while (true)
+        {
+            for (int i = 0; i < timesPerNSeconds; i++)
+            {
+                for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
+                {
+                    Transform lowestLevelCandy = null;
+                    Transform mergeTarget = null;
+                    float closestDistance = float.MaxValue;
 
-   
+                    foreach (Transform box in boxTransforms)
+                    {
+                        if (box.childCount > 0)
+                        {
+                            CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
+                            if (candyStatus != null && candyStatus.level == targetLevel)
+                            {
+                                if (lowestLevelCandy == null)
+                                {
+                                    lowestLevelCandy = box.GetChild(0);
+                                }
+                                else
+                                {
+                                    float distance = Vector3.Distance(lowestLevelCandy.position, box.GetChild(0).position);
+                                    if (distance < closestDistance)
+                                    {
+                                        closestDistance = distance;
+                                        mergeTarget = box.GetChild(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (lowestLevelCandy != null && mergeTarget != null)
+                    {
+                       
+                        MergeCandies(lowestLevelCandy, mergeTarget);
+                        break;
+                    }
+                }
+
+                yield return new WaitForSeconds((float)n / timesPerNSeconds);
+            }
+        }
+    }
+    
+    public void ToggleFastAutoMerge(bool isEnabled)
+    {
+        
+        if (isEnabled)
+        {
+            StartCoroutine(AutoMergeCandies(1, 1)); // 1초에 1번 병합
+        }
+        else
+        {
+            StopAllCoroutines(); // 자동 병합 코루틴 중지
+        }
+    }
     
 }

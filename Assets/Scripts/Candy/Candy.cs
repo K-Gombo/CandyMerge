@@ -11,7 +11,7 @@ public class Candy : MonoBehaviour
         CandyStatus status = GetComponent<CandyStatus>();
         status.level = baseLevel; // 기본 레벨로 설정
         CandyManager.instance.SetAppearance(this.gameObject);
-        Debug.Log($"Lv.{status.level} Candy");
+      
     }
 
     // 스킬 업그레이드 메서드

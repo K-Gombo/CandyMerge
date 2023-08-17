@@ -21501,6 +21501,7 @@ MonoBehaviour:
   ACOffBtn: {fileID: 790111756}
   ACOnBtn: {fileID: 1555466537}
   giftBoxController: {fileID: 827990675}
+  candycontroller: {fileID: 1968457436}
 --- !u!1 &753005362
 GameObject:
   m_ObjectHideFlags: 0
