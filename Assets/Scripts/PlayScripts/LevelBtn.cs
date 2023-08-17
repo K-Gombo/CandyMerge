@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI; // UI 컴포넌트를 사용하기 위해 추가
+using UnityEngine.UI;
 
 public class LevelBtn : MonoBehaviour
 {
-    public Button LevelOffBtn; // Button 타입으로 변경
+    public Button LevelOffBtn;
     public Button LevelOnBtn;
 
     private void Start()
@@ -12,26 +11,32 @@ public class LevelBtn : MonoBehaviour
         LevelOffBtn.gameObject.SetActive(true);
         LevelOnBtn.gameObject.SetActive(false);
 
-        // 버튼에 클릭 리스너 추가
-        LevelOffBtn.onClick.AddListener(OnAMOffBtnClick);
-        LevelOnBtn.onClick.AddListener(OnAMOnBtnClick);
+        LevelOffBtn.onClick.AddListener(OnLevelOffBtnClick);
+        LevelOnBtn.onClick.AddListener(OnLevelOnBtnClick);
     }
 
-    // ACOffBtn 클릭 시 호출될 메서드
-    private void OnAMOffBtnClick()
+    private void OnLevelOffBtnClick()
     {
         Debug.Log("LevelOffBtn 클릭됨!");
         LevelOffBtn.gameObject.SetActive(false);
         LevelOnBtn.gameObject.SetActive(true);
+        ToggleLevelText(true);
     }
 
-    // ACOnBtn 클릭 시 호출될 메서드
-    private void OnAMOnBtnClick()
+    private void OnLevelOnBtnClick()
     {
-        
         Debug.Log("LevelOnBtn 클릭됨!");
         LevelOffBtn.gameObject.SetActive(true);
         LevelOnBtn.gameObject.SetActive(false);
-        
+        ToggleLevelText(false);
+    }
+
+    private void ToggleLevelText(bool show)
+    {
+        CandyStatus[] candies = FindObjectsOfType<CandyStatus>();
+        foreach (CandyStatus candy in candies)
+        {
+            candy.ToggleLevelText(show);
+        }
     }
 }

@@ -24399,7 +24399,6 @@ MonoBehaviour:
   giftBoxFill: {fileID: 1505396484}
   createCandyText: {fileID: 1498248997}
   autoCreateEnabled: 1
-  passiveAutoCreateEnabled: 1
 --- !u!1 &829064840
 GameObject:
   m_ObjectHideFlags: 0
