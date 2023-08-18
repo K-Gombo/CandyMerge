@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
-    public GameObject ContainedCandy { get; private set; }
+    public Vector3 StartPosition { get; private set; }
+    public bool IsTracking { get; private set; } = false;
 
-    public void SetCandy(GameObject candy)
+    public void StartTracking(Vector3 startPos)
     {
-        ContainedCandy = candy;
+        StartPosition = startPos;
+        IsTracking = true;
     }
 
-    public void ClearCandy()
+    public void StopTracking()
     {
-        ContainedCandy = null;
+        IsTracking = false;
     }
 }
-

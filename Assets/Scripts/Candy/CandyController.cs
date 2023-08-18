@@ -1,18 +1,25 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
 public class CandyController : MonoBehaviour
 {
+    [SerializeField] private GiftBoxController giftBoxController;
     RaycastHit2D hit;
-    Vector3 startPosition;
+    public Vector3 startPosition;
     private Transform originalParent; // 원래 있던 박스를 저장하기 위한 변수
     private List<Transform> boxTransforms;
     private int originalSortingOrder;
     private Coroutine autoMergeCoroutine;
     private bool isAutoMergeEnabled = false;
     private bool isMergingInProgress = false;
-    public GameObject mergeEffectPrefab; // 병합 이펙트 프리팹
+    private bool isScalingInProgress = false; //
+    private Transform currentlyDraggingCandy; // 현재 드래그 중인 캔디
+    public GameObject mergeEffectPrefab; 
+    private int draggedBoxIndex = -1;// 병합 이펙트 프리팹
+    
+
 
     private void Start()
     {
@@ -23,8 +30,10 @@ public class CandyController : MonoBehaviour
         }
     }
 
-    private void Update()
+     private void Update()
     {
+        if (isMergingInProgress) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -32,17 +41,18 @@ public class CandyController : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
                 startPosition = hit.collider.transform.position;
-                originalParent = hit.collider.transform.parent; // 원래 부모 박스 저장
+                originalParent = hit.collider.transform.parent;
                 hit.collider.transform.SetParent(null);
                 originalSortingOrder = hit.collider.GetComponent<SpriteRenderer>().sortingOrder;
                 hit.collider.GetComponent<SpriteRenderer>().sortingOrder = 5;
+                currentlyDraggingCandy = hit.collider.transform; // 드래그 중인 캔디 저장
+                draggedBoxIndex = GetBoxIndexFromPosition(startPosition);
             }
         }
 
         if (Input.GetMouseButton(0) && hit.collider != null && hit.collider.CompareTag("Candy"))
         {
             var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
             hit.collider.transform.position = new Vector3(world.x, world.y, 90);
         }
 
@@ -58,7 +68,6 @@ public class CandyController : MonoBehaviour
                 if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level ==
                     mergeTarget.GetComponent<CandyStatus>().level)
                 {
-                   
                     MergeCandies(hit.collider.transform, mergeTarget);
                     hit.collider.transform.position = startPosition;
                 }
@@ -75,13 +84,30 @@ public class CandyController : MonoBehaviour
                     }
                     else
                     {
-                        ReturnToOriginalBox(hit.collider.transform); // 원래 박스로 되돌리는 메서드 호출
+                        ReturnToOriginalBox(hit.collider.transform);
                     }
                 }
+                startPosition = Vector3.zero; // 초기화 코드 추가
+                draggedBoxIndex = -1; // 드래그 중인 박스 인덱스 초기화
+                currentlyDraggingCandy = null; // 드래그 종료
             }
         }
-
     }
+     
+     public int GetBoxIndexFromPosition(Vector3 position)
+     {
+         for (int i = 0; i < giftBoxController.availableBoxes.Count; i++)
+         {
+             if (i == draggedBoxIndex) continue; // 드래그 중인 박스 인덱스 건너뜀
+             if (giftBoxController.availableBoxes[i].position == position)
+             {
+                 return i;
+             }
+         }
+         return -1;
+     }
+     
+     
 
     private Transform FindClosestEmptyBox(Transform candy)
     {
@@ -151,12 +177,12 @@ public class CandyController : MonoBehaviour
     
     private IEnumerator AnimateScale(Transform candy)
     {
-        Vector3 originalScale = candy.localScale; 
-        Vector3 targetScale = originalScale * 1.2f; 
+        isMergingInProgress = true; // 병합 중임을 표시
 
-        float duration = 0.2f; // 애니메이션 지속 시간
+        Vector3 originalScale = candy.localScale;
+        Vector3 targetScale = originalScale * 1.2f;
+        float duration = 0.2f;
 
-        // 스케일 확장
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
@@ -166,7 +192,6 @@ public class CandyController : MonoBehaviour
             yield return null;
         }
 
-        // 스케일 축소
         elapsedTime = 0f;
         while (elapsedTime < duration)
         {
@@ -176,13 +201,16 @@ public class CandyController : MonoBehaviour
             yield return null;
         }
 
-        candy.localScale = originalScale; // 스케일 원래대로 복귀
+        candy.localScale = originalScale;
+
+        isMergingInProgress = false; // 병합 중이 아님을 표시
     }
 
     private void ReturnToOriginalBox(Transform candy)
     {
         candy.transform.SetParent(originalParent); // 원래 부모 박스로 설정
         candy.transform.position = startPosition;
+       
     }
 
 
@@ -190,6 +218,12 @@ public class CandyController : MonoBehaviour
 {
     while (true)
     {
+        if (isMergingInProgress)
+        {
+            yield return null; // 병합 중일 경우 대기
+            continue;
+        }
+
         if (isAutoMergeEnabled || isMergingInProgress)
         {
             for (int i = 0; i < timesPerNSeconds; i++)
@@ -202,7 +236,7 @@ public class CandyController : MonoBehaviour
 
                     foreach (Transform box in boxTransforms)
                     {
-                        if (box.childCount > 0)
+                        if (box.childCount > 0 && box.GetChild(0) != currentlyDraggingCandy)
                         {
                             CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
                             if (candyStatus != null && candyStatus.level == targetLevel)
@@ -262,6 +296,7 @@ public class CandyController : MonoBehaviour
         }
     }
 }
+
     
     public void ToggleFastAutoMerge(bool isEnabled)
     {

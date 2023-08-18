@@ -19,6 +19,9 @@ public class EffectPooler : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
+    // EffectPool 빈 오브젝트
+    public Transform effectPool;
+
     private void Awake()
     {
         Instance = this;
@@ -34,7 +37,7 @@ public class EffectPooler : MonoBehaviour
 
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.prefab, effectPool);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -51,7 +54,7 @@ public class EffectPooler : MonoBehaviour
         objectToSpawn.transform.rotation = rotation;
 
         // 이펙트가 끝나는 시점에 비활성화
-        StartCoroutine(DeactivateAfterSeconds(objectToSpawn, 2f)); // 예: 0.5초 후에 비활성화
+        StartCoroutine(DeactivateAfterSeconds(objectToSpawn, 2f)); // 예: 2초 후에 비활성화
 
         poolDictionary[tag].Enqueue(objectToSpawn);
 

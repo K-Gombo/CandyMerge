@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class GiftBoxController : MonoBehaviour
 {
+    [SerializeField] private CandyController candyController;
     public GameObject candyPrefab;
     public Transform boxTile;
     public Image giftBoxFill;
@@ -13,6 +14,9 @@ public class GiftBoxController : MonoBehaviour
     private int maxCandies = 11;
     public bool autoCreateEnabled = false;
     private Coroutine autoCreateCoroutine;
+    private float lastClickTime = 0f; // 마지막 클릭 시간
+    private float clickCooldown = 0.3f; // 클릭 쿨타임 (초)
+    public List<Transform> availableBoxes = new List<Transform>();
 
     private void Start()
     {
@@ -74,13 +78,19 @@ public class GiftBoxController : MonoBehaviour
 
     public void OnGiftBoxClick()
     {
+        if (Time.time - lastClickTime < clickCooldown) return; // 쿨타임이 아직 지나지 않았으면 리턴
+
         if (candiesRemaining > 0 && IsSpaceAvailableInBox())
         {
             CreateCandy();
             candiesRemaining--;
             createCandyText.text = candiesRemaining + "/" + maxCandies;
         }
+
+        lastClickTime = Time.time; // 마지막 클릭 시간 갱신
     }
+
+
 
     private bool IsSpaceAvailableInBox()
     {
@@ -97,7 +107,7 @@ public class GiftBoxController : MonoBehaviour
 
     private void CreateCandy()
     {
-        List<Transform> availableBoxes = new List<Transform>();
+        availableBoxes.Clear();
 
         for (int i = 0; i < boxTile.childCount; i++)
         {
@@ -108,15 +118,30 @@ public class GiftBoxController : MonoBehaviour
             }
         }
 
-        if (availableBoxes.Count > 0)
+        int startIndex = candyController.GetBoxIndexFromPosition(candyController.startPosition); // 드래그 중인 캔디의 시작 위치에 해당하는 인덱스
+
+        List<int> validIndexes = new List<int>(); // 유효한 인덱스만 담을 리스트
+        for (int i = 0; i < availableBoxes.Count; i++)
         {
-            int randomIndex = Random.Range(0, availableBoxes.Count);
+            if (i != startIndex) // 시작 위치 인덱스와 다른 인덱스만 추가
+            {
+                validIndexes.Add(i);
+            }
+        }
+
+        if (validIndexes.Count > 0)
+        {
+            int randomIndex = validIndexes[Random.Range(0, validIndexes.Count)]; // 유효한 인덱스 목록에서 랜덤 인덱스 선택
+
             Transform selectedBox = availableBoxes[randomIndex];
             GameObject candy = Instantiate(candyPrefab, transform.position, Quaternion.identity); // 선물상자 위치에서 생성
             candy.transform.localScale = selectedBox.lossyScale; // Box의 전역 크기로 설정
             StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox)); // 생성된 캔디를 이동
         }
     }
+
+    
+    
 
 
     
