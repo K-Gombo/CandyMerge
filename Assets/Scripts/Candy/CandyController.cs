@@ -151,8 +151,8 @@ public class CandyController : MonoBehaviour
     
     private IEnumerator AnimateScale(Transform candy)
     {
-        Vector3 originalScale = candy.localScale; // 원래 스케일 저장
-        Vector3 targetScale = originalScale * 1.2f; // 목표 스케일 설정 (예: 원래 크기의 20% 증가)
+        Vector3 originalScale = candy.localScale; 
+        Vector3 targetScale = originalScale * 1.2f; 
 
         float duration = 0.2f; // 애니메이션 지속 시간
 

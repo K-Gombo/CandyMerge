@@ -18,12 +18,7 @@ public class CandyStatus : MonoBehaviour
     {
         levelText.text = level.ToString(); 
     }
-
-    private void OnDestroy()
-    {
-        CandyManager.instance.CandyDestroyed();
-    }
-
+    
     public void ToggleLevelText(bool show)
     {
         levelTextObject.SetActive(show); // 레벨 텍스트 오브젝트의 활성화 상태 설정
