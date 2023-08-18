@@ -18,9 +18,8 @@ public class CandyController : MonoBehaviour
     private Transform currentlyDraggingCandy; // 현재 드래그 중인 캔디
     public GameObject mergeEffectPrefab; 
     private int draggedBoxIndex = -1;// 병합 이펙트 프리팹
+    private bool isBusy;
     
-
-
     private void Start()
     {
         boxTransforms = new List<Transform>();
@@ -30,12 +29,14 @@ public class CandyController : MonoBehaviour
         }
     }
 
-     private void Update()
+    private void Update()
     {
+     
         if (isMergingInProgress) return;
 
         if (Input.GetMouseButtonDown(0))
         {
+           
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             hit = Physics2D.Raycast(worldPoint, transform.forward, Mathf.Infinity);
             if (hit.collider != null && hit.collider.CompareTag("Candy"))
@@ -87,13 +88,21 @@ public class CandyController : MonoBehaviour
                         ReturnToOriginalBox(hit.collider.transform);
                     }
                 }
+                
                 startPosition = Vector3.zero; // 초기화 코드 추가
                 draggedBoxIndex = -1; // 드래그 중인 박스 인덱스 초기화
                 currentlyDraggingCandy = null; // 드래그 종료
+                
             }
+            
         }
     }
-     
+
+    private IEnumerator WaitForTime()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        
+    }
      public int GetBoxIndexFromPosition(Vector3 position)
      {
          for (int i = 0; i < giftBoxController.availableBoxes.Count; i++)
@@ -187,9 +196,10 @@ public class CandyController : MonoBehaviour
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
-            candy.localScale = Vector3.Lerp(originalScale, targetScale, t);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+       
+                candy.localScale = Vector3.Lerp(originalScale, targetScale, t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
         }
 
         elapsedTime = 0f;
