@@ -5,8 +5,8 @@ public class CandyManager : MonoBehaviour
 {
     public static CandyManager instance;
     public Sprite[] candySprites;
-    public Text candyCountText; // TextUI를 가리키는 변수
-    public int MaxCandyCount = 15; // 최대 캔디 개수
+    public Text candyCountText;
+    public int MaxCandyCount; // 최대 캔디 개수
 
     private int currentCandyCount = 0; // 현재 생성된 캔디 개수를 추적
 
@@ -24,7 +24,9 @@ public class CandyManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateCandyCountText(); // 초기화 시에도 텍스트 업데이트
+        // 시작할 때 안에 Locked 오브젝트가 없는 박스의 개수를 구하여 MaxCandyCount를 설정합니다.
+        MaxCandyCount = GameObject.FindGameObjectsWithTag("Box").Length - GameObject.FindGameObjectsWithTag("Locked").Length;
+        UpdateCandyCountText();
     }
 
     public void SetAppearance(GameObject candy)
@@ -32,16 +34,22 @@ public class CandyManager : MonoBehaviour
         SpriteRenderer renderer = candy.GetComponent<SpriteRenderer>();
         CandyStatus status = candy.GetComponent<CandyStatus>();
         int level = status.level;
-        renderer.sprite = candySprites[level - 1]; // 레벨에 해당하는 스프라이트를 할당
+        renderer.sprite = candySprites[level - 1];
 
-        currentCandyCount++; // 캔디가 생성될 때마다 개수 증가
-        UpdateCandyCountText(); // 텍스트 업데이트
+        currentCandyCount++;
+        UpdateCandyCountText();
     }
 
     public void CandyDestroyed()
     {
-        currentCandyCount--; // 캔디가 파괴될 때마다 개수 감소
-        UpdateCandyCountText(); // 텍스트 업데이트
+        currentCandyCount--;
+        UpdateCandyCountText();
+    }
+
+    public void LockedTileRemoved()  // 나중에 스킬로 캔디 생성 영역 개수를 늘리는거 할떄 사용
+    {
+        MaxCandyCount++; // Locked 오브젝트가 제거될 때마다 MaxCandyCount를 증가시킵니다.
+        UpdateCandyCountText();
     }
 
     private void UpdateCandyCountText()

@@ -5641,6 +5641,7 @@ Transform:
   - {fileID: 1968457435}
   - {fileID: 477139586}
   - {fileID: 1411444307}
+  - {fileID: 2003888845}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58931,6 +58932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3406ba7154082764296be20feccf7c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mergeEffectPrefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
 --- !u!114 &1968457437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59945,6 +59947,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002728461}
   m_CullTransparentMesh: 1
+--- !u!1 &2003888844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003888845}
+  - component: {fileID: 2003888846}
+  m_Layer: 0
+  m_Name: EffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2003888845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003888844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 202093883}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2003888846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003888844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03828f7c9bdaba94cb838b4308c41d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: MergeEffect
+    prefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
+    size: 10
 --- !u!1 &2006754223
 GameObject:
   m_ObjectHideFlags: 0

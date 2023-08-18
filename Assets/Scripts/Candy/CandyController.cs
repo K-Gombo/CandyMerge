@@ -12,6 +12,7 @@ public class CandyController : MonoBehaviour
     private Coroutine autoMergeCoroutine;
     private bool isAutoMergeEnabled = false;
     private bool isMergingInProgress = false;
+    public GameObject mergeEffectPrefab; // 병합 이펙트 프리팹
 
     private void Start()
     {
@@ -57,7 +58,7 @@ public class CandyController : MonoBehaviour
                 if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level ==
                     mergeTarget.GetComponent<CandyStatus>().level)
                 {
-                    Debug.Log("여기다!");
+                   
                     MergeCandies(hit.collider.transform, mergeTarget);
                     hit.collider.transform.position = startPosition;
                 }
@@ -123,30 +124,64 @@ public class CandyController : MonoBehaviour
 
     private void MergeCandies(Transform candy1, Transform candy2)
     {
+        // 병합 이펙트 인스턴스화
+        EffectPooler.Instance.SpawnFromPool("MergeEffect", new Vector3(candy2.position.x, candy2.position.y, 0), Quaternion.identity);
+
         CandyStatus candyStatus1 = candy1.GetComponent<CandyStatus>();
         CandyStatus candyStatus2 = candy2.GetComponent<CandyStatus>();
 
         if (candyStatus1.level == candyStatus2.level)
         {
             candyStatus2.level++;
-            CandyManager.instance.SetAppearance(candy2.gameObject);
+            CandyManager.instance.SetAppearance(candy2.gameObject); // 이미지를 먼저 바꾸기
             candy2.position = candy2.parent.position;
 
             boxTransforms.Remove(candy1);
-            Destroy(candy1.gameObject);
-
             CandyManager.instance.CandyDestroyed();
+            Destroy(candy1.gameObject);
+            
+            // 새로운 이미지에 대한 Scale 변경 코루틴 시작
+            StartCoroutine(AnimateScale(candy2));
         }
         else
         {
             candy1.position = startPosition;
         }
     }
+    
+    private IEnumerator AnimateScale(Transform candy)
+    {
+        Vector3 originalScale = candy.localScale; // 원래 스케일 저장
+        Vector3 targetScale = originalScale * 1.2f; // 목표 스케일 설정 (예: 원래 크기의 20% 증가)
+
+        float duration = 0.2f; // 애니메이션 지속 시간
+
+        // 스케일 확장
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            candy.localScale = Vector3.Lerp(originalScale, targetScale, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 스케일 축소
+        elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            candy.localScale = Vector3.Lerp(targetScale, originalScale, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        candy.localScale = originalScale; // 스케일 원래대로 복귀
+    }
 
     private void ReturnToOriginalBox(Transform candy)
     {
         candy.transform.SetParent(originalParent); // 원래 부모 박스로 설정
-        Debug.LogWarning(originalParent);
         candy.transform.position = startPosition;
     }
 
@@ -194,7 +229,7 @@ public class CandyController : MonoBehaviour
                     {
                         isMergingInProgress = true;
 
-                        float duration = 0.05f;
+                        float duration = 0.03f;
                         float elapsedTime = 0f;
                         Vector3 startPosition = lowestLevelCandy.position;
                         Vector3 endPosition = mergeTarget.position;
