@@ -17,6 +17,7 @@ public class GiftBoxController : MonoBehaviour
     private float lastClickTime = 0f; // 마지막 클릭 시간
     private float clickCooldown = 0.3f; // 클릭 쿨타임 (초)
     public List<Transform> availableBoxes = new List<Transform>();
+    public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
 
     private void Start()
     {
@@ -134,9 +135,11 @@ public class GiftBoxController : MonoBehaviour
             int randomIndex = validIndexes[Random.Range(0, validIndexes.Count)]; // 유효한 인덱스 목록에서 랜덤 인덱스 선택
 
             Transform selectedBox = availableBoxes[randomIndex];
+            GameObject transparentObject = TransCandyPooler.Instance.SpawnFromPool(selectedBox.position, Quaternion.identity); // 투명한 오브젝트 생성
+            transparentObject.transform.SetParent(selectedBox); // 박스의 자식으로 설정
             GameObject candy = Instantiate(candyPrefab, transform.position, Quaternion.identity); // 선물상자 위치에서 생성
             candy.transform.localScale = selectedBox.lossyScale; // Box의 전역 크기로 설정
-            StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox)); // 생성된 캔디를 이동
+            StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox,transparentObject)); // 생성된 캔디를 이동
         }
     }
 
@@ -145,7 +148,7 @@ public class GiftBoxController : MonoBehaviour
 
 
     
-    private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox)
+    private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox, GameObject transparentObject)
     {
         float timeElapsed = 0f;
         float duration = 0.2f; // 이동에 걸리는 시간 (1초)
@@ -163,6 +166,9 @@ public class GiftBoxController : MonoBehaviour
         candy.SetParent(targetBox); // 최종 위치에 도달하면 부모를 설정
         candy.localPosition = Vector3.zero; // 로컬 위치를 0으로 설정
         candy.localScale = Vector3.one; // 로컬 크기를 1로 설정
+        transparentObject.transform.SetParent(null); // 부모 관계 끊기
+        TransCandyPooler.Instance.ReturnToPool(transparentObject); // 투명한 오브젝트 풀로 반환
+        
     }
 
     public void ToggleFastAutoCreate(bool isEnabled) 
