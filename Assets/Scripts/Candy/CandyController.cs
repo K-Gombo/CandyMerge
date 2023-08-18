@@ -30,79 +30,84 @@ public class CandyController : MonoBehaviour
     }
 
     private void Update()
-    {
-     
-        if (isMergingInProgress) return;
+{
+    if (isMergingInProgress) return;
 
-        if (Input.GetMouseButtonDown(0))
+    Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+    if (Input.GetMouseButtonDown(0))
+    {
+        if (currentlyDraggingCandy == null)
         {
-           
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             hit = Physics2D.Raycast(worldPoint, transform.forward, Mathf.Infinity);
             if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
-                startPosition = hit.collider.transform.position;
-                originalParent = hit.collider.transform.parent;
-                hit.collider.transform.SetParent(null);
-                originalSortingOrder = hit.collider.GetComponent<SpriteRenderer>().sortingOrder;
-                hit.collider.GetComponent<SpriteRenderer>().sortingOrder = 5;
-                currentlyDraggingCandy = hit.collider.transform; // 드래그 중인 캔디 저장
-                draggedBoxIndex = GetBoxIndexFromPosition(startPosition);
+                StartDraggingCandy();
             }
         }
+    }
 
-        if (Input.GetMouseButton(0) && hit.collider != null && hit.collider.CompareTag("Candy"))
+    if (currentlyDraggingCandy != null)
+    {
+        if (Input.GetMouseButton(0))
         {
-            var world = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            hit.collider.transform.position = new Vector3(world.x, world.y, 90);
+            currentlyDraggingCandy.position = new Vector3(worldPoint.x, worldPoint.y, 90);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (hit.collider != null && hit.collider.CompareTag("Candy"))
-            {
-                hit.collider.GetComponent<SpriteRenderer>().sortingOrder = originalSortingOrder;
-                Transform mergeTarget = GetMergeTarget(hit.collider.transform);
-                Transform closestBox = FindClosestEmptyBox(hit.collider.transform);
-                float thresholdDistance = 0.5f;
+            StopDraggingCandy();
+        }
+    }
+}
 
-                if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level ==
-                    mergeTarget.GetComponent<CandyStatus>().level)
-                {
-                    MergeCandies(hit.collider.transform, mergeTarget);
-                    hit.collider.transform.position = startPosition;
-                }
-                else
-                {
-                    float distanceToBox = closestBox != null
-                        ? Vector3.Distance(hit.collider.transform.position, closestBox.position)
-                        : Mathf.Infinity;
+private void StartDraggingCandy()
+{
+    startPosition = hit.collider.transform.position;
+    originalParent = hit.collider.transform.parent;
+    hit.collider.transform.SetParent(null);
+    originalSortingOrder = hit.collider.GetComponent<SpriteRenderer>().sortingOrder;
+    hit.collider.GetComponent<SpriteRenderer>().sortingOrder = 5;
+    currentlyDraggingCandy = hit.collider.transform;
+    draggedBoxIndex = GetBoxIndexFromPosition(startPosition);
+}
 
-                    if (mergeTarget == null && distanceToBox < thresholdDistance)
-                    {
-                        hit.collider.transform.SetParent(closestBox);
-                        hit.collider.transform.position = closestBox.position;
-                    }
-                    else
-                    {
-                        ReturnToOriginalBox(hit.collider.transform);
-                    }
-                }
-                
-                startPosition = Vector3.zero; // 초기화 코드 추가
-                draggedBoxIndex = -1; // 드래그 중인 박스 인덱스 초기화
-                currentlyDraggingCandy = null; // 드래그 종료
-                
-            }
-            
+private void StopDraggingCandy()
+{
+    hit.collider.GetComponent<SpriteRenderer>().sortingOrder = originalSortingOrder;
+    Transform mergeTarget = GetMergeTarget(hit.collider.transform);
+    Transform closestBox = FindClosestEmptyBox(hit.collider.transform);
+    float thresholdDistance = 0.5f;
+
+    if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level ==
+        mergeTarget.GetComponent<CandyStatus>().level)
+    {
+        MergeCandies(hit.collider.transform, mergeTarget);
+        hit.collider.transform.position = startPosition;
+    }
+    else
+    {
+        float distanceToBox = closestBox != null
+            ? Vector3.Distance(hit.collider.transform.position, closestBox.position)
+            : Mathf.Infinity;
+
+        if (mergeTarget == null && distanceToBox < thresholdDistance)
+        {
+            hit.collider.transform.SetParent(closestBox);
+            hit.collider.transform.position = closestBox.position;
+        }
+        else
+        {
+            ReturnToOriginalBox(hit.collider.transform);
         }
     }
 
-    private IEnumerator WaitForTime()
-    {
-        yield return new WaitForSecondsRealtime(0.2f);
-        
-    }
+    startPosition = Vector3.zero;
+    draggedBoxIndex = -1;
+    currentlyDraggingCandy = null;
+}
+
+   
      public int GetBoxIndexFromPosition(Vector3 position)
      {
          for (int i = 0; i < giftBoxController.availableBoxes.Count; i++)
