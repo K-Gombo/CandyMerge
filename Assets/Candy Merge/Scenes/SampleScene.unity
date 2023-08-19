@@ -12247,6 +12247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyUI: {fileID: 1140523787}
+  candyManager: {fileID: 1968457437}
 --- !u!1 &477603833
 GameObject:
   m_ObjectHideFlags: 0

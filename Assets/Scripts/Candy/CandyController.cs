@@ -18,7 +18,8 @@ public class CandyController : MonoBehaviour
     private Transform currentlyDraggingCandy; // 현재 드래그 중인 캔디
     public GameObject mergeEffectPrefab; 
     private int draggedBoxIndex = -1;// 병합 이펙트 프리팹
-    private bool isBusy;
+    
+    
     
     private void Start()
     {

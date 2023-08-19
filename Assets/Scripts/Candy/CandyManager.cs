@@ -60,6 +60,17 @@ public class CandyManager : MonoBehaviour
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 
+        // 캔디의 레벨을 현재 기본 레벨로 설정합니다.
+        CandyStatus status = objectToSpawn.GetComponent<CandyStatus>();
+        if (status != null)
+        {
+            status.level = CandyStatus.baseLevel;
+            status.UpdateLevelText();
+        }
+
+        // 캔디의 외형을 업데이트합니다.
+        SetAppearance(objectToSpawn);
+
         return objectToSpawn;
     }
 
@@ -68,7 +79,16 @@ public class CandyManager : MonoBehaviour
         objectToReturn.transform.SetParent(CandyPool); // CandyPool을 부모로 설정
         objectToReturn.SetActive(false);
         candyPool.Enqueue(objectToReturn);
+
+        // 캔디의 레벨을 baseLevel로 초기화합니다.
+        CandyStatus status = objectToReturn.GetComponent<CandyStatus>();
+        if (status != null)
+        {
+            status.level = CandyStatus.baseLevel;
+            status.UpdateLevelText();
+        }
     }
+
 
 
     public void SetAppearance(GameObject candy)
