@@ -135,11 +135,12 @@ public class GiftBoxController : MonoBehaviour
             int randomIndex = validIndexes[Random.Range(0, validIndexes.Count)]; // 유효한 인덱스 목록에서 랜덤 인덱스 선택
 
             Transform selectedBox = availableBoxes[randomIndex];
-            GameObject transparentObject = TransCandyPooler.Instance.SpawnFromPool(selectedBox.position, Quaternion.identity); // 투명한 오브젝트 생성
-            transparentObject.transform.SetParent(selectedBox); // 박스의 자식으로 설정
-            GameObject candy = Instantiate(candyPrefab, transform.position, Quaternion.identity); // 선물상자 위치에서 생성
-            candy.transform.localScale = selectedBox.lossyScale; // Box의 전역 크기로 설정
-            StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox,transparentObject)); // 생성된 캔디를 이동
+            GameObject transparentObject = TransCandyPooler.Instance.SpawnFromPool(selectedBox.position, Quaternion.identity);
+            transparentObject.transform.SetParent(selectedBox);
+            GameObject candy = CandyManager.instance.SpawnFromPool(transform.position, Quaternion.identity);
+            candy.transform.localScale = Vector3.one; // 로컬 스케일을 1로 설정
+            candy.transform.position = transform.position; // 선물상자의 위치로 설정
+            StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
         }
     }
 

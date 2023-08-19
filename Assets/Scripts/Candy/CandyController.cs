@@ -178,8 +178,8 @@ private void StopDraggingCandy()
 
             boxTransforms.Remove(candy1);
             CandyManager.instance.CandyDestroyed();
-            Destroy(candy1.gameObject);
-            
+            CandyManager.instance.ReturnToPool(candy1.gameObject); // 캔디 반환
+        
             // 새로운 이미지에 대한 Scale 변경 코루틴 시작
             StartCoroutine(AnimateScale(candy2));
         }

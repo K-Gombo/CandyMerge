@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class CandyManager : MonoBehaviour
 {
@@ -8,7 +9,15 @@ public class CandyManager : MonoBehaviour
     public Text candyCountText;
     public int MaxCandyCount; // 최대 캔디 개수
 
+    [SerializeField]
+    private GameObject candyPrefab;
+    private Queue<GameObject> candyPool;
+    [SerializeField]
+    private int poolSize = 10;
+
     private int currentCandyCount = 0; // 현재 생성된 캔디 개수를 추적
+    
+    public Transform CandyPool; // 캔디 풀 위치
 
     private void Awake()
     {
@@ -24,10 +33,43 @@ public class CandyManager : MonoBehaviour
 
     private void Start()
     {
-        // 시작할 때 안에 Locked 오브젝트가 없는 박스의 개수를 구하여 MaxCandyCount를 설정합니다.
         MaxCandyCount = GameObject.FindGameObjectsWithTag("Box").Length - GameObject.FindGameObjectsWithTag("Locked").Length;
         UpdateCandyCountText();
+
+        candyPool = new Queue<GameObject>();
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject candy = Instantiate(candyPrefab, CandyPool); // CandyPool 위치에서 생성
+            candy.SetActive(false);
+            candyPool.Enqueue(candy);
+        }
     }
+
+    public GameObject SpawnFromPool(Vector3 position, Quaternion rotation)
+    {
+        if (candyPool.Count == 0)
+        {
+            GameObject candy = Instantiate(candyPrefab, CandyPool); // CandyPool 위치에서 생성
+            candy.SetActive(false);
+            candyPool.Enqueue(candy);
+        }
+
+        GameObject objectToSpawn = candyPool.Dequeue();
+        objectToSpawn.transform.SetParent(CandyPool); // CandyPool을 부모로 설정
+        objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = position;
+        objectToSpawn.transform.rotation = rotation;
+
+        return objectToSpawn;
+    }
+
+    public void ReturnToPool(GameObject objectToReturn)
+    {
+        objectToReturn.transform.SetParent(CandyPool); // CandyPool을 부모로 설정
+        objectToReturn.SetActive(false);
+        candyPool.Enqueue(objectToReturn);
+    }
+
 
     public void SetAppearance(GameObject candy)
     {
