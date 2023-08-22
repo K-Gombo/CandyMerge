@@ -9,7 +9,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private Quest quest;
     public Transform questGrid;
     public Sprite[] humanAvatars;
-    public int maxQuests = 4;
+    public int maxQuests = 15;
     public int maxCandyCount = 15;
     public static QuestManager instance;
 
@@ -40,8 +40,11 @@ public class QuestManager : MonoBehaviour
         quest.InstanceQuest();
     }
     
+    
+    
     void Update()
-    {
+    {   
+        
         foreach (Quest quest in activeQuests)
         {
             RewardButton rewardButton = quest.GetComponentInChildren<RewardButton>();
@@ -50,6 +53,7 @@ public class QuestManager : MonoBehaviour
                 rewardButton.UpdateButtonState();
             }
         }
+      
     }
     
 
@@ -70,7 +74,8 @@ public class QuestManager : MonoBehaviour
     }
 
     public void CompleteQuest(Quest quest)
-    {
+    {   
+       
         int completedIndex = activeQuests.IndexOf(quest);
         for (int i = completedIndex + 1; i < activeQuests.Count; i++)
         {
@@ -80,6 +85,12 @@ public class QuestManager : MonoBehaviour
         activeQuests.Remove(quest);
         quest.gameObject.SetActive(false);
         quest.CreateQuest();
+        
+        if (quest != null)
+        {
+            quest.GetComponent<RewardButton>().enabled = false; 
+
+        }
     }
 
     public Sprite GetRandomHumanAvatar()
@@ -108,42 +119,29 @@ public class QuestManager : MonoBehaviour
     
     public void UpdateQuestCandyCount(Quest quest)
     {
-        int count1 = 0;
-        int count2 = 0;
-
-        foreach (GameObject box in boxes)
-        {
-            foreach (Transform child in box.transform)
-            {
-                CandyStatus status = child.GetComponent<CandyStatus>();
-                if (status != null && child.gameObject.activeInHierarchy)
-                {
-                    Sprite candySprite = CandyManager.instance.candySprites[status.level - 1];
-                    if (candySprite == quest.requestCandy1.sprite)
-                    {
-                        count1++;
-                    }
-                    else if (candySprite == quest.requestCandy2.sprite)
-                    {
-                        count2++;
-                    }
-                }
-            }
-        }
+        int level1 = CandyManager.instance.GetLevelBySprite(quest.requestCandy1.sprite);
+        int count1 = BoxManager.instance.GetCandyCountByLevel(level1);
 
         string[] requiredCount1Text = quest.candyCountText1.text.Split('/');
         int requiredCount1 = int.Parse(requiredCount1Text[1]);
         quest.candyCountText1.text = $"{count1}/{requiredCount1}";
 
+        int count2 = 0; // 여기서 count2 변수를 선언하고 초기화합니다.
+
         if (quest.requestCandy2.sprite != null)
         {
+            int level2 = CandyManager.instance.GetLevelBySprite(quest.requestCandy2.sprite);
+            count2 = BoxManager.instance.GetCandyCountByLevel(level2);
+
             string[] requiredCount2Text = quest.candyCountText2.text.Split('/');
             int requiredCount2 = int.Parse(requiredCount2Text[1]);
             quest.candyCountText2.text = $"{count2}/{requiredCount2}";
         }
-        
-        Debug.Log($"Count1: {count1}, Count2: {count2}");
 
+        Debug.Log($"Count1: {count1}, Count2: {count2}"); 
     }
+
+
+    
     
 }

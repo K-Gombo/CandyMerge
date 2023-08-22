@@ -4,11 +4,11 @@ using UnityEngine;
 public class BoxManager : MonoBehaviour
 {
     public Transform boxTile;
-    private Dictionary<int, int> candyLevelsCount;
+    public Dictionary<int, int> candyLevelsCount;
     private int totalCandyCount;
 
     public static BoxManager instance;
-
+    
     private void Awake()
     {
         instance = this;
@@ -47,10 +47,27 @@ public class BoxManager : MonoBehaviour
                 }
             }
         }
+
+        // 활성 퀘스트의 상태 업데이트
+        foreach (Quest quest in QuestManager.instance.activeQuests)
+        {
+            QuestManager.instance.UpdateQuestCandyCount(quest);
+        }
     }
 
     public int GetCurrentTotalCandyCount()
     {
         return totalCandyCount;
     }
+    
+    public int GetCandyCountByLevel(int level)
+    {
+        if (candyLevelsCount.ContainsKey(level))
+        {
+            return candyLevelsCount[level];
+        }
+        return 0;
+    }
+    
+    
 }
