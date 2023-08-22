@@ -18,6 +18,7 @@ public class GiftBoxController : MonoBehaviour
     private float clickCooldown = 0.3f; // 클릭 쿨타임 (초)
     public List<Transform> availableBoxes = new List<Transform>();
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
+    public BoxManager boxManager; // BoxManager 참조
 
     private void Start()
     {
@@ -117,6 +118,8 @@ public class GiftBoxController : MonoBehaviour
             {
                 availableBoxes.Add(child);
             }
+           
+            
         }
 
         int startIndex = candyController.GetBoxIndexFromPosition(candyController.startPosition); // 드래그 중인 캔디의 시작 위치에 해당하는 인덱스
@@ -142,6 +145,8 @@ public class GiftBoxController : MonoBehaviour
             candy.transform.position = transform.position; // 선물상자의 위치로 설정
             StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
         }
+        
+      
     }
 
     
@@ -169,6 +174,7 @@ public class GiftBoxController : MonoBehaviour
         candy.localScale = Vector3.one; // 로컬 크기를 1로 설정
         transparentObject.transform.SetParent(null); // 부모 관계 끊기
         TransCandyPooler.Instance.ReturnToPool(transparentObject); // 투명한 오브젝트 풀로 반환
+        BoxManager.instance.UpdateCandyCount(); // 여기에서 업데이트 호출
         
     }
 

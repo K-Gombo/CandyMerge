@@ -11,7 +11,7 @@ public class Quest : MonoBehaviour
     public Text rewardText;
     public Text candyCountText1;
     public Text candyCountText2;
-    
+
     public void InstanceQuest()
     {
         QuestManager.instance.activeQuests = new List<Quest>(QuestManager.instance.maxQuests);
@@ -22,6 +22,8 @@ public class Quest : MonoBehaviour
             QuestManager.instance.boxes.AddRange(GameObject.FindGameObjectsWithTag("Box"));
         }
     }
+    
+    
     
     public void CreateQuest()
     {
@@ -74,4 +76,8 @@ public class Quest : MonoBehaviour
         questObject.rewardText.text = formattedReward;
         QuestManager.instance.activeQuests.Add(questObject);
     }
+    
+  
+ 
+    
 }

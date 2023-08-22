@@ -18173,6 +18173,7 @@ GameObject:
   - component: {fileID: 749087268}
   - component: {fileID: 749087270}
   - component: {fileID: 749087269}
+  - component: {fileID: 749087271}
   m_Layer: 5
   m_Name: Boxtile
   m_TagString: Untagged
@@ -18286,6 +18287,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &749087271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749087267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7d478ba9952fd42a965c2736b58b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxTile: {fileID: 749087268}
 --- !u!1 &749789452
 GameObject:
   m_ObjectHideFlags: 0
@@ -20743,6 +20757,7 @@ MonoBehaviour:
   autoCreateEnabled: 0
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
+  boxManager: {fileID: 0}
 --- !u!1 &829064840
 GameObject:
   m_ObjectHideFlags: 0
@@ -49468,7 +49483,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ce8a9811d2768435e938097b8127560a, type: 3}
   maxQuests: 4
   maxCandyCount: 15
-  rewardBtn: {fileID: 0}
   boxes: []
   activeQuests: []
 --- !u!1 &1968457434
@@ -49519,6 +49533,7 @@ MonoBehaviour:
   giftBoxController: {fileID: 827990675}
   startPosition: {x: 0, y: 0, z: 0}
   mergeEffectPrefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
+  boxManager: {fileID: 749087271}
 --- !u!114 &1968457437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49597,6 +49612,7 @@ MonoBehaviour:
   candyPrefab: {fileID: 4293156756022381435, guid: fadf5ae2752bc474bb2751301166aefb, type: 3}
   poolSize: 50
   CandyPool: {fileID: 100597713}
+  boxManager: {fileID: 749087271}
 --- !u!1 &1972945190
 GameObject:
   m_ObjectHideFlags: 0

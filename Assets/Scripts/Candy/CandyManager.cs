@@ -18,6 +18,8 @@ public class CandyManager : MonoBehaviour
     private int currentCandyCount = 0; // 현재 생성된 캔디 개수를 추적
     
     public Transform CandyPool; // 캔디 풀 위치
+    
+    public BoxManager boxManager; // BoxManager 참조
 
     private void Awake()
     {
@@ -87,6 +89,11 @@ public class CandyManager : MonoBehaviour
             status.level = CandyStatus.baseLevel;
             status.UpdateLevelText();
         }
+    
+        BoxManager.instance.UpdateCandyCount();
+
+        // 기존의 캔디가 사라지므로 CandyDestroyed() 메서드 호출
+        CandyDestroyed();
     }
 
 
@@ -116,6 +123,9 @@ public class CandyManager : MonoBehaviour
 
     private void UpdateCandyCountText()
     {
-        candyCountText.text = $"{currentCandyCount}/{MaxCandyCount}"; // 텍스트 업데이트
+        int totalCandyCountInBoxes = BoxManager.instance.GetCurrentTotalCandyCount(); // BoxManager를 참조해서 총 캔디 개수를 가져옴
+        candyCountText.text = $"{currentCandyCount}/{MaxCandyCount} ({totalCandyCountInBoxes})"; // 텍스트 업데이트
     }
+    
+    
 }
