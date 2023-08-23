@@ -78,8 +78,13 @@ public class QuestManager : MonoBehaviour
             unitIndex++;
         }
 
-        return $"{displayValue:0.0}{unitChars[unitIndex]}";
+        // 소수점 이하가 0인 경우 소수점 없이 표시
+        if (displayValue == (int)displayValue)
+            return $"{displayValue:0}{unitChars[unitIndex]}";
+        else
+            return $"{displayValue:0.0}{unitChars[unitIndex]}";
     }
+
 
     public void CompleteQuest(Quest quest)
     {

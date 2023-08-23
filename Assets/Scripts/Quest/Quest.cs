@@ -96,6 +96,8 @@ public class Quest : MonoBehaviour
         Sprite candySprite2 = null;
         int candyCount2 = 0;
 
+        long reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
+
         if (numberOfCandyTypes == 2)
         {
             int candyLevel2;
@@ -106,6 +108,7 @@ public class Quest : MonoBehaviour
 
             candyCount2 = Random.Range(3, Mathf.Min(10, QuestManager.instance.maxCandyCount - candyCount1 + 1));
             candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
+            reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
         }
 
         requestCandy1.sprite = candySprite1;
@@ -113,6 +116,8 @@ public class Quest : MonoBehaviour
 
         candyCountText1.text = $"0/{candyCount1}";
         candyCountText2.text = candySprite2 != null ? $"0/{candyCount2}" : "";
+
+        rewardText.text = QuestManager.instance.FormatGold(reward); // rewardText 업데이트
     }
 
 }

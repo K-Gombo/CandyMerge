@@ -5,6 +5,7 @@ public class CurrencyUI : MonoBehaviour
 {
     public CurrencyManager currencyManager;
     public Text goldText;
+    public Text diaText;
 
     private void Start()
     {
@@ -23,6 +24,11 @@ public class CurrencyUI : MonoBehaviour
             goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(amount.ToString());
             
 
+        }
+
+        if (currencyName == "Dia")
+        {
+            diaText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(amount.ToString());
         }
         
         

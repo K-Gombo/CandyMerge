@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using ES3Internal;
+
 
 public class Currency
 {
@@ -43,7 +43,11 @@ public class CurrencyManager : MonoBehaviour
         {
             currencies.Add(new Currency("Gold", 0));
         }
-        
+
+        if (!LoadCurrencies())
+        {
+            currencies.Add(new Currency("Dia",0));
+        }
         
     }
 
@@ -52,6 +56,11 @@ public class CurrencyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             AddCurrency("Gold", 100);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            AddCurrency("Dia", 100);
         }
         
         
