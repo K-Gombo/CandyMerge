@@ -12,7 +12,7 @@ public class Quest : MonoBehaviour
     public Text candyCountText1;
     public Text candyCountText2;
     public RewardButton rewardButton;
-    
+    private static int specialQuestCounter = 0; // 특별 퀘스트 카운터
     
     
     private void Start() {
@@ -88,13 +88,21 @@ public class Quest : MonoBehaviour
     
     public void UpdateRequirements()
     {
+        
+
         int numberOfCandyTypes = Random.Range(1, 3);
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
         int candyCount1 = Random.Range(3, 10);
-
+        
+        
+        // 아바타 스프라이트 할당
+        Sprite avatar = QuestManager.instance.GetRandomHumanAvatar();
         Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
         Sprite candySprite2 = null;
         int candyCount2 = 0;
+        
+        // 해당 아바타 스프라이트를 humanAvatar 필드에 할당합니다.
+        humanAvatar.sprite = avatar;
 
         long reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
 
@@ -111,6 +119,7 @@ public class Quest : MonoBehaviour
             reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
         }
 
+        humanAvatar.sprite = avatar; // humanAvatar에 스프라이트 할당
         requestCandy1.sprite = candySprite1;
         requestCandy2.sprite = candySprite2;
 

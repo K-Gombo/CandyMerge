@@ -18,7 +18,8 @@ public class CandyController : MonoBehaviour
     public GameObject mergeEffectPrefab; 
     private int draggedBoxIndex = -1;// 병합 이펙트 프리팹
     public BoxManager boxManager; // BoxManager 참조
-    
+    private bool isDraggingStarted = false; // 드래깅 시작 여부 판단
+    private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     
     
     private void Start()

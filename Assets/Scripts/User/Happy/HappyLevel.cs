@@ -12,9 +12,13 @@ public class HappyLevel : MonoBehaviour
 
     public int CurrentLevel = 1; // 현재 레벨
     public int currentExperience = 0; // 현재 경험치
+    
+    public int CurrentDia = 0;
 
     public Text levelText; // Level Text 오브젝트
     public Text happinessText; // HappinessText 오브젝트
+    public Image happinessBar; // Happiness Bar를 참조하는 Image 컴포넌트
+    public Text DiaText;
 
     private void Awake()
     {
@@ -33,15 +37,21 @@ public class HappyLevel : MonoBehaviour
             HappylevelUpReward[level] = levelReward;
         }
 
-        // 초기 레벨과 경험치 텍스트 설정
+        // 초기 레벨과 경험치,다이타, 텍스트 설정
         UpdateLevelText();
         UpdateHappinessText();
+        UpdateDiaText();
     }
 
     private void UpdateLevelText()
     {
         // Level Text 오브젝트의 텍스트를 현재 레벨로 설정
         levelText.text = CurrentLevel.ToString();
+    }
+    
+    private void UpdateDiaText()
+    {
+        DiaText.text = CurrentDia.ToString();
     }
 
     private void UpdateHappinessText()
@@ -61,12 +71,34 @@ public class HappyLevel : MonoBehaviour
         }
         UpdateHappinessText();
     }
+    
+    // 레벨업 보상 메서드
+    private void GiveLevelUpReward()
+    {
+        int reward = HappylevelUpReward[CurrentLevel]; // 현재 레벨의 보상 가져오기
+        CurrentDia += reward; // 다이아몬드에 보상 더하기
+        UpdateDiaText(); // 다이아몬드 텍스트 업데이트
+    }
 
     private void LevelUp()
     {
         CurrentLevel++;
         UpdateLevelText();
+        GiveLevelUpReward(); // 레벨업 보상 주기
         // currentExperience 초기화
         currentExperience = 0;
+        
+    }
+    
+    public void UpdateHappinessBar()
+    {
+        // HappylevelUp 딕셔너리에서 현재 레벨의 다음 레벨 경험치 가져오기
+        int requiredExperience = HappylevelUp[CurrentLevel + 1];
+
+        // currentExperience와 requiredExperience의 비율을 계산
+        float fillAmount = (float)currentExperience / requiredExperience;
+
+        // 비율을 Happiness Bar의 Fill Amount로 설정
+        happinessBar.fillAmount = fillAmount;
     }
 }

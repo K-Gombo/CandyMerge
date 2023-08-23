@@ -22,6 +22,7 @@ public class QuestManager : MonoBehaviour
     public List<Quest> activeQuests;
     private List<int> usedAvatars = new List<int>();
     public HappyLevel happyLevel;
+    
 
     private void Awake()
     {
@@ -40,12 +41,14 @@ public class QuestManager : MonoBehaviour
             var goldAsLong = (long)gold;
             candyPriceByLevel[level] = goldAsLong;
         }
-        
-        quest.InstanceQuest();
+
         InitializePool();
     }
-    
-    
+
+    private void Start()
+    {
+        quest.InstanceQuest();
+    }
     
     void Update()
     {   
@@ -109,22 +112,26 @@ public class QuestManager : MonoBehaviour
         CreateNewQuest(); // 새로운 퀘스트 생성
         
         happyLevel.AddExperience(1);
+        happyLevel.UpdateHappinessBar();
     }
 
     public Sprite GetRandomHumanAvatar()
     {
         int index;
 
+        // 모든 아바타가 사용된 경우 리스트를 초기화합니다.
         if (usedAvatars.Count == humanAvatars.Length)
         {
             usedAvatars.Clear();
         }
 
+        // 이미 사용된 아바타를 제외하고 랜덤 인덱스를 선택합니다.
         do
         {
             index = Random.Range(0, humanAvatars.Length);
         } while (usedAvatars.Contains(index));
 
+        // 선택된 아바타의 인덱스를 리스트에 추가합니다.
         usedAvatars.Add(index);
 
         return humanAvatars[index];
@@ -132,7 +139,9 @@ public class QuestManager : MonoBehaviour
 
     public int RandomCandyLevel()
     {
-        return Random.Range(1, 4);
+        int maxLevel = BoxManager.instance.GetMaxCandyLevel(); // BoxManager에서 최대 레벨을 가져옵니다.
+        int minLevel = Math.Max(maxLevel - 2, 1); // 최대 레벨보다 2 레벨 낮은 값과 2 중에서 더 큰 값을 최소 레벨로 설정합니다.
+        return Random.Range(minLevel, maxLevel + 3); // n+2, n+1, n, n-1, n-2 중 하나 선택
     }
     
     public void UpdateQuestCandyCount(Quest quest)
