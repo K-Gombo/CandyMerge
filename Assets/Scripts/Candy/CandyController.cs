@@ -14,7 +14,6 @@ public class CandyController : MonoBehaviour
     private Coroutine autoMergeCoroutine;
     private bool isAutoMergeEnabled = false;
     private bool isMergingInProgress = false;
-    private bool isScalingInProgress = false; //
     private Transform currentlyDraggingCandy; // 현재 드래그 중인 캔디
     public GameObject mergeEffectPrefab; 
     private int draggedBoxIndex = -1;// 병합 이펙트 프리팹

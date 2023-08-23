@@ -11,13 +11,22 @@ public class Quest : MonoBehaviour
     public Text rewardText;
     public Text candyCountText1;
     public Text candyCountText2;
-
+    public RewardButton rewardButton;
+    
+    
+    
+    private void Start() {
+        
+        rewardButton.parentQuest = this;
+    }
+    
     public void InstanceQuest()
     {
         QuestManager.instance.activeQuests = new List<Quest>(QuestManager.instance.maxQuests);
         for (int i = 0; i < QuestManager.instance.maxQuests; i++)
         {
-            CreateQuest();
+            var questObject = Instantiate(this, QuestManager.instance.questGrid);
+            CreateQuest(questObject);
             // "Box" 태그를 가진 게임 오브젝트의 참조를 미리 저장
             QuestManager.instance.boxes.AddRange(GameObject.FindGameObjectsWithTag("Box"));
         }
@@ -25,7 +34,7 @@ public class Quest : MonoBehaviour
     
     
     
-    public void CreateQuest()
+    public void CreateQuest(Quest quest)
     {
         int numberOfCandyTypes = Random.Range(1, 3);
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
@@ -51,12 +60,12 @@ public class Quest : MonoBehaviour
             reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
         }
 
-        SetupQuest(avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
+        SetupQuest(quest ,avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
     }
 
-    public void SetupQuest(Sprite avatar, Sprite candySprite1, int candyCount1, Sprite candySprite2, int candyCount2, string formattedReward)
+    public void SetupQuest(Quest questObject, Sprite avatar, Sprite candySprite1, int candyCount1, Sprite candySprite2, int candyCount2, string formattedReward)
     {
-        var questObject = Instantiate(this, QuestManager.instance.questGrid);
+    
 
         questObject.humanAvatar.sprite = avatar;
         questObject.requestCandy1.sprite = candySprite1;
@@ -77,7 +86,37 @@ public class Quest : MonoBehaviour
         QuestManager.instance.activeQuests.Add(questObject);
     }
     
+    public void UpdateRequirements()
+    {
+        int numberOfCandyTypes = Random.Range(1, 3);
+        int candyLevel1 = QuestManager.instance.RandomCandyLevel();
+        int candyCount1 = Random.Range(3, 10);
+
+        Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
+        Sprite candySprite2 = null;
+        int candyCount2 = 0;
+
+        if (numberOfCandyTypes == 2)
+        {
+            int candyLevel2;
+            do
+            {
+                candyLevel2 = QuestManager.instance.RandomCandyLevel();
+            } while (candyLevel2 == candyLevel1);
+
+            candyCount2 = Random.Range(3, Mathf.Min(10, QuestManager.instance.maxCandyCount - candyCount1 + 1));
+            candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
+        }
+
+        requestCandy1.sprite = candySprite1;
+        requestCandy2.sprite = candySprite2;
+
+        candyCountText1.text = $"0/{candyCount1}";
+        candyCountText2.text = candySprite2 != null ? $"0/{candyCount2}" : "";
+    }
+
+}
+    
   
  
     
-}

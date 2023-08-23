@@ -37,7 +37,7 @@ RectTransform:
   - {fileID: 5647210307225698861}
   - {fileID: 7684493399351701566}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -100,6 +100,7 @@ MonoBehaviour:
   rewardText: {fileID: 8921116947317730968}
   candyCountText1: {fileID: 2086874302068148640}
   candyCountText2: {fileID: 3152248469065516052}
+  rewardButton: {fileID: 5311451405093990843}
 --- !u!1 &2429920939433489086
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2/6
+  m_Text: 0/6
 --- !u!1 &2812335771209621310
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +459,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2682307002721332584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5311451405093990843}
+        m_TargetAssemblyTypeName: RewardButton, Assembly-CSharp
+        m_MethodName: UpdateButtonState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5311451405093990843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,4 +717,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2/6
+  m_Text: 0/6

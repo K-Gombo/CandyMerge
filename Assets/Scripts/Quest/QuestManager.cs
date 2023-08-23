@@ -1,17 +1,20 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
+
 
 public class QuestManager : MonoBehaviour
 {
     [SerializeField] private Quest quest;
     public Transform questGrid;
     public Sprite[] humanAvatars;
-    public int maxQuests = 15;
-    public int maxCandyCount = 15;
+    public int maxQuests = 4;
+    public int maxCandyCount = 10;
     public static QuestManager instance;
+    public int poolSize = 10;
+    private Queue<Quest> questPool = new Queue<Quest>();
+    public Transform questPoolParent;
 
     public Dictionary<int, long> candyPriceByLevel = new Dictionary<int, long>();
     public List<GameObject> boxes = new List<GameObject>();
@@ -36,8 +39,9 @@ public class QuestManager : MonoBehaviour
             var goldAsLong = (long)gold;
             candyPriceByLevel[level] = goldAsLong;
         }
-
+        
         quest.InstanceQuest();
+        InitializePool();
     }
     
     
@@ -48,12 +52,16 @@ public class QuestManager : MonoBehaviour
         foreach (Quest quest in activeQuests)
         {
             RewardButton rewardButton = quest.GetComponentInChildren<RewardButton>();
-            if (rewardButton != null)
+            if (rewardButton == null)
+            {
+                continue; // 다음 퀘스트로 넘어갑니다.
+            }
+
+            if (rewardButton.parentQuest != null)
             {
                 rewardButton.UpdateButtonState();
             }
         }
-      
     }
     
 
@@ -74,23 +82,25 @@ public class QuestManager : MonoBehaviour
     }
 
     public void CompleteQuest(Quest quest)
-    {   
-       
+    {
+        RewardButton rewardButton = quest.GetComponentInChildren<RewardButton>();
+        if (rewardButton != null)
+        {
+            rewardButton.parentQuest = null; // 참조 끊기
+        }
+
         int completedIndex = activeQuests.IndexOf(quest);
         for (int i = completedIndex + 1; i < activeQuests.Count; i++)
         {
             activeQuests[i].transform.SetSiblingIndex(i - 1);
         }
 
-        activeQuests.Remove(quest);
-        quest.gameObject.SetActive(false);
-        quest.CreateQuest();
-        
-        if (quest != null)
-        {
-            quest.GetComponent<RewardButton>().enabled = false; 
+        quest.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
+        quest.gameObject.SetActive(false); // 객체를 비활성화
+        questPool.Enqueue(quest); // 풀에 다시 추가
+        activeQuests.Remove(quest); // activeQuests 리스트에서 해당 퀘스트 제거
 
-        }
+        CreateNewQuest(); // 새로운 퀘스트 생성
     }
 
     public Sprite GetRandomHumanAvatar()
@@ -138,10 +148,33 @@ public class QuestManager : MonoBehaviour
             quest.candyCountText2.text = $"{count2}/{requiredCount2}";
         }
 
-        Debug.Log($"Count1: {count1}, Count2: {count2}"); 
+        
     }
 
+    private void CreateNewQuest()
+    {
+        if (activeQuests.Count < maxQuests && questPool.Count > 0)
+        {
+            Quest newQuest = questPool.Dequeue();
+            newQuest.transform.SetParent(questGrid, false);
+            newQuest.gameObject.SetActive(true);
 
+            newQuest.UpdateRequirements(); // 랜덤한 요구사항 할당
+        
+            activeQuests.Add(newQuest);
+        }
+    }
+
+    
+    private void InitializePool()
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            Quest newQuest = Instantiate(quest, questPoolParent);
+            newQuest.gameObject.SetActive(false);
+            questPool.Enqueue(newQuest);
+        }
+    }
     
     
 }

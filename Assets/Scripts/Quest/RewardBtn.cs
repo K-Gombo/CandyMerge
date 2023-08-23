@@ -7,17 +7,41 @@ public class RewardButton : MonoBehaviour
     public Quest parentQuest; // 부모 퀘스트를 참조하기 위한 변수
 
     private Button rewardButton;
-
-    private void Start()
-    {    
-        rewardButton = GetComponent<Button>();
+    
+    
+    private void Awake()
+    {
+        if (GetComponent<Button>() == null)
+        {
+            
+            return;
+        }
+        rewardButton = GetComponent<Button>(); // 버튼 컴포넌트를 rewardButton 변수에 할당
         rewardButton.interactable = false; // 초기에는 비활성화
         rewardButton.onClick.AddListener(OnRewardButtonClicked); // 클릭 이벤트에 메서드 연결
+    }
+    
+    private void Start()
+    {
+        rewardButton = GetComponent<Button>();
+        rewardButton.interactable = false;
+        rewardButton.onClick.AddListener(OnRewardButtonClicked);
+       
     }
 
     public void UpdateButtonState()
     {   
-       
+        if (parentQuest == null)
+        {
+            
+            return; // parentQuest가 null이면 메서드를 종료
+        }
+        
+        if (rewardButton == null)
+        {
+            
+            return;
+        }
         // 퀘스트 완료 조건 검사
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');
         int currentCount1 = int.Parse(countText1[0]);
@@ -48,11 +72,15 @@ public class RewardButton : MonoBehaviour
 
     private void OnRewardButtonClicked()
     {   
-        
+        if (parentQuest == null)
+        {
+            return; // parentQuest가 null이면 메서드를 종료
+        }
+        rewardButton.onClick.RemoveListener(OnRewardButtonClicked);
        
         // 보상 지급
-        string rewardString = Regex.Match(parentQuest.rewardText.text, @"\d+").Value; // 숫자만 추출
-        int reward = int.Parse(rewardString);
+        string rewardString = parentQuest.rewardText.text;
+        int reward = ConvertRewardStringToInt(rewardString);
         CurrencyManager currencyManager = FindObjectOfType<CurrencyManager>();
         currencyManager.AddCurrency("Gold", reward);
 
@@ -69,15 +97,14 @@ public class RewardButton : MonoBehaviour
         }
             
         // 퀘스트 완료 처리
-        Debug.Log("퀘스트 완료! 보상 지급!");
         QuestManager.instance.CompleteQuest(parentQuest);
-        
+        parentQuest = null; // 부모 퀘스트 참조를 끊음
         
     }
 
     private void CollectCandy(Sprite sprite, int requiredCount)
     {   
-        Debug.Log($"CollectCandy 호출됨 - Sprite: {sprite.name}, Required Count: {requiredCount}"); // 디버그 로그 추가
+        
         int level = CandyManager.instance.GetLevelBySprite(sprite);
         int collectedCount = 0;
 
@@ -90,7 +117,7 @@ public class RewardButton : MonoBehaviour
                 {
                     CandyManager.instance.ReturnToPool(child.gameObject);
                     collectedCount++;
-                    Debug.Log($"캔디 회수됨 - Level: {level}, Collected Count: {collectedCount}"); // 디버그 로그 추가
+                    
 
                     if (collectedCount >= requiredCount)
                     {
@@ -99,6 +126,36 @@ public class RewardButton : MonoBehaviour
                 }
             }
         }
+    }
+    
+    private int ConvertRewardStringToInt(string rewardString)
+    {
+        var match = Regex.Match(rewardString, @"(\d+\.?\d*)([a-d]?)");
+        string numberPart = match.Groups[1].Value;
+        string suffix = match.Groups[2].Value;
+        double baseValue = double.Parse(numberPart);
+
+        int reward = 0;
+        switch(suffix)
+        {
+            case "a":
+                reward = (int)(baseValue * 1000);
+                break;
+            case "b":
+                reward = (int)(baseValue * 1000000);
+                break;
+            case "c":
+                reward = (int)(baseValue * 1000000000);
+                break;
+            case "d":
+                reward = (int)(baseValue * 1000000000000);
+                break;
+            default:
+                reward = (int)baseValue;
+                break;
+        }
+
+        return reward;
     }
 
 }
