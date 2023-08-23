@@ -21,6 +21,7 @@ public class QuestManager : MonoBehaviour
     public TextAsset CsvData { get; set; }
     public List<Quest> activeQuests;
     private List<int> usedAvatars = new List<int>();
+    public HappyLevel happyLevel;
 
     private void Awake()
     {
@@ -106,6 +107,8 @@ public class QuestManager : MonoBehaviour
         activeQuests.Remove(quest); // activeQuests 리스트에서 해당 퀘스트 제거
 
         CreateNewQuest(); // 새로운 퀘스트 생성
+        
+        happyLevel.AddExperience(1);
     }
 
     public Sprite GetRandomHumanAvatar()
