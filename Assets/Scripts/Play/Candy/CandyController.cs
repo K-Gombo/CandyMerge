@@ -20,7 +20,8 @@ public class CandyController : MonoBehaviour
     public BoxManager boxManager; // BoxManager 참조
     private bool isDraggingStarted = false; // 드래깅 시작 여부 판단
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
-    
+    private bool isLocked = false;
+    private float passiveMergeTry = 2.4f;
     
     private void Start()
     {
@@ -29,6 +30,7 @@ public class CandyController : MonoBehaviour
         {
             boxTransforms.Add(box.transform);
         }
+        StartCoroutine(PassiveAutoMerge());
     }
 
     private void Update()
@@ -243,6 +245,7 @@ private void StopDraggingCandy()
             yield return null; // 병합 중일 경우 대기
             continue;
         }
+        isLocked = true; 
 
         if (isAutoMergeEnabled || isMergingInProgress)
         {
@@ -298,6 +301,7 @@ private void StopDraggingCandy()
 
                         MergeCandies(lowestLevelCandy, mergeTarget);
                         isMergingInProgress = false;
+                        isLocked = false; // 락 해제
 
                         if (!isAutoMergeEnabled)
                         {
@@ -316,6 +320,78 @@ private void StopDraggingCandy()
         }
     }
 }
+    
+    private IEnumerator PassiveAutoMerge()
+{
+    float totalTime = 10f; // 총 시간 (10초)
+    float passiveMergeInterval = totalTime / passiveMergeTry;
+    while (true) // 무한 루프로 계속 실행
+    {
+        yield return new WaitForSeconds(passiveMergeInterval); // passiveMergeInterval의 값에 따라 대기 시간 조절
+
+        if (isLocked) // 만약 현재 락이 설정되어 있다면
+        {
+            continue; // 다음 반복으로 건너뛰기
+        }
+
+        isLocked = true; // 락 설정
+
+        for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
+        {
+            Transform lowestLevelCandy = null;
+            Transform mergeTarget = null;
+            float closestDistance = float.MaxValue;
+
+            foreach (Transform box in boxTransforms)
+            {
+                if (box.childCount > 0 && box.GetChild(0) != currentlyDraggingCandy)
+                {
+                    CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
+                    if (candyStatus != null && candyStatus.level == targetLevel)
+                    {
+                        if (lowestLevelCandy == null)
+                        {
+                            lowestLevelCandy = box.GetChild(0);
+                        }
+                        else
+                        {
+                            float distance = Vector3.Distance(lowestLevelCandy.position,
+                                box.GetChild(0).position);
+                            if (distance < closestDistance)
+                            {
+                                closestDistance = distance;
+                                mergeTarget = box.GetChild(0);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (lowestLevelCandy != null && mergeTarget != null)
+            {
+                float duration = 0.03f;
+                float elapsedTime = 0f;
+                Vector3 startPosition = lowestLevelCandy.position;
+                Vector3 endPosition = mergeTarget.position;
+
+                while (elapsedTime < duration)
+                {
+                    float t = elapsedTime / duration;
+                    lowestLevelCandy.position = Vector3.Lerp(startPosition, endPosition, t);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                MergeCandies(lowestLevelCandy, mergeTarget);
+                break; // 병합 완료 후 반복문 종료
+            }
+        }
+
+        isLocked = false; // 락 해제
+    }
+}
+
+
 
     
     public void ToggleFastAutoMerge(bool isEnabled)

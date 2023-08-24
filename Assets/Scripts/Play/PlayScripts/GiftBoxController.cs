@@ -18,9 +18,10 @@ public class GiftBoxController : MonoBehaviour
     public List<Transform> availableBoxes = new List<Transform>();
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
     public BoxManager boxManager; // BoxManager 참조
-    private float fillTime = 1f; // 초기값 설정
+    private float fillTime = 0.5f; // 초기값 설정
     private bool isLocked = false; // 작동 우선순위 락
-    private float passiveCreateTry = 2f; // 10동안 n번 생성 
+    private float passiveCreateTry = 2.4f; // 10동안 n번 생성 
+    private float luckyCreate = 100f; // 20% 확률로 2개의 캔디 생성
 
     private void Start()
     {
@@ -155,6 +156,8 @@ public class GiftBoxController : MonoBehaviour
         return false;
     }
 
+    
+
     private void CreateCandy()
     {
         availableBoxes.Clear();
@@ -166,41 +169,41 @@ public class GiftBoxController : MonoBehaviour
             {
                 availableBoxes.Add(child);
             }
-           
-            
         }
 
-        int startIndex = candyController.GetBoxIndexFromPosition(candyController.startPosition); // 드래그 중인 캔디의 시작 위치에 해당하는 인덱스
+        // 드래그 중인 캔디의 시작 위치에 해당하는 인덱스
+        int startIndex = candyController.GetBoxIndexFromPosition(candyController.startPosition);
 
-        List<int> validIndexes = new List<int>(); // 유효한 인덱스만 담을 리스트
-        for (int i = 0; i < availableBoxes.Count; i++)
+        // 시작 위치의 박스를 사용 가능한 목록에서 제거
+        if (startIndex >= 0 && startIndex < availableBoxes.Count)
         {
-            if (i != startIndex) // 시작 위치 인덱스와 다른 인덱스만 추가
-            {
-                validIndexes.Add(i);
-            }
+            availableBoxes.RemoveAt(startIndex);
         }
 
-        if (validIndexes.Count > 0)
-        {
-            int randomIndex = validIndexes[Random.Range(0, validIndexes.Count)]; // 유효한 인덱스 목록에서 랜덤 인덱스 선택
+        int numberOfCandiesToCreate = luckyCreate >= 100f ? 2 : (Random.Range(0f, 100f) < luckyCreate ? 2 : 1);
 
+        // availableBoxes.Count가 1개라면 1개만 생성
+        if (availableBoxes.Count == 1) numberOfCandiesToCreate = 1;
+
+        // 2개의 캔디를 생성해야 하지만 사용 가능한 박스가 2개 미만인 경우 반환
+        if (numberOfCandiesToCreate == 2 && availableBoxes.Count < 2) return;
+
+        for (int n = 0; n < numberOfCandiesToCreate; n++)
+        {
+            int randomIndex = Random.Range(0, availableBoxes.Count);
             Transform selectedBox = availableBoxes[randomIndex];
+            availableBoxes.RemoveAt(randomIndex); // 선택한 박스를 사용 가능한 목록에서 제거
             GameObject transparentObject = TransCandyPooler.Instance.SpawnFromPool(selectedBox.position, Quaternion.identity);
             transparentObject.transform.SetParent(selectedBox);
             GameObject candy = CandyManager.instance.SpawnFromPool(transform.position, Quaternion.identity);
-            candy.transform.localScale = Vector3.one; // 로컬 스케일을 1로 설정
-            candy.transform.position = transform.position; // 선물상자의 위치로 설정
+            candy.transform.localScale = Vector3.one;
+            candy.transform.position = transform.position;
             StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
         }
-        
-      
     }
 
     
     
-
-
     
     private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox, GameObject transparentObject)
     {
