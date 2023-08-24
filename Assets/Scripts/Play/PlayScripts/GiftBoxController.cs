@@ -12,7 +12,6 @@ public class GiftBoxController : MonoBehaviour
     public Text createCandyText;
     private int candiesRemaining = 0;
     private int maxCandies = 11;
-    public bool autoCreateEnabled = false;
     private Coroutine autoCreateCoroutine;
     private float lastClickTime = 0f; // 마지막 클릭 시간
     private float clickCooldown = 0.3f; // 클릭 쿨타임 (초)
@@ -20,11 +19,15 @@ public class GiftBoxController : MonoBehaviour
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
     public BoxManager boxManager; // BoxManager 참조
     private float fillTime = 1f; // 초기값 설정
+    private bool isLocked = false; // 작동 우선순위 락
+    private float passiveCreateTry = 2f; // 10동안 n번 생성 
 
     private void Start()
     {
         StartCoroutine(FillAndCreateCandies());
         createCandyText.text = candiesRemaining + "/" + maxCandies;
+        // 새로운 코루틴 호출
+        StartCoroutine(PassiveAutoCreateCandy());
     }
 
     private IEnumerator FillAndCreateCandies()
@@ -79,15 +82,49 @@ public class GiftBoxController : MonoBehaviour
             {
                 if (candiesRemaining > 0 && IsSpaceAvailableInBox())
                 {
+                    isLocked = true; // 락 설정
+
                     CreateCandy();
                     candiesRemaining--;
                     createCandyText.text = candiesRemaining + "/" + maxCandies;
+
+                    isLocked = false; // 락 해제
                 }
 
                 yield return new WaitForSeconds(1f / timesPer10Seconds);
             }
         }
     }
+    
+    private IEnumerator PassiveAutoCreateCandy()
+    {
+        float totalTime = 10f; // 총 시간 (10초)
+        float passiveCreateInterval = totalTime / passiveCreateTry; 
+        while (true) // 무한 루프로 계속 실행
+        {
+            if (candiesRemaining > 0 && IsSpaceAvailableInBox())
+            {
+                while (isLocked) // AutoCreateCandy가 락을 해제할 때까지 대기
+                {
+                    yield return null;
+                }
+
+                isLocked = true; // 락 설정
+
+                CreateCandy();
+                candiesRemaining--;
+                createCandyText.text = candiesRemaining + "/" + maxCandies;
+
+                isLocked = false; // 락 해제
+            }
+
+            yield return new WaitForSeconds(passiveCreateInterval); // passiveCreateInterval의 값에 따라 대기 시간 조절
+        }
+    }
+
+
+
+    
 
     public void OnGiftBoxClick()
     {

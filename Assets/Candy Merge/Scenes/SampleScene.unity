@@ -20416,7 +20416,6 @@ MonoBehaviour:
   boxTile: {fileID: 749087268}
   giftBoxFill: {fileID: 1505396484}
   createCandyText: {fileID: 1498248997}
-  autoCreateEnabled: 0
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
   boxManager: {fileID: 749087271}

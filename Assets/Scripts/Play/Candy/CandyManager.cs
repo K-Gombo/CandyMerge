@@ -125,7 +125,14 @@ public class CandyManager : MonoBehaviour
     private void UpdateCandyCountText()
     {
         int totalCandyCountInBoxes = BoxManager.instance.GetCurrentTotalCandyCount(); // BoxManager를 참조해서 총 캔디 개수를 가져옴
-        candyCountText.text = $"{currentCandyCount}/{MaxCandyCount} ({totalCandyCountInBoxes})"; // 텍스트 업데이트
+        if (totalCandyCountInBoxes == 1)
+        {
+            candyCountText.text = $"{currentCandyCount}/{MaxCandyCount}";
+        }
+        else
+        {
+            candyCountText.text = $"{currentCandyCount}/{MaxCandyCount} ({totalCandyCountInBoxes})"; // 그 외의 경우, 괄호와 괄호 안의 숫자를 표시
+        }
     }
     
     public int GetLevelBySprite(Sprite sprite)
