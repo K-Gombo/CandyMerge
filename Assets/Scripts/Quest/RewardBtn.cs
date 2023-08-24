@@ -21,13 +21,7 @@ public class RewardButton : MonoBehaviour
         rewardButton.onClick.AddListener(OnRewardButtonClicked); // 클릭 이벤트에 메서드 연결
     }
     
-    private void Start()
-    {
-        rewardButton = GetComponent<Button>();
-        rewardButton.interactable = false;
-        rewardButton.onClick.AddListener(OnRewardButtonClicked);
-       
-    }
+   
 
     public void UpdateButtonState()
     {   
@@ -72,6 +66,7 @@ public class RewardButton : MonoBehaviour
 
     private void OnRewardButtonClicked()
     {   
+        Debug.Log("보상 버튼이 클릭되었습니다."); // 로그 추가
         if (parentQuest == null)
         {
             return; // parentQuest가 null이면 메서드를 종료

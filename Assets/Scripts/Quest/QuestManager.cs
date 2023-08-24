@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 
@@ -20,8 +21,10 @@ public class QuestManager : MonoBehaviour
     public List<GameObject> boxes = new List<GameObject>();
     public TextAsset CsvData { get; set; }
     public List<Quest> activeQuests;
-    private List<int> usedAvatars = new List<int>();
+    private Queue<int> availableAvatars = new Queue<int>();
     public HappyLevel happyLevel;
+    private int specialQuestCounter = 0; // 특별 퀘스트 카운팅
+    public int specialQuestProbability = 15; // 특별 퀘스트 확률 (15회 중 1회)
     
 
     private void Awake()
@@ -47,7 +50,13 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
+        // 처음에 모든 인덱스를 사용 가능한 인덱스로 초기화
+        for (int i = 0; i < humanAvatars.Length; i++)
+        {
+            availableAvatars.Enqueue(i);
+        }
         quest.InstanceQuest();
+        
     }
     
     void Update()
@@ -105,36 +114,37 @@ public class QuestManager : MonoBehaviour
         }
 
         quest.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
+        rewardButton.GetComponent<Button>().interactable = false;
         quest.gameObject.SetActive(false); // 객체를 비활성화
         questPool.Enqueue(quest); // 풀에 다시 추가
         activeQuests.Remove(quest); // activeQuests 리스트에서 해당 퀘스트 제거
-
+        
+        quest.OnQuestComplete();
         CreateNewQuest(); // 새로운 퀘스트 생성
         
         happyLevel.AddExperience(1);
         happyLevel.UpdateHappinessBar();
     }
 
-    public Sprite GetRandomHumanAvatar()
+    public Sprite GetRandomHumanAvatar(out int avatarIndex)
     {
-        int index;
-
-        // 모든 아바타가 사용된 경우 리스트를 초기화합니다.
-        if (usedAvatars.Count == humanAvatars.Length)
+        // 사용 가능한 인덱스가 없으면 null 반환
+        if (availableAvatars.Count == 0)
         {
-            usedAvatars.Clear();
+            avatarIndex = -1;
+            return null;
         }
 
-        // 이미 사용된 아바타를 제외하고 랜덤 인덱스를 선택합니다.
-        do
-        {
-            index = Random.Range(0, humanAvatars.Length);
-        } while (usedAvatars.Contains(index));
+        // 사용 가능한 인덱스 큐에서 인덱스 가져오기
+        avatarIndex = availableAvatars.Dequeue();
 
-        // 선택된 아바타의 인덱스를 리스트에 추가합니다.
-        usedAvatars.Add(index);
+        return humanAvatars[avatarIndex];
+    }
 
-        return humanAvatars[index];
+    public void ReturnAvatarIndex(int index)
+    {
+        // 사용된 인덱스 반환
+        availableAvatars.Enqueue(index);
     }
 
     public int RandomCandyLevel()
@@ -193,5 +203,26 @@ public class QuestManager : MonoBehaviour
         }
     }
     
+    public bool IsSpecialQuest()
+    {
+        bool isSpecial = Random.Range(1, specialQuestProbability + 1 - specialQuestCounter) == 1 || specialQuestCounter == 14;
+    
+        if (isSpecial) 
+        {
+            Debug.Log("특별퀘스트 " + (specialQuestCounter + 1) + "번째에서 등장!"); // 몇 번째에서 특별퀘스트가 등장했는지 출력
+            specialQuestCounter = 0; // 특별 퀘스트 카운팅 초기화
+        }
+        else 
+        {
+            specialQuestCounter++; // 퀘스트 카운팅 증가
+        }
+
+        if (specialQuestCounter == 0)
+        {
+            Debug.Log("특별 퀘스트 생성조건 초기화!"); // 특별 퀘스트 생성조건 초기화 메시지 출력
+        }
+
+        return isSpecial;
+    }
     
 }
