@@ -21,8 +21,12 @@ public class SortBtn : MonoBehaviour
                     Transform grandChild = child.GetChild(j);
                     if (grandChild.CompareTag("Candy")) // "Candy" 태그를 가진 자식 찾기
                     {
-                        allCandies.Add(grandChild.GetComponent<CandyStatus>());
-                        break; // 캔디를 찾았으므로 루프 종료
+                        CandyStatus candyStatus = grandChild.GetComponent<CandyStatus>();
+                        if (candyStatus != null) // CandyStatus 컴포넌트가 존재하면
+                        {
+                            allCandies.Add(candyStatus);
+                            break; // 캔디를 찾았으므로 루프 종료
+                        }
                     }
                 }
             }

@@ -19,6 +19,7 @@ public class GiftBoxController : MonoBehaviour
     public List<Transform> availableBoxes = new List<Transform>();
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
     public BoxManager boxManager; // BoxManager 참조
+    private float fillTime = 1f; // 초기값 설정
 
     private void Start()
     {
@@ -34,10 +35,10 @@ public class GiftBoxController : MonoBehaviour
             {
                 float timeElapsed = 0f;
 
-                while (timeElapsed < 1f)
+                while (timeElapsed < fillTime)
                 {
                     timeElapsed += Time.deltaTime;
-                    giftBoxFill.fillAmount = timeElapsed / 1f;
+                    giftBoxFill.fillAmount = timeElapsed / fillTime;
                     yield return null;
                 }
 
@@ -59,7 +60,17 @@ public class GiftBoxController : MonoBehaviour
             }
         }
     }
-
+    
+    public float GetFillTime()
+    {
+        return fillTime; // 현재 fillTime 값 반환
+    }
+    public void SetFillTime(float newFillTime)
+    {
+        fillTime = newFillTime; // 새로운 값을 적용
+    }
+    
+  
     private IEnumerator AutoCreateCandy(int timesPer10Seconds)
     {
         while (true)

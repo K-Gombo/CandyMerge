@@ -56,10 +56,13 @@ public class Quest : MonoBehaviour
                 candyLevel2 = QuestManager.instance.RandomCandyLevel();
             } while (candyLevel2 == candyLevel1);
 
-            // 여기서 candyCount2의 최대값을 maxCandyCount - candyCount1로 지정
-            candyCount2 = Random.Range(3, QuestManager.instance.maxCandyCount - candyCount1);
-            candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
-            reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
+            int remainingCandyCount = QuestManager.instance.maxCandyCount - candyCount1;
+            if (remainingCandyCount > 2)
+            {
+                candyCount2 = Random.Range(3, remainingCandyCount + 1);
+                candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
+                reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
+            }
         }
         
         CalculateSpecialQuest(ref reward); // 특별 퀘스트 계산
@@ -120,10 +123,14 @@ public class Quest : MonoBehaviour
             {
                 candyLevel2 = QuestManager.instance.RandomCandyLevel();
             } while (candyLevel2 == candyLevel1);
-            
-            candyCount2 = Random.Range(3, QuestManager.instance.maxCandyCount - candyCount1);
-            candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
-            reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
+
+            int remainingCandyCount = QuestManager.instance.maxCandyCount - candyCount1;
+            if (remainingCandyCount > 2)
+            {
+                candyCount2 = Random.Range(3, remainingCandyCount + 1);
+                candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
+                reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
+            }
         }
         CalculateSpecialQuest(ref reward);
       
