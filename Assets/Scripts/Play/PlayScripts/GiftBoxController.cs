@@ -196,6 +196,8 @@ public class GiftBoxController : MonoBehaviour
             GameObject transparentObject = TransCandyPooler.Instance.SpawnFromPool(selectedBox.position, Quaternion.identity);
             transparentObject.transform.SetParent(selectedBox);
             GameObject candy = CandyManager.instance.SpawnFromPool(transform.position, Quaternion.identity);
+            candy.GetComponent<CandyStatus>().boxName = selectedBox.gameObject.name;
+            selectedBox.GetComponent<Box>().SetCandy(candy.GetComponent<CandyStatus>().level);
             candy.transform.localScale = Vector3.one;
             candy.transform.position = transform.position;
             StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));

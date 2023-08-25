@@ -7,6 +7,7 @@ public class BoxManager : MonoBehaviour
     public Dictionary<int, int> candyLevelsCount;
     private int totalCandyCount;
 
+
     public static BoxManager instance;
     
     private void Awake()
@@ -20,7 +21,7 @@ public class BoxManager : MonoBehaviour
         UpdateCandyCount();
     }
 
-    public void UpdateCandyCount()
+    public void UpdateCandyCount() 
     {
         candyLevelsCount.Clear();
         totalCandyCount = 0;
@@ -42,7 +43,6 @@ public class BoxManager : MonoBehaviour
                     {
                         candyLevelsCount[level] = 1;
                     }
-
                     totalCandyCount++;
                 }
             }

@@ -184,6 +184,8 @@ private void StopDraggingCandy()
             CandyManager.instance.SetAppearance(candy2.gameObject); // 이미지를 먼저 바꾸기
             candy2.position = candy2.parent.position;
 
+            candy2.parent.GetComponent<Box>().SetCandy(candyStatus2.level);
+
             boxTransforms.Remove(candy1);
             CandyManager.instance.CandyDestroyed();
             CandyManager.instance.ReturnToPool(candy1.gameObject); // 캔디 반환

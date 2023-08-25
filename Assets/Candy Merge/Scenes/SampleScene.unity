@@ -48921,6 +48921,7 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   mergeEffectPrefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
   boxManager: {fileID: 749087271}
+  draggingParentCanvas: {fileID: 0}
 --- !u!114 &1968457437
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class CandyManager : MonoBehaviour
 
     private void Awake()
     {
+        candyPool = new Queue<GameObject>();
+
         if (instance == null)
         {
             instance = this;
@@ -39,7 +41,6 @@ public class CandyManager : MonoBehaviour
         MaxCandyCount = GameObject.FindGameObjectsWithTag("Box").Length - GameObject.FindGameObjectsWithTag("Locked").Length;
         UpdateCandyCountText();
         
-        candyPool = new Queue<GameObject>();
         for (int i = 0; i < poolSize; i++)
         {
             GameObject candy = Instantiate(candyPrefab, CandyPool); // CandyPool 위치에서 생성
@@ -85,6 +86,7 @@ public class CandyManager : MonoBehaviour
 
         // 캔디의 레벨을 baseLevel로 초기화합니다.
         CandyStatus status = objectToReturn.GetComponent<CandyStatus>();
+        ES3.Save(status.boxName, 0);
         if (status != null)
         {
             status.level = CandyStatus.baseLevel;
