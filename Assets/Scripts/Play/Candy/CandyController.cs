@@ -22,7 +22,6 @@ public class CandyController : MonoBehaviour
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     private bool isLocked = false;
     private float passiveMergeTry = 2.4f;
-    public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
 
     Vector3 startPos;
     Vector3 currentPos;
@@ -47,6 +46,7 @@ public class CandyController : MonoBehaviour
     {
         if (currentlyDraggingCandy == null)
         {
+            startPos = worldPoint;
             hit = Physics2D.Raycast(worldPoint, transform.forward, Mathf.Infinity);
             if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
@@ -56,10 +56,18 @@ public class CandyController : MonoBehaviour
     }
 
     if (currentlyDraggingCandy != null)
-    {   
+    {
         if (Input.GetMouseButton(0))
         {
-            currentlyDraggingCandy.position = new Vector3(worldPoint.x, worldPoint.y, 90);
+                currentPos = worldPoint;
+                var distance = Vector3.Distance(startPos, currentPos);
+
+                if (distance >= 0.1f)
+                {
+                    currentlyDraggingCandy.position = new Vector3(worldPoint.x, worldPoint.y, 90);
+
+                }
+
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -69,16 +77,16 @@ public class CandyController : MonoBehaviour
     }
 }
 
-    private void StartDraggingCandy()
-    {
-        startPosition = hit.collider.transform.position;
-        originalParent = hit.collider.transform.parent;
-        hit.collider.transform.SetParent(draggingParentCanvas); // 드래그 중에는 Canvas를 부모로 설정
-        originalSortingOrder = hit.collider.GetComponent<SpriteRenderer>().sortingOrder;
-        hit.collider.GetComponent<SpriteRenderer>().sortingOrder = 5;
-        currentlyDraggingCandy = hit.collider.transform;
-        draggedBoxIndex = GetBoxIndexFromPosition(startPosition);
-    }
+private void StartDraggingCandy()
+{
+    startPosition = hit.collider.transform.position;
+    originalParent = hit.collider.transform.parent;
+    hit.collider.transform.SetParent(null);
+    originalSortingOrder = hit.collider.GetComponent<SpriteRenderer>().sortingOrder;
+    hit.collider.GetComponent<SpriteRenderer>().sortingOrder = 5;
+    currentlyDraggingCandy = hit.collider.transform;
+    draggedBoxIndex = GetBoxIndexFromPosition(startPosition);
+}
 
 private void StopDraggingCandy()
 {
