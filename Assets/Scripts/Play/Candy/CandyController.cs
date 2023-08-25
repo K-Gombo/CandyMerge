@@ -22,7 +22,10 @@ public class CandyController : MonoBehaviour
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     private bool isLocked = false;
     private float passiveMergeTry = 2.4f;
-    
+
+    Vector3 startPos;
+    Vector3 currentPos;
+
     private void Start()
     {
         boxTransforms = new List<Transform>();
@@ -43,6 +46,7 @@ public class CandyController : MonoBehaviour
     {
         if (currentlyDraggingCandy == null)
         {
+            startPos = worldPoint;
             hit = Physics2D.Raycast(worldPoint, transform.forward, Mathf.Infinity);
             if (hit.collider != null && hit.collider.CompareTag("Candy"))
             {
@@ -55,7 +59,15 @@ public class CandyController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            currentlyDraggingCandy.position = new Vector3(worldPoint.x, worldPoint.y, 90);
+                currentPos = worldPoint;
+                var distance = Vector3.Distance(startPos, currentPos);
+
+                if (distance >= 0.1f)
+                {
+                    currentlyDraggingCandy.position = new Vector3(worldPoint.x, worldPoint.y, 90);
+
+                }
+
         }
 
         if (Input.GetMouseButtonUp(0))
