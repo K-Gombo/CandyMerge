@@ -38,36 +38,36 @@ public class CandyController : MonoBehaviour
     }
 
     private void Update()
-{
-    if (isMergingInProgress) return;
-
-    Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-    if (Input.GetMouseButtonDown(0))
     {
-        if (currentlyDraggingCandy == null)
+        if (isMergingInProgress) return;
+
+        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (Input.GetMouseButtonDown(0))
         {
-            hit = Physics2D.Raycast(worldPoint, transform.forward, Mathf.Infinity);
-            if (hit.collider != null && hit.collider.CompareTag("Candy"))
+            if (currentlyDraggingCandy == null)
             {
-                StartDraggingCandy();
+                hit = Physics2D.Raycast(worldPoint, transform.forward, Mathf.Infinity);
+                if (hit.collider != null && hit.collider.CompareTag("Candy"))
+                {
+                    StartDraggingCandy();
+                }
+            }
+        }
+
+        if (currentlyDraggingCandy != null)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                currentlyDraggingCandy.position = new Vector3(worldPoint.x, worldPoint.y, 90);
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                StopDraggingCandy();
             }
         }
     }
-
-    if (currentlyDraggingCandy != null)
-    {   
-        if (Input.GetMouseButton(0))
-        {
-            currentlyDraggingCandy.position = new Vector3(worldPoint.x, worldPoint.y, 90);
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            StopDraggingCandy();
-        }
-    }
-}
 
     private void StartDraggingCandy()
     {
@@ -79,6 +79,7 @@ public class CandyController : MonoBehaviour
         currentlyDraggingCandy = hit.collider.transform;
         draggedBoxIndex = GetBoxIndexFromPosition(startPosition);
     }
+
 
 private void StopDraggingCandy()
 {
