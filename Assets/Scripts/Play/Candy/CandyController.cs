@@ -69,6 +69,7 @@ public class CandyController : MonoBehaviour
         }
     }
 
+
     private void StartDraggingCandy()
     {
         startPosition = hit.collider.transform.position;

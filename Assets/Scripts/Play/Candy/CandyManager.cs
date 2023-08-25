@@ -106,8 +106,11 @@ public class CandyManager : MonoBehaviour
         SpriteRenderer renderer = candy.GetComponent<SpriteRenderer>();
         CandyStatus status = candy.GetComponent<CandyStatus>();
         int level = status.level;
-        renderer.sprite = candySprites[level - 1];
-
+        if (level != 0)
+        {
+            renderer.sprite = candySprites[level - 1];
+        }
+        
         currentCandyCount++;
         UpdateCandyCountText();
     }
