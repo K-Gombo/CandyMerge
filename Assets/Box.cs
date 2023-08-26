@@ -26,7 +26,6 @@ public class Box : MonoBehaviour
             transform.GetComponent<Box>().SetCandy(myCandyLevel);
             candy.transform.localScale = Vector3.one;
             candy.transform.position = transform.position;
-
             candy.transform.SetParent(transform); // 최종 위치에 도달하면 부모를 설정
             candy.transform.localPosition = Vector3.zero; // 로컬 위치를 0으로 설정
             candy.transform.localScale = Vector3.one; // 로컬 크기를 1로 설정

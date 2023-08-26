@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
+
+
 public class CandyController : MonoBehaviour
 {
     [SerializeField] private GiftBoxController giftBoxController;
@@ -20,8 +22,11 @@ public class CandyController : MonoBehaviour
     public BoxManager boxManager; // BoxManager 참조
     private bool isDraggingStarted = false; // 드래깅 시작 여부 판단
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
-    private bool isLocked = false;
-    private float passiveMergeTry = 2.4f;
+    
+    private WaitForSeconds passiveDelay;
+    private float passiveWaiting = 10f;  // 기본값을 1.5초로 설정
+    private const float fixedTime = 10f; // 고정된 10초 시간
+    
     public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
 
     Vector3 startPos;
@@ -34,8 +39,19 @@ public class CandyController : MonoBehaviour
         {
             boxTransforms.Add(box.transform);
         }
+
+        UpdatePassiveWaiting(passiveWaiting);  // 초기값 설정
+        Invoke("StartAutoMerge", 0.1f);
+        
+
+    }
+    
+    void StartAutoMerge()
+    {   Debug.Log("Initial passiveDelay: " + passiveDelay);
         StartCoroutine(PassiveAutoMerge());
     }
+
+
 
     private void Update()
     {
@@ -206,8 +222,9 @@ private void StopDraggingCandy()
     
     private IEnumerator AnimateScale(Transform candy)
     {
+       
         isMergingInProgress = true; // 병합 중임을 표시
-
+       
         Vector3 originalScale = candy.localScale;
         Vector3 targetScale = originalScale * 1.2f;
         float duration = 0.2f;
@@ -234,6 +251,7 @@ private void StopDraggingCandy()
         candy.localScale = originalScale;
 
         isMergingInProgress = false; // 병합 중이 아님을 표시
+        
     }
 
     private void ReturnToOriginalBox(Transform candy)
@@ -253,9 +271,8 @@ private void StopDraggingCandy()
             yield return null; // 병합 중일 경우 대기
             continue;
         }
-        isLocked = true; 
 
-        if (isAutoMergeEnabled || isMergingInProgress)
+        if (isAutoMergeEnabled || isMergingInProgress )
         {
             for (int i = 0; i < timesPerNSeconds; i++)
             {
@@ -309,7 +326,6 @@ private void StopDraggingCandy()
 
                         MergeCandies(lowestLevelCandy, mergeTarget);
                         isMergingInProgress = false;
-                        isLocked = false; // 락 해제
 
                         if (!isAutoMergeEnabled)
                         {
@@ -328,21 +344,17 @@ private void StopDraggingCandy()
         }
     }
 }
-    
-    private IEnumerator PassiveAutoMerge()
+
+private IEnumerator PassiveAutoMerge()
 {
-    float totalTime = 10f; // 총 시간 (10초)
-    float passiveMergeInterval = totalTime / passiveMergeTry;
-    while (true) // 무한 루프로 계속 실행
+    
+    while (true)
     {
-        yield return new WaitForSeconds(passiveMergeInterval); // passiveMergeInterval의 값에 따라 대기 시간 조절
-
-        if (isLocked) // 만약 현재 락이 설정되어 있다면
+        if (isMergingInProgress)
         {
-            continue; // 다음 반복으로 건너뛰기
+            yield return null; // 병합 중일 경우 대기
+            continue;
         }
-
-        isLocked = true; // 락 설정
 
         for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
         {
@@ -376,32 +388,23 @@ private void StopDraggingCandy()
             }
 
             if (lowestLevelCandy != null && mergeTarget != null)
-            {
-                float duration = 0.03f;
-                float elapsedTime = 0f;
-                Vector3 startPosition = lowestLevelCandy.position;
-                Vector3 endPosition = mergeTarget.position;
-
-                while (elapsedTime < duration)
-                {
-                    float t = elapsedTime / duration;
-                    lowestLevelCandy.position = Vector3.Lerp(startPosition, endPosition, t);
-                    elapsedTime += Time.deltaTime;
-                    yield return null;
-                }
-
+            {   Debug.Log("Current passiveDelay time: " + passiveDelay);
+                isMergingInProgress = true;
                 MergeCandies(lowestLevelCandy, mergeTarget);
-                break; // 병합 완료 후 반복문 종료
+                isMergingInProgress = false;
+                yield return passiveDelay;  // 병합이 성공적으로 이루어진 후 1초의 딜레이를 준다.
+                break; // 병합이 일어났으면 루프를 빠져나옵니다.
             }
         }
-
-        isLocked = false; // 락 해제
+        yield return null; // 병합이 일어나지 않았으면 다음 프레임을 기다립니다.
     }
 }
 
-
-
+   
+ 
     
+   
+
     public void ToggleFastAutoMerge(bool isEnabled)
     {
                 if (autoMergeCoroutine != null && !isMergingInProgress)
@@ -421,7 +424,20 @@ private void StopDraggingCandy()
     {
             yield return new WaitForSeconds(1f);
             yield return AutoMergeCandies(timesPerNSeconds, n);
+            
     }
+    
+    public void UpdatePassiveWaiting(float newWaitingTime)
+    {
+        passiveWaiting = newWaitingTime;
+        float calculatedDelay = fixedTime / newWaitingTime;
+        passiveDelay = new WaitForSeconds(calculatedDelay);  // 변경된 부분: 계산된 딜레이 시간을 passiveDelay에 저장
+    }
+    
+  
+    
+    
+    
 }
 
 
