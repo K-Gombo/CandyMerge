@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,10 @@ public class CandyStatus : MonoBehaviour
     public static int baseLevel = 1; // deafault 레벨 (스킬 업그레이드 시 증가)
     public int maxBaseLevel = 58;
     public string boxName;
+   
+
+
+   
 
     private void Start()
     {
@@ -50,6 +55,10 @@ public class CandyStatus : MonoBehaviour
         {
             baseLevel = maxBaseLevel;
         }
+        Debug.Log("CheckAndReturnImpossibleQuests is called");
+        QuestManager.instance.CheckAndReturnImpossibleQuests();  // baseLevel이 변경될 때마다 호출
     }
+    
+    
 
 }

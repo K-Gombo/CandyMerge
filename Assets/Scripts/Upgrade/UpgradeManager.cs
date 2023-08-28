@@ -34,6 +34,16 @@ public class UpgradeManager : MonoBehaviour
     public int currentCandyLevelUpCost;
     public int currentPassiveAutoMergeSpeedUpCost;
     public int currentPassiveAutoCreateSpeedUpCost;
+    
+    
+    // 각 업그레이드의 레벨
+    public int luckyCreateLevel = 1;
+    public int createSpeedLevel = 1;
+    public int removeLockedLevel = 1;
+    public int maxCandiesLevel = 1;
+    public int candyLevel = 1;
+    public int passiveAutoMergeSpeedLevel = 1;
+    public int passiveAutoCreateSpeedLevel = 1;
     private void Start()
     {
         // 초기 비용 설정
@@ -67,6 +77,7 @@ public class UpgradeManager : MonoBehaviour
             float newLuckyCreate = Mathf.Min(currentLuckyCreate + increaseLuckyCreate, giftBoxController.maxLuckyCreate);
             giftBoxController.SetLuckyCreate(newLuckyCreate);
             UpdateCost(ref currentLuckyCreateUpCost);
+            luckyCreateLevel++;
             Debug.Log($"캔디 확률 업!: {newLuckyCreate}");
             
         }
@@ -93,6 +104,7 @@ public class UpgradeManager : MonoBehaviour
             float newFillTime = Mathf.Max(currentFillTime - decreaseFilltime, giftBoxController.minimumFillTime);
             giftBoxController.SetFillTime(newFillTime);
             UpdateCost(ref currentCreateSpeedUpCost);
+            createSpeedLevel++;
             Debug.Log($"생산 쿨타임 감소!:{newFillTime}");
             
         }
@@ -154,6 +166,7 @@ public class UpgradeManager : MonoBehaviour
                             Destroy(child.gameObject);
                             CandyManager.instance.LockedTileRemoved();
                             UpdateCost(ref currentRemoveLockedCost);
+                            removeLockedLevel++;
                             Debug.Log($"Locked 오브젝트 제거 완료! 남은 골드: {currencyManager.GetCurrencyAmount("Gold")}");
                             return;
                         }
@@ -182,6 +195,7 @@ public class UpgradeManager : MonoBehaviour
             int newMaxCandies = currentMaxCandies + increaseMaxCandies;
             giftBoxController.SetMaxCandies(newMaxCandies);
             UpdateCost(ref currentMaxCandiesUpCost);
+            maxCandiesLevel++;
             Debug.Log($"캔디 생성 증가!:{newMaxCandies}");
         }
         else
@@ -203,6 +217,7 @@ public class UpgradeManager : MonoBehaviour
             int newBaseLevel = currentBaseLevel + increaseBaseLevel;
             candyStatus.SetBaseLevel(newBaseLevel);
             UpdateCost(ref currentCandyLevelUpCost);
+            candyLevel++;
             Debug.Log($"캔디 레벨업!:{newBaseLevel}");
         }
         else
@@ -224,6 +239,7 @@ public class UpgradeManager : MonoBehaviour
             float newPassiveAutoMergeSpeed = Mathf.Min(currentPassiveWating + increasePassiveAutoMergeSpeed, candyController.maxPassiveWating);
             candyController.SetPassiveWating(newPassiveAutoMergeSpeed);
             UpdateCost(ref currentPassiveAutoMergeSpeedUpCost);
+            passiveAutoMergeSpeedLevel++;
             Debug.Log($"자동 머지 속도업!:{newPassiveAutoMergeSpeed}");
         }
         else
@@ -245,6 +261,7 @@ public class UpgradeManager : MonoBehaviour
             float newPassiveAutoCreateSpeed = Mathf.Min(currentPassiveCreateSpeed + increasePassiveAutoCreateSpeed, giftBoxController.maxPassiveCreateTry);
             giftBoxController.SetPassiveCreateTry(newPassiveAutoCreateSpeed);
             UpdateCost(ref currentPassiveAutoCreateSpeedUpCost);
+            passiveAutoCreateSpeedLevel++;
             Debug.Log($"자동 생성 속도업!:{newPassiveAutoCreateSpeed}");
         }
         else

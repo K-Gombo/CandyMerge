@@ -164,6 +164,17 @@ public class Quest : MonoBehaviour
             QuestManager.instance.ReturnAvatarIndex(avatarIndex);
         }
     }
+    
+    public int GetRequiredCandyCount(Text candyCountText)
+    {
+        string[] splitText = candyCountText.text.Split('/');
+        if (splitText.Length == 2)
+        {
+            return int.Parse(splitText[1]);
+        }
+        return 0;
+    }
+
 
 }
     

@@ -226,4 +226,59 @@ public class QuestManager : MonoBehaviour
         return isSpecial;
     }
     
+    public void CheckAndReturnImpossibleQuests()
+    {
+        List<Quest> questsToRemove = new List<Quest>();
+        int baseLevel = CandyStatus.baseLevel;
+
+        foreach (Quest quest in activeQuests)
+        {
+            int requiredLevel1 = CandyManager.instance.GetLevelBySprite(quest.requestCandy1.sprite);
+            int requiredLevel2 = quest.requestCandy2.sprite != null ? CandyManager.instance.GetLevelBySprite(quest.requestCandy2.sprite) : 0;
+
+            int availableCount1 = BoxManager.instance.GetCandyCountByLevel(requiredLevel1);
+            int availableCount2 = requiredLevel2 > 0 ? BoxManager.instance.GetCandyCountByLevel(requiredLevel2) : 0;
+
+            Debug.Log($"Available Count 1: {availableCount1}, Available Count 2: {availableCount2}");
+            Debug.Log($"Required Level 1: {requiredLevel1}, Required Level 2: {requiredLevel2}");
+            Debug.Log($"Base Level: {baseLevel}");
+
+            if ((availableCount1 == 0 && requiredLevel1 < baseLevel) || (availableCount2 == 0 && requiredLevel2 < baseLevel))
+            {
+                questsToRemove.Add(quest);
+                Debug.Log("Quest added to remove list");
+            }
+        }
+
+        foreach (Quest quest in questsToRemove)
+        {
+            RewardButton rewardButton = quest.GetComponentInChildren<RewardButton>();
+            if (rewardButton != null)
+            {
+                rewardButton.parentQuest = null; // 참조 끊기
+            }
+
+            int completedIndex = activeQuests.IndexOf(quest);
+            for (int i = completedIndex + 1; i < activeQuests.Count; i++)
+            {
+                activeQuests[i].transform.SetSiblingIndex(i - 1);
+            }
+
+            quest.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
+            rewardButton.GetComponent<Button>().interactable = false;
+            quest.gameObject.SetActive(false); // 객체를 비활성화
+            questPool.Enqueue(quest); // 풀에 다시 추가
+            activeQuests.Remove(quest); // activeQuests 리스트에서 해당 퀘스트 제거
+
+            quest.OnQuestComplete();
+            CreateNewQuest(); // 새로운 퀘스트 생성
+        }
+    }
+
+
 }
+
+
+
+    
+

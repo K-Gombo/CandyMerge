@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 7512650}
   - component: {fileID: 7512649}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: CandyLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9656,7 +9656,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +0.5
+  m_Text: +0.2
 --- !u!222 &367831097
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10884,7 +10884,7 @@ GameObject:
   - component: {fileID: 432905696}
   - component: {fileID: 432905695}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: MaxCandyLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11634,7 +11634,7 @@ GameObject:
   - component: {fileID: 456975361}
   - component: {fileID: 456975360}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: CreateSpeedLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23591,7 +23591,7 @@ GameObject:
   - component: {fileID: 953190790}
   - component: {fileID: 953190789}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: PassiveAutoMergeLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25052,7 +25052,7 @@ GameObject:
   - component: {fileID: 1020032503}
   - component: {fileID: 1020032502}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: HaveCandyLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34026,7 +34026,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +0.5
+  m_Text: + 1
 --- !u!222 &1357655588
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34739,6 +34739,13 @@ MonoBehaviour:
   candyLevelUpCostText: {fileID: 394917824}
   passiveAutoMergeSpeedUpCostText: {fileID: 358703888}
   passiveAutoCreateSpeedUpCostText: {fileID: 323776044}
+  luckyCreateLevelText: {fileID: 1592743178}
+  createSpeedLevelText: {fileID: 456975360}
+  removeLockedLevelText: {fileID: 1020032502}
+  maxCandiesLevelText: {fileID: 432905695}
+  candyLevelUpText: {fileID: 7512649}
+  PassiveAutoMergeSpeedUpLevelText: {fileID: 953190789}
+  PassiveAutoCreateSpeedUpLevelText: {fileID: 1710439879}
 --- !u!114 &1387880594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34777,6 +34784,13 @@ MonoBehaviour:
   currentCandyLevelUpCost: 0
   currentPassiveAutoMergeSpeedUpCost: 0
   currentPassiveAutoCreateSpeedUpCost: 0
+  luckyCreateLevel: 1
+  createSpeedLevel: 1
+  removeLockedLevel: 1
+  maxCandiesLevel: 1
+  candyLevel: 1
+  passiveAutoMergeSpeedLevel: 1
+  passiveAutoCreateSpeedLevel: 1
 --- !u!1 &1388160929
 GameObject:
   m_ObjectHideFlags: 0
@@ -38764,7 +38778,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +0.5
+  m_Text: + 1
 --- !u!222 &1546814162
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -39745,7 +39759,7 @@ GameObject:
   - component: {fileID: 1592743179}
   - component: {fileID: 1592743178}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: LuckyCreateLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42353,7 +42367,7 @@ GameObject:
   - component: {fileID: 1710439880}
   - component: {fileID: 1710439879}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: PassiveAutoCreateLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43892,7 +43906,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +0.5
+  m_Text: +0.2
 --- !u!222 &1764061046
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -49251,7 +49265,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +0.5
+  m_Text: + 1
 --- !u!222 &1944908154
 CanvasRenderer:
   m_ObjectHideFlags: 0
