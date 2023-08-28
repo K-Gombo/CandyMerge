@@ -106,11 +106,16 @@ public class CandyManager : MonoBehaviour
         SpriteRenderer renderer = candy.GetComponent<SpriteRenderer>();
         CandyStatus status = candy.GetComponent<CandyStatus>();
         int level = status.level;
-        if (level != 0)
+
+        if (level > 0 && level <= candySprites.Length) // level이 배열의 크기를 벗어나지 않도록 체크
         {
             renderer.sprite = candySprites[level - 1];
         }
-        
+        else if (level > candySprites.Length) // level이 배열의 크기를 벗어났을 때의 처리
+        {
+            Debug.Log($"캔디의 최대레벨입니다.");
+        }
+
         currentCandyCount++;
         UpdateCandyCountText();
     }
@@ -124,6 +129,7 @@ public class CandyManager : MonoBehaviour
     public void LockedTileRemoved()  // 나중에 스킬로 캔디 생성 영역 개수를 늘리는거 할떄 사용
     {
         MaxCandyCount++; // Locked 오브젝트가 제거될 때마다 MaxCandyCount를 증가시킵니다.
+        Debug.Log($"보유 캔디 증가!:{MaxCandyCount}");
         UpdateCandyCountText();
     }
 

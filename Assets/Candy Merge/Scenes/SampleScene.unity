@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBE60\uB978 \uC81C\uC791(Max 8)"
+  m_Text: "\uC790\uB3D9 \uBA38\uC9C0 \uCFE8\uD0C0\uC784 \uAC10\uC18C(Max 8)"
 --- !u!222 &469258
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3814,8 +3814,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 180984627}
   m_HandleRect: {fileID: 180984626}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.5525607
+  m_Value: 1.0000001
+  m_Size: 0.55256075
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4286,8 +4286,8 @@ RectTransform:
   m_Father: {fileID: 1103436424}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.4474393}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5116,7 +5116,7 @@ GameObject:
   - component: {fileID: 215148572}
   - component: {fileID: 215148571}
   m_Layer: 5
-  m_Name: Skill (2)
+  m_Name: HaveCandy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5141,9 +5141,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -945}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &215148571
@@ -5636,8 +5636,10 @@ GameObject:
   - component: {fileID: 237222219}
   - component: {fileID: 237222221}
   - component: {fileID: 237222220}
+  - component: {fileID: 237222222}
+  - component: {fileID: 237222223}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: LuckyCreateBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5650,19 +5652,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237222218}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 645239258}
   - {fileID: 831767504}
-  m_Father: {fileID: 1724307864}
+  m_Father: {fileID: 518103905}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 335, y: 0}
+  m_AnchoredPosition: {x: 660, y: 0}
   m_SizeDelta: {x: 230, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237222220
@@ -5685,8 +5687,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5703,6 +5705,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237222218}
   m_CullTransparentMesh: 1
+--- !u!114 &237222222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237222218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 237222220}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 237222223}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnLuckyCreateUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &237222223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237222218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  upgradeManager: {fileID: 1387880594}
+  boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &240807381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5794,6 +5874,7 @@ GameObject:
   - component: {fileID: 242259532}
   - component: {fileID: 242259534}
   - component: {fileID: 242259533}
+  - component: {fileID: 242259535}
   m_Layer: 5
   m_Name: Skill Button
   m_TagString: Untagged
@@ -5843,8 +5924,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5861,6 +5942,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242259531}
   m_CullTransparentMesh: 1
+--- !u!114 &242259535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242259531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 242259533}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &243561967
 GameObject:
   m_ObjectHideFlags: 0
@@ -6489,8 +6614,10 @@ GameObject:
   - component: {fileID: 273389326}
   - component: {fileID: 273389328}
   - component: {fileID: 273389327}
+  - component: {fileID: 273389329}
+  - component: {fileID: 273389330}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: CreateSpeedBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6538,8 +6665,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6556,6 +6683,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273389325}
   m_CullTransparentMesh: 1
+--- !u!114 &273389329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273389325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 273389327}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 273389330}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnCreateSpeedUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &273389330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273389325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  upgradeManager: {fileID: 1387880594}
+  boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &276223995
 GameObject:
   m_ObjectHideFlags: 0
@@ -8303,7 +8508,7 @@ GameObject:
   - component: {fileID: 323776045}
   - component: {fileID: 323776044}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: PACCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8892,7 +9097,7 @@ GameObject:
   - component: {fileID: 342065180}
   - component: {fileID: 342065179}
   m_Layer: 5
-  m_Name: Skill (6)
+  m_Name: PassiveAutoCreate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8917,9 +9122,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -2425}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &342065179
@@ -9144,7 +9349,7 @@ GameObject:
   - component: {fileID: 358703889}
   - component: {fileID: 358703888}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: PAMCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10017,7 +10222,7 @@ GameObject:
   - component: {fileID: 394917825}
   - component: {fileID: 394917824}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: CandyLevelCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11280,7 +11485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &445562531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12813,7 +13018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBE60\uB978 \uC81C\uC791(Max 8)"
+  m_Text: "\uC790\uB3D9 \uC81C\uC791 \uCFE8\uD0C0\uC784 \uAC10\uC18C(Max 8)"
 --- !u!222 &490570136
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13266,6 +13471,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1592743177}
+  - {fileID: 237222219}
   m_Father: {fileID: 1724307864}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13899,7 +14105,7 @@ GameObject:
   - component: {fileID: 583071421}
   - component: {fileID: 583071420}
   m_Layer: 5
-  m_Name: Skill (8)
+  m_Name: LuckyGold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13924,9 +14130,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -3165}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &583071420
@@ -17385,8 +17591,10 @@ GameObject:
   - component: {fileID: 721476788}
   - component: {fileID: 721476790}
   - component: {fileID: 721476789}
+  - component: {fileID: 721476791}
+  - component: {fileID: 721476792}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: CandyLevelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17434,8 +17642,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -17452,6 +17660,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721476787}
   m_CullTransparentMesh: 1
+--- !u!114 &721476791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721476787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 721476789}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 721476792}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnCandyLevelUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &721476792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721476787}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  upgradeManager: {fileID: 1387880594}
+  boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &726819369
 GameObject:
   m_ObjectHideFlags: 0
@@ -19775,7 +20061,7 @@ GameObject:
   - component: {fileID: 791263303}
   - component: {fileID: 791263302}
   m_Layer: 5
-  m_Name: Skill (9)
+  m_Name: OfflineReward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19800,9 +20086,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -3535}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &791263302
@@ -20689,9 +20975,14 @@ MonoBehaviour:
   boxTile: {fileID: 749087268}
   giftBoxFill: {fileID: 1505396484}
   createCandyText: {fileID: 1498248997}
+  realMaxCandies: 25
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
   boxManager: {fileID: 749087271}
+  minimumFillTime: 2
+  passiveCreateTry: 0
+  maxPassiveCreateTry: 10
+  maxLuckyCreate: 20
 --- !u!1 &829064840
 GameObject:
   m_ObjectHideFlags: 0
@@ -20996,7 +21287,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBE60\uB978 \uC81C\uC791(Max 8)"
+  m_Text: "\uC81C\uC791 \uCE94\uB514 2\uBC30 \uD655\uB960(Max 8)"
 --- !u!222 &838637802
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21359,7 +21650,7 @@ GameObject:
   - component: {fileID: 856519190}
   - component: {fileID: 856519189}
   m_Layer: 5
-  m_Name: Skill (5)
+  m_Name: PassiveAutoMerge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21384,9 +21675,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -2055}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &856519189
@@ -25574,7 +25865,7 @@ GameObject:
   - component: {fileID: 1046759037}
   - component: {fileID: 1046759036}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: HaveCandyCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26115,8 +26406,10 @@ GameObject:
   - component: {fileID: 1081694374}
   - component: {fileID: 1081694376}
   - component: {fileID: 1081694375}
+  - component: {fileID: 1081694377}
+  - component: {fileID: 1081694378}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: HaveCandyBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26164,8 +26457,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -26182,6 +26475,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081694373}
   m_CullTransparentMesh: 1
+--- !u!114 &1081694377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081694373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1081694375}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1081694378}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnRemoveLockedButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1081694378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081694373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  upgradeManager: {fileID: 1387880594}
+  boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &1082128089
 GameObject:
   m_ObjectHideFlags: 0
@@ -26823,7 +27194,7 @@ GameObject:
   - component: {fileID: 1105927015}
   - component: {fileID: 1105927014}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: MaxCandyCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28482,7 +28853,7 @@ GameObject:
   - component: {fileID: 1176425628}
   - component: {fileID: 1176425627}
   m_Layer: 5
-  m_Name: Skill (1)
+  m_Name: CreateSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28507,9 +28878,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -575}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1176425627
@@ -30051,8 +30422,10 @@ GameObject:
   - component: {fileID: 1237663588}
   - component: {fileID: 1237663590}
   - component: {fileID: 1237663589}
+  - component: {fileID: 1237663591}
+  - component: {fileID: 1237663592}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: MaxCandyBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30100,8 +30473,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -30118,6 +30491,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237663587}
   m_CullTransparentMesh: 1
+--- !u!114 &1237663591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237663587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1237663589}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1237663592}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnMaxCandiesUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1237663592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237663587}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  upgradeManager: {fileID: 1387880594}
+  boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &1241858453
 GameObject:
   m_ObjectHideFlags: 0
@@ -32588,7 +33039,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBE60\uB978 \uC81C\uC791(Max 8)"
+  m_Text: "\uBCF4\uC720 \uCE94\uB514 \uC99D\uAC00(Max 8)"
 --- !u!222 &1332196262
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34235,6 +34686,97 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386915127}
   m_CullTransparentMesh: 1
+--- !u!1 &1387880591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1387880592}
+  - component: {fileID: 1387880594}
+  - component: {fileID: 1387880593}
+  m_Layer: 0
+  m_Name: UpgradeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1387880592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387880591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1675821895}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1387880593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387880591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841f242c276be4a46aa15613533a0090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeManager: {fileID: 1387880594}
+  luckyCreateUpCostText: {fileID: 1908773672}
+  createSpeedUpCostText: {fileID: 1814439391}
+  removeLockedCostText: {fileID: 1046759036}
+  maxCandiesUpCostText: {fileID: 1105927014}
+  candyLevelUpCostText: {fileID: 394917824}
+  passiveAutoMergeSpeedUpCostText: {fileID: 358703888}
+  passiveAutoCreateSpeedUpCostText: {fileID: 323776044}
+--- !u!114 &1387880594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387880591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e4c216a83976c488ef1a050c9a2166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giftBoxController: {fileID: 827990675}
+  candyStatus: {fileID: 7457344846519049650, guid: fadf5ae2752bc474bb2751301166aefb, type: 3}
+  candyController: {fileID: 1968457436}
+  boxManager: {fileID: 749087271}
+  decreaseFilltime: 0.5
+  increaseLuckyCreate: 0.5
+  increaseMaxCandies: 1
+  increaseBaseLevel: 1
+  increasePassiveAutoMergeSpeed: 0.2
+  increasePassiveAutoCreateSpeed: 0.2
+  costMultiplier: 2
+  currencyManager: {fileID: 477139587}
+  LuckyCreateUpCost: 800
+  CreateSpeedUpCost: 1000
+  RemoveLockedCost: 1000
+  MaxCandiesUpCost: 1000
+  CandyLevelUpCost: 800
+  PassiveAutoMergeSpeedUpCost: 900
+  PassiveAutoCreateSpeedUpCost: 900
+  currentLuckyCreateUpCost: 0
+  currentCreateSpeedUpCost: 0
+  currentRemoveLockedCost: 0
+  currentMaxCandiesUpCost: 0
+  currentCandyLevelUpCost: 0
+  currentPassiveAutoMergeSpeedUpCost: 0
+  currentPassiveAutoCreateSpeedUpCost: 0
 --- !u!1 &1388160929
 GameObject:
   m_ObjectHideFlags: 0
@@ -35935,9 +36477,9 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1461332734
 MonoBehaviour:
@@ -37748,7 +38290,7 @@ GameObject:
   - component: {fileID: 1525669975}
   - component: {fileID: 1525669974}
   m_Layer: 5
-  m_Name: Skill (3)
+  m_Name: MaxCandy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37773,9 +38315,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -1315}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525669974
@@ -38652,8 +39194,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -39680,7 +40222,7 @@ GameObject:
   - component: {fileID: 1610516262}
   - component: {fileID: 1610516261}
   m_Layer: 5
-  m_Name: Skill (4)
+  m_Name: CandyLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39705,9 +40247,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -1685}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610516261
@@ -41002,6 +41544,7 @@ Transform:
   - {fileID: 2003888845}
   - {fileID: 75539330}
   - {fileID: 1965584765}
+  - {fileID: 1387880592}
   m_Father: {fileID: 202093883}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41346,8 +41889,10 @@ GameObject:
   - component: {fileID: 1696709024}
   - component: {fileID: 1696709026}
   - component: {fileID: 1696709025}
+  - component: {fileID: 1696709028}
+  - component: {fileID: 1696709027}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: PassiveCreateBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41395,8 +41940,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -41413,6 +41958,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696709023}
   m_CullTransparentMesh: 1
+--- !u!114 &1696709027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696709023}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  upgradeManager: {fileID: 1387880594}
+  boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
+--- !u!114 &1696709028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696709023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1696709025}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1696709027}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnPassiveAutoCreateSpeedUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1700250677
 GameObject:
   m_ObjectHideFlags: 0
@@ -42175,7 +42798,7 @@ GameObject:
   - component: {fileID: 1724307866}
   - component: {fileID: 1724307865}
   m_Layer: 5
-  m_Name: Skill
+  m_Name: LuckyCreate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42194,15 +42817,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 518103905}
-  - {fileID: 237222219}
   - {fileID: 838637800}
   - {fileID: 1454263933}
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -205}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1724307865
@@ -42472,7 +43094,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBE60\uB978 \uC81C\uC791(Max 8)"
+  m_Text: "\uC81C\uC791 \uCE94\uB514 \uC99D\uAC00(Max 8)"
 --- !u!222 &1740888499
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42941,7 +43563,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBE60\uB978 \uC81C\uC791(Max 8)"
+  m_Text: "\uCE94\uB514 \uB808\uBCA8 \uC99D\uAC00(Max 8)"
 --- !u!222 &1749695474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -44694,7 +45316,7 @@ GameObject:
   - component: {fileID: 1814439392}
   - component: {fileID: 1814439391}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: CreateSpeedCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46309,7 +46931,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 3710}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1867829409
 MonoBehaviour:
@@ -47562,7 +48184,7 @@ GameObject:
   - component: {fileID: 1908773673}
   - component: {fileID: 1908773672}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: LuckyCreateCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48921,6 +49543,8 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   mergeEffectPrefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
   boxManager: {fileID: 749087271}
+  passiveWaiting: 0
+  maxPassiveWating: 10
   draggingParentCanvas: {fileID: 124782620}
 --- !u!114 &1968457437
 MonoBehaviour:
@@ -49677,7 +50301,7 @@ GameObject:
   - component: {fileID: 2001466629}
   - component: {fileID: 2001466628}
   m_Layer: 5
-  m_Name: Skill (7)
+  m_Name: GoldUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49702,9 +50326,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 570, y: -2795}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001466628
@@ -49977,8 +50601,10 @@ GameObject:
   - component: {fileID: 2009208907}
   - component: {fileID: 2009208909}
   - component: {fileID: 2009208908}
+  - component: {fileID: 2009208910}
+  - component: {fileID: 2009208911}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: PassiveMergeBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50026,8 +50652,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -50044,6 +50670,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009208906}
   m_CullTransparentMesh: 1
+--- !u!114 &2009208910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009208906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2009208908}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2009208911}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnPassiveAutoMergeSpeedUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2009208911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009208906}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  upgradeManager: {fileID: 1387880594}
+  boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &2015883455
 GameObject:
   m_ObjectHideFlags: 0
@@ -51239,6 +51943,7 @@ GameObject:
   - component: {fileID: 2051342462}
   - component: {fileID: 2051342464}
   - component: {fileID: 2051342463}
+  - component: {fileID: 2051342465}
   m_Layer: 5
   m_Name: Skill Button
   m_TagString: Untagged
@@ -51288,8 +51993,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 2bdac7181c4e9427393908def02854b1, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -51306,6 +52011,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051342461}
   m_CullTransparentMesh: 1
+--- !u!114 &2051342465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051342461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2051342463}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2053258650
 GameObject:
   m_ObjectHideFlags: 0

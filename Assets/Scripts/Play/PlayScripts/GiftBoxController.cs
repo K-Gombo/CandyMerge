@@ -11,17 +11,21 @@ public class GiftBoxController : MonoBehaviour
     public Image giftBoxFill;
     public Text createCandyText;
     private int candiesRemaining = 0;
-    private int maxCandies = 11;
+    private int maxCandies = 10;
+    public int realMaxCandies = 25;
     private Coroutine autoCreateCoroutine;
     private float lastClickTime = 0f; // 마지막 클릭 시간
     private float clickCooldown = 0.3f; // 클릭 쿨타임 (초)
     public List<Transform> availableBoxes = new List<Transform>();
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
     public BoxManager boxManager; // BoxManager 참조
-    private float fillTime = 0.5f; // 초기값 설정
+    private float fillTime = 10f; // 초기값 설정
+    public float minimumFillTime = 2f;
     private bool isLocked = false; // 작동 우선순위 락
-    private float passiveCreateTry = 2.4f; // 10동안 n번 생성 
-    private float luckyCreate = 100f; // 20% 확률로 2개의 캔디 생성
+    public float passiveCreateTry = 0f; // 10동안 n번 생성
+    public float maxPassiveCreateTry = 10f;
+    private float luckyCreate = 0f; // 20% 확률로 2개의 캔디 생성
+    public float maxLuckyCreate = 20f;
 
     private void Start()
     {
@@ -40,7 +44,7 @@ public class GiftBoxController : MonoBehaviour
                 float timeElapsed = 0f;
 
                 while (timeElapsed < fillTime)
-                {
+                {   
                     timeElapsed += Time.deltaTime;
                     giftBoxFill.fillAmount = timeElapsed / fillTime;
                     yield return null;
@@ -67,13 +71,61 @@ public class GiftBoxController : MonoBehaviour
     
     public float GetFillTime()
     {
-        return fillTime; // 현재 fillTime 값 반환
+        return fillTime; // 현재 fillTime 값 반환                                                                                ㅡㅡㅡㅡㅡ 
     }
     public void SetFillTime(float newFillTime)
     {
-        fillTime = newFillTime; // 새로운 값을 적용
+        newFillTime = Mathf.Round(newFillTime * 100f) / 100f; // 소수점 둘째 자리까지만 고려
+        if (newFillTime > minimumFillTime)
+        {
+            fillTime = newFillTime; // 새로운 값을 적용
+        }
+        else
+        {
+            fillTime = minimumFillTime; // 최소치를 넘으면 최소치로 설정
+        }
     }
-    
+
+
+
+    public float GetLuckyCreate()
+    {
+        return luckyCreate;
+    }
+
+    public void SetLuckyCreate(float newLuckyCreate)
+    {
+        newLuckyCreate = Mathf.Round(newLuckyCreate * 10f) / 10f; // 소수 둘째자리에서 반올림
+        luckyCreate = Mathf.Min(newLuckyCreate, maxLuckyCreate);
+    }
+
+    public int GetMaxCandies()
+    {
+        return maxCandies;
+    }
+
+    public void SetMaxCandies(int newMaxCandies)
+    {
+        if (newMaxCandies <= realMaxCandies)
+        {
+            maxCandies = newMaxCandies;
+        }
+        else
+        {
+            maxCandies = realMaxCandies;
+        }
+    }
+
+    public float GetPassiveCreateTry()
+    {
+        return passiveCreateTry;
+    }
+
+    public void SetPassiveCreateTry(float newPassiveCreateTry)
+    {
+        newPassiveCreateTry = Mathf.Round(newPassiveCreateTry * 10f) / 10f; // 소수 둘째자리에서 반올림
+        passiveCreateTry = Mathf.Min(newPassiveCreateTry, maxPassiveCreateTry);
+    }
   
     private IEnumerator AutoCreateCandy(int timesPer10Seconds)
     {

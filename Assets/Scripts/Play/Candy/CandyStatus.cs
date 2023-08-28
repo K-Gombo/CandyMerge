@@ -8,6 +8,7 @@ public class CandyStatus : MonoBehaviour
     public Text levelText; // 레벨을 표시할 텍스트 컴포넌트
     public GameObject levelTextObject; // 레벨 텍스트 오브젝트
     public static int baseLevel = 1; // deafault 레벨 (스킬 업그레이드 시 증가)
+    public int maxBaseLevel = 58;
     public string boxName;
 
     private void Start()
@@ -34,9 +35,21 @@ public class CandyStatus : MonoBehaviour
         levelText.text = level.ToString();
     }
 
-    // 스킬 업그레이드 메서드
-    public static void UpgradeLevel()
+    public int GetBaseLevel()
     {
-        baseLevel++; // 기본 레벨 증가
+        return baseLevel;
     }
+
+    public void SetBaseLevel(int newBaseLevel)
+    {
+        if (newBaseLevel <= maxBaseLevel)
+        {
+            baseLevel = newBaseLevel;
+        }
+        else
+        {
+            baseLevel = maxBaseLevel;
+        }
+    }
+
 }

@@ -20,11 +20,11 @@ public class CandyController : MonoBehaviour
     public GameObject mergeEffectPrefab; 
     private int draggedBoxIndex = -1;// 병합 이펙트 프리팹
     public BoxManager boxManager; // BoxManager 참조
-    private bool isDraggingStarted = false; // 드래깅 시작 여부 판단
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     
     private WaitForSeconds passiveDelay;
-    private float passiveWaiting = 10f;  // 기본값을 1.5초로 설정
+    public float passiveWaiting = 0f;  // 
+    public float maxPassiveWating = 10f;
     private const float fixedTime = 10f; // 고정된 10초 시간
     
     public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
@@ -190,14 +190,21 @@ private void StopDraggingCandy()
 
     private void MergeCandies(Transform candy1, Transform candy2)
     {
-        // 병합 이펙트 인스턴스화
-        EffectPooler.Instance.SpawnFromPool("MergeEffect", new Vector3(candy2.position.x, candy2.position.y, 0), Quaternion.identity);
-
         CandyStatus candyStatus1 = candy1.GetComponent<CandyStatus>();
         CandyStatus candyStatus2 = candy2.GetComponent<CandyStatus>();
 
         if (candyStatus1.level == candyStatus2.level)
         {
+            // 캔디 레벨이 최대 레벨인지 확인
+            if (candyStatus1.level >= 60) 
+            {
+                // 최대 레벨일 경우 병합을 하지 않습니다.
+                return;
+            }
+
+            // 병합 이펙트 인스턴스화
+            EffectPooler.Instance.SpawnFromPool("MergeEffect", new Vector3(candy2.position.x, candy2.position.y, 0), Quaternion.identity);
+
             candyStatus2.level++;
             CandyManager.instance.SetAppearance(candy2.gameObject); // 이미지를 먼저 바꾸기
             candy2.position = candy2.parent.position;
@@ -207,7 +214,7 @@ private void StopDraggingCandy()
             boxTransforms.Remove(candy1);
             CandyManager.instance.CandyDestroyed();
             CandyManager.instance.ReturnToPool(candy1.gameObject); // 캔디 반환
-        
+    
             // 새로운 이미지에 대한 Scale 변경 코루틴 시작
             StartCoroutine(AnimateScale(candy2));
         }
@@ -215,9 +222,8 @@ private void StopDraggingCandy()
         {
             candy1.position = startPosition;
         }
-        
+    
         BoxManager.instance.UpdateCandyCount();
-        
     }
     
     private IEnumerator AnimateScale(Transform candy)
@@ -433,6 +439,19 @@ private IEnumerator PassiveAutoMerge()
         float calculatedDelay = fixedTime / newWaitingTime;
         passiveDelay = new WaitForSeconds(calculatedDelay);  // 변경된 부분: 계산된 딜레이 시간을 passiveDelay에 저장
     }
+
+    public float GetPassiveWating()
+    {
+        return passiveWaiting;
+    }
+
+    public void SetPassiveWating(float newPassiveWating)
+    {
+        newPassiveWating = Mathf.Round(newPassiveWating * 10f) / 10f; // 소수 둘째자리에서 반올림
+        passiveWaiting = Mathf.Min(newPassiveWating, maxPassiveWating);
+    }
+
+
     
   
     
