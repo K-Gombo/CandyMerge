@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -39859,6 +39859,8 @@ MonoBehaviour:
   - {fileID: 1440952244}
   - {fileID: 311118662}
   - {fileID: 311449787}
+  GiftBox: {fileID: 827990670}
+  AutoCreateBtn: {fileID: 751400241}
 --- !u!1 &1605544953
 GameObject:
   m_ObjectHideFlags: 0
@@ -54748,7 +54750,9 @@ MonoBehaviour:
   - {fileID: 1440952244}
   - {fileID: 311118662}
   - {fileID: 311449787}
-  OvenPanel: {fileID: 26010858820251081}
+  - {fileID: 827990670}
+  - {fileID: 751400241}
+  OvenPanel: {fileID: 932752025}
 --- !u!114 &26010858820251083
 MonoBehaviour:
   m_ObjectHideFlags: 0

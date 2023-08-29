@@ -27,6 +27,8 @@ public class CandyController : MonoBehaviour
     public float maxPassiveWating = 10f;
     private const float fixedTime = 10f; // 고정된 10초 시간
     
+    public bool mergeLocked = false;
+    
     public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
 
     Vector3 startPos;
@@ -189,10 +191,32 @@ private void StopDraggingCandy()
     }
 
     private void MergeCandies(Transform candy1, Transform candy2)
-    {
+    {   
+        
+        if (mergeLocked)
+        {   
+            Transform originalParent1 = candy1.parent;
+            Transform originalParent2 = candy2.parent;
+
+            // 부모에서 분리
+            candy1.SetParent(null);
+            candy2.SetParent(null);
+
+            // 시작 위치로 이동
+            candy1.position = startPosition;
+            candy2.position = startPosition;
+
+            // 원래의 부모로 복구
+            candy1.SetParent(originalParent1);
+            candy2.SetParent(originalParent2);
+    
+            return;
+        }
+
+        
         CandyStatus candyStatus1 = candy1.GetComponent<CandyStatus>();
         CandyStatus candyStatus2 = candy2.GetComponent<CandyStatus>();
-
+        
         if (candyStatus1.level == candyStatus2.level)
         {
             // 캔디 레벨이 최대 레벨인지 확인
@@ -356,7 +380,7 @@ private IEnumerator PassiveAutoMerge()
     
     while (true)
     {
-        if (isMergingInProgress)
+        if (isMergingInProgress || mergeLocked)
         {
             yield return null; // 병합 중일 경우 대기
             continue;
