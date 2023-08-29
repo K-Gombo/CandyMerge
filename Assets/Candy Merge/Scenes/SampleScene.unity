@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4951,9 +4951,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -945}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &215148571
@@ -8962,9 +8962,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -2425}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &342065179
@@ -11293,7 +11293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &445562531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11522,7 +11522,7 @@ GameObject:
   - component: {fileID: 460961207}
   - component: {fileID: 460961206}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: LuckyGoldCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13937,9 +13937,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -3165}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &583071420
@@ -19894,9 +19894,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -3535}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &791263302
@@ -21483,9 +21483,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -2055}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &856519189
@@ -28650,9 +28650,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -575}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1176425627
@@ -34541,7 +34541,7 @@ MonoBehaviour:
   candyController: {fileID: 1968457436}
   boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
-  rewardButton: {fileID: 0}
+  rewardButton: {fileID: 1965584767}
   decreaseFilltime: 0.5
   increaseLuckyCreate: 0.5
   increaseMaxCandies: 1
@@ -38116,9 +38116,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -1315}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525669974
@@ -39859,6 +39859,7 @@ MonoBehaviour:
   - {fileID: 1440952244}
   - {fileID: 311118662}
   - {fileID: 311449787}
+  candyController: {fileID: 0}
   GiftBox: {fileID: 827990670}
   AutoCreateBtn: {fileID: 751400241}
 --- !u!1 &1605544953
@@ -40050,9 +40051,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -1685}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610516261
@@ -42625,9 +42626,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -205}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1724307865
@@ -46734,7 +46735,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 3710}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1867829409
 MonoBehaviour:
@@ -47024,7 +47025,7 @@ GameObject:
   - component: {fileID: 1880817019}
   - component: {fileID: 1880817018}
   m_Layer: 5
-  m_Name: Skill Cost
+  m_Name: GoldUpCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47646,7 +47647,7 @@ GameObject:
   - component: {fileID: 1901572738}
   - component: {fileID: 1901572737}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: LuckyGoldLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49239,6 +49240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1965584765}
   - component: {fileID: 1965584766}
+  - component: {fileID: 1965584767}
   m_Layer: 0
   m_Name: QuestManager
   m_TagString: Untagged
@@ -49297,6 +49299,23 @@ MonoBehaviour:
   - {fileID: 4756250599264335645, guid: cc6cca75671dfbf4993f8bbefd7a9499, type: 3}
   happyLevel: {fileID: 1675821896}
   specialQuestProbability: 15
+--- !u!114 &1965584767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965584764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7e2277b505fe140a19f7de3fce0b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentQuest: {fileID: 4756250599264335645, guid: cc6cca75671dfbf4993f8bbefd7a9499, type: 3}
+  goldIncreaseRate: 0
+  maxGoldIncreaseRate: 30
+  luckyGoldProbability: 0
+  maxLuckyGoldProbability: 40
 --- !u!1 &1968457434
 GameObject:
   m_ObjectHideFlags: 0
@@ -49348,6 +49367,7 @@ MonoBehaviour:
   boxManager: {fileID: 749087271}
   passiveWaiting: 0
   maxPassiveWating: 10
+  mergeLocked: 0
   draggingParentCanvas: {fileID: 124782620}
 --- !u!114 &1968457437
 MonoBehaviour:
@@ -50129,9 +50149,9 @@ RectTransform:
   m_Father: {fileID: 1867829408}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -2795}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1060, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001466628
@@ -51586,7 +51606,7 @@ GameObject:
   - component: {fileID: 2047367757}
   - component: {fileID: 2047367756}
   m_Layer: 5
-  m_Name: Skill Level
+  m_Name: GoldUpLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54752,6 +54772,7 @@ MonoBehaviour:
   - {fileID: 311449787}
   - {fileID: 827990670}
   - {fileID: 751400241}
+  candyController: {fileID: 0}
   OvenPanel: {fileID: 932752025}
 --- !u!114 &26010858820251083
 MonoBehaviour:
