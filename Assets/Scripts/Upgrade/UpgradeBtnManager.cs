@@ -10,9 +10,10 @@ public class UpgradeBtnManager : MonoBehaviour
     public Button passiveAutoMergeSpeedUpButton;
     public Button passiveAutoCreateSpeedUpButton;
     public Button RemoveLokcedButton;
+    public Button goldUpButton;
+    public Button luckyGoldUpButton;
 
     public UpgradeManager upgradeManager;
-    public BoxManager boxManager;
     public CurrencyManager currencyManager;  // CurrencyManager 참조 추가
 
     private void Start()
@@ -25,6 +26,8 @@ public class UpgradeBtnManager : MonoBehaviour
         passiveAutoMergeSpeedUpButton.interactable = true;
         passiveAutoCreateSpeedUpButton.interactable = true;
         RemoveLokcedButton.interactable = true;
+        goldUpButton.interactable = true;
+        luckyGoldUpButton.interactable = true;
     }
 
     private void Update()
@@ -38,6 +41,8 @@ public class UpgradeBtnManager : MonoBehaviour
         passiveAutoMergeSpeedUpButton.interactable = currentGold >= upgradeManager.PassiveAutoMergeSpeedUpCost;
         passiveAutoCreateSpeedUpButton.interactable = currentGold >= upgradeManager.PassiveAutoCreateSpeedUpCost;
         RemoveLokcedButton.interactable = currentGold >= upgradeManager.RemoveLockedCost;
+        goldUpButton.interactable = currentGold >= upgradeManager.GoldUpCost;
+        luckyGoldUpButton.interactable = currentGold >= upgradeManager.LuckyGoldUpCost;
     }
 
     public void OnLuckyCreateUpButtonClick()
@@ -73,5 +78,15 @@ public class UpgradeBtnManager : MonoBehaviour
     public void OnRemoveLockedButtonClick()
     {
         upgradeManager.RemoveLocked();
+    }
+
+    public void OnGoldUpButtonClick()
+    {
+        upgradeManager.GoldUp();
+    }
+
+    public void OnLuckyGoldUpButtonClick()
+    {
+        upgradeManager.LuckyGoldUp();
     }
 }

@@ -7,6 +7,8 @@ public class UpgradeManager : MonoBehaviour
     public CandyStatus candyStatus;
     public CandyController candyController;
     public BoxManager boxManager;
+    public CurrencyManager currencyManager;
+    public RewardButton rewardButton;
     
     public float decreaseFilltime = 0.5f; // 캔디 생성 속도 감소조절 
     public float increaseLuckyCreate = 0.5f;
@@ -14,10 +16,12 @@ public class UpgradeManager : MonoBehaviour
     public int increaseBaseLevel = 1;
     public float increasePassiveAutoMergeSpeed = 0.2f;
     public float increasePassiveAutoCreateSpeed = 0.2f;
+    public float increaseGoldUp = 0.5f;
+    public float increaseLuckyGold = 0.5f;
     
     public float costMultiplier = 2.0f; //업그레이드 비용 증가 비율
     
-    public CurrencyManager currencyManager; 
+     
     public int LuckyCreateUpCost = 800; 
     public int CreateSpeedUpCost = 1000;
     public int RemoveLockedCost = 1000;
@@ -25,6 +29,8 @@ public class UpgradeManager : MonoBehaviour
     public int CandyLevelUpCost = 800;
     public int PassiveAutoMergeSpeedUpCost = 900;
     public int PassiveAutoCreateSpeedUpCost = 900;
+    public int GoldUpCost = 1500;
+    public int LuckyGoldUpCost = 1500;
     
     // 각 업그레이드의 현재 비용
     public int currentLuckyCreateUpCost;
@@ -34,7 +40,8 @@ public class UpgradeManager : MonoBehaviour
     public int currentCandyLevelUpCost;
     public int currentPassiveAutoMergeSpeedUpCost;
     public int currentPassiveAutoCreateSpeedUpCost;
-    
+    public int currentGoldUpCost;
+    public int currentLuckyGoldUpCost;
     
     // 각 업그레이드의 레벨
     public int luckyCreateLevel = 1;
@@ -44,6 +51,9 @@ public class UpgradeManager : MonoBehaviour
     public int candyLevel = 1;
     public int passiveAutoMergeSpeedLevel = 1;
     public int passiveAutoCreateSpeedLevel = 1;
+    public int goldUpLevel = 1;
+    public int ludkyGoldLevel = 1;
+    
     private void Start()
     {
         // 초기 비용 설정
@@ -54,6 +64,8 @@ public class UpgradeManager : MonoBehaviour
         currentCandyLevelUpCost = CandyLevelUpCost;
         currentPassiveAutoMergeSpeedUpCost = PassiveAutoMergeSpeedUpCost;
         currentPassiveAutoCreateSpeedUpCost = PassiveAutoCreateSpeedUpCost;
+        currentGoldUpCost = GoldUpCost;
+        currentLuckyGoldUpCost = LuckyGoldUpCost;
     }
     
     public void UpdateCost(ref int currentCost)
@@ -263,6 +275,51 @@ public class UpgradeManager : MonoBehaviour
             UpdateCost(ref currentPassiveAutoCreateSpeedUpCost);
             passiveAutoCreateSpeedLevel++;
             Debug.Log($"자동 생성 속도업!:{newPassiveAutoCreateSpeed}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+    public void GoldUp()
+    {
+        float currentGoldUp = rewardButton.GetGoldUp();
+        if (currentGoldUp >= rewardButton.maxGoldIncreaseRate)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (currencyManager.SubtractCurrency("Gold", currentGoldUpCost))
+        {
+            float newGoldUp = Mathf.Min(currentGoldUp + increaseGoldUp, rewardButton.maxGoldIncreaseRate);
+            rewardButton.SetGoldUp(newGoldUp);
+            UpdateCost(ref currentGoldUpCost);
+            goldUpLevel++;
+            Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+    public void LuckyGoldUp()
+    {
+        float currentDubleGoldUp = rewardButton.GetLuckyGoldUp();
+        if (currentDubleGoldUp >= rewardButton.maxLuckyGoldProbability)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (currencyManager.SubtractCurrency("Gold", currentLuckyGoldUpCost))
+        {
+            float newDoubleGoldUp = Mathf.Min(currentDubleGoldUp + increaseLuckyGold, rewardButton.maxLuckyGoldProbability);
+            rewardButton.SetLuckyGoldUp(newDoubleGoldUp);
+            ludkyGoldLevel++;
+            Debug.Log($"골드 2배 확률 업!: {newDoubleGoldUp}");
         }
         else
         {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3731,133 +3731,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130451410}
   m_CullTransparentMesh: 1
---- !u!1 &137418575
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 137418576}
-  - component: {fileID: 137418579}
-  - component: {fileID: 137418578}
-  - component: {fileID: 137418577}
-  m_Layer: 5
-  m_Name: Scrollbar Vertical
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &137418576
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137418575}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1103436424}
-  m_Father: {fileID: 421766154}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -17}
-  m_Pivot: {x: 1, y: 1}
---- !u!114 &137418577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137418575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 180984627}
-  m_HandleRect: {fileID: 180984626}
-  m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.55256075
-  m_NumberOfSteps: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &137418578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137418575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &137418579
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137418575}
-  m_CullTransparentMesh: 1
 --- !u!1 &145250205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4252,82 +4125,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178627736}
-  m_CullTransparentMesh: 1
---- !u!1 &180984625
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 180984626}
-  - component: {fileID: 180984628}
-  - component: {fileID: 180984627}
-  m_Layer: 5
-  m_Name: Handle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &180984626
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180984625}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1103436424}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &180984627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180984625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &180984628
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180984625}
   m_CullTransparentMesh: 1
 --- !u!1 &190602754
 GameObject:
@@ -5659,12 +5456,12 @@ RectTransform:
   m_Children:
   - {fileID: 645239258}
   - {fileID: 831767504}
-  m_Father: {fileID: 518103905}
+  m_Father: {fileID: 1724307864}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 660, y: 0}
+  m_AnchoredPosition: {x: 334.99997, y: 0}
   m_SizeDelta: {x: 230, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237222220
@@ -5780,8 +5577,9 @@ MonoBehaviour:
   passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
   passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
   RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 242259535}
   upgradeManager: {fileID: 1387880594}
-  boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
 --- !u!1 &240807381
 GameObject:
@@ -5875,8 +5673,9 @@ GameObject:
   - component: {fileID: 242259534}
   - component: {fileID: 242259533}
   - component: {fileID: 242259535}
+  - component: {fileID: 242259536}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: LuckyGoldBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5985,7 +5784,42 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 242259533}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 242259536}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnLuckyGoldUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &242259536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242259531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 2051342465}
+  upgradeManager: {fileID: 1387880594}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &243561967
 GameObject:
   m_ObjectHideFlags: 0
@@ -6758,8 +6592,9 @@ MonoBehaviour:
   passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
   passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
   RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 242259535}
   upgradeManager: {fileID: 1387880594}
-  boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
 --- !u!1 &276223995
 GameObject:
@@ -10692,7 +10527,6 @@ GameObject:
   m_Component:
   - component: {fileID: 421766154}
   - component: {fileID: 421766157}
-  - component: {fileID: 421766156}
   - component: {fileID: 421766155}
   m_Layer: 5
   m_Name: Scroll View
@@ -10714,7 +10548,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1461332733}
-  - {fileID: 137418576}
   m_Father: {fileID: 2136996922}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10745,7 +10578,7 @@ MonoBehaviour:
   m_ScrollSensitivity: 1
   m_Viewport: {fileID: 1461332733}
   m_HorizontalScrollbar: {fileID: 0}
-  m_VerticalScrollbar: {fileID: 137418577}
+  m_VerticalScrollbar: {fileID: 0}
   m_HorizontalScrollbarVisibility: 2
   m_VerticalScrollbarVisibility: 2
   m_HorizontalScrollbarSpacing: -3
@@ -10753,36 +10586,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &421766156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421766153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &421766157
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13471,7 +13274,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1592743177}
-  - {fileID: 237222219}
   m_Father: {fileID: 1724307864}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17723,7 +17525,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721476787}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
   m_Name: 
@@ -17735,8 +17537,9 @@ MonoBehaviour:
   passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
   passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
   RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 242259535}
   upgradeManager: {fileID: 1387880594}
-  boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
 --- !u!1 &726819369
 GameObject:
@@ -26550,8 +26353,9 @@ MonoBehaviour:
   passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
   passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
   RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 242259535}
   upgradeManager: {fileID: 1387880594}
-  boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
 --- !u!1 &1082128089
 GameObject:
@@ -27145,43 +26949,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099714420}
   m_CullTransparentMesh: 1
---- !u!1 &1103436423
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1103436424}
-  m_Layer: 5
-  m_Name: Sliding Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1103436424
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103436423}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 180984626}
-  m_Father: {fileID: 137418576}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1105927012
 GameObject:
   m_ObjectHideFlags: 0
@@ -30554,7 +30321,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237663587}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
   m_Name: 
@@ -30566,8 +30333,9 @@ MonoBehaviour:
   passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
   passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
   RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 242259535}
   upgradeManager: {fileID: 1387880594}
-  boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
 --- !u!1 &1241858453
 GameObject:
@@ -34731,6 +34499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841f242c276be4a46aa15613533a0090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currencyManager: {fileID: 477139587}
   upgradeManager: {fileID: 1387880594}
   luckyCreateUpCostText: {fileID: 1908773672}
   createSpeedUpCostText: {fileID: 1814439391}
@@ -34739,6 +34508,8 @@ MonoBehaviour:
   candyLevelUpCostText: {fileID: 394917824}
   passiveAutoMergeSpeedUpCostText: {fileID: 358703888}
   passiveAutoCreateSpeedUpCostText: {fileID: 323776044}
+  goldUpCostText: {fileID: 1880817018}
+  luckyGoldUpCostText: {fileID: 460961206}
   luckyCreateLevelText: {fileID: 1592743178}
   createSpeedLevelText: {fileID: 456975360}
   removeLockedLevelText: {fileID: 1020032502}
@@ -34746,6 +34517,8 @@ MonoBehaviour:
   candyLevelUpText: {fileID: 7512649}
   PassiveAutoMergeSpeedUpLevelText: {fileID: 953190789}
   PassiveAutoCreateSpeedUpLevelText: {fileID: 1710439879}
+  goldUpLevelText: {fileID: 2047367756}
+  luckyGoldUpLevelText: {fileID: 1901572737}
 --- !u!114 &1387880594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34762,14 +34535,16 @@ MonoBehaviour:
   candyStatus: {fileID: 7457344846519049650, guid: fadf5ae2752bc474bb2751301166aefb, type: 3}
   candyController: {fileID: 1968457436}
   boxManager: {fileID: 749087271}
+  currencyManager: {fileID: 477139587}
   decreaseFilltime: 0.5
   increaseLuckyCreate: 0.5
   increaseMaxCandies: 1
   increaseBaseLevel: 1
   increasePassiveAutoMergeSpeed: 0.2
   increasePassiveAutoCreateSpeed: 0.2
+  increaseGoldUp: 0.5
+  increaseLuckyGold: 0.5
   costMultiplier: 2
-  currencyManager: {fileID: 477139587}
   LuckyCreateUpCost: 800
   CreateSpeedUpCost: 1000
   RemoveLockedCost: 1000
@@ -34777,6 +34552,8 @@ MonoBehaviour:
   CandyLevelUpCost: 800
   PassiveAutoMergeSpeedUpCost: 900
   PassiveAutoCreateSpeedUpCost: 900
+  GoldUpCost: 1500
+  LuckyGoldUpCost: 1500
   currentLuckyCreateUpCost: 0
   currentCreateSpeedUpCost: 0
   currentRemoveLockedCost: 0
@@ -34784,6 +34561,8 @@ MonoBehaviour:
   currentCandyLevelUpCost: 0
   currentPassiveAutoMergeSpeedUpCost: 0
   currentPassiveAutoCreateSpeedUpCost: 0
+  currentGoldUpCost: 0
+  currentLuckyGoldUpCost: 0
   luckyCreateLevel: 1
   createSpeedLevel: 1
   removeLockedLevel: 1
@@ -34791,6 +34570,8 @@ MonoBehaviour:
   candyLevel: 1
   passiveAutoMergeSpeedLevel: 1
   passiveAutoCreateSpeedLevel: 1
+  goldUpLevel: 1
+  ludkyGoldLevel: 1
 --- !u!1 &1388160929
 GameObject:
   m_ObjectHideFlags: 0
@@ -36491,7 +36272,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
@@ -41979,7 +41760,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696709023}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
   m_Name: 
@@ -41991,8 +41772,9 @@ MonoBehaviour:
   passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
   passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
   RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 242259535}
   upgradeManager: {fileID: 1387880594}
-  boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
 --- !u!114 &1696709028
 MonoBehaviour:
@@ -42831,6 +42613,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 518103905}
+  - {fileID: 237222219}
   - {fileID: 838637800}
   - {fileID: 1454263933}
   m_Father: {fileID: 1867829408}
@@ -46974,7 +46757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 40
+    m_Left: 45
     m_Right: 0
     m_Top: 30
     m_Bottom: 0
@@ -49574,64 +49357,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candySprites:
   - {fileID: 21300000, guid: 6e9151b62d57345e3abf6c2b2c1276df, type: 3}
-  - {fileID: 21300000, guid: 38b3b421e5c7747218d351ab009f8c0c, type: 3}
-  - {fileID: 21300000, guid: 28d0f7ab667e242f8b250de7da1e4bba, type: 3}
+  - {fileID: 21300000, guid: 727b0689845654883843a982ce437936, type: 3}
+  - {fileID: 21300000, guid: c7d92a4735cf441cdb6f3ea4aa3b4203, type: 3}
   - {fileID: 21300000, guid: 4517cec607c624f3284392c7d8052205, type: 3}
   - {fileID: 21300000, guid: f7c1b1fbefeb0414db3ac6839389284d, type: 3}
-  - {fileID: 21300000, guid: aec354904da904d21ae70ccb48b392c2, type: 3}
+  - {fileID: 21300000, guid: e88f26805818844b2b0ac93697690e53, type: 3}
   - {fileID: 21300000, guid: 22bc345351b014718bf047d414f152f1, type: 3}
-  - {fileID: 21300000, guid: 68fe214754a6546518fd7a02c3e57b23, type: 3}
-  - {fileID: 21300000, guid: b9803b4291cc0466baacecf9625bdeca, type: 3}
-  - {fileID: 21300000, guid: eb8f370e285804320801a5f6562452ae, type: 3}
-  - {fileID: 21300000, guid: 0a73dc1f9a23a490584d9a1482787074, type: 3}
-  - {fileID: 21300000, guid: 5b53d659225a14cb09e09ac4dee88fcc, type: 3}
+  - {fileID: 21300000, guid: 33e426bbd761247e7b49966a49250b24, type: 3}
+  - {fileID: 21300000, guid: 8f52107d08598444ba8a2926108f4f9b, type: 3}
+  - {fileID: 21300000, guid: 2dd4df0c50a6c447699a0f6f5d5d02bc, type: 3}
+  - {fileID: 21300000, guid: c81e1021c94ee406eb3b621175625be6, type: 3}
+  - {fileID: 21300000, guid: 135506a9cec534dd79a185b9de8350c0, type: 3}
   - {fileID: 21300000, guid: cd959f2d114844e3a96422a7318b7c43, type: 3}
-  - {fileID: 21300000, guid: c786a73a171004d1cb3c8cb56339a3a5, type: 3}
+  - {fileID: 21300000, guid: b717b58bb07e04304999de78859116d1, type: 3}
   - {fileID: 21300000, guid: a357df7ebd1a3442bbb8726ac873d433, type: 3}
-  - {fileID: 21300000, guid: 48f4727f120f142f9a88122b35a26bcd, type: 3}
-  - {fileID: 21300000, guid: d7ee265786ab54af2abcd5017c56ad9b, type: 3}
-  - {fileID: 21300000, guid: 33de06c6e4c954c599e025e709b0cb45, type: 3}
-  - {fileID: 21300000, guid: 1c7496b0b222a4bcba7699ecbc91ebb9, type: 3}
-  - {fileID: 21300000, guid: 7d530a242485c4f2eb229a02197c2992, type: 3}
-  - {fileID: 21300000, guid: 03912dca8eb004218bc046d63d1ada09, type: 3}
-  - {fileID: 21300000, guid: 6a117eca6973846a58868b9317c8b87e, type: 3}
+  - {fileID: 21300000, guid: c2fd8ec7be1114287ab6dc367d5e099a, type: 3}
+  - {fileID: 21300000, guid: 5ca668dc858fc4ad6aa7a9dfc55da7db, type: 3}
+  - {fileID: 21300000, guid: 99ca3156373d046fdb464b567fec4d22, type: 3}
+  - {fileID: 21300000, guid: 242f1130342804cefbe673435f89a4ff, type: 3}
+  - {fileID: 21300000, guid: 12098ee1a66e34f30ba58dac10162e53, type: 3}
+  - {fileID: 21300000, guid: 88e973b998cc7427ba564aa58491a014, type: 3}
+  - {fileID: 21300000, guid: 9c4abbe2a23264f93bd392225cfd74bc, type: 3}
   - {fileID: 21300000, guid: d886e8584a3f946a38cf8f0721bbe399, type: 3}
   - {fileID: 21300000, guid: 78038a3e1135a46729e9aa9f477a8615, type: 3}
-  - {fileID: 21300000, guid: 3045eb825d6e0457085ec0f3ee6d901b, type: 3}
+  - {fileID: 21300000, guid: 5e39d501a34ff4d88bd4cb701515af4e, type: 3}
   - {fileID: 21300000, guid: 14e391cca4421494abcba414f1c9b881, type: 3}
-  - {fileID: 21300000, guid: 2af7c3b21267b4953aa3abd108d393fe, type: 3}
-  - {fileID: 21300000, guid: 07e263ab5c55f4475952968911bbe112, type: 3}
-  - {fileID: 21300000, guid: c5be809c4a5ac45a58f52fdb112508ce, type: 3}
+  - {fileID: 21300000, guid: 76f7085c2adbd4e07b992e658c9b8585, type: 3}
+  - {fileID: 21300000, guid: 3689899cca12e40d5ab87a149119e45f, type: 3}
+  - {fileID: 21300000, guid: e84f1cc1cd5cc4fa9a83490d8a359f89, type: 3}
   - {fileID: 21300000, guid: 7091359652669478e961a63e2e5585cc, type: 3}
   - {fileID: 21300000, guid: 8d19e0b3d2f834a54b28090ab73ac345, type: 3}
-  - {fileID: 21300000, guid: be7013cb6ea104ec1bf931e5ffed83e1, type: 3}
+  - {fileID: 21300000, guid: bab2999d521f64d479c7200657e84113, type: 3}
   - {fileID: 21300000, guid: 62af885cc98944751818a2af4a3a6df9, type: 3}
-  - {fileID: 21300000, guid: 11449083cb08445759854bf5e8138657, type: 3}
-  - {fileID: 21300000, guid: 0346c82cbdc33410f859e96a6535a1a3, type: 3}
-  - {fileID: 21300000, guid: 50328cb0dc6f84906a3839033a1b2a3a, type: 3}
-  - {fileID: 21300000, guid: 034ca3cd07f0948f7b5e75f6578bdba3, type: 3}
-  - {fileID: 21300000, guid: e27d097c750ce411d87c39a220fb2d88, type: 3}
-  - {fileID: 21300000, guid: cb29dad6746fe423d92c7dc49e7088aa, type: 3}
-  - {fileID: 21300000, guid: e959ab5c7be554694a2284ffcca1216b, type: 3}
-  - {fileID: 21300000, guid: 2aa1d23067b16449f8d187bed208511b, type: 3}
-  - {fileID: 21300000, guid: 5148db130988a4f68afedcdadf57ada6, type: 3}
-  - {fileID: 21300000, guid: d079a3427099b499080f2037149ea29a, type: 3}
-  - {fileID: 21300000, guid: 79257fcbb182b41f9875bd5512ca5e88, type: 3}
-  - {fileID: 21300000, guid: 2f5ea727d78c548368c143ba5bca8e6f, type: 3}
-  - {fileID: 21300000, guid: 3787b208122004cdc9f04d4e208faf61, type: 3}
-  - {fileID: 21300000, guid: cbd213b51317841b58f6a6787b5960f6, type: 3}
-  - {fileID: 21300000, guid: 9c2c0a21bb1c64a308a07ed013182a07, type: 3}
-  - {fileID: 21300000, guid: 2317d9461c9e64bb983f795cbbc62f97, type: 3}
-  - {fileID: 21300000, guid: 696042f3265584f808167aeb64cfe87b, type: 3}
-  - {fileID: 21300000, guid: 7b7f1e5cd7c74442181d06407c8e109a, type: 3}
+  - {fileID: 21300000, guid: 5e58ea13aebad4bae94d831d8d2381fd, type: 3}
+  - {fileID: 21300000, guid: a5f2b4a1ea7744a44bfb6ab535922219, type: 3}
+  - {fileID: 21300000, guid: cbfc4474e978044d89cc07e58bccb36b, type: 3}
+  - {fileID: 21300000, guid: cdac83b9f215a4c9d97288cefaeb7dea, type: 3}
+  - {fileID: 21300000, guid: 6dc411bde143643e18b74fcfae2c9a1e, type: 3}
+  - {fileID: 21300000, guid: a6122156370c9416cb475ccca61efb57, type: 3}
+  - {fileID: 21300000, guid: 80eeb5e8c48434bb093ce648daed1cb4, type: 3}
+  - {fileID: 21300000, guid: 307db098368704db18fced034428dfac, type: 3}
+  - {fileID: 21300000, guid: b92edf68989f3409fa42fccdd3c20c5e, type: 3}
+  - {fileID: 21300000, guid: 8ce7d06a3116e4b2b968e65032c29971, type: 3}
+  - {fileID: 21300000, guid: 2df8ab25115254385a30b41bb1c26f53, type: 3}
+  - {fileID: 21300000, guid: df19acd4db0b24438a5523cf6a219e8c, type: 3}
+  - {fileID: 21300000, guid: f8b4486c3e2714255957904526b307af, type: 3}
+  - {fileID: 21300000, guid: 1df20a24bd0384ef99f7412841bff548, type: 3}
+  - {fileID: 21300000, guid: ac985fb9a208a4127b4e3705413b4abc, type: 3}
+  - {fileID: 21300000, guid: 6b5c1e43e957a4bdd9c08ac8edb67ed2, type: 3}
+  - {fileID: 21300000, guid: 49a73b346e61f484e808663f70404015, type: 3}
+  - {fileID: 21300000, guid: f7144a71f1d7a4393a424f3b759d0e49, type: 3}
   - {fileID: 21300000, guid: cb1bcd1be16a645ec9495af2f580ded1, type: 3}
-  - {fileID: 21300000, guid: 18b27c4fff1964d4aae0267277b5466b, type: 3}
-  - {fileID: 21300000, guid: e6915269d0b7e4ca7a3afb115947c71d, type: 3}
-  - {fileID: 21300000, guid: 9a1e0ebcda73f43e08d2b3a8880e614a, type: 3}
-  - {fileID: 21300000, guid: d72aebae2f7e345f58ab875923848d83, type: 3}
-  - {fileID: 21300000, guid: e8f23db3131c14748be690cf2be7ea5a, type: 3}
-  - {fileID: 21300000, guid: 6f352f912722b4ac09a2e2cacd24d2b5, type: 3}
-  - {fileID: 21300000, guid: e751f91d66b5a4dbd8cfdaf35069114b, type: 3}
+  - {fileID: 21300000, guid: 0677edfbaa199436a863b2897ffe8442, type: 3}
+  - {fileID: 21300000, guid: a79ae38688fa7468eb98605f43b699a1, type: 3}
+  - {fileID: 21300000, guid: 802e7db153a1140cab94bb053d575499, type: 3}
+  - {fileID: 21300000, guid: cd8ddc43b44364ef0afaabf2cea81278, type: 3}
+  - {fileID: 21300000, guid: 25be2e23faac641559e49971f82288f4, type: 3}
+  - {fileID: 21300000, guid: 5e4bd06fcd8264c30aefd3a20e97c6e6, type: 3}
+  - {fileID: 21300000, guid: 22b224116c5d44e12823e3fd7024a340, type: 3}
   - {fileID: 21300000, guid: 995b3bcb92e67467081c16c0ac0f1ff9, type: 3}
   candyCountText: {fileID: 550518878}
   MaxCandyCount: 48
@@ -50747,7 +50530,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009208906}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
   m_Name: 
@@ -50759,8 +50542,9 @@ MonoBehaviour:
   passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
   passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
   RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 242259535}
   upgradeManager: {fileID: 1387880594}
-  boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
 --- !u!1 &2015883455
 GameObject:
@@ -51958,8 +51742,9 @@ GameObject:
   - component: {fileID: 2051342464}
   - component: {fileID: 2051342463}
   - component: {fileID: 2051342465}
+  - component: {fileID: 2051342466}
   m_Layer: 5
-  m_Name: Skill Button
+  m_Name: GoldUpBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52068,7 +51853,42 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2051342463}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2051342466}
+        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
+        m_MethodName: OnGoldUpButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2051342466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051342461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luckyCreateUpButton: {fileID: 237222222}
+  createSpeedUpButton: {fileID: 273389329}
+  maxCandiesUpButton: {fileID: 1237663591}
+  candyLevelUpButton: {fileID: 721476791}
+  passiveAutoMergeSpeedUpButton: {fileID: 2009208910}
+  passiveAutoCreateSpeedUpButton: {fileID: 1696709028}
+  RemoveLokcedButton: {fileID: 1081694377}
+  goldUpButton: {fileID: 2051342465}
+  luckyGoldUpButton: {fileID: 2051342465}
+  upgradeManager: {fileID: 1387880594}
+  currencyManager: {fileID: 477139587}
 --- !u!1 &2053258650
 GameObject:
   m_ObjectHideFlags: 0

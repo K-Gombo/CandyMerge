@@ -2,12 +2,20 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class RewardButton : MonoBehaviour
 {
     public Quest parentQuest; // 부모 퀘스트를 참조하기 위한 변수
 
     private Button rewardButton;
     
+    // 골드량 증가 비율
+    public float goldIncreaseRate = 0f;
+    public float maxGoldIncreaseRate = 30f;
+
+    // 골드 2배 획득 확률 
+    public float luckyGoldProbability = 0;
+    public float maxLuckyGoldProbability = 40f;
     
     private void Awake()
     {
@@ -69,16 +77,32 @@ public class RewardButton : MonoBehaviour
         Debug.Log("보상 버튼이 클릭되었습니다."); // 로그 추가
         if (parentQuest == null)
         {
-            return; // parentQuest가 null이면 메서드를 종료
+            return;
         }
-        rewardButton.onClick.RemoveListener(OnRewardButtonClicked);
-       
-        // 보상 지급
-        string rewardString = parentQuest.rewardText.text;
-        int reward = ConvertRewardStringToInt(rewardString);
-        CurrencyManager currencyManager = FindObjectOfType<CurrencyManager>();
-        currencyManager.AddCurrency("Gold", reward);
 
+        rewardButton.onClick.RemoveListener(OnRewardButtonClicked);
+
+        // 보상 계산을 위한 초기 설정
+        string rewardString = parentQuest.rewardText.text;
+        int baseReward = ConvertRewardStringToInt(rewardString);
+
+        // 2배 확률 체크
+        float randomValue = UnityEngine.Random.Range(0f, 100f);
+        if (randomValue < luckyGoldProbability)
+        {
+            baseReward *= 2;
+        }
+
+        // 실제 증가 비율 계산
+        float actualIncreaseRate = 1 + (goldIncreaseRate / 100);
+
+        // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
+        int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
+
+        // 최종 보상 지급
+        CurrencyManager currencyManager = FindObjectOfType<CurrencyManager>();
+        currencyManager.AddCurrency("Gold", finalReward);
+        
         // 캔디 회수
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');
         int requiredCount1 = int.Parse(countText1[1]);
@@ -151,6 +175,28 @@ public class RewardButton : MonoBehaviour
         }
 
         return reward;
+    }
+    
+    public float GetGoldUp()
+    {
+        return goldIncreaseRate;
+    }
+
+    public void SetGoldUp(float newGoldIncreaseRate)
+    {
+        newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 10f) / 10f; // 소수 둘째자리에서 반올림
+        goldIncreaseRate = Mathf.Min(newGoldIncreaseRate, maxGoldIncreaseRate);
+    }
+    
+    public float GetLuckyGoldUp()
+    {
+        return luckyGoldProbability;
+    }
+
+    public void SetLuckyGoldUp(float newDoubleGoldProbability)
+    {
+        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
+        luckyGoldProbability = Mathf.Min(newDoubleGoldProbability, maxLuckyGoldProbability);
     }
 
 }
