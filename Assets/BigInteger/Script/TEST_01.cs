@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Keiwando.BigInteger;
 
 public class TEST_01 : MonoBehaviour {
     public string BigDatastr; // 입력 저장 string
@@ -14,7 +15,10 @@ public class TEST_01 : MonoBehaviour {
     {
         //LoadMoney();
 
-        MyText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(BigDatastr);
+        //MyText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(BigDatastr);
+
+        BigInteger big = 1000;
+        MyText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(big.ToString());
     }
 
     void Update()
