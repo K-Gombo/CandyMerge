@@ -4,38 +4,47 @@ using System.Collections.Generic;
 
 public class PlayPanelBtn : MonoBehaviour
 {
-    public List<GameObject> allPanels; // 모든 패널을 관리하는 리스트
-    public CandyController candyController; // CandyController에 대한 참조
-    public GiftBoxController giftBoxController; // GiftBoxController에 대한 참조
+    public List<GameObject> allPanels;
+    public CandyController candyController;
+    public GiftBoxController giftBoxController;
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
+    public MixManager mixManager;
 
     public void OnButtonClick()
     {
-        // 모든 패널 비활성화
-        foreach (GameObject panel in allPanels)
-        {
-            panel.SetActive(false);
-        }
-        
-        if (!GiftBox.activeSelf)
-        {
-            GiftBox.SetActive(true);
-        }
-        
-        if (!AutoCreateBtn.activeSelf)
-        {
-            AutoCreateBtn.SetActive(true);
-        }
+        bool hasCandiesInMixBox = mixManager.CheckCandiesExistInMixBox();
 
-        // mergeLocked가 true일 경우 false로 설정
-        if (candyController.mergeLocked)
+        if (hasCandiesInMixBox)
         {
-            candyController.mergeLocked = false;
+            candyController.MoveToRandomBox();  // 캔디가 있다면 원래 박스로 이동
         }
+        else
+        {
+            // 캔디가 없다면 모든 패널을 비활성화
+            foreach (GameObject panel in allPanels)
+            {
+                panel.SetActive(false);
+            }
+            
+            // 이하의 로직은 패널이 비활성화된 후에 실행됩니다.
+            if (!GiftBox.activeSelf)
+            {
+                GiftBox.SetActive(true);
+            }
 
-        giftBoxController.TogglePassiveAutoCreate(true); // 패시브 자동생성 활성화
-        candyController.TogglePassiveAutoMerge(true); // 패시브 자동생성 활성화
-        
+            if (!AutoCreateBtn.activeSelf)
+            {
+                AutoCreateBtn.SetActive(true);
+            }
+
+            if (candyController.mergeLocked)
+            {
+                candyController.mergeLocked = false;
+            }
+
+            giftBoxController.TogglePassiveAutoCreate(true);
+            candyController.TogglePassiveAutoMerge(true);
+        }
     }
 }
