@@ -67,7 +67,7 @@ public class UpgradeUI : MonoBehaviour
         PassiveAutoMergeSpeedUpLevelText.text =  "Lv." + upgradeManager.passiveAutoMergeSpeedLevel;
         PassiveAutoCreateSpeedUpLevelText.text = "Lv." + upgradeManager.passiveAutoCreateSpeedLevel;
         goldUpLevelText.text = "Lv." + upgradeManager.goldUpLevel;
-        luckyGoldUpLevelText.text = "Lv." + upgradeManager.ludkyGoldLevel;
+        luckyGoldUpLevelText.text = "Lv." + upgradeManager.luckyGoldLevel;
 
     }
     

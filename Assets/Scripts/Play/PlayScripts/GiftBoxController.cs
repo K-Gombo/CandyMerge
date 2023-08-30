@@ -1,39 +1,55 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class GiftBoxController : MonoBehaviour
 {
     [SerializeField] private CandyController candyController;
     public GameObject candyPrefab;
     public Transform boxTile;
+    public Button giftBoxButton;  // Gift box의 버튼
     public Image giftBoxFill;
+    public Transform giftBoxTransform;
     public Text createCandyText;
     private int candiesRemaining = 0;
     private int maxCandies = 10;
     public int realMaxCandies = 25;
     private Coroutine autoCreateCoroutine;
+    private Coroutine passiveAutoCreateCoroutine;
     private float lastClickTime = 0f; // 마지막 클릭 시간
     private float clickCooldown = 0.3f; // 클릭 쿨타임 (초)
     public List<Transform> availableBoxes = new List<Transform>();
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
     public BoxManager boxManager; // BoxManager 참조
-    private float fillTime = 10f; // 초기값 설정
+    private float fillTime = 2f; // 초기값 설정
     public float minimumFillTime = 2f;
     private bool isLocked = false; // 작동 우선순위 락
     public float passiveCreateTry = 0f; // 10동안 n번 생성
     public float maxPassiveCreateTry = 10f;
     private float luckyCreate = 0f; // 20% 확률로 2개의 캔디 생성
     public float maxLuckyCreate = 20f;
+    private GameObject transparentObject;
+
+
+   
+    
+
 
     private void Start()
-    {
+    {   
         StartCoroutine(FillAndCreateCandies());
         createCandyText.text = candiesRemaining + "/" + maxCandies;
-        // 새로운 코루틴 호출
         StartCoroutine(PassiveAutoCreateCandy());
+        giftBoxTransform = GameObject.Find("GiftBox").transform;
+        giftBoxButton.onClick.AddListener(OnGiftBoxClick);
+        
+        
     }
+
+   
 
     private IEnumerator FillAndCreateCandies()
     {
@@ -128,9 +144,9 @@ public class GiftBoxController : MonoBehaviour
     }
   
     private IEnumerator AutoCreateCandy(int timesPer10Seconds)
-    {
+    {   
         while (true)
-        {
+        {   
             for (int i = 0; i < timesPer10Seconds; i++)
             {
                 if (candiesRemaining > 0 && IsSpaceAvailableInBox())
@@ -149,31 +165,43 @@ public class GiftBoxController : MonoBehaviour
         }
     }
     
-    private IEnumerator PassiveAutoCreateCandy()
+    public IEnumerator PassiveAutoCreateCandy()
     {
+       
+
         float totalTime = 10f; // 총 시간 (10초)
-        float passiveCreateInterval = totalTime / passiveCreateTry; 
         while (true) // 무한 루프로 계속 실행
-        {
+        {    
+            if (passiveCreateTry <= 0f)
+            {
+                yield return new WaitForSeconds(1f); // 1초 대기하고 다시 체크
+                continue; // 이번 반복은 건너뛰고 다음 반복으로
+            }
+
+            float passiveCreateInterval = totalTime / passiveCreateTry;
             if (candiesRemaining > 0 && IsSpaceAvailableInBox())
             {
                 while (isLocked) // AutoCreateCandy가 락을 해제할 때까지 대기
                 {
                     yield return null;
                 }
-
-                isLocked = true; // 락 설정
-
+        
                 CreateCandy();
+
                 candiesRemaining--;
+
                 createCandyText.text = candiesRemaining + "/" + maxCandies;
 
                 isLocked = false; // 락 해제
             }
 
             yield return new WaitForSeconds(passiveCreateInterval); // passiveCreateInterval의 값에 따라 대기 시간 조절
+
         }
+      
     }
+
+
 
 
 
@@ -207,11 +235,19 @@ public class GiftBoxController : MonoBehaviour
         }
         return false;
     }
+    
+    private IEnumerator TransParentCandy(Transform selectedBox)
+    {   
+        transparentObject = TransCandyPooler.Instance.SpawnFromPool(selectedBox.position, Quaternion.identity);
+        transparentObject.transform.SetParent(selectedBox);
+        yield return null;
+    }
 
     
 
     private void CreateCandy()
     {
+     
         availableBoxes.Clear();
 
         for (int i = 0; i < boxTile.childCount; i++)
@@ -242,46 +278,50 @@ public class GiftBoxController : MonoBehaviour
 
         for (int n = 0; n < numberOfCandiesToCreate; n++)
         {
-            int randomIndex = Random.Range(0, availableBoxes.Count);
-            Transform selectedBox = availableBoxes[randomIndex];
-            availableBoxes.RemoveAt(randomIndex); // 선택한 박스를 사용 가능한 목록에서 제거
-            GameObject transparentObject = TransCandyPooler.Instance.SpawnFromPool(selectedBox.position, Quaternion.identity);
-            transparentObject.transform.SetParent(selectedBox);
-            GameObject candy = CandyManager.instance.SpawnFromPool(transform.position, Quaternion.identity);
-            candy.GetComponent<CandyStatus>().boxName = selectedBox.gameObject.name;
-            selectedBox.GetComponent<Box>().SetCandy(candy.GetComponent<CandyStatus>().level);
-            candy.transform.localScale = Vector3.one;
-            candy.transform.position = transform.position;
-            StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
+            if (availableBoxes.Count > 0) // 사용 가능한 박스가 있는지 확인
+            {
+                int randomIndex = Random.Range(0, availableBoxes.Count);
+                Transform selectedBox = availableBoxes[randomIndex];
+                availableBoxes.RemoveAt(randomIndex); // 선택한 박스를 사용 가능한 목록에서 제거
+
+                StartCoroutine(TransParentCandy(selectedBox));
+                GameObject candy = CandyManager.instance.SpawnFromPool(giftBoxTransform.position, Quaternion.identity);
+
+                candy.GetComponent<CandyStatus>().boxName = selectedBox.gameObject.name;
+                selectedBox.GetComponent<Box>().SetCandy(candy.GetComponent<CandyStatus>().level);
+                candy.transform.localScale = Vector3.one;
+                candy.transform.position = transform.position;
+                StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
+            }
+            
         }
     }
-
-    
-    
+   
     
     private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox, GameObject transparentObject)
     {
         float timeElapsed = 0f;
-        float duration = 0.2f; // 이동에 걸리는 시간 (1초)
+        float duration = 0.3f;
 
-        Vector3 startPosition = candy.position;
+        Vector3 startPosition = giftBoxTransform.position; // 시작 위치를 GiftBox의 위치로 설정
 
         while (timeElapsed < duration)
         {
             timeElapsed += Time.deltaTime;
             float t = timeElapsed / duration;
-            candy.position = Vector3.Lerp(startPosition, targetPosition, t); // 선형 보간을 사용해 부드럽게 이동
+            candy.position = Vector3.Lerp(startPosition, targetPosition, t);
             yield return null;
         }
 
-        candy.SetParent(targetBox); // 최종 위치에 도달하면 부모를 설정
-        candy.localPosition = Vector3.zero; // 로컬 위치를 0으로 설정
-        candy.localScale = Vector3.one; // 로컬 크기를 1로 설정
-        transparentObject.transform.SetParent(null); // 부모 관계 끊기
-        TransCandyPooler.Instance.ReturnToPool(transparentObject); // 투명한 오브젝트 풀로 반환
-        BoxManager.instance.UpdateCandyCount(); // 여기에서 업데이트 호출
-        
+        // 나머지 부분은 동일
+        candy.SetParent(targetBox);
+        candy.localPosition = Vector3.zero;
+        candy.localScale = Vector3.one;
+        transparentObject.transform.SetParent(null);
+        TransCandyPooler.Instance.ReturnToPool(transparentObject);
+        BoxManager.instance.UpdateCandyCount();
     }
+
 
     public void ToggleFastAutoCreate(bool isEnabled) 
     {
@@ -299,10 +339,31 @@ public class GiftBoxController : MonoBehaviour
             StopCoroutine(autoCreateCoroutine);
         }
     }
+    
+    public void TogglePassiveAutoCreate(bool isEnabled) 
+    {
+        if (passiveAutoCreateCoroutine != null)
+        {
+            StopCoroutine(passiveAutoCreateCoroutine); // 이미 실행 중인 코루틴이 있다면 중지
+        }
+
+        if (isEnabled)
+        {
+            passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());
+        }
+        else
+        {
+            StopCoroutine(passiveAutoCreateCoroutine);
+        }
+    }
+    
+    
 
     private IEnumerator DelayedAutoCreateCandy(int timesPer10Seconds)
     {
         yield return new WaitForSeconds(1f); // 1초의 딜레이
         yield return AutoCreateCandy(timesPer10Seconds); // 생성 시작
     }
+    
+
 }

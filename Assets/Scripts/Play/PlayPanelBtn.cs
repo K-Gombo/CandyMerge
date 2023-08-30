@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -5,6 +6,7 @@ public class PlayPanelBtn : MonoBehaviour
 {
     public List<GameObject> allPanels; // 모든 패널을 관리하는 리스트
     public CandyController candyController; // CandyController에 대한 참조
+    public GiftBoxController giftBoxController; // GiftBoxController에 대한 참조
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
 
@@ -31,5 +33,9 @@ public class PlayPanelBtn : MonoBehaviour
         {
             candyController.mergeLocked = false;
         }
+
+        giftBoxController.TogglePassiveAutoCreate(true); // 패시브 자동생성 활성화
+        candyController.TogglePassiveAutoMerge(true); // 패시브 자동생성 활성화
+        
     }
 }

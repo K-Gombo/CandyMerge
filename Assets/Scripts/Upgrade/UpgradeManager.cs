@@ -52,7 +52,7 @@ public class UpgradeManager : MonoBehaviour
     public int passiveAutoMergeSpeedLevel = 1;
     public int passiveAutoCreateSpeedLevel = 1;
     public int goldUpLevel = 1;
-    public int ludkyGoldLevel = 1;
+    public int luckyGoldLevel = 1;
     
     private void Start()
     {
@@ -307,8 +307,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void LuckyGoldUp()
     {
-        float currentDubleGoldUp = rewardButton.GetLuckyGoldUp();
-        if (currentDubleGoldUp >= rewardButton.maxLuckyGoldProbability)
+        float currentLuckyGoldUp = rewardButton.GetLuckyGoldUp();
+        if (currentLuckyGoldUp >= rewardButton.maxLuckyGoldProbability)
         {
             Debug.Log("이미 최대로 업그레이드 되었습니다.");
             return;
@@ -316,10 +316,11 @@ public class UpgradeManager : MonoBehaviour
 
         if (currencyManager.SubtractCurrency("Gold", currentLuckyGoldUpCost))
         {
-            float newDoubleGoldUp = Mathf.Min(currentDubleGoldUp + increaseLuckyGold, rewardButton.maxLuckyGoldProbability);
-            rewardButton.SetLuckyGoldUp(newDoubleGoldUp);
-            ludkyGoldLevel++;
-            Debug.Log($"골드 2배 확률 업!: {newDoubleGoldUp}");
+            float newLuckyGoldUp = Mathf.Min(currentLuckyGoldUp + increaseLuckyGold, rewardButton.maxLuckyGoldProbability);
+            rewardButton.SetLuckyGoldUp(newLuckyGoldUp);
+            UpdateCost(ref currentLuckyGoldUpCost);
+            luckyGoldLevel++;
+            Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}");
         }
         else
         {
