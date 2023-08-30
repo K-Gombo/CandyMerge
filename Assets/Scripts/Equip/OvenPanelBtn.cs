@@ -9,7 +9,7 @@ public class OvenPanelBtn : MonoBehaviour
     public GiftBoxController giftBoxController; // GiftBoxController 인스턴스를 참조
 
     public void OnButtonClick()
-    {
+    {   Debug.Log("OnButtonClick Called");
         // 모든 패널 비활성화
         foreach (GameObject panel in allPanels)
         {

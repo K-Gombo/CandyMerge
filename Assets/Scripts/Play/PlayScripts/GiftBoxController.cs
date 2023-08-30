@@ -32,6 +32,7 @@ public class GiftBoxController : MonoBehaviour
     private float luckyCreate = 0f; // 20% 확률로 2개의 캔디 생성
     public float maxLuckyCreate = 20f;
     private GameObject transparentObject;
+    public bool isPassiveAutoCreateRunning = false;
 
 
    
@@ -42,10 +43,9 @@ public class GiftBoxController : MonoBehaviour
     {   
         StartCoroutine(FillAndCreateCandies());
         createCandyText.text = candiesRemaining + "/" + maxCandies;
-        StartCoroutine(PassiveAutoCreateCandy());
+        TogglePassiveAutoCreate(true);
         giftBoxTransform = GameObject.Find("GiftBox").transform;
         giftBoxButton.onClick.AddListener(OnGiftBoxClick);
-        
         
     }
 
@@ -167,11 +167,11 @@ public class GiftBoxController : MonoBehaviour
     
     public IEnumerator PassiveAutoCreateCandy()
     {
-       
+        Debug.Log("PassiveAutoCreateCandy Coroutine Started");
 
         float totalTime = 10f; // 총 시간 (10초)
-        while (true) // 무한 루프로 계속 실행
-        {    
+        while (isPassiveAutoCreateRunning) // 무한 루프로 계속 실행
+        {    Debug.Log("Running PassiveAutoCreateCandy Coroutine");
             if (passiveCreateTry <= 0f)
             {
                 yield return new WaitForSeconds(1f); // 1초 대기하고 다시 체크
@@ -340,23 +340,23 @@ public class GiftBoxController : MonoBehaviour
         }
     }
     
-    public void TogglePassiveAutoCreate(bool isEnabled) 
+    public void TogglePassiveAutoCreate(bool isEnabled)
     {
-        if (passiveAutoCreateCoroutine != null)
+        if (isEnabled && !isPassiveAutoCreateRunning)
         {
-            StopCoroutine(passiveAutoCreateCoroutine); // 이미 실행 중인 코루틴이 있다면 중지
+            isPassiveAutoCreateRunning = true;
+            passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());  // 코루틴 인스턴스 저장
+            Debug.Log("Started new coroutine");
         }
-
-        if (isEnabled)
+        else if (!isEnabled && isPassiveAutoCreateRunning)
         {
-            passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());
-        }
-        else
-        {
-            StopCoroutine(passiveAutoCreateCoroutine);
+            isPassiveAutoCreateRunning = false;
+            StopCoroutine(passiveAutoCreateCoroutine);  // 저장된 코루틴 인스턴스로 멈춤
+            Debug.Log("Stopped existing coroutine");
         }
     }
-    
+
+
     
 
     private IEnumerator DelayedAutoCreateCandy(int timesPer10Seconds)
