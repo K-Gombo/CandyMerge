@@ -52,7 +52,7 @@ public class CandyController : MonoBehaviour
     }
     
     void StartAutoMerge()
-    {   Debug.Log("Initial passiveDelay: " + passiveDelay);
+    {   
         TogglePassiveAutoMerge(true);
     }
 
@@ -433,7 +433,7 @@ public IEnumerator PassiveAutoMerge()
             }
 
             if (lowestLevelCandy != null && mergeTarget != null)
-            {   Debug.Log("Current passiveDelay time: " + passiveDelay);
+            {   
                 isMergingInProgress = true;
                 MergeCandies(lowestLevelCandy, mergeTarget);
                 isMergingInProgress = false;
@@ -473,13 +473,13 @@ public IEnumerator PassiveAutoMerge()
         {
             isPassiveAutoMergeRunning = true;
             passiveAutoMergeCoroutine = StartCoroutine(PassiveAutoMerge());  // 코루틴 인스턴스 저장
-            Debug.Log("Started new coroutine");
+            
         }
         else if (!isEnabled && isPassiveAutoMergeRunning)
         {
             isPassiveAutoMergeRunning = false;
             StopCoroutine(passiveAutoMergeCoroutine);  // 저장된 코루틴 인스턴스로 멈춤
-            Debug.Log("Stopped existing coroutine");
+            
         }
     }
 
@@ -520,11 +520,11 @@ public IEnumerator PassiveAutoMerge()
   
     public void MoveToRandomBox()
     {
-        // MixBox 태그를 가진 모든 오브젝트를 찾는다.
+       
         GameObject[] mixBoxes = GameObject.FindGameObjectsWithTag("MixBox");
         List<Transform> candyPrefabs = new List<Transform>();
 
-        // MixBox 내의 candyPrefab들을 찾는다.
+        // MixBox 내의 candyPrefab들을 찾기
         foreach (var mixBox in mixBoxes)
         {
             foreach (Transform child in mixBox.transform)
@@ -533,7 +533,7 @@ public IEnumerator PassiveAutoMerge()
             }
         }
 
-        // 비어있는 Box 태그를 가진 오브젝트를 찾는다.
+        // 비어있는 Box 태그를 가진 오브젝트를 찾기
         List<Transform> emptyBoxes = new List<Transform>();
         foreach (var box in boxTransforms)
         {
@@ -546,7 +546,7 @@ public IEnumerator PassiveAutoMerge()
         // candyPrefabs과 비어있는 Box가 모두 있을 경우, 랜덤한 Box로 candyPrefab을 이동
         if (candyPrefabs.Count > 0 && emptyBoxes.Count >= candyPrefabs.Count)
         {
-            // 모든 candyPrefabs를 랜덤한 비어있는 Box로 이동시킨다.
+            // 모든 candyPrefabs를 랜덤한 비어있는 Box로 이동
             foreach (Transform candyPrefab in candyPrefabs)
             {
                 int randomBoxIndex = UnityEngine.Random.Range(0, emptyBoxes.Count);

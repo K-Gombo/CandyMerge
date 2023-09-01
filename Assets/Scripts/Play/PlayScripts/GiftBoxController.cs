@@ -167,11 +167,11 @@ public class GiftBoxController : MonoBehaviour
     
     public IEnumerator PassiveAutoCreateCandy()
     {
-        Debug.Log("PassiveAutoCreateCandy Coroutine Started");
+        
 
         float totalTime = 10f; // 총 시간 (10초)
         while (isPassiveAutoCreateRunning) // 무한 루프로 계속 실행
-        {    Debug.Log("Running PassiveAutoCreateCandy Coroutine");
+        {   
             if (passiveCreateTry <= 0f)
             {
                 yield return new WaitForSeconds(1f); // 1초 대기하고 다시 체크
@@ -346,13 +346,13 @@ public class GiftBoxController : MonoBehaviour
         {
             isPassiveAutoCreateRunning = true;
             passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());  // 코루틴 인스턴스 저장
-            Debug.Log("Started new coroutine");
+            
         }
         else if (!isEnabled && isPassiveAutoCreateRunning)
         {
             isPassiveAutoCreateRunning = false;
             StopCoroutine(passiveAutoCreateCoroutine);  // 저장된 코루틴 인스턴스로 멈춤
-            Debug.Log("Stopped existing coroutine");
+            
         }
     }
 
