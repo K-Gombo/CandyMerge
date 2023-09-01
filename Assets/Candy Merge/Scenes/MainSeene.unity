@@ -37465,105 +37465,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908773670}
   m_CullTransparentMesh: 1
---- !u!1 &1913112006 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1275339381236544186, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-  m_PrefabInstance: {fileID: 26010858820251076}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1913112008 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1674474225366238621, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-  m_PrefabInstance: {fileID: 26010858820251076}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913112006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1913112010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913112006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62fad5f3c504e4161a33b0d401fc28ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allPanels:
-  - {fileID: 932752025}
-  - {fileID: 745594858}
-  - {fileID: 445562530}
-  - {fileID: 1440952244}
-  - {fileID: 311118662}
-  - {fileID: 311449787}
-  - {fileID: 751400241}
-  - {fileID: 827990670}
-  candyController: {fileID: 1968457436}
-  giftBoxController: {fileID: 1675821897}
-  GiftBox: {fileID: 827990670}
-  AutoCreateBtn: {fileID: 751400241}
-  mixManager: {fileID: 411645544}
-  EquipPanel: {fileID: 1168936108}
---- !u!114 &1913112011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913112006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1913112008}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1913112010}
-        m_TargetAssemblyTypeName: EquipPanelBtn, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1916153131
 GameObject:
   m_ObjectHideFlags: 0
@@ -42504,10 +42405,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomMenubar
       objectReference: {fileID: 0}
-    - target: {fileID: 1275339381236544186, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      propertyPath: m_Name
-      value: Equip
-      objectReference: {fileID: 0}
     - target: {fileID: 1987169747512614031, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -42597,10 +42494,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 932752025}
     - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      propertyPath: OvenPanel
-      value: 
-      objectReference: {fileID: 932752025}
-    - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: autoCreateBtn
       value: 
       objectReference: {fileID: 751400243}
@@ -42644,10 +42537,6 @@ PrefabInstance:
       propertyPath: allPanels.Array.data[7]
       value: 
       objectReference: {fileID: 751400241}
-    - target: {fileID: 5283233103618469609, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      propertyPath: m_Name
-      value: Gacha
-      objectReference: {fileID: 0}
     - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: GiftBox
       value: 
@@ -42724,16 +42613,66 @@ PrefabInstance:
       propertyPath: allPanels.Array.data[5]
       value: 
       objectReference: {fileID: 311449787}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: GiftBox
+      value: 
+      objectReference: {fileID: 827990670}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: EquipPanel
+      value: 
+      objectReference: {fileID: 1168936108}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: mixManager
+      value: 
+      objectReference: {fileID: 411645544}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: AutoCreateBtn
+      value: 
+      objectReference: {fileID: 751400241}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: candyController
+      value: 
+      objectReference: {fileID: 1968457436}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: giftBoxController
+      value: 
+      objectReference: {fileID: 1675821897}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[0]
+      value: 
+      objectReference: {fileID: 932752025}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[1]
+      value: 
+      objectReference: {fileID: 745594858}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[2]
+      value: 
+      objectReference: {fileID: 445562530}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[3]
+      value: 
+      objectReference: {fileID: 1440952244}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[4]
+      value: 
+      objectReference: {fileID: 311118662}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[5]
+      value: 
+      objectReference: {fileID: 311449787}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[6]
+      value: 
+      objectReference: {fileID: 751400241}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[7]
+      value: 
+      objectReference: {fileID: 827990670}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1275339381236544186, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1913112010}
-    - targetCorrespondingSourceObject: {fileID: 1275339381236544186, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1913112011}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
 --- !u!1001 &6056463578503923132
 PrefabInstance:
