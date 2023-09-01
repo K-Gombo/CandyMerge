@@ -32403,7 +32403,7 @@ MonoBehaviour:
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
   boxManager: {fileID: 749087271}
   minimumFillTime: 2
-  passiveCreateTry: 0
+  passiveCreateTry: 5
   maxPassiveCreateTry: 10
   maxLuckyCreate: 20
   isPassiveAutoCreateRunning: 0

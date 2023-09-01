@@ -48,8 +48,10 @@ GameObject:
   - component: {fileID: 7862736859087960872}
   - component: {fileID: 621208931729267109}
   - component: {fileID: 1674474225366238621}
+  - component: {fileID: 9077454698705625840}
+  - component: {fileID: 1051078397553288326}
   m_Layer: 5
-  m_Name: Book
+  m_Name: Equip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,6 +115,89 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9077454698705625840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275339381236544186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62fad5f3c504e4161a33b0d401fc28ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allPanels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  candyController: {fileID: 0}
+  giftBoxController: {fileID: 0}
+  GiftBox: {fileID: 0}
+  AutoCreateBtn: {fileID: 0}
+  mixManager: {fileID: 0}
+  EquipPanel: {fileID: 0}
+--- !u!114 &1051078397553288326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275339381236544186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1674474225366238621}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9077454698705625840}
+        m_TargetAssemblyTypeName: EquipPanelBtn, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4053377672374321673
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +288,7 @@ GameObject:
   - component: {fileID: 4786292779940625718}
   - component: {fileID: 3323029437379976358}
   m_Layer: 5
-  m_Name: Oven
+  m_Name: Gacha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,8 +374,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   candyController: {fileID: 0}
-  OvenPanel: {fileID: 0}
+  MixPanel: {fileID: 0}
   giftBoxController: {fileID: 0}
+  autoCreateBtn: {fileID: 0}
 --- !u!114 &3323029437379976358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +535,7 @@ MonoBehaviour:
   giftBoxController: {fileID: 0}
   GiftBox: {fileID: 0}
   AutoCreateBtn: {fileID: 0}
+  mixManager: {fileID: 0}
 --- !u!114 &520149950788541427
 MonoBehaviour:
   m_ObjectHideFlags: 0
