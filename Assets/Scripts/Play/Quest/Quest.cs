@@ -40,7 +40,7 @@ public class Quest : MonoBehaviour
     {
         int numberOfCandyTypes = Random.Range(1, 3);
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
-        int candyCount1 = Random.Range(3, 10);
+        int candyCount1 = Random.Range(3, 8);
         Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex); 
         Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
         Sprite candySprite2 = null;

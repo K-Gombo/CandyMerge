@@ -23,7 +23,7 @@ public class CandyController : MonoBehaviour
     public BoxManager boxManager; // BoxManager 참조
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     private bool isPassiveAutoMergeRunning = false;
-    
+    private bool delayCompleted = true;
  
     
     private WaitForSeconds passiveDelay;
@@ -36,6 +36,11 @@ public class CandyController : MonoBehaviour
 
     Vector3 startPos;
     Vector3 currentPos;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     private void Start()
     {
@@ -447,11 +452,8 @@ public IEnumerator PassiveAutoMerge()
     
 }
 
-   
- 
     
-   
-
+    
     public void ToggleFastAutoMerge(bool isEnabled)
     {
                 if (autoMergeCoroutine != null && !isMergingInProgress)
@@ -466,23 +468,28 @@ public IEnumerator PassiveAutoMerge()
                     autoMergeCoroutine = StartCoroutine(DelayedAutoMerge(1, 1));
                 }
     }
-    
+
     public void TogglePassiveAutoMerge(bool isEnabled)
     {
-        if (isEnabled && !isPassiveAutoMergeRunning)
+        if (isEnabled && !isPassiveAutoMergeRunning && delayCompleted)
         {
-            isPassiveAutoMergeRunning = true;
-            passiveAutoMergeCoroutine = StartCoroutine(PassiveAutoMerge());  // 코루틴 인스턴스 저장
-            
+            delayCompleted = false;
+            StartCoroutine(DelayStartPassiveAutoMerge());
         }
         else if (!isEnabled && isPassiveAutoMergeRunning)
         {
             isPassiveAutoMergeRunning = false;
-            StopCoroutine(passiveAutoMergeCoroutine);  // 저장된 코루틴 인스턴스로 멈춤
-            
+            StopCoroutine(passiveAutoMergeCoroutine);
         }
     }
 
+    IEnumerator DelayStartPassiveAutoMerge()
+    {
+        yield return new WaitForSeconds(1f); // 1초 딜레이
+        isPassiveAutoMergeRunning = true;
+        passiveAutoMergeCoroutine = StartCoroutine(PassiveAutoMerge());
+        delayCompleted = true;  // 딜레이가 끝났음을 표시
+    }
     
     
 

@@ -33,7 +33,7 @@ public class GiftBoxController : MonoBehaviour
     public float maxLuckyCreate = 20f;
     private GameObject transparentObject;
     public bool isPassiveAutoCreateRunning = false;
-
+    private bool delayCompleted = true;
 
    
     
@@ -342,10 +342,9 @@ public class GiftBoxController : MonoBehaviour
     
     public void TogglePassiveAutoCreate(bool isEnabled)
     {
-        if (isEnabled && !isPassiveAutoCreateRunning)
+        if (isEnabled && !isPassiveAutoCreateRunning && delayCompleted)
         {
-            isPassiveAutoCreateRunning = true;
-            passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());  // 코루틴 인스턴스 저장
+            StartCoroutine(DelayStartPassiveAutoCreate());  
             
         }
         else if (!isEnabled && isPassiveAutoCreateRunning)
@@ -354,6 +353,14 @@ public class GiftBoxController : MonoBehaviour
             StopCoroutine(passiveAutoCreateCoroutine);  // 저장된 코루틴 인스턴스로 멈춤
             
         }
+    }
+    
+    IEnumerator DelayStartPassiveAutoCreate()
+    {
+        yield return new WaitForSeconds(1f); // 1초 딜레이
+        isPassiveAutoCreateRunning = true;
+        passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());
+        delayCompleted = true;  // 딜레이가 끝났음을 표시
     }
 
 

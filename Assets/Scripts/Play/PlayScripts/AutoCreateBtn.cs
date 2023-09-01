@@ -27,7 +27,7 @@ public class AutoCreateBtn : MonoBehaviour
         
     }
 
-    private void OnACOnBtnClick() {
+    public void OnACOnBtnClick() {
        
         ACOffBtn.gameObject.SetActive(true);
         ACOnBtn.gameObject.SetActive(false);

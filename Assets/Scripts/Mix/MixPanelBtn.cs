@@ -7,9 +7,13 @@ public class MixPanelBtn : MonoBehaviour
     public CandyController candyController;
     public GameObject MixPanel;    // UpgradePanel
     public GiftBoxController giftBoxController; // GiftBoxController 인스턴스를 참조
+    public AutoCreateBtn autoCreateBtn;
 
     public void OnButtonClick()
-    {  
+    {   
+        
+        giftBoxController.TogglePassiveAutoCreate(false); // 패시브 자동생성 비활성화
+        candyController.TogglePassiveAutoMerge(false); // 패시브 자동머지 비활성화
         // 모든 패널 비활성화
         foreach (GameObject panel in allPanels)
         {
@@ -20,13 +24,10 @@ public class MixPanelBtn : MonoBehaviour
        
         // Merge 기능 비활성화
         candyController.mergeLocked = true;
-        giftBoxController.TogglePassiveAutoCreate(false); // 패시브 자동생성 비활성화
-        candyController.TogglePassiveAutoMerge(false); // 패시브 자동생성 활성화
         candyController.UpdateBoxTransforms(); 
+        autoCreateBtn.OnACOnBtnClick();
         Transform mixBox = GameObject.FindGameObjectWithTag("MixBox").transform;
         candyController.MoveToMixBox(mixBox); // 캔디를 MixBox로 이동
-        
-       
         
         
         
