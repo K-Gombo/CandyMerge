@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI; // Image 컴포넌트를 사용하기 위해 추가
 
-public class EquipMentStatus : MonoBehaviour
+public class EquipmentStatus : MonoBehaviour
 {
     public int equipId;
     public EquipmentManager.SlotType slotType;
@@ -11,4 +11,16 @@ public class EquipMentStatus : MonoBehaviour
     public EquipmentManager.Rank equipRank;
 
     public Image imageComponent; // Image 컴포넌트 추가
+
+
+    void Awake()
+    {
+        EquipArrangeManager equipArrangeManager = FindObjectOfType<EquipArrangeManager>();
+        if (equipArrangeManager != null)
+        {
+            equipArrangeManager.AddEquipment(this);
+        }
+    }
+
 }
+

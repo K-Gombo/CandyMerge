@@ -168,7 +168,7 @@ public class EquipmentManager : MonoBehaviour
         Debug.Log("랭크 확률 배열이 null입니다.");
     }
 
-    // equipList에서 랜덤으로 Equip 객체를 선택
+    // equipList에서 랜덤으로 Equip 객체 선택
     int randomIndex = UnityEngine.Random.Range(0, equipList.Count);
     Debug.Log($"랜덤 인덱스: {randomIndex}");
 
@@ -180,7 +180,7 @@ public class EquipmentManager : MonoBehaviour
     newEquip.transform.SetParent(parentTransform);
 
     // 생성된 프리팹에 Equip 정보를 할당
-    EquipMentStatus equipComponent = newEquip.GetComponent<EquipMentStatus>();
+    EquipmentStatus equipComponent = newEquip.GetComponent<EquipmentStatus>();
     if (equipComponent != null)
     {
         Debug.Log("EquipMentStatus 컴포넌트를 찾았습니다.");
@@ -189,10 +189,9 @@ public class EquipmentManager : MonoBehaviour
         equipComponent.equipName = selectedEquip.equipName;
         equipComponent.skillIds = selectedEquip.skillIds;
         equipComponent.skillRanks = selectedEquip.skillRanks;
-        equipComponent.equipRank = chosenRank;  // 랜덤으로 뽑힌 랭크를 할당합니다.
+        equipComponent.equipRank = chosenRank;  
 
-        // Image 컴포넌트에 sprite를 할당합니다.
-        // Image 컴포넌트에 sprite를 할당합니다.
+       
         if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
         {
             Debug.Log("매핑된 이미지 스프라이트를 찾았습니다.");
