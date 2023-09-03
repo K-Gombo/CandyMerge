@@ -55,7 +55,7 @@ public class CurrencyManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            AddCurrency("Gold", 10000);
+            AddCurrency("Gold", 1000000);
         }
 
         if (Input.GetKeyDown(KeyCode.H))

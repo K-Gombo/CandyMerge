@@ -133,9 +133,11 @@ public class EquipmentManager : MonoBehaviour
     public void ReturnEquipToPool(GameObject obj)
     {
         obj.transform.SetParent(equipMentPoolTransform); 
+        obj.transform.localScale = Vector3.one;  // 스케일 초기화
         obj.SetActive(false);
         equipPool.Enqueue(obj);
     }
+
 
     
     
@@ -177,7 +179,8 @@ public class EquipmentManager : MonoBehaviour
 
     // 장비 프리팹을 풀에서 가져옴
     GameObject newEquip = GetEquipFromPool();
-    newEquip.transform.SetParent(parentTransform);
+    newEquip.transform.SetParent(parentTransform, false);
+
 
     // 생성된 프리팹에 Equip 정보를 할당
     EquipmentStatus equipComponent = newEquip.GetComponent<EquipmentStatus>();

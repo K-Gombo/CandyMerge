@@ -14,8 +14,7 @@ public class MixManager : MonoBehaviour
     public MixUIManager mixUIManager; // MixUIManager에 대한 참조 추가
 
     // 범위와 확률을 저장하는 딕셔너리
-    Dictionary<string, Dictionary<string, float>> rankProbabilities =
-        new Dictionary<string, Dictionary<string, float>>();
+    Dictionary<string, Dictionary<string, float>> rankProbabilities = new Dictionary<string, Dictionary<string, float>>();
 
     private void Awake()
     {
