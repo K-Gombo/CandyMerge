@@ -38,7 +38,6 @@ public class MixManager : MonoBehaviour
             }
 
             rankProbabilities[rangeString] = rankInfo;
-            Debug.Log($"Parsed {rangeString}: {string.Join(",", rankInfo)}");
         }
     }
 
@@ -163,15 +162,13 @@ public class MixManager : MonoBehaviour
         if (CheckCandiesCount())
         {
             int totalLevel = mixUIManager.totalLevelSum; // MixUIManager에서 캔디 총합 레벨을 가져옴
-            Debug.Log($"totalLevel: {totalLevel}");
+           
             float[] rankProbabilities = GetRankProbabilities(totalLevel);
-            Debug.Log("확률 배열 시작");
+            
             foreach (float prob in rankProbabilities)
             {
                 Debug.Log(prob);
             }
-
-            Debug.Log("확률 배열 끝");
 
             equipmentManager.CreateEquipPrefab(equipSpawnLocation, rankProbabilities);
 

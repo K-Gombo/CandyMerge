@@ -4325,9 +4325,9 @@ RectTransform:
   - {fileID: 1440952245}
   - {fileID: 311118663}
   - {fileID: 311449788}
+  - {fileID: 66404881}
   - {fileID: 5955923}
   - {fileID: 1107623424}
-  - {fileID: 66404881}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16629,6 +16629,7 @@ GameObject:
   - component: {fileID: 728567994}
   - component: {fileID: 728567993}
   - component: {fileID: 728567995}
+  - component: {fileID: 728567996}
   m_Layer: 0
   m_Name: EquipManager
   m_TagString: Untagged
@@ -16687,6 +16688,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3290b1291ee3b46e480c129682d0b35d, type: 3}
   - {fileID: 21300000, guid: 5397c0039e4a94a4c9adc10d4ab8f5ca, type: 3}
   mixManager: {fileID: 411645544}
+  equipSkillManager: {fileID: 728567996}
   poolSize: 40
   equipMentPoolTransform: {fileID: 1095069984}
 --- !u!114 &728567993
@@ -16746,6 +16748,18 @@ MonoBehaviour:
   mixManager: {fileID: 411645544}
   equipmentManager: {fileID: 728567992}
   equipSpawnLocation: {fileID: 1373033894}
+--- !u!114 &728567996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728567990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308d0785292dc4fef90916eec2241593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &738281235
 GameObject:
   m_ObjectHideFlags: 0
@@ -48633,18 +48647,6 @@ PrefabInstance:
       value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 1532391484686968800, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0004799
-      objectReference: {fileID: 0}
-    - target: {fileID: 1532391484686968800, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0004799
-      objectReference: {fileID: 0}
-    - target: {fileID: 1532391484686968800, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.0004799
-      objectReference: {fileID: 0}
-    - target: {fileID: 1532391484686968800, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -48674,11 +48676,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1532391484686968800, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -53320030
+      value: 569
       objectReference: {fileID: 0}
     - target: {fileID: 1532391484686968800, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -54276532
+      value: 629
       objectReference: {fileID: 0}
     - target: {fileID: 1532391484686968800, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -48695,10 +48697,6 @@ PrefabInstance:
     - target: {fileID: 6101440837307258548, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
       propertyPath: m_Name
       value: GachaTest
-      objectReference: {fileID: 0}
-    - target: {fileID: 6101440837307258548, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

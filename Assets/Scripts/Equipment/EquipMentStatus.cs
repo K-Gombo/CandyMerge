@@ -9,9 +9,9 @@ public class EquipmentStatus : MonoBehaviour
     public int[] skillIds = new int[4];
     public EquipmentManager.Rank[] skillRanks = new EquipmentManager.Rank[4];
     public EquipmentManager.Rank equipRank;
-
-    public Image imageComponent; // Image 컴포넌트 추가
-
+    public Image imageComponent;
+    public string[] skillNames = new string[4];
+    public float[] skillPoints = new float[4];
 
     void Awake()
     {

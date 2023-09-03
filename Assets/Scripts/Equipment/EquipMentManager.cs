@@ -3,25 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
-{  
+{
     public GameObject equipPrefab;
     public TextAsset CsvData { get; set; }
     public List<Equip> equipList = new List<Equip>();
     public Sprite[] equipSprites;
     public MixManager mixManager;
+    public EquipSkillManager equipSkillManager;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
     public int poolSize = 40;
     public Transform equipMentPoolTransform;
-    // EquipmentManager 클래스 내부에 추가
     public Dictionary<string, Sprite> equipNameToSpriteMap = new Dictionary<string, Sprite>();
 
-    
+
     // 장비 등급을 나타내는 enum
-    public enum Rank { F, D, C, B, A, S, SS }
+    public enum Rank
+    {
+        F,
+        D,
+        C,
+        B,
+        A,
+        S,
+        SS
+    }
+
     // 장비 타입을 나타내는 enum
-    public enum SlotType { Cook, Cap, Cloth, Shoes }
-    
-    
+    public enum SlotType
+    {
+        Cook,
+        Cap,
+        Cloth,
+        Shoes
+    }
+
+
     [Serializable]
     public class Equip
     {
@@ -30,6 +46,8 @@ public class EquipmentManager : MonoBehaviour
         public string equipName;
         public Sprite equipSprite;
         public int[] skillIds = new int[4];
+        public string[] skillNames = new string[4];
+        public float[] skillPoints = new float[4];
         public Rank[] skillRanks = new Rank[4];
         public Rank equipRank; // 랜덤으로 할당될 장비 등급
     }
@@ -38,19 +56,21 @@ public class EquipmentManager : MonoBehaviour
     {
         CsvData = Resources.Load<TextAsset>("EquipmentData");
 
-        if (CsvData != null)  // TextAsset이 로딩되었는지 확인
+        if (CsvData != null)
         {
             string csvText = CsvData.text;
             string[] csvData = csvText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
+            equipSkillManager = FindObjectOfType<EquipSkillManager>();
             for (int i = 1; i < csvData.Length; i++)
             {
                 string[] data = csvData[i].Split(',');
-                
+
                 Equip equip = new Equip();
-    
-                // 각각의 파싱 과정에서 문제가 발생할 수 있으므로 로그를 추가
-                try {
+
+
+                try
+                {
                     equip.equipId = int.Parse(data[0]);
                     equip.slotType = (SlotType)Enum.Parse(typeof(SlotType), data[1]);
                     equip.equipName = data[2];
@@ -58,27 +78,35 @@ public class EquipmentManager : MonoBehaviour
                     {
                         equip.skillIds[j] = int.Parse(data[3 + j * 2]);
                         equip.skillRanks[j] = (Rank)Enum.Parse(typeof(Rank), data[4 + j * 2]);
+
+                        if (equipSkillManager.skillMap.ContainsKey(equip.skillIds[j]))
+                        {
+                            EquipSkill equipSkill = equipSkillManager.skillMap[equip.skillIds[j]];
+                            equip.skillNames[j] = equipSkill.skillName;
+                            equip.skillPoints[j] = equipSkill.skillPoint;
+                        }
                     }
-                    
-                } catch (Exception e) {
-                    
+
                 }
-    
+                catch (Exception e)
+                {
+
+                }
+
                 equipList.Add(equip);
                 // foreach (var equipment in equipList)
                 // {
                 //     Debug.Log($"Equip ID: {equipment.equipId}, Equip Name: {equipment.equipName}, SlotType: {equipment.slotType}, {equipment.skillIds[0]},{equipment.skillRanks[0]}");
                 // }
-              
             }
 
             AssignRandomRank();
             InitializeEquipSpriteMapping();
             InitializeEquipPool();
         }
-        
+
     }
-    
+
     void InitializeEquipSpriteMapping()
     {
         foreach (Equip equip in equipList)
@@ -89,8 +117,8 @@ public class EquipmentManager : MonoBehaviour
             }
         }
     }
-    
-    
+
+
     // 각 Equip 객체에 랜덤으로 장비 등급을 할당
     void AssignRandomRank()
     {
@@ -101,15 +129,16 @@ public class EquipmentManager : MonoBehaviour
             equip.equipRank = (Rank)ranks.GetValue(UnityEngine.Random.Range(0, ranks.Length));
         }
     }
+
     void InitializeEquipPool()
     {
-        
+
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(equipPrefab, equipMentPoolTransform);
             obj.SetActive(false);
             equipPool.Enqueue(obj);
-            
+
         }
     }
 
@@ -132,84 +161,82 @@ public class EquipmentManager : MonoBehaviour
 
     public void ReturnEquipToPool(GameObject obj)
     {
-        obj.transform.SetParent(equipMentPoolTransform); 
-        obj.transform.localScale = Vector3.one;  // 스케일 초기화
+        obj.transform.SetParent(equipMentPoolTransform);
+        obj.transform.localScale = Vector3.one; // 스케일 초기화
         obj.SetActive(false);
         equipPool.Enqueue(obj);
     }
 
 
-    
-    
-   public void CreateEquipPrefab(Transform parentTransform, float[] rankProbabilities)
-{
-    Debug.Log("CreateEquipPrefab 호출됨");
-    // 랜덤 랭크 할당 로직
-    Rank chosenRank = Rank.F;
-    if (rankProbabilities != null)
+
+
+    public void CreateEquipPrefab(Transform parentTransform, float[] rankProbabilities)
     {
-        Debug.Log("랭크 확률 배열이 null이 아닙니다.");
-        float randValue = UnityEngine.Random.Range(0, 100);
-        Debug.Log($"랜덤 값: {randValue}");
         
-        float sum = 0;
-        for (int i = 0; i < rankProbabilities.Length; i++)
+        // 랜덤 랭크 할당 로직
+        Rank chosenRank = Rank.F;
+        if (rankProbabilities != null)
         {
-            sum += rankProbabilities[i];
-            Debug.Log($"현재 합계: {sum}");
-            if (randValue < sum)
+            
+            float randValue = UnityEngine.Random.Range(0, 100);
+          
+
+            float sum = 0;
+            for (int i = 0; i < rankProbabilities.Length; i++)
             {
-                chosenRank = (Rank)i;
-                Debug.Log($"선택된 랭크: {chosenRank}");
-                break;
+                sum += rankProbabilities[i];
+               
+                if (randValue < sum)
+                {
+                    chosenRank = (Rank)i;
+                    break;
+                }
+            }
+        }
+        
+
+        // equipList에서 랜덤으로 Equip 객체 선택
+        int randomIndex = UnityEngine.Random.Range(0, equipList.Count);
+        
+
+        Equip selectedEquip = equipList[randomIndex];
+       
+
+        // 장비 프리팹을 풀에서 가져옴
+        GameObject newEquip = GetEquipFromPool();
+        newEquip.transform.SetParent(parentTransform, false);
+
+
+        // 생성된 프리팹에 Equip 정보를 할당
+        EquipmentStatus equipComponent = newEquip.GetComponent<EquipmentStatus>();
+        if (equipComponent != null)
+        {
+            
+            equipComponent.equipId = selectedEquip.equipId;
+            equipComponent.slotType = selectedEquip.slotType;
+            equipComponent.equipName = selectedEquip.equipName;
+            equipComponent.skillIds = selectedEquip.skillIds;
+            equipComponent.skillRanks = selectedEquip.skillRanks;
+            equipComponent.equipRank = chosenRank;
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (equipSkillManager.skillMap.ContainsKey(selectedEquip.skillIds[i]))
+                {
+                    
+                    EquipSkill equipSkill = equipSkillManager.skillMap[selectedEquip.skillIds[i]];
+                    equipComponent.skillNames[i] = equipSkill.skillName;
+                    equipComponent.skillPoints[i] = equipSkill.skillPoint;
+                }
+               
+            }
+
+            if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
+            {
+          
+                equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
             }
         }
     }
-    else
-    {
-        Debug.Log("랭크 확률 배열이 null입니다.");
-    }
-
-    // equipList에서 랜덤으로 Equip 객체 선택
-    int randomIndex = UnityEngine.Random.Range(0, equipList.Count);
-    Debug.Log($"랜덤 인덱스: {randomIndex}");
-
-    Equip selectedEquip = equipList[randomIndex];
-    Debug.Log($"선택된 Equip: {selectedEquip.equipName}");
-
-    // 장비 프리팹을 풀에서 가져옴
-    GameObject newEquip = GetEquipFromPool();
-    newEquip.transform.SetParent(parentTransform, false);
-
-
-    // 생성된 프리팹에 Equip 정보를 할당
-    EquipmentStatus equipComponent = newEquip.GetComponent<EquipmentStatus>();
-    if (equipComponent != null)
-    {
-        Debug.Log("EquipMentStatus 컴포넌트를 찾았습니다.");
-        equipComponent.equipId = selectedEquip.equipId;
-        equipComponent.slotType = selectedEquip.slotType;
-        equipComponent.equipName = selectedEquip.equipName;
-        equipComponent.skillIds = selectedEquip.skillIds;
-        equipComponent.skillRanks = selectedEquip.skillRanks;
-        equipComponent.equipRank = chosenRank;  
-
-       
-        if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
-        {
-            Debug.Log("매핑된 이미지 스프라이트를 찾았습니다.");
-            equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];  
-        }
-        else
-        {
-            Debug.Log("매핑된 이미지 스프라이트를 찾을 수 없습니다.");
-        }
-    }
-    else
-    {
-        Debug.Log("EquipMentStatus 컴포넌트를 찾을 수 없습니다.");
-    }
-}
-
 }
 
