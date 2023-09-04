@@ -28,10 +28,18 @@ public class EquipmentManager : MonoBehaviour
         F,
         D,
         C,
+        C1,
         B,
+        B1,
         A,
+        A1,
+        A2,
         S,
-        SS
+        S1,
+        S2,
+        SS,
+        SS1,
+        SS2
     }
 
     // 장비 타입을 나타내는 enum
