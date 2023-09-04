@@ -41,6 +41,8 @@ public class EquipmentManager : MonoBehaviour
         SS1,
         SS2
     }
+    
+    
 
     // 장비 타입을 나타내는 enum
     public enum SlotType
