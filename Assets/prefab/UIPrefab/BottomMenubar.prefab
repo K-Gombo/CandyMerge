@@ -603,7 +603,6 @@ GameObject:
   - component: {fileID: 2215417589412516544}
   - component: {fileID: 1401245002927252167}
   - component: {fileID: 6347450431172695204}
-  - component: {fileID: 9018158335027383915}
   - component: {fileID: 4149493417649195185}
   - component: {fileID: 8957363607456649543}
   m_Layer: 5
@@ -671,26 +670,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9018158335027383915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9066769108773421178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8423a816d7ed38a478f630f95b4e6345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allPanels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  UpgradePanel: {fileID: 0}
 --- !u!114 &4149493417649195185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,6 +746,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   UpgradePanel: {fileID: 0}
+  candyController: {fileID: 0}
 --- !u!1 &9072614759883847399
 GameObject:
   m_ObjectHideFlags: 0

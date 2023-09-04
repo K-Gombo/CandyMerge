@@ -50,6 +50,7 @@ public class EquipPanelBtn : MonoBehaviour
             
         }
         EquipPanel.SetActive(true);
+        candyController.EnableDrag(false);
         
     }
 }

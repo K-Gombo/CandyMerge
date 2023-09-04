@@ -24,6 +24,7 @@ public class CandyController : MonoBehaviour
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     private bool isPassiveAutoMergeRunning = false;
     private bool delayCompleted = true;
+    public bool isDragEnabled = true; // 드래그가 가능한지를 나타내는 변수
  
     
     private WaitForSeconds passiveDelay;
@@ -65,7 +66,7 @@ public class CandyController : MonoBehaviour
 
     private void Update()
     {
-        if (isMergingInProgress) return;
+        if (isMergingInProgress || !isDragEnabled) return; // isDragEnabled를 체크
 
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -93,6 +94,11 @@ public class CandyController : MonoBehaviour
                 StopDraggingCandy();
             }
         }
+    }
+    
+    public void EnableDrag(bool enable)
+    {
+        isDragEnabled = enable;
     }
 
 

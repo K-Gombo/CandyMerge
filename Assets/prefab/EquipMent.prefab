@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1984425184861743222}
   - component: {fileID: 3348615878373077510}
   m_Layer: 5
-  m_Name: Value_Text
+  m_Name: rank_Level_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 8421705104648469700}
   - component: {fileID: 1882861914411009457}
   m_Layer: 5
-  m_Name: Lv_Text
+  m_Name: upgrade_Level_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv. 2
+  m_Text: Lv. 1
 --- !u!1 &7550698876365069209
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,3 +582,13 @@ MonoBehaviour:
   skillRanks: 00000000000000000000000000000000
   equipRank: 0
   imageComponent: {fileID: 7992966488826300496}
+  skillNames:
+  - 
+  - 
+  - 
+  - 
+  skillPoints:
+  - 0
+  - 0
+  - 0
+  - 0

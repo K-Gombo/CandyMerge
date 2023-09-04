@@ -33,7 +33,6 @@ public class EquipSkillManager : MonoBehaviour
         {
             try
             {
-                Debug.Log($"Processing line {i}");
                 var line = csvData[i];
                 var data = line.Split(',');
                 EquipSkill equipSkill = new EquipSkill();
@@ -55,6 +54,7 @@ public class EquipSkillManager : MonoBehaviour
             }
         }
     }
+    
 
 
 

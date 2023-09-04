@@ -58,8 +58,14 @@ public class HappyLevel : MonoBehaviour
     {
         // HappylevelUp 딕셔너리에서 현재 레벨에 필요한 경험치 가져오기
         int requiredExperience = HappylevelUp[CurrentLevel + 1]; // 현재 레벨의 다음 레벨 경험치
-        happinessText.text = currentExperience + "/" + requiredExperience;
+
+        // 퍼센테이지 계산
+        float percentage = ((float)currentExperience / requiredExperience) * 100.0f;
+
+        // 텍스트로 퍼센테이지 표시
+        happinessText.text = string.Format("{0:F1}%", percentage);
     }
+
 
     // 경험치를 증가시키고 레벨업이 필요한지 확인하는 메서드
     public void AddExperience(int amount)

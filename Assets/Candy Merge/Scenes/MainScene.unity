@@ -44217,6 +44217,7 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   mergeEffectPrefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
   boxManager: {fileID: 749087271}
+  isDragEnabled: 1
   passiveWaiting: 0
   maxPassiveWating: 10
   mergeLocked: 0
@@ -48517,6 +48518,10 @@ PrefabInstance:
       propertyPath: UpgradePanel
       value: 
       objectReference: {fileID: 445562530}
+    - target: {fileID: 8957363607456649543, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: candyController
+      value: 
+      objectReference: {fileID: 1968457436}
     - target: {fileID: 8957363607456649543, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[0]
       value: 
