@@ -12,6 +12,7 @@ public class EquipmentStatus : MonoBehaviour
     public Image imageComponent;
     public string[] skillNames = new string[4];
     public float[] skillPoints = new float[4];
+    public Image backgroundImageComponent;
 
     void Awake()
     {

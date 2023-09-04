@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentManager : MonoBehaviour
 {
@@ -8,13 +9,15 @@ public class EquipmentManager : MonoBehaviour
     public TextAsset CsvData { get; set; }
     public List<Equip> equipList = new List<Equip>();
     public Sprite[] equipSprites;
+    public Sprite[] rankSprites; 
     public MixManager mixManager;
     public EquipSkillManager equipSkillManager;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
     public int poolSize = 40;
     public Transform equipMentPoolTransform;
     public Dictionary<string, Sprite> equipNameToSpriteMap = new Dictionary<string, Sprite>();
-
+    public Dictionary<Rank, Sprite> rankToSpriteMap = new Dictionary<Rank, Sprite>();
+    
 
     // 장비 등급을 나타내는 enum
     public enum Rank
@@ -86,6 +89,7 @@ public class EquipmentManager : MonoBehaviour
                             equip.skillPoints[j] = equipSkill.skillPoint;
                         }
                     }
+                    
 
                 }
                 catch (Exception e)
@@ -102,6 +106,7 @@ public class EquipmentManager : MonoBehaviour
 
             AssignRandomRank();
             InitializeEquipSpriteMapping();
+            InitializeRankSpriteMapping();
             InitializeEquipPool();
         }
 
@@ -117,14 +122,14 @@ public class EquipmentManager : MonoBehaviour
             }
         }
     }
-
+    
 
     // 각 Equip 객체에 랜덤으로 장비 등급을 할당
     void AssignRandomRank()
     {
         foreach (var equip in equipList)
         {
-            // 등급을 랜덤으로 지정하는 로직 (나중에 확률을 고려해서 작성 가능)
+            // 등급을 랜덤으로 지정
             Array ranks = Enum.GetValues(typeof(Rank));
             equip.equipRank = (Rank)ranks.GetValue(UnityEngine.Random.Range(0, ranks.Length));
         }
@@ -166,10 +171,18 @@ public class EquipmentManager : MonoBehaviour
         obj.SetActive(false);
         equipPool.Enqueue(obj);
     }
-
-
-
-
+    
+    void InitializeRankSpriteMapping()
+    {
+        // 예를 들어 rankSprites 배열이 F, D, C, B, A, S, SS 순서로 정렬되어 있다고 가정
+        Array ranks = Enum.GetValues(typeof(Rank));
+        for(int i = 0; i < ranks.Length; i++)
+        {
+            rankToSpriteMap[(Rank)ranks.GetValue(i)] = rankSprites[i];
+        }
+    }
+    
+    
     public void CreateEquipPrefab(Transform parentTransform, float[] rankProbabilities)
     {
         
@@ -230,12 +243,20 @@ public class EquipmentManager : MonoBehaviour
                 }
                
             }
-
+            // 장비에 따라 스프라이트 설정
             if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
             {
           
                 equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
             }
+            
+            // 랭크에 따라 배경 스프라이트 설정
+            if (rankToSpriteMap.ContainsKey(chosenRank))
+            {
+                equipComponent.backgroundImageComponent.sprite = rankToSpriteMap[chosenRank];
+            }
+            
+           
         }
     }
 }

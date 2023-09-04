@@ -16687,6 +16687,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4123143143fa74682bc563b530086673, type: 3}
   - {fileID: 21300000, guid: 3290b1291ee3b46e480c129682d0b35d, type: 3}
   - {fileID: 21300000, guid: 5397c0039e4a94a4c9adc10d4ab8f5ca, type: 3}
+  rankSprites:
+  - {fileID: 21300000, guid: 01318389d16d949f6850016748a03b63, type: 3}
+  - {fileID: 21300000, guid: ced8827ab14654d09810d7f977ecc793, type: 3}
+  - {fileID: 21300000, guid: 371c82360c45847168bde501aa107c18, type: 3}
+  - {fileID: 21300000, guid: e2b016118e3c14a6d9d03130335efc07, type: 3}
+  - {fileID: 21300000, guid: c3054f96b354b4572af7c9ec0be0ccd9, type: 3}
+  - {fileID: 21300000, guid: 5ee686ed45d2a40d98404dc549e9174d, type: 3}
+  - {fileID: 21300000, guid: cc3bd53bc54c047d3b0903870fa305cd, type: 3}
   mixManager: {fileID: 411645544}
   equipSkillManager: {fileID: 728567996}
   poolSize: 40
