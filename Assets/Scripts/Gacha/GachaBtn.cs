@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GachaBtn : MonoBehaviour
 {
-    public MixManager mixManager;  // 인스펙터에서 설정 가능
+    public GachaManager GachaManager;  // 인스펙터에서 설정 가능
     private Button gachaButton;  // 이 게임 오브젝트에 붙은 버튼 컴포넌트
     
     void Start()
@@ -17,18 +17,18 @@ public class GachaBtn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // MixManager에서 캔디 개수 확인 후 버튼 상태 업데이트
-        if (mixManager != null)
+        // GachaManager에서 캔디 개수 확인 후 버튼 상태 업데이트
+        if (GachaManager != null)
         {
-            gachaButton.interactable = mixManager.CheckCandiesCount();
+            gachaButton.interactable = GachaManager.CheckCandiesCount();
         }
     }
 
     void OnClickGacha()
     {    Debug.Log("OnClickGacha called");
-        if (mixManager != null)
+        if (GachaManager != null)
         {   
-            mixManager.EquipGacha();
+            GachaManager.EquipGacha();
         }
     }
 }

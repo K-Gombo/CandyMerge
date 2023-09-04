@@ -8802,7 +8802,7 @@ GameObject:
   - component: {fileID: 411645544}
   - component: {fileID: 411645543}
   m_Layer: 0
-  m_Name: MixManager
+  m_Name: GachaManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8853,7 +8853,7 @@ MonoBehaviour:
   equipPrefab: {fileID: 7550698876365069209, guid: 52626865b337749689e41378fa3c3f4a, type: 3}
   equipSpawnLocation: {fileID: 1373033894}
   candyManager: {fileID: 1968457437}
-  mixUIManager: {fileID: 411645543}
+  GachaUIManager: {fileID: 0}
 --- !u!1 &416970016
 GameObject:
   m_ObjectHideFlags: 0
@@ -16700,7 +16700,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: beb9058cf6404447d92b0d219e864138, type: 3}
   - {fileID: 21300000, guid: 3107cdf8703694e27b0d85ca54d457ec, type: 3}
   - {fileID: 21300000, guid: 2ee62f986bc694a72aed36aacc714b65, type: 3}
-  mixManager: {fileID: 411645544}
+  GachaManager: {fileID: 0}
   equipSkillManager: {fileID: 728567996}
   poolSize: 40
   equipMentPoolTransform: {fileID: 1095069984}
@@ -16758,7 +16758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testBtn: {fileID: 66404878}
-  mixManager: {fileID: 411645544}
+  GachaManager: {fileID: 411645544}
   equipmentManager: {fileID: 728567992}
   equipSpawnLocation: {fileID: 1373033894}
 --- !u!114 &728567996
@@ -42814,7 +42814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ebf1017c92a74048ada8da88c88de5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixManager: {fileID: 411645544}
+  GachaManager: {fileID: 0}
 --- !u!114 &1920858817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48488,6 +48488,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 411645544}
     - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: GachaManager
+      value: 
+      objectReference: {fileID: 411645544}
+    - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: AutoCreateBtn
       value: 
       objectReference: {fileID: 751400241}
@@ -48569,6 +48573,10 @@ PrefabInstance:
       objectReference: {fileID: 1168936108}
     - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: mixManager
+      value: 
+      objectReference: {fileID: 411645544}
+    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: GachaManager
       value: 
       objectReference: {fileID: 411645544}
     - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}

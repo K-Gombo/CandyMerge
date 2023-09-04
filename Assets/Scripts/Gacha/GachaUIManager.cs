@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class MixUIManager : MonoBehaviour
+public class GachaUIManager : MonoBehaviour
 {
     public Text LevelSumText; // LevelSum을 표시할 Text UI
     public int totalLevelSum { get; private set; } // 여기에 totalLevelSum를 멤버 변수로 선언

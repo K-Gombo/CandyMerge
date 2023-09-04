@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MixManager : MonoBehaviour
+public class GachaManager : MonoBehaviour
 {
     public TextAsset CsvData { get; set; }
     public CandyController candyController; // CandyController에 대한 참조
@@ -11,7 +11,7 @@ public class MixManager : MonoBehaviour
     public GameObject equipPrefab; // 생성할 장비의 프리팹
     public Transform equipSpawnLocation; // 장비가 생성될 위치
     public CandyManager candyManager;
-    public MixUIManager mixUIManager; // MixUIManager에 대한 참조 추가
+    public GachaUIManager GachaUIManager; // GachaUIManager에 대한 참조 추가
 
     // 범위와 확률을 저장하는 딕셔너리
     Dictionary<string, Dictionary<string, float>> rankProbabilities = new Dictionary<string, Dictionary<string, float>>();
@@ -38,6 +38,7 @@ public class MixManager : MonoBehaviour
             }
 
             rankProbabilities[rangeString] = rankInfo;
+            Debug.Log($"Parsed {rangeString}: {string.Join(",", rankInfo)}");
         }
     }
 
@@ -161,7 +162,7 @@ public class MixManager : MonoBehaviour
     {
         if (CheckCandiesCount())
         {
-            int totalLevel = mixUIManager.totalLevelSum; // MixUIManager에서 캔디 총합 레벨을 가져옴
+            int totalLevel = GachaUIManager.totalLevelSum; // GachaUIManager에서 캔디 총합 레벨을 가져옴
            
             float[] rankProbabilities = GetRankProbabilities(totalLevel);
             

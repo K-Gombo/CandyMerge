@@ -291,6 +291,8 @@ public class GiftBoxController : MonoBehaviour
                 selectedBox.GetComponent<Box>().SetCandy(candy.GetComponent<CandyStatus>().level);
                 candy.transform.localScale = Vector3.one;
                 candy.transform.position = transform.position;
+                CandyManager.instance.AddCount();
+                Debug.Log("만들어짐!");
                 StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
             }
             

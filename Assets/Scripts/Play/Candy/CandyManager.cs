@@ -100,6 +100,11 @@ public class CandyManager : MonoBehaviour
     }
 
 
+    public void AddCount()
+    {
+        currentCandyCount++;
+        UpdateCandyCountText();
+    }
 
     public void SetAppearance(GameObject candy)
     {
@@ -116,7 +121,6 @@ public class CandyManager : MonoBehaviour
             Debug.Log($"캔디의 최대레벨입니다.");
         }
 
-        currentCandyCount++;
         UpdateCandyCountText();
     }
 

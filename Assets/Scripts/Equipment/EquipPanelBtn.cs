@@ -9,13 +9,13 @@ public class EquipPanelBtn : MonoBehaviour
     public GiftBoxController giftBoxController;
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
-    public MixManager mixManager;
+    public GachaManager GachaManager;
     public GameObject EquipPanel; 
     
     
     public void OnButtonClick()
     {
-        bool hasCandiesInMixBox = mixManager.CheckCandiesExistInMixBox();
+        bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
 
         if (hasCandiesInMixBox)
         {

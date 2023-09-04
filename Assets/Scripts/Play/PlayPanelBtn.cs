@@ -9,11 +9,11 @@ public class PlayPanelBtn : MonoBehaviour
     public GiftBoxController giftBoxController;
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
-    public MixManager mixManager;
+    public GachaManager GachaManager;
 
     public void OnButtonClick()
     {
-        bool hasCandiesInMixBox = mixManager.CheckCandiesExistInMixBox();
+        bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
 
         if (hasCandiesInMixBox)
         {

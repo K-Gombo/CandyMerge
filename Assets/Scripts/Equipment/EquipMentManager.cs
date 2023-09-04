@@ -12,7 +12,7 @@ public class EquipmentManager : MonoBehaviour
     public Sprite[] equipSprites;
     public Sprite[] rankSprites;
     public Sprite[] slotSprites;
-    public MixManager mixManager;
+    public GachaManager GachaManager;
     public EquipSkillManager equipSkillManager;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
     public int poolSize = 40;

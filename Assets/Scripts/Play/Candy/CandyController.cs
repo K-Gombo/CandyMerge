@@ -265,7 +265,7 @@ public class CandyController : MonoBehaviour
         {
             candy1.position = startPosition;
         }
-    
+        CandyManager.instance.AddCount();
         BoxManager.instance.UpdateCandyCount();
     }
     

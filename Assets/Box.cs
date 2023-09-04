@@ -31,6 +31,8 @@ public class Box : MonoBehaviour
             candy.transform.localScale = Vector3.one; // 로컬 크기를 1로 설정
             transparentObject.transform.SetParent(null); // 부모 관계 끊기
             TransCandyPooler.Instance.ReturnToPool(transparentObject); // 투명한 오브젝트 풀로 반환
+
+            CandyManager.instance.AddCount();
             CandyManager.instance.SetAppearance(candy);
         }
     }
