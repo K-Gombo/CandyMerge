@@ -7,9 +7,11 @@ public class EquipmentManager : MonoBehaviour
 {
     public GameObject equipPrefab;
     public TextAsset CsvData { get; set; }
+    public TextAsset LevelCsvData { get; set; } 
     public List<Equip> equipList = new List<Equip>();
     public Sprite[] equipSprites;
-    public Sprite[] rankSprites; 
+    public Sprite[] rankSprites;
+    public Sprite[] slotSprites;
     public MixManager mixManager;
     public EquipSkillManager equipSkillManager;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
@@ -17,7 +19,8 @@ public class EquipmentManager : MonoBehaviour
     public Transform equipMentPoolTransform;
     public Dictionary<string, Sprite> equipNameToSpriteMap = new Dictionary<string, Sprite>();
     public Dictionary<Rank, Sprite> rankToSpriteMap = new Dictionary<Rank, Sprite>();
-    
+    public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
+    public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
 
     // 장비 등급을 나타내는 enum
     public enum Rank
@@ -54,11 +57,30 @@ public class EquipmentManager : MonoBehaviour
         public Rank[] skillRanks = new Rank[4];
         public Rank equipRank; // 랜덤으로 할당될 장비 등급
     }
+    
+    // EquipLevelData를 저장할 클래스
+    [Serializable]
+    public class EquipLevelData
+    {
+        public string rank;
+        public int startLevel;
+        public int maxLevel;
+        public float startGoldGain;
+        public float upgradeGoldGain;
+        public float maxGoldGain;
+    }
 
     private void Awake()
     {
         CsvData = Resources.Load<TextAsset>("EquipmentData");
-
+        LoadEquipmentData(); 
+        
+        LevelCsvData = Resources.Load<TextAsset>("EquipLevelData");
+        LoadEquipLevelData();
+    }
+    
+    private void LoadEquipmentData()
+    {
         if (CsvData != null)
         {
             string csvText = CsvData.text;
@@ -107,10 +129,42 @@ public class EquipmentManager : MonoBehaviour
             AssignRandomRank();
             InitializeEquipSpriteMapping();
             InitializeRankSpriteMapping();
+            InitializeSlotSpriteMapping();
             InitializeEquipPool();
         }
-
     }
+    
+    private void LoadEquipLevelData()
+    {
+        if (LevelCsvData != null)
+        {
+            string csvText = LevelCsvData.text;
+            string[] csvData = csvText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+
+            for (int i = 1; i < csvData.Length; i++)
+            {
+                string[] data = csvData[i].Split(',');
+                EquipLevelData levelData = new EquipLevelData();
+                
+                try
+                {
+                    levelData.rank = data[0];
+                    levelData.startLevel = int.Parse(data[1]);
+                    levelData.maxLevel = int.Parse(data[2]);
+                    levelData.startGoldGain = float.Parse(data[3]);
+                    levelData.upgradeGoldGain = float.Parse(data[4]);
+                    levelData.maxGoldGain = float.Parse(data[5]);
+                }
+                catch (Exception e)
+                {
+                    // 에러 처리
+                }
+                
+                levelDataMap[levelData.rank] = levelData;
+            }
+        }
+    }
+
 
     void InitializeEquipSpriteMapping()
     {
@@ -174,13 +228,24 @@ public class EquipmentManager : MonoBehaviour
     
     void InitializeRankSpriteMapping()
     {
-        // 예를 들어 rankSprites 배열이 F, D, C, B, A, S, SS 순서로 정렬되어 있다고 가정
+        
         Array ranks = Enum.GetValues(typeof(Rank));
         for(int i = 0; i < ranks.Length; i++)
         {
             rankToSpriteMap[(Rank)ranks.GetValue(i)] = rankSprites[i];
         }
     }
+    
+    void InitializeSlotSpriteMapping()
+    {
+        // 예를 들어, slotSprites 배열이 Cook, Cap, Cloth, Shoes 순서로 정렬되어 있다고 가정
+        Array slotTypes = Enum.GetValues(typeof(SlotType));
+        for(int i = 0; i < slotTypes.Length; i++)
+        {
+            slotToSpriteMap[(SlotType)slotTypes.GetValue(i)] = slotSprites[i];
+        }
+    }
+
     
     
     public void CreateEquipPrefab(Transform parentTransform, float[] rankProbabilities)
@@ -254,6 +319,12 @@ public class EquipmentManager : MonoBehaviour
             if (rankToSpriteMap.ContainsKey(chosenRank))
             {
                 equipComponent.backgroundImageComponent.sprite = rankToSpriteMap[chosenRank];
+            }
+
+            // SlotType에 따라 슬롯 스프라이트 설정
+            if (slotToSpriteMap.ContainsKey(equipComponent.slotType))
+            {
+                equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
             }
             
            

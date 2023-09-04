@@ -16695,6 +16695,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c3054f96b354b4572af7c9ec0be0ccd9, type: 3}
   - {fileID: 21300000, guid: 5ee686ed45d2a40d98404dc549e9174d, type: 3}
   - {fileID: 21300000, guid: cc3bd53bc54c047d3b0903870fa305cd, type: 3}
+  slotSprites:
+  - {fileID: 21300000, guid: 70ee796c70aa74a4a97e00c00ecc0969, type: 3}
+  - {fileID: 21300000, guid: beb9058cf6404447d92b0d219e864138, type: 3}
+  - {fileID: 21300000, guid: 3107cdf8703694e27b0d85ca54d457ec, type: 3}
+  - {fileID: 21300000, guid: 2ee62f986bc694a72aed36aacc714b65, type: 3}
   mixManager: {fileID: 411645544}
   equipSkillManager: {fileID: 728567996}
   poolSize: 40
