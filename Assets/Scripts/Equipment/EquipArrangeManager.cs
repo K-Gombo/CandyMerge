@@ -103,13 +103,31 @@ public class EquipArrangeManager : MonoBehaviour
     {
         switch (rank)
         {
+            case EquipmentManager.Rank.SS3:
+                return 15;
+            case EquipmentManager.Rank.SS2:
+                return 14;
+            case EquipmentManager.Rank.SS1:
+                return 13;
             case EquipmentManager.Rank.SS:
-                return 6;
+                return 12;
+            case EquipmentManager.Rank.S2:
+                return 11;
+            case EquipmentManager.Rank.S1:
+                return 10;
             case EquipmentManager.Rank.S:
-                return 5;
+                return 9;
+            case EquipmentManager.Rank.A2:
+                return 8;
+            case EquipmentManager.Rank.A1:
+                return 7;
             case EquipmentManager.Rank.A:
-                return 4;
+                return 6;
+            case EquipmentManager.Rank.B1:
+                return 5;
             case EquipmentManager.Rank.B:
+                return 4;
+            case EquipmentManager.Rank.C1:
                 return 3;
             case EquipmentManager.Rank.C:
                 return 2;
@@ -118,6 +136,7 @@ public class EquipArrangeManager : MonoBehaviour
             case EquipmentManager.Rank.F:
             default:
                 return 0;
+
         }
     }
     

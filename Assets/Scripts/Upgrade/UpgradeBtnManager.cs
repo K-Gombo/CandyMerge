@@ -34,15 +34,18 @@ public class UpgradeBtnManager : MonoBehaviour
     {
         // 골드가 부족하면 버튼 비활성화
         int currentGold = currencyManager.GetCurrencyAmount("Gold");
-        luckyCreateUpButton.interactable = currentGold >= upgradeManager.LuckyCreateUpCost;
-        createSpeedUpButton.interactable = currentGold >= upgradeManager.CreateSpeedUpCost;
-        maxCandiesUpButton.interactable = currentGold >= upgradeManager.MaxCandiesUpCost;
-        candyLevelUpButton.interactable = currentGold >= upgradeManager.CandyLevelUpCost;
-        passiveAutoMergeSpeedUpButton.interactable = currentGold >= upgradeManager.PassiveAutoMergeSpeedUpCost;
-        passiveAutoCreateSpeedUpButton.interactable = currentGold >= upgradeManager.PassiveAutoCreateSpeedUpCost;
-        RemoveLokcedButton.interactable = currentGold >= upgradeManager.RemoveLockedCost;
-        goldUpButton.interactable = currentGold >= upgradeManager.GoldUpCost;
-        luckyGoldUpButton.interactable = currentGold >= upgradeManager.LuckyGoldUpCost;
+        Debug.Log("현재 골드: " + currentGold);  // 디버깅
+    
+        // 초기 설정된 비용 대신 'current' 비용을 참조
+        luckyCreateUpButton.interactable = currentGold >= upgradeManager.currentLuckyCreateUpCost;
+        createSpeedUpButton.interactable = currentGold >= upgradeManager.currentCreateSpeedUpCost;
+        maxCandiesUpButton.interactable = currentGold >= upgradeManager.currentMaxCandiesUpCost;
+        candyLevelUpButton.interactable = currentGold >= upgradeManager.currentCandyLevelUpCost;
+        passiveAutoMergeSpeedUpButton.interactable = currentGold >= upgradeManager.currentPassiveAutoMergeSpeedUpCost;
+        passiveAutoCreateSpeedUpButton.interactable = currentGold >= upgradeManager.currentPassiveAutoCreateSpeedUpCost;
+        RemoveLokcedButton.interactable = currentGold >= upgradeManager.currentRemoveLockedCost;
+        goldUpButton.interactable = currentGold >= upgradeManager.currentGoldUpCost;
+        luckyGoldUpButton.interactable = currentGold >= upgradeManager.currentLuckyGoldUpCost;
     }
 
     public void OnLuckyCreateUpButtonClick()

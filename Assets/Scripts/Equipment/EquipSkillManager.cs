@@ -29,7 +29,7 @@ public class EquipSkillManager : MonoBehaviour
         var csvText = CsvData.text;
         var csvData = csvText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-        for (int i = 1; i < csvData.Length - 1; i++)
+        for (int i = 1; i < csvData.Length; i++)
         {
             try
             {

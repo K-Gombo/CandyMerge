@@ -28,7 +28,7 @@ public class GachaPanelBtn : MonoBehaviour
         autoCreateBtn.OnACOnBtnClick();
         Transform mixBox = GameObject.FindGameObjectWithTag("MixBox").transform;
         candyController.MoveToMixBox(mixBox); // 캔디를 MixBox로 이동
-        
+        candyController.EnableDrag(true);
         
         
     }

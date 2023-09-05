@@ -24,12 +24,12 @@ public class GiftBoxController : MonoBehaviour
     public List<Transform> availableBoxes = new List<Transform>();
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
     public BoxManager boxManager; // BoxManager 참조
-    private float fillTime = 2f; // 초기값 설정
+    public float fillTime = 10f; // 초기값 설정
     public float minimumFillTime = 2f;
     private bool isLocked = false; // 작동 우선순위 락
     public float passiveCreateTry = 0f; // 10동안 n번 생성
     public float maxPassiveCreateTry = 10f;
-    private float luckyCreate = 0f; // 20% 확률로 2개의 캔디 생성
+    public float luckyCreate = 0f; // 20% 확률로 2개의 캔디 생성
     public float maxLuckyCreate = 20f;
     private GameObject transparentObject;
     public bool isPassiveAutoCreateRunning = false;
@@ -292,11 +292,11 @@ public class GiftBoxController : MonoBehaviour
                 candy.transform.localScale = Vector3.one;
                 candy.transform.position = transform.position;
                 CandyManager.instance.AddCount();
-                Debug.Log("만들어짐!");
                 StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
             }
             
         }
+        
     }
    
     

@@ -8853,7 +8853,7 @@ MonoBehaviour:
   equipPrefab: {fileID: 7550698876365069209, guid: 52626865b337749689e41378fa3c3f4a, type: 3}
   equipSpawnLocation: {fileID: 1373033894}
   candyManager: {fileID: 1968457437}
-  GachaUIManager: {fileID: 0}
+  GachaUIManager: {fileID: 411645543}
 --- !u!1 &416970016
 GameObject:
   m_ObjectHideFlags: 0
@@ -37184,9 +37184,11 @@ MonoBehaviour:
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
   boxManager: {fileID: 749087271}
+  fillTime: 2
   minimumFillTime: 2
   passiveCreateTry: 0
   maxPassiveCreateTry: 10
+  luckyCreate: 0
   maxLuckyCreate: 20
   isPassiveAutoCreateRunning: 0
 --- !u!1 &1677070640 stripped

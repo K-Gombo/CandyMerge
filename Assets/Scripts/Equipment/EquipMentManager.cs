@@ -21,37 +21,16 @@ public class EquipmentManager : MonoBehaviour
     public Dictionary<Rank, Sprite> rankToSpriteMap = new Dictionary<Rank, Sprite>();
     public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
     public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
-
+    public Dictionary<Rank, Rank> rankUpgradeMap = new Dictionary<Rank, Rank>(); // 장비 등급 상승 순서를 정의한 딕셔너리
+    
     // 장비 등급을 나타내는 enum
     public enum Rank
-    {
-        F,
-        D,
-        C,
-        C1,
-        B,
-        B1,
-        A,
-        A1,
-        A2,
-        S,
-        S1,
-        S2,
-        SS,
-        SS1,
-        SS2
-    }
-    
-    
+    { F,D,C,B,A,S,SS,C1,B1,A1,A2,S1,S2,SS1,SS2,SS3}
+
 
     // 장비 타입을 나타내는 enum
     public enum SlotType
-    {
-        Cook,
-        Cap,
-        Cloth,
-        Shoes
-    }
+    { Cook, Cap, Cloth, Shoes }
 
 
     [Serializable]
@@ -75,9 +54,9 @@ public class EquipmentManager : MonoBehaviour
         public string rank;
         public int startLevel;
         public int maxLevel;
-        public float startGoldGain;
-        public float upgradeGoldGain;
-        public float maxGoldGain;
+        public float startGoldGainIncrement;
+        public float upgradeGoldGainIncrement;
+        public float maxGoldGainIncrement;
     }
 
     private void Awake()
@@ -161,9 +140,9 @@ public class EquipmentManager : MonoBehaviour
                     levelData.rank = data[0];
                     levelData.startLevel = int.Parse(data[1]);
                     levelData.maxLevel = int.Parse(data[2]);
-                    levelData.startGoldGain = float.Parse(data[3]);
-                    levelData.upgradeGoldGain = float.Parse(data[4]);
-                    levelData.maxGoldGain = float.Parse(data[5]);
+                    levelData.startGoldGainIncrement = float.Parse(data[3]);
+                    levelData.upgradeGoldGainIncrement = float.Parse(data[4]);
+                    levelData.maxGoldGainIncrement = float.Parse(data[5]);
                 }
                 catch (Exception e)
                 {
@@ -265,10 +244,7 @@ public class EquipmentManager : MonoBehaviour
         Rank chosenRank = Rank.F;
         if (rankProbabilities != null)
         {
-            
             float randValue = UnityEngine.Random.Range(0, 100);
-          
-
             float sum = 0;
             for (int i = 0; i < rankProbabilities.Length; i++)
             {
@@ -339,6 +315,36 @@ public class EquipmentManager : MonoBehaviour
             
            
         }
+    }
+    
+    public Rank GetNextRank(Rank currentRank)
+    {
+        Dictionary<Rank, Rank> rankUpMap = new Dictionary<Rank, Rank>
+        {
+            {Rank.F, Rank.D},
+            {Rank.D, Rank.C},
+            {Rank.C, Rank.C1},
+            {Rank.C1, Rank.B},
+            {Rank.B, Rank.B1},
+            {Rank.B1, Rank.A},
+            {Rank.A, Rank.A1},
+            {Rank.A1, Rank.A2},
+            {Rank.A2, Rank.S},
+            {Rank.S, Rank.S1},
+            {Rank.S1, Rank.S2},
+            {Rank.S2, Rank.SS},
+            {Rank.SS, Rank.SS1},
+            {Rank.SS1, Rank.SS2},
+            {Rank.SS2, Rank.SS3},
+            {Rank.SS3, Rank.SS3}  // 최고 등급이므로 그대로 유지
+        };
+
+        if (rankUpMap.ContainsKey(currentRank))
+        {
+            return rankUpMap[currentRank];
+        }
+
+        return currentRank; // 목록에 없는 등급은 그대로 반환
     }
 }
 
