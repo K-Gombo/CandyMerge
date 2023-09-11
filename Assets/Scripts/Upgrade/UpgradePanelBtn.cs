@@ -16,7 +16,6 @@ public class UpgradePanelBtn : MonoBehaviour
 
         // UpgradePanel 활성화
         UpgradePanel.SetActive(true);
-
         candyController.EnableDrag(false);
     }
 }

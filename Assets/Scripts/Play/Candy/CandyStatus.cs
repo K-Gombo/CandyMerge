@@ -11,10 +11,11 @@ public class CandyStatus : MonoBehaviour
     public static int baseLevel = 1; // deafault 레벨 (스킬 업그레이드 시 증가)
     public int maxBaseLevel = 58;
     public string boxName;
+    public int maxCandyLevel = 60;
    
 
 
-   
+    public static CandyStatus instance;
 
     private void Start()
     {
@@ -44,7 +45,12 @@ public class CandyStatus : MonoBehaviour
     {
         return baseLevel;
     }
-
+    
+    public int GetMaxCandyLevel()
+    {
+        return maxCandyLevel;
+    }
+    
     public void SetBaseLevel(int newBaseLevel)
     {
         if (newBaseLevel <= maxBaseLevel)

@@ -14,11 +14,13 @@ public class QuestManager : MonoBehaviour
     public int maxQuests = 4;
     public int maxCandyCount = 10;
     public static QuestManager instance;
+    public CandyStatus candyStatus;
     public int poolSize = 10;
     private Queue<Quest> questPool = new Queue<Quest>();
     public Transform questPoolParent;
 
     public Dictionary<int, long> candyPriceByLevel = new Dictionary<int, long>();
+    public Dictionary<int, long> candySellPriceByLevel = new Dictionary<int, long>();
     public List<GameObject> boxes = new List<GameObject>();
     public TextAsset CsvData { get; set; }
     public List<Quest> activeQuests;
@@ -26,6 +28,8 @@ public class QuestManager : MonoBehaviour
     public HappyLevel happyLevel;
     private int specialQuestCounter = 0; // 특별 퀘스트 카운팅
     public int specialQuestProbability = 15; // 특별 퀘스트 확률 (15회 중 1회)
+    
+    
     
 
     private void Awake()
@@ -42,8 +46,11 @@ public class QuestManager : MonoBehaviour
             var data = line.Split(',');
             var level = int.Parse(data[0]);
             var gold = double.Parse(data[1]);
+            var sellGold = double.Parse(data[2]);
             var goldAsLong = (long)gold;
+            var sellGoldAsLong = (long)sellGold;
             candyPriceByLevel[level] = goldAsLong;
+            candySellPriceByLevel[level] = sellGoldAsLong;
         }
 
         InitializePool();
@@ -150,9 +157,9 @@ public class QuestManager : MonoBehaviour
 
     public int RandomCandyLevel()
     {
-        int maxLevel = BoxManager.instance.GetMaxCandyLevel(); // BoxManager에서 최대 레벨을 가져옵니다.
-        int minLevel = Math.Max(maxLevel - 2, 1); // 최대 레벨보다 2 레벨 낮은 값과 2 중에서 더 큰 값을 최소 레벨로 설정합니다.
-        return Random.Range(minLevel, maxLevel + 3); // n+2, n+1, n, n-1, n-2 중 하나 선택
+        int baseLevel = candyStatus.GetBaseLevel(); // 기본 제작 캔디 레벨 가져오기
+        int randomLevel = Random.Range(baseLevel, baseLevel + 4); // n, n+1, n+2, n+3 중 하나를 랜덤하게 선택
+        return Mathf.Min(randomLevel, candyStatus.GetMaxCandyLevel()); // 선택된 레벨과 최대 캔디 레벨 중 작은 값 반환
     }
     
     public void UpdateQuestCandyCount(Quest quest)
@@ -229,21 +236,15 @@ public class QuestManager : MonoBehaviour
     public void CheckAndReturnImpossibleQuests()
     {
         List<Quest> questsToRemove = new List<Quest>();
-        int baseLevel = CandyStatus.baseLevel;
+        int baseLevel = candyStatus.GetBaseLevel(); // 현재 제작되는 캔디의 기본 레벨
 
         foreach (Quest quest in activeQuests)
         {
             int requiredLevel1 = CandyManager.instance.GetLevelBySprite(quest.requestCandy1.sprite);
             int requiredLevel2 = quest.requestCandy2.sprite != null ? CandyManager.instance.GetLevelBySprite(quest.requestCandy2.sprite) : 0;
 
-            int availableCount1 = BoxManager.instance.GetCandyCountByLevel(requiredLevel1);
-            int availableCount2 = requiredLevel2 > 0 ? BoxManager.instance.GetCandyCountByLevel(requiredLevel2) : 0;
-
-            Debug.Log($"Available Count 1: {availableCount1}, Available Count 2: {availableCount2}");
-            Debug.Log($"Required Level 1: {requiredLevel1}, Required Level 2: {requiredLevel2}");
-            Debug.Log($"Base Level: {baseLevel}");
-
-            if ((availableCount1 == 0 && requiredLevel1 < baseLevel) || (availableCount2 == 0 && requiredLevel2 < baseLevel))
+            // 제작되는 캔디의 기본 레벨보다 낮은 레벨의 캔디가 요구되는 경우
+            if (requiredLevel1 < baseLevel || (requiredLevel2 > 0 && requiredLevel2 < baseLevel))
             {
                 questsToRemove.Add(quest);
                 Debug.Log("Quest added to remove list");
@@ -274,6 +275,7 @@ public class QuestManager : MonoBehaviour
             CreateNewQuest(); // 새로운 퀘스트 생성
         }
     }
+
 
 
 }

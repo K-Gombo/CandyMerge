@@ -7,7 +7,6 @@ public class UpgradeBtnManager : MonoBehaviour
     public Button createSpeedUpButton;
     public Button maxCandiesUpButton;
     public Button candyLevelUpButton;
-    public Button passiveAutoMergeSpeedUpButton;
     public Button passiveAutoCreateSpeedUpButton;
     public Button RemoveLokcedButton;
     public Button goldUpButton;
@@ -23,7 +22,6 @@ public class UpgradeBtnManager : MonoBehaviour
         createSpeedUpButton.interactable = true;
         maxCandiesUpButton.interactable = true;
         candyLevelUpButton.interactable = true;
-        passiveAutoMergeSpeedUpButton.interactable = true;
         passiveAutoCreateSpeedUpButton.interactable = true;
         RemoveLokcedButton.interactable = true;
         goldUpButton.interactable = true;
@@ -34,14 +32,12 @@ public class UpgradeBtnManager : MonoBehaviour
     {
         // 골드가 부족하면 버튼 비활성화
         int currentGold = currencyManager.GetCurrencyAmount("Gold");
-        Debug.Log("현재 골드: " + currentGold);  // 디버깅
     
         // 초기 설정된 비용 대신 'current' 비용을 참조
         luckyCreateUpButton.interactable = currentGold >= upgradeManager.currentLuckyCreateUpCost;
         createSpeedUpButton.interactable = currentGold >= upgradeManager.currentCreateSpeedUpCost;
         maxCandiesUpButton.interactable = currentGold >= upgradeManager.currentMaxCandiesUpCost;
         candyLevelUpButton.interactable = currentGold >= upgradeManager.currentCandyLevelUpCost;
-        passiveAutoMergeSpeedUpButton.interactable = currentGold >= upgradeManager.currentPassiveAutoMergeSpeedUpCost;
         passiveAutoCreateSpeedUpButton.interactable = currentGold >= upgradeManager.currentPassiveAutoCreateSpeedUpCost;
         RemoveLokcedButton.interactable = currentGold >= upgradeManager.currentRemoveLockedCost;
         goldUpButton.interactable = currentGold >= upgradeManager.currentGoldUpCost;
@@ -67,11 +63,7 @@ public class UpgradeBtnManager : MonoBehaviour
     {
         upgradeManager.CandyLevelUp();
     }
-
-    public void OnPassiveAutoMergeSpeedUpButtonClick()
-    {
-        upgradeManager.PassiveAutoMergeSpeedUp();
-    }
+    
 
     public void OnPassiveAutoCreateSpeedUpButtonClick()
     {

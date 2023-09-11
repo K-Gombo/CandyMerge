@@ -69,24 +69,24 @@ public class BoxManager : MonoBehaviour
         return 0;
     }
     
-    public int GetMaxCandyLevel()
-    {
-        if (candyLevelsCount == null)
-        {
-            Debug.LogError("candyLevelsCount가 아직 초기화되지 않았습니다.");
-            return 0; // 아직 초기화되지 않았으므로 0 반환
-        }
-
-        int maxLevel = 0;
-        foreach (int level in candyLevelsCount.Keys)
-        {
-            if (level > maxLevel)
-            {
-                maxLevel = level;
-            }
-        }
-        return maxLevel;
-    }
+    // public int GetMaxCandyLevel()
+    // {
+    //     if (candyLevelsCount == null)
+    //     {
+    //         Debug.LogError("candyLevelsCount가 아직 초기화되지 않았습니다.");
+    //         return 0; // 아직 초기화되지 않았으므로 0 반환
+    //     }
+    //
+    //     int maxLevel = 0;
+    //     foreach (int level in candyLevelsCount.Keys)
+    //     {
+    //         if (level > maxLevel)
+    //         {
+    //             maxLevel = level;
+    //         }
+    //     }
+    //     return maxLevel;
+    // }
     
     
 

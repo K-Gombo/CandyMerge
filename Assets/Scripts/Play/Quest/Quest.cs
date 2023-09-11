@@ -23,10 +23,10 @@ public class Quest : MonoBehaviour
     }
     
     public void InstanceQuest()
-    {
+    {    Debug.Log("InstanceQuest 호출됨");
         QuestManager.instance.activeQuests = new List<Quest>(QuestManager.instance.maxQuests);
         for (int i = 0; i < QuestManager.instance.maxQuests; i++)
-        {
+        {   Debug.Log("Quest 생성: " + i);
             var questObject = Instantiate(this, QuestManager.instance.questGrid);
             CreateQuest(questObject);
             // "Box" 태그를 가진 게임 오브젝트의 참조를 미리 저장
@@ -101,7 +101,9 @@ public class Quest : MonoBehaviour
         
 
         int numberOfCandyTypes = Random.Range(1, 3);
+        Debug.Log("RandomCandyLevel을 호출하기 전입니다.");
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
+        Debug.Log("RandomCandyLevel을 호출한 후입니다. 레벨: " + candyLevel1);
         int candyCount1 = Random.Range(3, 10);
         
         
@@ -165,16 +167,6 @@ public class Quest : MonoBehaviour
         }
     }
     
-    public int GetRequiredCandyCount(Text candyCountText)
-    {
-        string[] splitText = candyCountText.text.Split('/');
-        if (splitText.Length == 2)
-        {
-            return int.Parse(splitText[1]);
-        }
-        return 0;
-    }
-
 
 }
     

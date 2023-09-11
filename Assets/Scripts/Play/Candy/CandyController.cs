@@ -14,7 +14,6 @@ public class CandyController : MonoBehaviour
     private List<Transform> boxTransforms;
     private int originalSortingOrder;
     private Coroutine autoMergeCoroutine;
-    private Coroutine passiveAutoMergeCoroutine;
     private bool isAutoMergeEnabled = false;
     private bool isMergingInProgress = false;
     private Transform currentlyDraggingCandy; // 현재 드래그 중인 캔디
@@ -22,15 +21,8 @@ public class CandyController : MonoBehaviour
     private int draggedBoxIndex = -1;// 병합 이펙트 프리팹
     public BoxManager boxManager; // BoxManager 참조
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
-    private bool isPassiveAutoMergeRunning = false;
-    private bool delayCompleted = true;
     public bool isDragEnabled = true; // 드래그가 가능한지를 나타내는 변수
- 
     
-    private WaitForSeconds passiveDelay;
-    public float passiveWaiting = 0f;  // 
-    public float maxPassiveWating = 10f;
-    private const float fixedTime = 10f; // 고정된 10초 시간
     
     public bool mergeLocked = false;
     public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
@@ -50,19 +42,9 @@ public class CandyController : MonoBehaviour
         {
             boxTransforms.Add(box.transform);
         }
-       
-        UpdatePassiveWaiting(passiveWaiting);  // 초기값 설정
-        Invoke("StartAutoMerge", 1f);
         
-
     }
     
-    void StartAutoMerge()
-    {   
-        TogglePassiveAutoMerge(true);
-    }
-
-
 
     private void Update()
     {
@@ -394,70 +376,6 @@ public class CandyController : MonoBehaviour
     }
 }
 
-public IEnumerator PassiveAutoMerge()
-{   
-    
-    while (isPassiveAutoMergeRunning)
-    {   
-        if (passiveWaiting <= 0f)
-        {
-            yield return new WaitForSeconds(1f); // 1초 대기하고 다시 체크
-            continue; // 이번 반복은 건너뛰고 다음 반복으로
-        }
-        
-        if (isMergingInProgress)
-        {
-            yield return null; // 병합 중일 경우 대기
-            continue;
-        }
-   
-
-        for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
-        {
-            Transform lowestLevelCandy = null;
-            Transform mergeTarget = null;
-            float closestDistance = float.MaxValue;
-
-            foreach (Transform box in boxTransforms)
-            {
-                if (box.childCount > 0 && box.GetChild(0) != currentlyDraggingCandy)
-                {
-                    CandyStatus candyStatus = box.GetChild(0).GetComponent<CandyStatus>();
-                    if (candyStatus != null && candyStatus.level == targetLevel)
-                    {
-                        if (lowestLevelCandy == null)
-                        {
-                            lowestLevelCandy = box.GetChild(0);
-                        }
-                        else
-                        {
-                            float distance = Vector3.Distance(lowestLevelCandy.position,
-                                box.GetChild(0).position);
-                            if (distance < closestDistance)
-                            {
-                                closestDistance = distance;
-                                mergeTarget = box.GetChild(0);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (lowestLevelCandy != null && mergeTarget != null)
-            {   
-                isMergingInProgress = true;
-                MergeCandies(lowestLevelCandy, mergeTarget);
-                isMergingInProgress = false;
-                yield return passiveDelay;
-                break; // 병합이 일어났으면 루프를 빠져나옵니다.
-            }
-        }
-
-        yield return null; // 병합이 일어나지 않았으면 다음 프레임을 기다립니다.
-    }
-    
-}
-
     
     
     public void ToggleFastAutoMerge(bool isEnabled)
@@ -474,28 +392,6 @@ public IEnumerator PassiveAutoMerge()
                     autoMergeCoroutine = StartCoroutine(DelayedAutoMerge(1, 1));
                 }
     }
-
-    public void TogglePassiveAutoMerge(bool isEnabled)
-    {
-        if (isEnabled && !isPassiveAutoMergeRunning && delayCompleted)
-        {
-            delayCompleted = false;
-            StartCoroutine(DelayStartPassiveAutoMerge());
-        }
-        else if (!isEnabled && isPassiveAutoMergeRunning)
-        {
-            isPassiveAutoMergeRunning = false;
-            StopCoroutine(passiveAutoMergeCoroutine);
-        }
-    }
-
-    IEnumerator DelayStartPassiveAutoMerge()
-    {
-        yield return new WaitForSeconds(1f); // 1초 딜레이
-        isPassiveAutoMergeRunning = true;
-        passiveAutoMergeCoroutine = StartCoroutine(PassiveAutoMerge());
-        delayCompleted = true;  // 딜레이가 끝났음을 표시
-    }
     
     
 
@@ -506,23 +402,6 @@ public IEnumerator PassiveAutoMerge()
             
     }
     
-    public void UpdatePassiveWaiting(float newWaitingTime)
-    {
-        passiveWaiting = newWaitingTime;
-        float calculatedDelay = fixedTime / newWaitingTime;
-        passiveDelay = new WaitForSeconds(calculatedDelay);  // 변경된 부분: 계산된 딜레이 시간을 passiveDelay에 저장
-    }
-
-    public float GetPassiveWating()
-    {
-        return passiveWaiting;
-    }
-
-    public void SetPassiveWating(float newPassiveWating)
-    {
-        newPassiveWating = Mathf.Round(newPassiveWating * 10f) / 10f; // 소수 둘째자리에서 반올림
-        passiveWaiting = Mathf.Min(newPassiveWating, maxPassiveWating);
-    }
     
     public void MoveToMixBox(Transform mixBox)
     {

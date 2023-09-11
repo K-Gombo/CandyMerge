@@ -13,7 +13,6 @@ public class UpgradeUI : MonoBehaviour
     public Text removeLockedCostText;
     public Text maxCandiesUpCostText;
     public Text candyLevelUpCostText;
-    public Text passiveAutoMergeSpeedUpCostText;
     public Text passiveAutoCreateSpeedUpCostText;
     public Text goldUpCostText;
     public Text luckyGoldUpCostText;
@@ -24,7 +23,6 @@ public class UpgradeUI : MonoBehaviour
     public Text removeLockedLevelText;
     public Text maxCandiesLevelText;
     public Text candyLevelUpText;
-    public Text PassiveAutoMergeSpeedUpLevelText;
     public Text PassiveAutoCreateSpeedUpLevelText;
     public Text goldUpLevelText;
     public Text luckyGoldUpLevelText;
@@ -53,7 +51,6 @@ public class UpgradeUI : MonoBehaviour
         removeLockedCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentRemoveLockedCost.ToString());
         maxCandiesUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentMaxCandiesUpCost.ToString());
         candyLevelUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentCandyLevelUpCost.ToString());
-        passiveAutoMergeSpeedUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentPassiveAutoMergeSpeedUpCost.ToString());
         passiveAutoCreateSpeedUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentPassiveAutoCreateSpeedUpCost.ToString());
         goldUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentGoldUpCost.ToString());
         luckyGoldUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentLuckyGoldUpCost.ToString());
@@ -64,7 +61,6 @@ public class UpgradeUI : MonoBehaviour
         removeLockedLevelText.text = "Lv." + upgradeManager.removeLockedLevel;
         maxCandiesLevelText.text =  "Lv." + upgradeManager.maxCandiesLevel;
         candyLevelUpText.text = "Lv." + upgradeManager.candyLevel;
-        PassiveAutoMergeSpeedUpLevelText.text =  "Lv." + upgradeManager.passiveAutoMergeSpeedLevel;
         PassiveAutoCreateSpeedUpLevelText.text = "Lv." + upgradeManager.passiveAutoCreateSpeedLevel;
         goldUpLevelText.text = "Lv." + upgradeManager.goldUpLevel;
         luckyGoldUpLevelText.text = "Lv." + upgradeManager.luckyGoldLevel;

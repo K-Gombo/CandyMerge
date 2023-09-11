@@ -13,7 +13,7 @@ public class GachaPanelBtn : MonoBehaviour
     {   
         
         giftBoxController.TogglePassiveAutoCreate(false); // 패시브 자동생성 비활성화
-        candyController.TogglePassiveAutoMerge(false); // 패시브 자동머지 비활성화
+        
         // 모든 패널 비활성화
         foreach (GameObject panel in allPanels)
         {

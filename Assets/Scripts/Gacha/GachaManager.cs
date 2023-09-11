@@ -38,7 +38,6 @@ public class GachaManager : MonoBehaviour
             }
 
             rankProbabilities[rangeString] = rankInfo;
-            Debug.Log($"Parsed {rangeString}: {string.Join(",", rankInfo)}");
         }
     }
 

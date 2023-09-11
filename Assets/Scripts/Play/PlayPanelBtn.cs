@@ -44,7 +44,6 @@ public class PlayPanelBtn : MonoBehaviour
             }
 
             giftBoxController.TogglePassiveAutoCreate(true);
-            candyController.TogglePassiveAutoMerge(true);
             candyController.EnableDrag(true);
         }
     }

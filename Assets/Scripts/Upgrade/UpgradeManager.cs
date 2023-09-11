@@ -14,7 +14,6 @@ public class UpgradeManager : MonoBehaviour
     public float increaseLuckyCreate = 0.5f;
     public int increaseMaxCandies = 1;
     public int increaseBaseLevel = 1;
-    public float increasePassiveAutoMergeSpeed = 0.2f;
     public float increasePassiveAutoCreateSpeed = 0.2f;
     public float increaseGoldUp = 0.5f;
     public float increaseLuckyGold = 0.5f;
@@ -27,7 +26,6 @@ public class UpgradeManager : MonoBehaviour
     public int RemoveLockedCost = 1000;
     public int MaxCandiesUpCost = 1000;
     public int CandyLevelUpCost = 800;
-    public int PassiveAutoMergeSpeedUpCost = 900;
     public int PassiveAutoCreateSpeedUpCost = 900;
     public int GoldUpCost = 1500;
     public int LuckyGoldUpCost = 1500;
@@ -38,7 +36,6 @@ public class UpgradeManager : MonoBehaviour
     public int currentRemoveLockedCost;
     public int currentMaxCandiesUpCost;
     public int currentCandyLevelUpCost;
-    public int currentPassiveAutoMergeSpeedUpCost;
     public int currentPassiveAutoCreateSpeedUpCost;
     public int currentGoldUpCost;
     public int currentLuckyGoldUpCost;
@@ -49,7 +46,6 @@ public class UpgradeManager : MonoBehaviour
     public int removeLockedLevel = 1;
     public int maxCandiesLevel = 1;
     public int candyLevel = 1;
-    public int passiveAutoMergeSpeedLevel = 1;
     public int passiveAutoCreateSpeedLevel = 1;
     public int goldUpLevel = 1;
     public int luckyGoldLevel = 1;
@@ -62,7 +58,6 @@ public class UpgradeManager : MonoBehaviour
         currentRemoveLockedCost = RemoveLockedCost;
         currentMaxCandiesUpCost = MaxCandiesUpCost;
         currentCandyLevelUpCost = CandyLevelUpCost;
-        currentPassiveAutoMergeSpeedUpCost = PassiveAutoMergeSpeedUpCost;
         currentPassiveAutoCreateSpeedUpCost = PassiveAutoCreateSpeedUpCost;
         currentGoldUpCost = GoldUpCost;
         currentLuckyGoldUpCost = LuckyGoldUpCost;
@@ -237,28 +232,7 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
-
-    public void PassiveAutoMergeSpeedUp() //패시브 자동 머지 속도 업 (스킬6)
-    {
-        float currentPassiveWating = candyController.GetPassiveWating();
-        if (currentPassiveWating >= candyController.maxPassiveWating) 
-        {
-            Debug.Log("이미 최대로 업그레이드 되었습니다.");
-            return;
-        }
-        if (currencyManager.SubtractCurrency("Gold", currentPassiveAutoMergeSpeedUpCost))
-        {
-            float newPassiveAutoMergeSpeed = Mathf.Min(currentPassiveWating + increasePassiveAutoMergeSpeed, candyController.maxPassiveWating);
-            candyController.SetPassiveWating(newPassiveAutoMergeSpeed);
-            UpdateCost(ref currentPassiveAutoMergeSpeedUpCost);
-            passiveAutoMergeSpeedLevel++;
-            Debug.Log($"자동 머지 속도업!:{newPassiveAutoMergeSpeed}");
-        }
-        else
-        {
-            Debug.Log("골드가 부족합니다.");
-        }
-    }
+    
 
     public void PassiveAutoCreateSpeedUp() //패시브 자동 제작 속도 업 (스킬7)
     {

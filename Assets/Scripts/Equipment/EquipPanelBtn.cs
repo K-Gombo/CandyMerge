@@ -46,7 +46,7 @@ public class EquipPanelBtn : MonoBehaviour
             
             
             giftBoxController.TogglePassiveAutoCreate(true);
-            candyController.TogglePassiveAutoMerge(true);
+           
             
         }
         EquipPanel.SetActive(true);
