@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class EquipmentManager : MonoBehaviour
-{
+{   
     public GameObject equipPrefab;
     public TextAsset CsvData { get; set; }
     public TextAsset LevelCsvData { get; set; } 
@@ -14,6 +14,8 @@ public class EquipmentManager : MonoBehaviour
     public Sprite[] slotSprites;
     public GachaManager GachaManager;
     public EquipSkillManager equipSkillManager;
+    public EquipmentStatus equipmentStatus;
+    public EquipMentUI equipMentUI;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
     public int poolSize = 40;
     public Transform equipMentPoolTransform;
@@ -21,7 +23,7 @@ public class EquipmentManager : MonoBehaviour
     public Dictionary<Rank, Sprite> rankToSpriteMap = new Dictionary<Rank, Sprite>();
     public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
     public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
-    public Dictionary<Rank, Rank> rankUpgradeMap = new Dictionary<Rank, Rank>(); // 장비 등급 상승 순서를 정의한 딕셔너리
+    
     
     // 장비 등급을 나타내는 enum
     public enum Rank
@@ -313,9 +315,31 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
             }
             
+            // 초기 장비 레벨을 설정. 예를 들어, F 등급이면 시작 레벨이 1이 될 수 있습니다.
+            if (levelDataMap.ContainsKey(chosenRank.ToString()))
+            {
+                EquipLevelData levelData = levelDataMap[chosenRank.ToString()];
+                equipComponent.equipLevel = levelData.startLevel;  // 장비의 초기 레벨을 설정
+            }
+            
            
         }
     }
+    
+    // 각 랭크의 최대 레벨을 관리하는 딕셔너리
+    public static Dictionary<Rank, int> maxLevelsPerRank = new Dictionary<Rank, int>
+    {
+        { Rank.F, 1 }, // F는 rankLevel이 1이 최대이므로 바로 다음 등급으로 상승
+        { Rank.D, 1 },
+        { Rank.C, 2 }, // C는 rankLevel이 2가 최대이므로 2이상일 경우 B등급으로 상승
+        { Rank.B, 2 },
+        { Rank.A, 3 },
+        { Rank.S, 3 },
+        { Rank.SS, 4 },
+
+    };
+    
+    
     
     public Rank GetNextRank(Rank currentRank)
     {
@@ -323,20 +347,11 @@ public class EquipmentManager : MonoBehaviour
         {
             {Rank.F, Rank.D},
             {Rank.D, Rank.C},
-            {Rank.C, Rank.C1},
-            {Rank.C1, Rank.B},
-            {Rank.B, Rank.B1},
-            {Rank.B1, Rank.A},
-            {Rank.A, Rank.A1},
-            {Rank.A1, Rank.A2},
-            {Rank.A2, Rank.S},
-            {Rank.S, Rank.S1},
-            {Rank.S1, Rank.S2},
-            {Rank.S2, Rank.SS},
-            {Rank.SS, Rank.SS1},
-            {Rank.SS1, Rank.SS2},
-            {Rank.SS2, Rank.SS3},
-            {Rank.SS3, Rank.SS3}  // 최고 등급이므로 그대로 유지
+            {Rank.C, Rank.B},
+            {Rank.B, Rank.A},
+            {Rank.A, Rank.S},
+            {Rank.S, Rank.SS},
+            {Rank.SS, Rank.SS}  // 최고 등급이므로 그대로 유지
         };
 
         if (rankUpMap.ContainsKey(currentRank))
@@ -346,5 +361,30 @@ public class EquipmentManager : MonoBehaviour
 
         return currentRank; // 목록에 없는 등급은 그대로 반환
     }
+    
+    public void UpdateEquipLevel()
+    {
+        if (equipmentStatus.equipLevel < maxLevelsPerRank[equipmentStatus.equipRank])
+        {
+            equipmentStatus.equipLevel++;
+            equipmentStatus.UpdateRankBasedOnLevel();
+        }
+        else
+        {
+            equipmentStatus.equipRank = GetNextRank(equipmentStatus.equipRank);
+            equipmentStatus.equipLevel = 1;
+        }
+        equipMentUI.UpdateUI();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 }
 
