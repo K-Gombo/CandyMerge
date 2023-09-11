@@ -35916,6 +35916,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomMenubar
       objectReference: {fileID: 0}
+    - target: {fileID: 967016417811839637, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1987169747512614031, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -36305,6 +36309,10 @@ PrefabInstance:
     - target: {fileID: 4845242437180406642, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
       propertyPath: m_Name
       value: TopMenubar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845242437180406642, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5177264196136407270, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
       propertyPath: m_Pivot.x
