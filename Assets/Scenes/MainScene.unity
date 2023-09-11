@@ -17169,6 +17169,7 @@ GameObject:
   - component: {fileID: 728567993}
   - component: {fileID: 728567995}
   - component: {fileID: 728567996}
+  - component: {fileID: 728567997}
   m_Layer: 0
   m_Name: EquipManager
   m_TagString: Untagged
@@ -17239,10 +17240,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: beb9058cf6404447d92b0d219e864138, type: 3}
   - {fileID: 21300000, guid: 3107cdf8703694e27b0d85ca54d457ec, type: 3}
   - {fileID: 21300000, guid: 2ee62f986bc694a72aed36aacc714b65, type: 3}
-  GachaManager: {fileID: 0}
+  GachaManager: {fileID: 411645544}
   equipSkillManager: {fileID: 728567996}
-  equipmentStatus: {fileID: 0}
-  equipMentUI: {fileID: 0}
+  equipmentStatus: {fileID: 9062808844006152309, guid: 52626865b337749689e41378fa3c3f4a, type: 3}
   poolSize: 40
   equipMentPoolTransform: {fileID: 1095069984}
 --- !u!114 &728567993
@@ -17314,6 +17314,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308d0785292dc4fef90916eec2241593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &728567997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728567990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1daf95250954e21b63b1057e7151ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentStatus: {fileID: 9062808844006152309, guid: 52626865b337749689e41378fa3c3f4a, type: 3}
+  equipLevelText: {fileID: 0}
+  rankLevelText: {fileID: 0}
 --- !u!1 &736530264
 GameObject:
   m_ObjectHideFlags: 0
@@ -26449,7 +26464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1167979203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28809,7 +28824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1272144692
 RectTransform:
   m_ObjectHideFlags: 0

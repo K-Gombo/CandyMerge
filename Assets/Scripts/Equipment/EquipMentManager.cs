@@ -15,7 +15,6 @@ public class EquipmentManager : MonoBehaviour
     public GachaManager GachaManager;
     public EquipSkillManager equipSkillManager;
     public EquipmentStatus equipmentStatus;
-    public EquipMentUI equipMentUI;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
     public int poolSize = 40;
     public Transform equipMentPoolTransform;
@@ -347,11 +346,20 @@ public class EquipmentManager : MonoBehaviour
         {
             {Rank.F, Rank.D},
             {Rank.D, Rank.C},
-            {Rank.C, Rank.B},
-            {Rank.B, Rank.A},
-            {Rank.A, Rank.S},
-            {Rank.S, Rank.SS},
-            {Rank.SS, Rank.SS}  // 최고 등급이므로 그대로 유지
+            {Rank.C, Rank.C1},
+            {Rank.C1, Rank.B},
+            {Rank.B, Rank.B1},
+            {Rank.B1, Rank.A},
+            {Rank.A, Rank.A1},
+            {Rank.A1, Rank.A2},
+            {Rank.A2, Rank.S},
+            {Rank.S, Rank.S1},
+            {Rank.S1, Rank.S2},
+            {Rank.S2, Rank.SS},
+            {Rank.SS, Rank.SS1},
+            {Rank.SS1, Rank.SS2},
+            {Rank.SS2, Rank.SS3},
+            {Rank.SS3, Rank.SS3}  // 최고 등급이므로 그대로 유지
         };
 
         if (rankUpMap.ContainsKey(currentRank))
@@ -362,19 +370,41 @@ public class EquipmentManager : MonoBehaviour
         return currentRank; // 목록에 없는 등급은 그대로 반환
     }
     
+    
+    public void UpdateEquipLevelAndRank()
+    {
+        if (maxLevelsPerRank.ContainsKey(equipmentStatus.equipRank))
+        {
+            if (equipmentStatus.equipLevel >= maxLevelsPerRank[equipmentStatus.equipRank])
+            {
+                equipmentStatus.equipRank = GetNextRank(equipmentStatus.equipRank); // 등급을 다음 등급으로 변경
+                equipmentStatus.equipLevel = 1;  // 레벨을 초기화
+            }
+            else
+            {
+                equipmentStatus.equipLevel++; // 레벨을 하나 올림
+            }
+        }
+        else
+        {
+            // 해당 등급에 대한 정보가 없으면 그냥 레벨을 올림
+            equipmentStatus.equipLevel++;
+        }
+    }
+    
     public void UpdateEquipLevel()
     {
         if (equipmentStatus.equipLevel < maxLevelsPerRank[equipmentStatus.equipRank])
         {
             equipmentStatus.equipLevel++;
-            equipmentStatus.UpdateRankBasedOnLevel();
+            UpdateEquipLevelAndRank();
         }
         else
         {
             equipmentStatus.equipRank = GetNextRank(equipmentStatus.equipRank);
             equipmentStatus.equipLevel = 1;
         }
-        equipMentUI.UpdateUI();
+        equipmentStatus.UpdateUI();
     }
     
     

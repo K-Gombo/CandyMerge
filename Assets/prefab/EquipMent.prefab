@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef80f9ba933c54624b59399ef3a71b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipmentManager: {fileID: 0}
   equipId: 0
   slotType: 0
   equipName: 
@@ -595,6 +596,10 @@ MonoBehaviour:
   - 0
   backgroundImageComponent: {fileID: 7899845762787001645}
   slotImageComponent: {fileID: 478676505122546662}
+  equipLevel: 0
+  rankLevel: 0
+  equipLevelText: {fileID: 1882861914411009457}
+  rankLevelText: {fileID: 3348615878373077510}
 --- !u!1 &8536447352059482334
 GameObject:
   m_ObjectHideFlags: 0
