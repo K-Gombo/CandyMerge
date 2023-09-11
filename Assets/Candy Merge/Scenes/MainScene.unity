@@ -26509,6 +26509,7 @@ MonoBehaviour:
   candyManager: {fileID: 1968457437}
   questManager: {fileID: 1965584766}
   currencyManager: {fileID: 477139587}
+  candyController: {fileID: 1968457436}
 --- !u!1 &1541254242
 GameObject:
   m_ObjectHideFlags: 0
@@ -34481,6 +34482,7 @@ MonoBehaviour:
   mergeEffectPrefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
   boxManager: {fileID: 749087271}
   isDragEnabled: 1
+  isSellBox: 0
   mergeLocked: 0
   draggingParentCanvas: {fileID: 124782620}
 --- !u!114 &1968457437

@@ -22,7 +22,7 @@ public class CandyController : MonoBehaviour
     public BoxManager boxManager; // BoxManager 참조
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     public bool isDragEnabled = true; // 드래그가 가능한지를 나타내는 변수
-    
+
     
     public bool mergeLocked = false;
     public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
@@ -75,6 +75,7 @@ public class CandyController : MonoBehaviour
             {
                 StopDraggingCandy();
             }
+
         }
     }
     
@@ -288,7 +289,7 @@ public class CandyController : MonoBehaviour
     }
 
     private void ReturnToOriginalBox(Transform candy)
-    {
+    {   
         candy.transform.SetParent(originalParent); // 원래 부모 박스로 설정
         candy.transform.position = startPosition;
        

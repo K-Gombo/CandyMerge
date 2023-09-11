@@ -13,6 +13,7 @@ public class CandyStatus : MonoBehaviour
     public string boxName;
     public int maxCandyLevel = 60;
     
+    
 
     private void Start()
     {
@@ -61,6 +62,8 @@ public class CandyStatus : MonoBehaviour
         Debug.Log("CheckAndReturnImpossibleQuests is called");
         QuestManager.instance.CheckAndReturnImpossibleQuests();  // baseLevel이 변경될 때마다 호출
     }
+    
+    
     
     
 

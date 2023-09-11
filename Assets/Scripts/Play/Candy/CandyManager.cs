@@ -79,7 +79,7 @@ public class CandyManager : MonoBehaviour
     }
 
     public void ReturnToPool(GameObject objectToReturn)
-    {
+    {   
         objectToReturn.transform.SetParent(CandyPool); // CandyPool을 부모로 설정
         objectToReturn.SetActive(false);
         candyPool.Enqueue(objectToReturn);
@@ -94,10 +94,11 @@ public class CandyManager : MonoBehaviour
         }
     
         BoxManager.instance.UpdateCandyCount();
-
+        
         // 기존의 캔디가 사라지므로 CandyDestroyed() 메서드 호출
         CandyDestroyed();
     }
+    
 
 
     public void AddCount()
