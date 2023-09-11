@@ -124,7 +124,9 @@ public class CandyController : MonoBehaviour
             }
             else
             {
-                ReturnToOriginalBox(hit.collider.transform);
+                Debug.Log("돌아간단다");
+                if (!CandySellBox.isBox)
+                    ReturnToOriginalBox(hit.collider.transform);
             }
         }
 

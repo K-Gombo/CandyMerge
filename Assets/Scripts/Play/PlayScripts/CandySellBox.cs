@@ -9,6 +9,7 @@ public class CandySellBox : MonoBehaviour
     public QuestManager questManager; // QuestManager 참조
     public CurrencyManager currencyManager; // CurrencyManager 참조
 
+    public static bool isBox = false;
     private bool isTrigger = false;
 
     private GameObject collision;
@@ -17,6 +18,7 @@ public class CandySellBox : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
+            if (collision == null) return;
             // 태그를 통해 캔디인지 확인
             if (collision.CompareTag("Candy"))
             {
@@ -40,6 +42,7 @@ public class CandySellBox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Candy")) return;
+        isBox = true;
         Debug.Log("들어왔다");
         isTrigger = true;
         this.collision = other.gameObject;
@@ -49,9 +52,16 @@ public class CandySellBox : MonoBehaviour
     // OnTriggerEnter2D를 사용하여 캔디가 들어온 것을 감지
     private void OnTriggerExit2D(Collider2D collision)
     {
+        StartCoroutine(WaitSellBox());
+    }
+
+
+    IEnumerator WaitSellBox()
+    {
+        yield return null;
+        isBox = false;
         Debug.Log("나갔다");
         isTrigger = false;
         this.collision = null;
     }
-    
 }
