@@ -22,9 +22,6 @@ public class CandyController : MonoBehaviour
     public BoxManager boxManager; // BoxManager 참조
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     public bool isDragEnabled = true; // 드래그가 가능한지를 나타내는 변수
-    public CurrencyManager currencyManager;
-    public QuestManager questManager;
-    public CandyManager candyManager;
     
     
     public bool mergeLocked = false;
@@ -108,18 +105,8 @@ public class CandyController : MonoBehaviour
         Transform closestBox = FindClosestEmptyBox(hit.collider.transform);
         float thresholdDistance = 0.5f;
 
-        RaycastHit2D sellHit = Physics2D.Raycast(hit.collider.transform.position, Vector2.zero);
-
-        // 판매 박스에 드롭되었는지 확인
-        if (sellHit.collider != null && sellHit.collider.CompareTag("SellBox"))
-        {
-            int candyLevel = hit.collider.GetComponent<CandyStatus>().level;
-            long sellPrice = questManager.candySellPriceByLevel.ContainsKey(candyLevel) ? questManager.candySellPriceByLevel[candyLevel] : 0;
-            currencyManager.AddCurrency("Gold", (int)sellPrice);
-            candyManager.ReturnToPool(hit.collider.gameObject);
-        }
-        else if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level ==
-                 mergeTarget.GetComponent<CandyStatus>().level)
+        if (mergeTarget != null && hit.collider.GetComponent<CandyStatus>().level ==
+            mergeTarget.GetComponent<CandyStatus>().level)
         {
             MergeCandies(hit.collider.transform, mergeTarget);
             hit.collider.transform.position = startPosition;
@@ -145,7 +132,6 @@ public class CandyController : MonoBehaviour
         draggedBoxIndex = -1;
         currentlyDraggingCandy = null;
     }
-
 
    
      public int GetBoxIndexFromPosition(Vector3 position)
