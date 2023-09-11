@@ -36053,10 +36053,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 827990670}
     - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      propertyPath: mixManager
-      value: 
-      objectReference: {fileID: 411645544}
-    - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: GachaManager
       value: 
       objectReference: {fileID: 411645544}
@@ -36140,10 +36136,6 @@ PrefabInstance:
       propertyPath: EquipPanel
       value: 
       objectReference: {fileID: 1168936108}
-    - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      propertyPath: mixManager
-      value: 
-      objectReference: {fileID: 411645544}
     - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: GachaManager
       value: 
