@@ -23,10 +23,10 @@ public class Quest : MonoBehaviour
     }
     
     public void InstanceQuest()
-    {    Debug.Log("InstanceQuest 호출됨");
+    {    
         QuestManager.instance.activeQuests = new List<Quest>(QuestManager.instance.maxQuests);
         for (int i = 0; i < QuestManager.instance.maxQuests; i++)
-        {   Debug.Log("Quest 생성: " + i);
+        {   
             var questObject = Instantiate(this, QuestManager.instance.questGrid);
             CreateQuest(questObject);
             // "Box" 태그를 가진 게임 오브젝트의 참조를 미리 저장

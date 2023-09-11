@@ -8,6 +8,8 @@ TagManager:
   - Box
   - Locked
   - MixBox
+  - EquipMent
+  - SellBox
   layers:
   - Default
   - TransparentFX
