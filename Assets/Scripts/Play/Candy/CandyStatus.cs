@@ -12,10 +12,7 @@ public class CandyStatus : MonoBehaviour
     public int maxBaseLevel = 58;
     public string boxName;
     public int maxCandyLevel = 60;
-   
-
-
-    public static CandyStatus instance;
+    
 
     private void Start()
     {

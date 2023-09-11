@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: -1878897667326311292}
   - component: {fileID: 7457344846519049650}
   - component: {fileID: 7338467177435198358}
-  - component: {fileID: 4414486705545829503}
+  - component: {fileID: 6477897221588141891}
   m_Layer: 3
   m_Name: Candy
   m_TagString: Candy
@@ -231,7 +231,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 120, y: 120}
   m_EdgeRadius: 0
---- !u!50 &4414486705545829503
+--- !u!50 &6477897221588141891
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -246,14 +246,14 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
