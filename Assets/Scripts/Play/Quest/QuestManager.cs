@@ -201,8 +201,10 @@ public class QuestManager : MonoBehaviour
             }
 
             newQuest.UpdateRequirements(); // 랜덤한 요구사항 할당
+            UpdateQuestCandyCount(newQuest); 
             activeQuests.Add(newQuest);
         }
+        
     }
 
 
