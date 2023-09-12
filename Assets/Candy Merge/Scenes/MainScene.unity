@@ -16822,22 +16822,6 @@ PrefabInstance:
       propertyPath: currencyManager
       value: 
       objectReference: {fileID: 477139587}
-    - target: {fileID: 7518638668246871534, guid: a11b17254b90a4b5c98c7e3a3a00880e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518638668246871534, guid: a11b17254b90a4b5c98c7e3a3a00880e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518638668246871534, guid: a11b17254b90a4b5c98c7e3a3a00880e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7518638668246871534, guid: a11b17254b90a4b5c98c7e3a3a00880e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7883298322219855235, guid: a11b17254b90a4b5c98c7e3a3a00880e, type: 3}
       propertyPath: m_SizeDelta.y
       value: 3340
