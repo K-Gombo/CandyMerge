@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11767,13 +11767,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6202aeb03844f469948ae280135c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pileOfCurrency: {fileID: 2146850636}
-  initialPos: []
-  initialRot: []
-  goldSprite: {fileID: 21300000, guid: d968198b8526f4d57977095ac885cc7d, type: 3}
-  diaSprite: {fileID: 21300000, guid: ab9dd49b7b8bc4c8594ae6ac961280e9, type: 3}
-  goldPos: {x: -295, y: 1400}
-  diaPos: {x: 120, y: 1400}
+  currencyIconPrefab: {fileID: 1581751442}
+  currencyIconContainer: {fileID: 2146850636}
+  currencyMetaDatas:
+  - type: 0
+    sprite: {fileID: 21300000, guid: d968198b8526f4d57977095ac885cc7d, type: 3}
+    targetPosition: {x: -295, y: 1400}
+  - type: 1
+    sprite: {fileID: 21300000, guid: ab9dd49b7b8bc4c8594ae6ac961280e9, type: 3}
+    targetPosition: {x: 120, y: 1400}
+  initialPoolSize: 10
 --- !u!4 &656063575
 Transform:
   m_ObjectHideFlags: 0
@@ -26509,7 +26512,6 @@ MonoBehaviour:
   candyManager: {fileID: 1968457437}
   questManager: {fileID: 1965584766}
   currencyManager: {fileID: 477139587}
-  candyController: {fileID: 1968457436}
 --- !u!1 &1541254242
 GameObject:
   m_ObjectHideFlags: 0
@@ -34482,7 +34484,6 @@ MonoBehaviour:
   mergeEffectPrefab: {fileID: 6255611053735554030, guid: a0c34a16f6b674c7b88ad9cc917e2ab2, type: 3}
   boxManager: {fileID: 749087271}
   isDragEnabled: 1
-  isSellBox: 0
   mergeLocked: 0
   draggingParentCanvas: {fileID: 124782620}
 --- !u!114 &1968457437
@@ -35343,7 +35344,7 @@ GameObject:
   - component: {fileID: 2021528350}
   - component: {fileID: 2021528349}
   m_Layer: 0
-  m_Name: OfflineRwardManager
+  m_Name: OfflineRewardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

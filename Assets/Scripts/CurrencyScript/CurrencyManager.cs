@@ -2,13 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CurrencyType
-{
-    None,
-    Gold,
-    Dia
-}
-
 
 public class Currency
 {
@@ -63,13 +56,13 @@ public class CurrencyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("uhguygg");
-            RewardMovingManager.instance.MovingCurrency(5, CurrencyType.Gold);
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold);
             AddCurrency("Gold", 1000000);
         }
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            RewardMovingManager.instance.MovingCurrency(5, CurrencyType.Dia);
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia);
             AddCurrency("Dia", 100);
         }
         
