@@ -59,19 +59,16 @@ public class CandyStatus : MonoBehaviour
         {
             baseLevel = maxBaseLevel;
         }
-        Debug.Log("CheckAndReturnImpossibleQuests is called");
         QuestManager.instance.CheckAndReturnImpossibleQuests();  // baseLevel이 변경될 때마다 호출
     }
     
     public void SaveCandy()
     {
-        Debug.Log($"boxName : " + boxName + "\tlevel : " + level);
         ES3.Save(boxName, level);
     }
     
     public void NullSaveCandy()
     {
-        Debug.Log($"boxName : " + boxName + "\tlevel : " + -1);
         ES3.Save(boxName, -1);
     }
 

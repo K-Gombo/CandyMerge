@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HappyLevel : MonoBehaviour
-{
+{   
+    
+    public static HappyLevel instance;
     public TextAsset CsvData { get; set; }
-
+    
     public Dictionary<int, int> HappylevelUp = new Dictionary<int, int>();
     public Dictionary<int, int> HappylevelUpReward = new Dictionary<int, int>();
 
@@ -21,7 +23,9 @@ public class HappyLevel : MonoBehaviour
     public Text DiaText;
 
     private void Awake()
-    {
+    {   
+        instance = this;
+        
         CsvData = Resources.Load<TextAsset>("LevelData");
         var csvText = CsvData.text;
         var csvData = csvText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);

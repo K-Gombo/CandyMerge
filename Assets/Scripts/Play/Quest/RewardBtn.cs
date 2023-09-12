@@ -74,8 +74,7 @@ public class RewardButton : MonoBehaviour
     }
 
     private void OnRewardButtonClicked()
-    {   
-        Debug.Log("보상 버튼이 클릭되었습니다."); // 로그 추가
+    {
         if (parentQuest == null)
         {
             return;
