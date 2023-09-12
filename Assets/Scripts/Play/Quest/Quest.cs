@@ -22,6 +22,9 @@ public class Quest : MonoBehaviour
         rewardButton.parentQuest = this;
     }
     
+    
+    
+    
     public void InstanceQuest()
     {    
         QuestManager.instance.activeQuests = new List<Quest>(QuestManager.instance.maxQuests);
@@ -67,9 +70,8 @@ public class Quest : MonoBehaviour
         
         CalculateSpecialQuest(ref reward); // 특별 퀘스트 계산
 
-
-      
-
+        quest.rewardButton.parentQuest = quest;
+        
         SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
     }
 

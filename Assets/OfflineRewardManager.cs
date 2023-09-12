@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfflineRwardManager : MonoBehaviour
+public class OfflineRewardManager : MonoBehaviour
 {
     private TimeSpan totalAccumulatedTime;
     private const double MAX_ACCUMULATION_TIME_IN_MINUTES = 24 * 60;  // 24 hours in minutes

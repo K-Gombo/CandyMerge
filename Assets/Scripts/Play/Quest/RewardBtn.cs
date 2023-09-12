@@ -27,6 +27,7 @@ public class RewardButton : MonoBehaviour
         rewardButton = GetComponent<Button>(); // 버튼 컴포넌트를 rewardButton 변수에 할당
         rewardButton.interactable = false; // 초기에는 비활성화
         rewardButton.onClick.AddListener(OnRewardButtonClicked); // 클릭 이벤트에 메서드 연결
+        
     }
     
    
@@ -35,13 +36,13 @@ public class RewardButton : MonoBehaviour
     {   
         if (parentQuest == null)
         {
-            
+            Debug.Log("parentQuest is null");
             return; // parentQuest가 null이면 메서드를 종료
         }
         
         if (rewardButton == null)
         {
-            
+            Debug.Log("Rewardbutton is null");
             return;
         }
         // 퀘스트 완료 조건 검사
@@ -79,8 +80,6 @@ public class RewardButton : MonoBehaviour
         {
             return;
         }
-
-        rewardButton.onClick.RemoveListener(OnRewardButtonClicked);
 
         // 보상 계산을 위한 초기 설정
         string rewardString = parentQuest.rewardText.text;
