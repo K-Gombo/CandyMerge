@@ -184,8 +184,6 @@ public class QuestManager : MonoBehaviour
             int requiredCount2 = int.Parse(requiredCount2Text[1]);
             quest.candyCountText2.text = $"{count2}/{requiredCount2}";
         }
-
-        
     }
 
     private void CreateNewQuest()

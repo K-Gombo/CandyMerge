@@ -64,6 +64,10 @@ public class RewardMovingManager : MonoBehaviour
     {
         MovingCurrency(count, type);
     }
+    public void RequestMovingCurrency(int count, CurrencyType type, Vector2 dynamicStartPosition)
+    {
+        MovingCurrency(count, type, dynamicStartPosition);
+    }
 
     private void MovingCurrency(int currencyCount, CurrencyType type)
     {
@@ -92,6 +96,42 @@ public class RewardMovingManager : MonoBehaviour
             icon.GetComponent<RectTransform>().rotation = initialRot[i];
         }
     }
+
+    private void MovingCurrency(int currencyCount, CurrencyType type, Vector2 dynamicStartPosition)
+    {
+        currencyIconContainer.gameObject.SetActive(true);
+        var delay = 0f;
+
+        for (int i = 0; i < currencyCount; i++)
+        {
+            var icon = GetIconFromPool();
+
+            // 랜덤한 위치 오프셋을 생성합니다.
+            float randomX = Random.Range(-50f, 50f);  // 예시 값, 원하는 범위로 조정
+            float randomY = Random.Range(-50f, 50f);  // 예시 값, 원하는 범위로 조정
+
+            Vector2 randomizedStartPosition = dynamicStartPosition + new Vector2(randomX, randomY);
+
+            // 아이콘의 초기 위치와 회전을 설정합니다.
+            icon.GetComponent<RectTransform>().anchoredPosition = randomizedStartPosition;
+            icon.GetComponent<RectTransform>().rotation = Quaternion.identity;
+
+            var currencyData = currencyMetaDatas.Find(data => data.type == type);
+            icon.GetComponent<Image>().sprite = currencyData.sprite;
+
+            icon.DOScale(1f, 0.3f).SetDelay(delay).SetEase(Ease.OutBack);
+            icon.GetComponent<RectTransform>().DOAnchorPos(currencyData.targetPosition, 0.8f)
+                .SetDelay(delay + 0.5f).SetEase(Ease.InBack);
+            icon.DORotate(Vector3.zero, 0.5f).SetDelay(delay + 0.5f)
+                .SetEase(Ease.Flash);
+            icon.DOScale(0f, 0.3f).SetDelay(delay + 1.5f).SetEase(Ease.OutBack).OnComplete(() => {
+                icon.gameObject.SetActive(false);
+                currencyIconPool.Add(icon);
+            });
+            delay += 0.1f;
+        }
+    }
+
 
     private Transform GetIconFromPool()
     {

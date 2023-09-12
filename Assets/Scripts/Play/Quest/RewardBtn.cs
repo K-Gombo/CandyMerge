@@ -7,7 +7,7 @@ public class RewardButton : MonoBehaviour
 {
     public Quest parentQuest; // 부모 퀘스트를 참조하기 위한 변수
 
-    private Button rewardButton;
+    [SerializeField] private Button rewardButton;
     
     // 골드량 증가 비율
     public float goldIncreaseRate = 0f;
@@ -29,8 +29,9 @@ public class RewardButton : MonoBehaviour
         rewardButton.onClick.AddListener(OnRewardButtonClicked); // 클릭 이벤트에 메서드 연결
         
     }
-    
-   
+
+
+
 
     public void UpdateButtonState()
     {   
@@ -79,6 +80,14 @@ public class RewardButton : MonoBehaviour
         {
             return;
         }
+
+        if (Input.GetMouseButtonUp(0)) // 0은 왼쪽 마우스 버튼을 의미합니다.
+        {
+            Vector2 clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RewardMovingManager.instance.RequestMovingCurrency(10, CurrencyType.Gold, clickedPosition);
+            Debug.Log("한본 부자잉" + clickedPosition);
+        }
+
 
         // 보상 계산을 위한 초기 설정
         string rewardString = parentQuest.rewardText.text;
