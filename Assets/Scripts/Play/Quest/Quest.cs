@@ -46,60 +46,75 @@ public class Quest : MonoBehaviour
     
     
     public void CreateQuest(Quest quest)
+{
+    int numberOfCandyTypes;
+    if (HappyLevel.instance.CurrentLevel < 4)
     {
-        int numberOfCandyTypes;
-        if (HappyLevel.instance.CurrentLevel < 4)
-        {
-            numberOfCandyTypes = 1;
-        }
-        else
-        {
-            numberOfCandyTypes = Random.Range(1, 3);
-        }
-
-        int candyLevel1 = QuestManager.instance.RandomCandyLevel();
-        int candyCount1 = Random.Range(3, 8);
-        int candyLevel2 = -1;
-        int candyCount2 = 0;
-
-        while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
-        {
-            candyLevel1 = QuestManager.instance.RandomCandyLevel();
-            candyCount1 = Random.Range(3, 8);
-            // 다른 로직 (예: candyLevel2, candyCount2 설정)
-        }
-
-        QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
-
-        Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex);
-        Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
-        Sprite candySprite2 = null;
-
-        reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
-
-        if (numberOfCandyTypes == 2)
-        {
-            do
-            {
-                candyLevel2 = QuestManager.instance.RandomCandyLevel();
-            } while (candyLevel2 == candyLevel1);
-
-            int remainingCandyCount = QuestManager.instance.maxCandyCount - candyCount1;
-            if (remainingCandyCount > 2)
-            {
-                candyCount2 = Random.Range(3, remainingCandyCount + 1);
-                candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
-                reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
-            }
-        }
-
-        CalculateSpecialQuest(ref reward);
-    
-        quest.rewardButton.parentQuest = quest;
-    
-        SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
-        QuestManager.instance.UpdateQuestCandyCount(quest);
+        numberOfCandyTypes = 1;
     }
+    else
+    {
+        numberOfCandyTypes = Random.Range(1, 3);
+    }
+
+    int candyLevel1 = QuestManager.instance.RandomCandyLevel();
+    int candyCount1 = Random.Range(3, 8);
+    int candyLevel2 = -1;
+    int candyCount2 = 0;
+
+    while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
+    {
+        candyLevel1 = QuestManager.instance.RandomCandyLevel();
+        candyCount1 = Random.Range(3, 8);
+    }
+
+    QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
+
+    Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex);
+    Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
+    Sprite candySprite2 = null;
+
+    reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
+
+    if (numberOfCandyTypes == 2)
+    {
+        do
+        {
+            candyLevel2 = QuestManager.instance.RandomCandyLevel();
+        } while (candyLevel2 == candyLevel1);
+
+        int remainingCandyCount = QuestManager.instance.maxCandyCount - candyCount1;
+        if (remainingCandyCount > 2)
+        {
+            candyCount2 = Random.Range(3, remainingCandyCount + 1);
+            candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
+            reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
+        }
+    }
+
+    // 특별 퀘스트 여부를 결정
+    quest.isSpecialQuest = QuestManager.instance.IsSpecialQuest();
+    
+    // 특별 퀘스트일 경우 보상을 3배
+    if (quest.isSpecialQuest)
+    {
+        reward *= 3;
+    }
+
+    // 특별 퀘스트일 경우 색상 변경
+    if (quest.isSpecialQuest && quest.questImage != null)
+    {
+        quest.questImage.color = new Color(1f, 0.8f, 1f, 1.0f);
+    }
+    else if (quest.questImage != null)
+    {
+        quest.questImage.color = Color.white;
+    }
+
+    SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
+    QuestManager.instance.UpdateQuestCandyCount(quest);
+}
+
 
     
 
@@ -128,80 +143,82 @@ public class Quest : MonoBehaviour
 
     
     public void UpdateRequirements()
+{
+    int numberOfCandyTypes;
+    if (HappyLevel.instance.CurrentLevel < 4)
     {
-        int numberOfCandyTypes;
-        if (HappyLevel.instance.CurrentLevel < 4)
-        {
-            numberOfCandyTypes = 1;
-        }
-        else
-        {
-            numberOfCandyTypes = Random.Range(1, 3);
-        }
-
-        int candyLevel1 = QuestManager.instance.RandomCandyLevel();
-        int candyCount1 = Random.Range(3, 8);
-        int candyLevel2 = -1;
-        int candyCount2 = 0;
-
-        while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
-        {
-            candyLevel1 = QuestManager.instance.RandomCandyLevel();
-            candyCount1 = Random.Range(3, 8);
-            // 다른 로직 (예: candyLevel2, candyCount2 설정)
-        }
-
-        QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
-
-        Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex);
-        Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
-        Sprite candySprite2 = null;
-
-        long reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
-
-        if (numberOfCandyTypes == 2)
-        {
-            do
-            {
-                candyLevel2 = QuestManager.instance.RandomCandyLevel();
-            } while (candyLevel2 == candyLevel1);
-
-            int remainingCandyCount = QuestManager.instance.maxCandyCount - candyCount1;
-            if (remainingCandyCount > 2)
-            {
-                candyCount2 = Random.Range(3, remainingCandyCount + 1);
-                candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
-                reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
-            }
-        }
-
-        CalculateSpecialQuest(ref reward);
-
-        humanAvatar.sprite = avatar;
-        requestCandy1.sprite = candySprite1;
-        requestCandy2.sprite = candySprite2;
-
-        candyCountText1.text = $"0/{candyCount1}";
-        candyCountText2.text = candySprite2 != null ? $"0/{candyCount2}" : "";
-
-        rewardText.text = QuestManager.instance.FormatGold(reward);
+        numberOfCandyTypes = 1;
+    }
+    else
+    {
+        numberOfCandyTypes = Random.Range(1, 3);
     }
 
-    
-    public void CalculateSpecialQuest(ref long reward)
+    int candyLevel1 = QuestManager.instance.RandomCandyLevel();
+    int candyCount1 = Random.Range(3, 8);
+    int candyLevel2 = -1;
+    int candyCount2 = 0;
+
+    while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
     {
-        // QuestManager의 IsSpecialQuest 메서드를 호출하여 특별 퀘스트 여부를 판단
-        isSpecialQuest = QuestManager.instance.IsSpecialQuest();
+        candyLevel1 = QuestManager.instance.RandomCandyLevel();
+        candyCount1 = Random.Range(3, 8);
+    }
 
-        if (isSpecialQuest)
+    QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
+
+    Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex);
+    Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
+    Sprite candySprite2 = null;
+
+    long reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
+
+    if (numberOfCandyTypes == 2)
+    {
+        do
         {
-            reward *= 3; // 특별 퀘스트일 경우 보상을 3배로 함
-            Debug.Log("특별퀘스트 등장!");
+            candyLevel2 = QuestManager.instance.RandomCandyLevel();
+        } while (candyLevel2 == candyLevel1);
 
+        int remainingCandyCount = QuestManager.instance.maxCandyCount - candyCount1;
+        if (remainingCandyCount > 2)
+        {
+            candyCount2 = Random.Range(3, remainingCandyCount + 1);
+            candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
+            reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
         }
     }
+
+    // 특별 퀘스트 여부를 결정
+    isSpecialQuest = QuestManager.instance.IsSpecialQuest();
+
+    // 특별 퀘스트일 경우 보상을 3배로 함
+    if (isSpecialQuest)
+    {
+        reward *= 3;
+    }
+
+    // 특별 퀘스트일 경우 색상 변경
+    if (isSpecialQuest && questImage != null)
+    {
+        questImage.color = new Color(1f, 0.8f, 1f, 1.0f);
+    }
+    else if (questImage != null)
+    {
+        questImage.color = Color.white;
+    }
+
+    humanAvatar.sprite = avatar;
+    requestCandy1.sprite = candySprite1;
+    requestCandy2.sprite = candySprite2;
+
+    candyCountText1.text = $"0/{candyCount1}";
+    candyCountText2.text = candySprite2 != null ? $"0/{candyCount2}" : "";
+
+    rewardText.text = QuestManager.instance.FormatGold(reward);
+}
+
     
-    // 퀘스트가 완료되면 호출되는 메서드
     public void OnQuestComplete()
     {
         if (avatarIndex >= 0)

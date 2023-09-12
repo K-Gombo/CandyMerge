@@ -123,15 +123,21 @@ public class QuestManager : MonoBehaviour
             activeQuests[i].transform.SetSiblingIndex(i - 1);
         }
 
+        // 특별 퀘스트의 색상을 초기화
+        if (quest.questImage != null)
+        {
+            quest.questImage.color = Color.white;
+        }
+
         quest.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
         rewardButton.GetComponent<Button>().interactable = false;
         quest.gameObject.SetActive(false); // 객체를 비활성화
         questPool.Enqueue(quest); // 풀에 다시 추가
         activeQuests.Remove(quest); // activeQuests 리스트에서 해당 퀘스트 제거
-        
+    
         quest.OnQuestComplete();
         CreateNewQuest(); // 새로운 퀘스트 생성
-        
+    
         happyLevel.AddExperience(1);
         happyLevel.UpdateHappinessBar();
     }
@@ -203,9 +209,10 @@ public class QuestManager : MonoBehaviour
             newQuest.UpdateRequirements(); // 랜덤한 요구사항 할당
             UpdateQuestCandyCount(newQuest); 
             activeQuests.Add(newQuest);
+            
         }
-        
     }
+
 
 
     
@@ -226,20 +233,12 @@ public class QuestManager : MonoBehaviour
         if (isSpecial) 
         {   
             Debug.Log("특별퀘스트 " + (specialQuestCounter + 1) + "번째에서 등장!"); // 몇 번째에서 특별퀘스트가 등장했는지 출력
-
-            if (Quest.instance.questImage != null)
-            {
-                Quest.instance.questImage.color = new Color(1f, 0.8f, 1f, 1.0f); // 특별 퀘스트일 경우, Quest 프리팹의 Image 컴포넌트의 색상 변경
-            }
+            
 
             specialQuestCounter = 0; // 특별 퀘스트 카운팅 초기화
         }
         else 
         {
-            if (Quest.instance.questImage != null)
-            {
-                Quest.instance.questImage.color = Color.white; // 특별 퀘스트가 아닐 경우, 원래의 색으로 복귀
-            }
             
             specialQuestCounter++; // 퀘스트 카운팅 증가
         }
