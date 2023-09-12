@@ -24,6 +24,7 @@ public class SortBtn : MonoBehaviour
                         CandyStatus candyStatus = grandChild.GetComponent<CandyStatus>();
                         if (candyStatus != null) // CandyStatus 컴포넌트가 존재하면
                         {
+                            candyStatus.NullSaveCandy();
                             allCandies.Add(candyStatus);
                             break; // 캔디를 찾았으므로 루프 종료
                         }
@@ -43,7 +44,9 @@ public class SortBtn : MonoBehaviour
             if (targetBox.CompareTag("Box"))
             {
                 candy.transform.SetParent(targetBox);
+                candy.boxName = targetBox.gameObject.name;
                 candy.transform.localPosition = Vector3.zero; // 로컬 위치를 0으로 설정
+                candy.SaveCandy();
                 boxIndex++;
             }
         }
