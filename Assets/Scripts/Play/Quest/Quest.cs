@@ -12,6 +12,7 @@ public class Quest : MonoBehaviour
     public Text candyCountText1;
     public Text candyCountText2;
     public RewardButton rewardButton;
+   
     
     public bool isSpecialQuest = false; // 특별 퀘스트 여부 확인
     public long reward; // 보상
@@ -41,7 +42,15 @@ public class Quest : MonoBehaviour
     
     public void CreateQuest(Quest quest)
     {
-        int numberOfCandyTypes = Random.Range(1, 3);
+        int numberOfCandyTypes;
+        if (HappyLevel.instance.CurrentLevel < 4)
+        {
+            numberOfCandyTypes = 1;
+        }
+        else
+        {
+            numberOfCandyTypes = Random.Range(1, 3);
+        }
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
         int candyCount1 = Random.Range(3, 8);
         Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex); 
@@ -102,9 +111,17 @@ public class Quest : MonoBehaviour
     public void UpdateRequirements()
     {
         
-        int numberOfCandyTypes = Random.Range(1, 3);
+        int numberOfCandyTypes;
+        if (HappyLevel.instance.CurrentLevel < 4)
+        {
+            numberOfCandyTypes = 1;
+        }
+        else
+        {
+            numberOfCandyTypes = Random.Range(1, 3);
+        }
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
-        int candyCount1 = Random.Range(3, 10);
+        int candyCount1 = Random.Range(3, 8);
         
         
         // 아바타 스프라이트 할당
