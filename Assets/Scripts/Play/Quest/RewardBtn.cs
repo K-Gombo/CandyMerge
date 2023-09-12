@@ -2,58 +2,52 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class RewardButton : MonoBehaviour
 {
-    public Quest parentQuest; // 부모 퀘스트를 참조하기 위한 변수
+    public Quest parentQuest;
 
     [SerializeField] private Button rewardButton;
-    
-    // 골드량 증가 비율
+
     public float goldIncreaseRate = 0f;
     public float maxGoldIncreaseRate = 30f;
 
-    // 골드 2배 획득 확률 
     public float luckyGoldProbability = 0;
     public float maxLuckyGoldProbability = 40f;
-    
+
+    [SerializeField] private GameObject Check1;
+    [SerializeField] private GameObject Check2;
+   
     private void Awake()
     {
         if (GetComponent<Button>() == null)
         {
-            
             return;
         }
-        rewardButton = GetComponent<Button>(); // 버튼 컴포넌트를 rewardButton 변수에 할당
-        rewardButton.interactable = false; // 초기에는 비활성화
-        rewardButton.onClick.AddListener(OnRewardButtonClicked); // 클릭 이벤트에 메서드 연결
-        
+        rewardButton = GetComponent<Button>();
+        rewardButton.interactable = false;
+        rewardButton.onClick.AddListener(OnRewardButtonClicked);
     }
 
-
-
-
     public void UpdateButtonState()
-    {   
+    {
         if (parentQuest == null)
         {
             Debug.Log("parentQuest is null");
-            return; // parentQuest가 null이면 메서드를 종료
+            return;
         }
-        
+
         if (rewardButton == null)
         {
             Debug.Log("Rewardbutton is null");
             return;
         }
-        // 퀘스트 완료 조건 검사
+
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');
         int currentCount1 = int.Parse(countText1[0]);
         int requiredCount1 = int.Parse(countText1[1]);
-
         bool isCondition1Met = currentCount1 >= requiredCount1;
 
-        bool isCondition2Met = true; // 기본적으로 두 번째 조건은 충족된 것으로 간주
+        bool isCondition2Met = false;
         Sprite requestCandy2 = parentQuest.requestCandy2.sprite;
         if (requestCandy2 != null)
         {
@@ -63,14 +57,42 @@ public class RewardButton : MonoBehaviour
             isCondition2Met = currentCount2 >= requiredCount2;
         }
 
-        // 조건 충족 확인
-        if (isCondition1Met && isCondition2Met)
+        if (isCondition1Met)
         {
-            rewardButton.interactable = true; // 조건 충족 시 활성화
+            Check1.SetActive(true);
         }
         else
         {
-            rewardButton.interactable = false; // 조건 미충족 시 비활성화
+            Check1.SetActive(false);
+        }
+
+        if (isCondition2Met)
+        {
+            Check2.SetActive(true);
+        }
+        else
+        {
+            Check2.SetActive(false);
+        }
+    
+        // 조건 충족 확인
+        if (isCondition1Met && isCondition2Met)
+        {
+            rewardButton.interactable = true;
+            Image thisImage = this.GetComponent<Image>();
+            if (thisImage != null)
+            {
+                thisImage.color = Color.green; // 색상을 변경
+            }
+        }
+        else
+        {
+            rewardButton.interactable = false;
+            Image thisImage = this.GetComponent<Image>();
+            if (thisImage != null)
+            {
+                thisImage.color = Color.white; // 원래 색상으로 복구
+            }
         }
     }
 

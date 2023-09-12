@@ -24182,7 +24182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c787ea1705e4afd488adb5eedd96078d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevel: 1
+  CurrentLevel: 5
   currentExperience: 0
   CurrentDia: 0
   levelText: {fileID: 1213891983}
@@ -24212,7 +24212,7 @@ MonoBehaviour:
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
   boxManager: {fileID: 749087271}
-  fillTime: 3
+  fillTime: 0.1
   minimumFillTime: 1
   passiveCreateTry: 0
   maxPassiveCreateTry: 10
@@ -27611,6 +27611,8 @@ MonoBehaviour:
   maxGoldIncreaseRate: 30
   luckyGoldProbability: 0
   maxLuckyGoldProbability: 40
+  Check1: {fileID: 0}
+  Check2: {fileID: 0}
 --- !u!1 &1968457434
 GameObject:
   m_ObjectHideFlags: 0
