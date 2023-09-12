@@ -29,6 +29,8 @@ public class QuestManager : MonoBehaviour
     private int specialQuestCounter = 0; // 특별 퀘스트 카운팅
     public int specialQuestProbability = 15; // 특별 퀘스트 확률 (15회 중 1회)
     
+    public Dictionary<string, int> activeQuestsInfo = new Dictionary<string, int>(); //활성화된 퀘스트 담는 딕셔너리
+    
     
     
 
@@ -283,9 +285,31 @@ public class QuestManager : MonoBehaviour
             CreateNewQuest(); // 새로운 퀘스트 생성
         }
     }
+    
+    public bool IsQuestValid(int candyLevel1, int candyCount1, int candyLevel2 = -1, int candyCount2 = -1)
+    {
+        // 캔디 정보를 문자열 키로 변환
+        string questKey = $"{candyLevel1}-{candyCount1}";
+        if (candyLevel2 != -1)
+        {
+            questKey += $"-{candyLevel2}-{candyCount2}";
+        }
 
+        // 같은 키가 이미 존재하는지 확인
+        return !activeQuestsInfo.ContainsKey(questKey);
+    }
 
-
+    public void AddQuestInfo(int candyLevel1, int candyCount1, int candyLevel2 = -1, int candyCount2 = -1)
+    {
+        string questKey = $"{candyLevel1}-{candyCount1}";
+        if (candyLevel2 != -1)
+        {
+            questKey += $"-{candyLevel2}-{candyCount2}";
+        }
+        activeQuestsInfo[questKey] = 1;  // 값은 무엇이든 될 수 있습니다.
+    }
+    
+    
 }
 
 

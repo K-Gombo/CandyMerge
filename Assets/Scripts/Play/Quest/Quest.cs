@@ -51,18 +51,29 @@ public class Quest : MonoBehaviour
         {
             numberOfCandyTypes = Random.Range(1, 3);
         }
+
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
         int candyCount1 = Random.Range(3, 8);
-        Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex); 
+        int candyLevel2 = -1;
+        int candyCount2 = 0;
+
+        while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
+        {
+            candyLevel1 = QuestManager.instance.RandomCandyLevel();
+            candyCount1 = Random.Range(3, 8);
+            // 다른 로직 (예: candyLevel2, candyCount2 설정)
+        }
+
+        QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
+
+        Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex);
         Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
         Sprite candySprite2 = null;
-        int candyCount2 = 0;
 
         reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
 
         if (numberOfCandyTypes == 2)
         {
-            int candyLevel2;
             do
             {
                 candyLevel2 = QuestManager.instance.RandomCandyLevel();
@@ -76,14 +87,16 @@ public class Quest : MonoBehaviour
                 reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
             }
         }
-        
-        CalculateSpecialQuest(ref reward); // 특별 퀘스트 계산
 
+        CalculateSpecialQuest(ref reward);
+    
         quest.rewardButton.parentQuest = quest;
-        
+    
         SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
         QuestManager.instance.UpdateQuestCandyCount(quest);
     }
+
+    
 
     public void SetupQuest(Quest questObject, Sprite avatar, Sprite candySprite1, int candyCount1, Sprite candySprite2, int candyCount2, string formattedReward)
     {
@@ -110,7 +123,6 @@ public class Quest : MonoBehaviour
     
     public void UpdateRequirements()
     {
-        
         int numberOfCandyTypes;
         if (HappyLevel.instance.CurrentLevel < 4)
         {
@@ -120,24 +132,29 @@ public class Quest : MonoBehaviour
         {
             numberOfCandyTypes = Random.Range(1, 3);
         }
+
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
         int candyCount1 = Random.Range(3, 8);
-        
-        
-        // 아바타 스프라이트 할당
-        Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex); 
+        int candyLevel2 = -1;
+        int candyCount2 = 0;
+
+        while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
+        {
+            candyLevel1 = QuestManager.instance.RandomCandyLevel();
+            candyCount1 = Random.Range(3, 8);
+            // 다른 로직 (예: candyLevel2, candyCount2 설정)
+        }
+
+        QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
+
+        Sprite avatar = QuestManager.instance.GetRandomHumanAvatar(out avatarIndex);
         Sprite candySprite1 = CandyManager.instance.candySprites[candyLevel1 - 1];
         Sprite candySprite2 = null;
-        int candyCount2 = 0;
-        
-        // 해당 아바타 스프라이트를 humanAvatar 필드에 할당합니다.
-        humanAvatar.sprite = avatar;
 
         long reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
 
         if (numberOfCandyTypes == 2)
         {
-            int candyLevel2;
             do
             {
                 candyLevel2 = QuestManager.instance.RandomCandyLevel();
@@ -151,17 +168,19 @@ public class Quest : MonoBehaviour
                 reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
             }
         }
+
         CalculateSpecialQuest(ref reward);
-      
-        humanAvatar.sprite = avatar; // humanAvatar에 스프라이트 할당
+
+        humanAvatar.sprite = avatar;
         requestCandy1.sprite = candySprite1;
         requestCandy2.sprite = candySprite2;
 
         candyCountText1.text = $"0/{candyCount1}";
         candyCountText2.text = candySprite2 != null ? $"0/{candyCount2}" : "";
 
-        rewardText.text = QuestManager.instance.FormatGold(reward); // rewardText 업데이트
+        rewardText.text = QuestManager.instance.FormatGold(reward);
     }
+
     
     public void CalculateSpecialQuest(ref long reward)
     {
