@@ -74,6 +74,7 @@ public class RewardButton : MonoBehaviour
         }
     }
 
+    Vector3 pulsY = new Vector3(0, 845, 0);
     private void OnRewardButtonClicked()
     {
         if (parentQuest == null)
@@ -81,13 +82,9 @@ public class RewardButton : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonUp(0)) // 0은 왼쪽 마우스 버튼을 의미합니다.
-        {
-            Vector2 clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RewardMovingManager.instance.RequestMovingCurrency(10, CurrencyType.Gold, clickedPosition);
-            Debug.Log("한본 부자잉" + clickedPosition);
-        }
+        RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, (transform.parent.transform.localPosition + pulsY));
 
+        Debug.Log("한본 보우장 : " + transform.parent.transform.localPosition + pulsY);
 
         // 보상 계산을 위한 초기 설정
         string rewardString = parentQuest.rewardText.text;
