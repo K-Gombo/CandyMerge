@@ -6,7 +6,7 @@ using UnityEngine;
 public class OfflineRewardManager : MonoBehaviour
 {
     private TimeSpan totalAccumulatedTime;
-    private const double MAX_ACCUMULATION_TIME_IN_MINUTES = 24 * 60;  // 24 hours in minutes
+    private const double MAX_ACCUMULATION_TIME_IN_MINUTES = 0.1;//24 * 60;  // 24 hours in minutes
 
     void Start()
     {
