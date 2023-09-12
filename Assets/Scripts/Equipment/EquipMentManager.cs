@@ -118,8 +118,8 @@ public class EquipmentManager : MonoBehaviour
 
             AssignRandomRank();
             InitializeEquipSpriteMapping();
-            InitializeRankSpriteMapping();
             InitializeSlotSpriteMapping();
+            InitializeRankSpriteMapping();
             InitializeEquipPool();
         }
     }

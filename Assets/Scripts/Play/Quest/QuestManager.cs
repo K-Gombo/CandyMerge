@@ -18,7 +18,6 @@ public class QuestManager : MonoBehaviour
     public int poolSize = 10;
     private Queue<Quest> questPool = new Queue<Quest>();
     public Transform questPoolParent;
-
     public Dictionary<int, long> candyPriceByLevel = new Dictionary<int, long>();
     public Dictionary<int, long> candySellPriceByLevel = new Dictionary<int, long>();
     public List<GameObject> boxes = new List<GameObject>();
@@ -28,6 +27,7 @@ public class QuestManager : MonoBehaviour
     public HappyLevel happyLevel;
     private int specialQuestCounter = 0; // 특별 퀘스트 카운팅
     public int specialQuestProbability = 15; // 특별 퀘스트 확률 (15회 중 1회)
+    
     
     public Dictionary<string, int> activeQuestsInfo = new Dictionary<string, int>(); //활성화된 퀘스트 담는 딕셔너리
     
@@ -224,14 +224,25 @@ public class QuestManager : MonoBehaviour
     public bool IsSpecialQuest()
     {
         bool isSpecial = Random.Range(1, specialQuestProbability + 1 - specialQuestCounter) == 1 || specialQuestCounter == 14;
-    
+
         if (isSpecial) 
-        {
+        {   
             Debug.Log("특별퀘스트 " + (specialQuestCounter + 1) + "번째에서 등장!"); // 몇 번째에서 특별퀘스트가 등장했는지 출력
+
+            if (Quest.instance.questImage != null)
+            {
+                Quest.instance.questImage.color = new Color(1f, 0.8f, 1f, 1.0f); // 특별 퀘스트일 경우, Quest 프리팹의 Image 컴포넌트의 색상 변경
+            }
+
             specialQuestCounter = 0; // 특별 퀘스트 카운팅 초기화
         }
         else 
         {
+            if (Quest.instance.questImage != null)
+            {
+                Quest.instance.questImage.color = Color.white; // 특별 퀘스트가 아닐 경우, 원래의 색으로 복귀
+            }
+            
             specialQuestCounter++; // 퀘스트 카운팅 증가
         }
 
@@ -242,6 +253,7 @@ public class QuestManager : MonoBehaviour
 
         return isSpecial;
     }
+
     
     public void CheckAndReturnImpossibleQuests()
     {

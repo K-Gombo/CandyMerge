@@ -100,8 +100,9 @@ MonoBehaviour:
   candyCountText1: {fileID: 2086874302068148640}
   candyCountText2: {fileID: 3152248469065516052}
   rewardButton: {fileID: 5311451405093990843}
+  questImage: {fileID: 8752421512687586058}
   isSpecialQuest: 0
-  reward: 1500
+  reward: 1575
 --- !u!1 &2429920939433489086
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5108452584126272017
 RectTransform:
   m_ObjectHideFlags: 0
@@ -475,6 +476,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentQuest: {fileID: 4756250599264335645}
+  goldIncreaseRate: 0
+  maxGoldIncreaseRate: 30
+  luckyGoldProbability: 0
+  maxLuckyGoldProbability: 40
 --- !u!1 &7166283968239458915
 GameObject:
   m_ObjectHideFlags: 0

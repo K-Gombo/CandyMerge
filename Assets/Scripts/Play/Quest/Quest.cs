@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,19 +13,23 @@ public class Quest : MonoBehaviour
     public Text candyCountText1;
     public Text candyCountText2;
     public RewardButton rewardButton;
-   
+    public static Quest instance;
+    public Image questImage;
     
     public bool isSpecialQuest = false; // 특별 퀘스트 여부 확인
     public long reward; // 보상
     private int avatarIndex = -1;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
     
     private void Start() {
         
         rewardButton.parentQuest = this;
     }
-    
-    
-    
     
     public void InstanceQuest()
     {    
@@ -100,8 +105,6 @@ public class Quest : MonoBehaviour
 
     public void SetupQuest(Quest questObject, Sprite avatar, Sprite candySprite1, int candyCount1, Sprite candySprite2, int candyCount2, string formattedReward)
     {
-    
-
         questObject.humanAvatar.sprite = avatar;
         questObject.requestCandy1.sprite = candySprite1;
         questObject.candyCountText1.text = $"0/{candyCount1}";
@@ -110,16 +113,19 @@ public class Quest : MonoBehaviour
         {
             questObject.requestCandy2.sprite = candySprite2;
             questObject.candyCountText2.text = $"0/{candyCount2}";
+            questObject.requestCandy2.gameObject.SetActive(true);  // 2종류일 때 활성화
         }
         else
         {
             questObject.requestCandy2.sprite = null;
             questObject.candyCountText2.text = "";
+            questObject.requestCandy2.gameObject.SetActive(false); // 1종류일 때 비활성화
         }
 
         questObject.rewardText.text = formattedReward;
         QuestManager.instance.activeQuests.Add(questObject);
     }
+
     
     public void UpdateRequirements()
     {
@@ -190,7 +196,8 @@ public class Quest : MonoBehaviour
         if (isSpecialQuest)
         {
             reward *= 3; // 특별 퀘스트일 경우 보상을 3배로 함
-            Debug.Log("특별퀘스트 등장!"); 
+            Debug.Log("특별퀘스트 등장!");
+
         }
     }
     
