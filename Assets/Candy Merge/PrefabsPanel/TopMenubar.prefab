@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3545413230806259334}
   - component: {fileID: 4465372818570673171}
   m_Layer: 5
-  m_Name: Image
+  m_Name: diaImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 1800287507824962923}
   - component: {fileID: 4507717122427158393}
   m_Layer: 5
-  m_Name: Image
+  m_Name: goldImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100.9, y: 0}
+  m_AnchoredPosition: {x: -100, y: 0}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1800287507824962923

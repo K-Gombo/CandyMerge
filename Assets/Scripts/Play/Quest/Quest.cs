@@ -22,6 +22,9 @@ public class Quest : MonoBehaviour
         rewardButton.parentQuest = this;
     }
     
+    
+    
+    
     public void InstanceQuest()
     {    
         QuestManager.instance.activeQuests = new List<Quest>(QuestManager.instance.maxQuests);
@@ -67,10 +70,10 @@ public class Quest : MonoBehaviour
         
         CalculateSpecialQuest(ref reward); // 특별 퀘스트 계산
 
-
-      
-
+        quest.rewardButton.parentQuest = quest;
+        
         SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
+        QuestManager.instance.UpdateQuestCandyCount(quest);
     }
 
     public void SetupQuest(Quest questObject, Sprite avatar, Sprite candySprite1, int candyCount1, Sprite candySprite2, int candyCount2, string formattedReward)
@@ -99,11 +102,8 @@ public class Quest : MonoBehaviour
     public void UpdateRequirements()
     {
         
-
         int numberOfCandyTypes = Random.Range(1, 3);
-        Debug.Log("RandomCandyLevel을 호출하기 전입니다.");
         int candyLevel1 = QuestManager.instance.RandomCandyLevel();
-        Debug.Log("RandomCandyLevel을 호출한 후입니다. 레벨: " + candyLevel1);
         int candyCount1 = Random.Range(3, 10);
         
         

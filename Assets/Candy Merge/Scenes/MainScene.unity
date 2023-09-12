@@ -26447,71 +26447,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539171663}
   m_CullTransparentMesh: 1
---- !u!1 &1539628247 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2056678393850432943, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-  m_PrefabInstance: {fileID: 9102584590486264801}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1539628250
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1539628247}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &1539628253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1539628247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2a79022caa3f4ea89092657bc114fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  candyManager: {fileID: 1968457437}
-  questManager: {fileID: 1965584766}
-  currencyManager: {fileID: 477139587}
 --- !u!1 &1541254242
 GameObject:
   m_ObjectHideFlags: 0
@@ -29374,7 +29309,7 @@ MonoBehaviour:
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
   boxManager: {fileID: 749087271}
-  fillTime: 2
+  fillTime: 0.1
   minimumFillTime: 2
   passiveCreateTry: 0
   maxPassiveCreateTry: 10
@@ -34407,7 +34342,7 @@ MonoBehaviour:
   maxQuests: 4
   maxCandyCount: 10
   candyStatus: {fileID: 7457344846519049650, guid: fadf5ae2752bc474bb2751301166aefb, type: 3}
-  poolSize: 10
+  poolSize: 4
   questPoolParent: {fileID: 596270954}
   boxes: []
   activeQuests:
@@ -37156,10 +37091,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomMenubar
       objectReference: {fileID: 0}
-    - target: {fileID: 967016417811839637, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1987169747512614031, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -37529,10 +37460,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GachaTest
       objectReference: {fileID: 0}
-    - target: {fileID: 6101440837307258548, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37546,21 +37473,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 202459797}
     m_Modifications:
-    - target: {fileID: 2512038471907828437, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2689150146131359467, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
-      propertyPath: m_Name
-      value: diaImage
-      objectReference: {fileID: 0}
     - target: {fileID: 4845242437180406642, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
       propertyPath: m_Name
       value: TopMenubar
-      objectReference: {fileID: 0}
-    - target: {fileID: 4845242437180406642, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5177264196136407270, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
       propertyPath: m_Pivot.x
@@ -37645,10 +37560,6 @@ PrefabInstance:
     - target: {fileID: 5177264196136407270, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411522257542833798, guid: 2ea02a563c119b548adcdf0de0c2889f, type: 3}
-      propertyPath: m_Name
-      value: goldImage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37787,6 +37698,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 802968472973667407, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+      propertyPath: candyManager
+      value: 
+      objectReference: {fileID: 1968457437}
+    - target: {fileID: 802968472973667407, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+      propertyPath: questManager
+      value: 
+      objectReference: {fileID: 1965584766}
+    - target: {fileID: 802968472973667407, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+      propertyPath: currencyManager
+      value: 
+      objectReference: {fileID: 477139587}
     - target: {fileID: 899300378118010934, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -38098,14 +38021,6 @@ PrefabInstance:
     - target: {fileID: 1998984487656441994, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2056678393850432943, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2056678393850432943, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      propertyPath: m_TagString
-      value: SellBox
       objectReference: {fileID: 0}
     - target: {fileID: 2254876642769256137, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -38923,17 +38838,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Main
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 690811358587965683, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-    - {fileID: 5079338911710788400, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-    - {fileID: 7990265948245969692, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2056678393850432943, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1539628250}
-    - targetCorrespondingSourceObject: {fileID: 2056678393850432943, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1539628253}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a119303524bd24dc48446f5232e91ec6, type: 3}

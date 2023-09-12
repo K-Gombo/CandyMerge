@@ -194,11 +194,19 @@ public class QuestManager : MonoBehaviour
             newQuest.transform.SetParent(questGrid, false);
             newQuest.gameObject.SetActive(true);
 
+            RewardButton rewardButton = newQuest.GetComponentInChildren<RewardButton>();
+            if (rewardButton != null)
+            {
+                rewardButton.parentQuest = newQuest;  // parentQuest 재설정
+            }
+
             newQuest.UpdateRequirements(); // 랜덤한 요구사항 할당
-        
+            UpdateQuestCandyCount(newQuest); 
             activeQuests.Add(newQuest);
         }
+        
     }
+
 
     
     private void InitializePool()

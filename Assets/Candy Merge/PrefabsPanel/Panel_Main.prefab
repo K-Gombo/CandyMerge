@@ -2173,9 +2173,9 @@ GameObject:
   - component: {fileID: 8075544613606097072}
   - component: {fileID: 8637700717073525800}
   - component: {fileID: 5041616791055153612}
-  - component: {fileID: 5079338911710788400}
-  - component: {fileID: 7990265948245969692}
-  m_Layer: 5
+  - component: {fileID: 7393340803975907330}
+  - component: {fileID: 802968472973667407}
+  m_Layer: 3
   m_Name: TrashBtn
   m_TagString: SellBox
   m_Icon: {fileID: 0}
@@ -2240,7 +2240,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!61 &5079338911710788400
+--- !u!61 &7393340803975907330
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2283,9 +2283,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 100, y: 100}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7990265948245969692
+--- !u!114 &802968472973667407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
