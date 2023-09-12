@@ -120,8 +120,12 @@ public class CandyController : MonoBehaviour
 
             if (mergeTarget == null && distanceToBox < thresholdDistance)
             {
+                ES3.Save(closestBox.gameObject.name, hit.collider.GetComponent<CandyStatus>().level);
+                ES3.Save(originalParent.gameObject.name, -1);
+                Debug.Log("이동! : " + closestBox.gameObject.name + "\n" + originalParent.gameObject.name);
                 hit.collider.transform.SetParent(closestBox);
                 hit.collider.transform.position = closestBox.position;
+
             }
             else
             {

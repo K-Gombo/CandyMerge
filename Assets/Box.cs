@@ -17,6 +17,8 @@ public class Box : MonoBehaviour
         {
             myCandyLevel = ES3.Load(gameObject.name, 0);
 
+            if (myCandyLevel == -1) return;
+
             GameObject transparentObject = TransCandyPooler.Instance.SpawnFromPool(transform.position, Quaternion.identity);
             transparentObject.transform.SetParent(transform);
             GameObject candy = CandyManager.instance.SpawnFromPool(transform.position, Quaternion.identity);
@@ -50,6 +52,8 @@ public class Box : MonoBehaviour
 
     public void CandyNull()
     {
+        //Debug.Log("CandyNull : " + gameObject.name);
         ES3.Save(gameObject.name, null);
+
     }
 }

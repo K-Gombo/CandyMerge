@@ -86,7 +86,7 @@ public class CandyManager : MonoBehaviour
 
         // 캔디의 레벨을 baseLevel로 초기화합니다.
         CandyStatus status = objectToReturn.GetComponent<CandyStatus>();
-        ES3.Save(status.boxName, 0);
+        ES3.Save(status.boxName, -1);
         if (status != null)
         {
             status.level = CandyStatus.baseLevel;
