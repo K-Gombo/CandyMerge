@@ -218,12 +218,30 @@ public class CandyController : MonoBehaviour
 
     private void MergeCandies(Transform candy1, Transform candy2)
     {   
-        
+        // Null 체크
+        if (candy1 == null || candy2 == null)
+        {
+            Debug.LogError("candy1 또는 candy2가 null입니다.");
+            return;
+        }
+
+        if(EffectPooler.Instance == null) 
+        {
+            Debug.LogError("EffectPooler.Instance가 null입니다.");
+            return;
+        }
+
         // 병합 이펙트 인스턴스화
         EffectPooler.Instance.SpawnFromPool("MergeEffect", new Vector3(candy2.position.x, candy2.position.y, 0), Quaternion.identity);
 
         CandyStatus candyStatus1 = candy1.GetComponent<CandyStatus>();
         CandyStatus candyStatus2 = candy2.GetComponent<CandyStatus>();
+        
+        if (candyStatus1 == null || candyStatus2 == null)
+        {
+            Debug.LogError("candyStatus1 또는 candyStatus2가 null입니다.");
+            return;
+        }
         
         if (candyStatus1.level == candyStatus2.level)
         {
@@ -233,9 +251,7 @@ public class CandyController : MonoBehaviour
                 // 최대 레벨일 경우 병합을 하지 않습니다.
                 return;
             }
-
-            // 병합 이펙트 인스턴스화
-            EffectPooler.Instance.SpawnFromPool("MergeEffect", new Vector3(candy2.position.x, candy2.position.y, 0), Quaternion.identity);
+            
 
             candyStatus2.level++;
             CandyManager.instance.SetAppearance(candy2.gameObject); // 이미지를 먼저 바꾸기
