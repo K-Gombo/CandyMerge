@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23582,7 +23582,7 @@ MonoBehaviour:
   boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
   rewardButton: {fileID: 1965584767}
-  decreaseFilltime: 0.5
+  decreaseFilltime: 0.3
   increaseLuckyCreate: 0.5
   increaseMaxCandies: 1
   increaseBaseLevel: 1
@@ -29309,8 +29309,8 @@ MonoBehaviour:
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
   boxManager: {fileID: 749087271}
-  fillTime: 0.1
-  minimumFillTime: 2
+  fillTime: 6
+  minimumFillTime: 1.2
   passiveCreateTry: 0
   maxPassiveCreateTry: 10
   luckyCreate: 0

@@ -25,7 +25,7 @@ public class GiftBoxController : MonoBehaviour
     public GameObject transparentObjectPrefab; // 투명한 오브젝트 프리팹
     public BoxManager boxManager; // BoxManager 참조
     public float fillTime = 10f; // 초기값 설정
-    public float minimumFillTime = 2f;
+    public float minimumFillTime = 1.2f;
     private bool isLocked = false; // 작동 우선순위 락
     public float passiveCreateTry = 0f; // 10동안 n번 생성
     public float maxPassiveCreateTry = 10f;

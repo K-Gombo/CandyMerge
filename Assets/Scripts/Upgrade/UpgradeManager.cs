@@ -10,7 +10,7 @@ public class UpgradeManager : MonoBehaviour
     public CurrencyManager currencyManager;
     public RewardButton rewardButton;
     
-    public float decreaseFilltime = 0.5f; // 캔디 생성 속도 감소조절 
+    public float decreaseFilltime = 0.3f; // 캔디 생성 속도 감소조절 
     public float increaseLuckyCreate = 0.5f;
     public int increaseMaxCandies = 1;
     public int increaseBaseLevel = 1;
