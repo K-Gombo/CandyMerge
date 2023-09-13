@@ -123,10 +123,7 @@ public class RewardButton : MonoBehaviour
         {
             return;
         }
-
-
-        Debug.Log("한본 보우장 : " + transform.parent.transform.localPosition + pulsY);
-
+        
         // 보상 계산을 위한 초기 설정
         string rewardString = parentQuest.rewardText.text;
         int baseReward = ConvertRewardStringToInt(rewardString);

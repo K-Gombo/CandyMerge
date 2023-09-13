@@ -428,7 +428,7 @@ public class CandyController : MonoBehaviour
     
     public void MoveToMixBox(Transform mixBox)
     {
-        currentlyDraggingCandy.SetParent(mixBox); // MixBox로 이동
+        currentlyDraggingCandy.SetParent(mixBox); 
     }
 
 
