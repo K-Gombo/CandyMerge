@@ -14,7 +14,7 @@ public class GiftBoxController : MonoBehaviour
     public Image giftBoxFill;
     public Transform giftBoxTransform;
     public Text createCandyText;
-    private int candiesRemaining = 0;
+    public int candiesRemaining = 0;
     private int maxCandies = 10;
     public int realMaxCandies = 25;
     private Coroutine autoCreateCoroutine;
@@ -68,6 +68,8 @@ public class GiftBoxController : MonoBehaviour
 
                 candiesRemaining++;
                 createCandyText.text = candiesRemaining + "/" + maxCandies;
+
+                DataController.instance.CandiesRemaining_Save();
 
                 if (candiesRemaining == maxCandies)
                 {
@@ -157,6 +159,8 @@ public class GiftBoxController : MonoBehaviour
                     candiesRemaining--;
                     createCandyText.text = candiesRemaining + "/" + maxCandies;
 
+                    DataController.instance.CandiesRemaining_Save();
+
                     isLocked = false; // 락 해제
                 }
 
@@ -192,6 +196,8 @@ public class GiftBoxController : MonoBehaviour
 
                 createCandyText.text = candiesRemaining + "/" + maxCandies;
 
+                DataController.instance.CandiesRemaining_Save();
+
                 isLocked = false; // 락 해제
             }
 
@@ -216,6 +222,9 @@ public class GiftBoxController : MonoBehaviour
             CreateCandy();
             candiesRemaining--;
             createCandyText.text = candiesRemaining + "/" + maxCandies;
+
+            DataController.instance.CandiesRemaining_Save();
+
         }
 
         lastClickTime = Time.time; // 마지막 클릭 시간 갱신
