@@ -82,6 +82,7 @@ public class CurrencyManager : MonoBehaviour
         {
             currency.Add(value);
             OnCurrencyChanged?.Invoke(currencyName, currency.amount); // 이벤트 발생
+            SaveCurrencies();
         }
     }
 
