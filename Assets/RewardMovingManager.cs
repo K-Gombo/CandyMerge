@@ -16,6 +16,7 @@ public struct CurrencyMetaData
     public CurrencyType type;
     public Sprite sprite;
     public Vector2 targetPosition;
+    public GameObject fadeOut;
 }
 
 public class RewardMovingManager : MonoBehaviour
@@ -26,6 +27,8 @@ public class RewardMovingManager : MonoBehaviour
     [SerializeField] private Transform currencyIconContainer;
     [SerializeField] private List<CurrencyMetaData> currencyMetaDatas;
     [SerializeField] private int initialPoolSize = 10;
+
+    private List<GameObject> fadeOutPool = new List<GameObject>();
 
     private List<Transform> currencyIconPool = new List<Transform>();
     private Vector2[] initialPos;
@@ -59,15 +62,15 @@ public class RewardMovingManager : MonoBehaviour
         }
     }
 
-    public void RequestMovingCurrency(int count, CurrencyType type, Vector2? dynamicStartPosition = null)
+    public void RequestMovingCurrency(int count, CurrencyType type, int reward, Vector2? dynamicStartPosition = null)
     {
         currencyIconContainer.gameObject.SetActive(true);
         var delay = 0f;
+        var currencyData = currencyMetaDatas.Find(data => data.type == type);
 
         for (int i = 0; i < count; i++)
         {
             var icon = GetIconFromPool();
-            var currencyData = currencyMetaDatas.Find(data => data.type == type);
 
             SetupIcon(icon, currencyData.sprite, delay, currencyData.targetPosition);
 
@@ -82,6 +85,12 @@ public class RewardMovingManager : MonoBehaviour
 
             delay += 0.1f;
         }
+
+        GameObject activeFadeOut = RequestFadeOutInstance(currencyData);
+        activeFadeOut.GetComponent<FadeOutController>().SetFadeOutText($"+{BigIntegerCtrl_global.bigInteger.ChangeMoney(reward.ToString())}");
+
+        CurrencyManager.instance.AddCurrency(type.ToString(), reward);
+
     }
 
     private void SetupIcon(Transform icon, Sprite sprite, float delay, Vector2 targetPosition)
@@ -138,4 +147,47 @@ public class RewardMovingManager : MonoBehaviour
         currencyIconPool.Add(icon);
         return icon;
     }
+
+    // FadeOut Pool 관리
+    private void InitializeFadeOutPool(CurrencyMetaData currencyData, int size)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            GameObject newFadeOut = Instantiate(currencyData.fadeOut, currencyData.fadeOut.transform.parent);
+            newFadeOut.SetActive(false);
+            fadeOutPool.Add(newFadeOut);
+        }
+    }
+
+
+    private GameObject GetFadeOutFromPool(CurrencyMetaData currencyData)
+    {
+        if (fadeOutPool.Count == 0)
+        {
+            InitializeFadeOutPool(currencyData, 5); // 필요에 따라 추가로 5개의 fadeOut 오브젝트를 생성
+        }
+
+        
+        var pooledFadeOut = fadeOutPool[0];
+        fadeOutPool.RemoveAt(0);
+        pooledFadeOut.transform.parent = currencyData.fadeOut.transform.parent;
+        pooledFadeOut.SetActive(true);
+        return pooledFadeOut;
+    }
+
+
+    public void ReturnFadeOutToPool(GameObject fadeOutObject)
+    {
+        fadeOutObject.SetActive(false);
+        fadeOutPool.Add(fadeOutObject);
+    }
+
+    public GameObject RequestFadeOutInstance(CurrencyMetaData currencyData)
+    {
+        GameObject activeFadeOut = GetFadeOutFromPool(currencyData);
+        activeFadeOut.GetComponent<FadeOutController>().Manager = this; // Setting the manager reference
+        return activeFadeOut;
+    }
+
+
 }

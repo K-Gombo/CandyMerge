@@ -102,7 +102,6 @@ public class RewardButton : MonoBehaviour
             return;
         }
 
-        RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, (transform.parent.transform.localPosition + pulsY));
 
         Debug.Log("한본 보우장 : " + transform.parent.transform.localPosition + pulsY);
 
@@ -123,9 +122,7 @@ public class RewardButton : MonoBehaviour
         // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
         int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
 
-        // 최종 보상 지급
-        CurrencyManager currencyManager = FindObjectOfType<CurrencyManager>();
-        currencyManager.AddCurrency("Gold", finalReward);
+        RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward, (transform.parent.transform.localPosition + pulsY));
         
         // 캔디 회수
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');

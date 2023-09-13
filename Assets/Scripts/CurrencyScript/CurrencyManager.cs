@@ -29,13 +29,19 @@ public class Currency
 
 public class CurrencyManager : MonoBehaviour
 {
+    public static CurrencyManager instance;
+
     [SerializeField] CurrencyUI currencyUI;
 
     public List<Currency> currencies = new List<Currency>();
 
     public event Action<string, int> OnCurrencyChanged;
-    
 
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -56,13 +62,13 @@ public class CurrencyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("uhguygg");
-            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, new Vector2(200,200));
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, 1000000);
             AddCurrency("Gold", 1000000);
         }
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, new Vector2(-200, -200));
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, 10000000);
             AddCurrency("Dia", 100);
         }
         
