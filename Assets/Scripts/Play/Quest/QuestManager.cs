@@ -128,19 +128,21 @@ public class QuestManager : MonoBehaviour
         {
             quest.questImage.color = Color.white;
         }
+        
 
         quest.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
         rewardButton.GetComponent<Button>().interactable = false;
         quest.gameObject.SetActive(false); // 객체를 비활성화
         questPool.Enqueue(quest); // 풀에 다시 추가
         activeQuests.Remove(quest); // activeQuests 리스트에서 해당 퀘스트 제거
-    
+
         quest.OnQuestComplete();
         CreateNewQuest(); // 새로운 퀘스트 생성
-    
+
         happyLevel.AddExperience(1);
         happyLevel.UpdateHappinessBar();
     }
+
 
     public Sprite GetRandomHumanAvatar(out int avatarIndex)
     {

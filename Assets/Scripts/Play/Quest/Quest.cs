@@ -15,6 +15,7 @@ public class Quest : MonoBehaviour
     public RewardButton rewardButton;
     public static Quest instance;
     public Image questImage;
+    public GameObject RequestCandy2;
     
     public bool isSpecialQuest = false; // 특별 퀘스트 여부 확인
     public long reward; // 보상
@@ -47,14 +48,24 @@ public class Quest : MonoBehaviour
     
     public void CreateQuest(Quest quest)
 {
+    
     int numberOfCandyTypes;
     if (HappyLevel.instance.CurrentLevel < 4)
     {
         numberOfCandyTypes = 1;
+        RequestCandy2.SetActive(false); // 1종류만 생기는 경우에는 RequestCandy2를 비활성화
     }
     else
     {
         numberOfCandyTypes = Random.Range(1, 3);
+        if (numberOfCandyTypes == 1)
+        {
+            RequestCandy2.SetActive(false); // 1종류만 생기는 경우에는 RequestCandy2를 비활성화
+        }
+        else
+        {
+            RequestCandy2.SetActive(true); // 2종류가 생기는 경우에는 RequestCandy2를 활성화
+        }
     }
 
     int candyLevel1 = QuestManager.instance.RandomCandyLevel();
@@ -113,6 +124,8 @@ public class Quest : MonoBehaviour
 
     SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
     QuestManager.instance.UpdateQuestCandyCount(quest);
+    
+    
 }
 
 
@@ -148,10 +161,19 @@ public class Quest : MonoBehaviour
     if (HappyLevel.instance.CurrentLevel < 4)
     {
         numberOfCandyTypes = 1;
+        RequestCandy2.SetActive(false); // 1종류만 생기는 경우에는 RequestCandy2를 비활성화
     }
     else
     {
         numberOfCandyTypes = Random.Range(1, 3);
+        if (numberOfCandyTypes == 1)
+        {
+            RequestCandy2.SetActive(false); // 1종류만 생기는 경우에는 RequestCandy2를 비활성화
+        }
+        else
+        {
+            RequestCandy2.SetActive(true); // 2종류가 생기는 경우에는 RequestCandy2를 활성화
+        }
     }
 
     int candyLevel1 = QuestManager.instance.RandomCandyLevel();
