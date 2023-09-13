@@ -28543,10 +28543,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
-      propertyPath: MixPanel
-      value: 
-      objectReference: {fileID: 932752025}
-    - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: GachaPanel
       value: 
       objectReference: {fileID: 932752025}

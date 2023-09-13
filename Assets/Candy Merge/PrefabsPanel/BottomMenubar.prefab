@@ -75,8 +75,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 586, y: -1364}
-  m_SizeDelta: {x: 280, y: 280}
+  m_AnchoredPosition: {x: 586, y: -1400}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &621208931729267109
 CanvasRenderer:
@@ -234,8 +234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -586, y: -1364}
-  m_SizeDelta: {x: 280, y: 280}
+  m_AnchoredPosition: {x: -586, y: -1400}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4459492086709456876
 CanvasRenderer:
@@ -312,8 +312,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -293, y: -1364}
-  m_SizeDelta: {x: 280, y: 280}
+  m_AnchoredPosition: {x: -293, y: -1400}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5483046933743214035
 CanvasRenderer:
@@ -375,7 +375,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   candyController: {fileID: 0}
-  MixPanel: {fileID: 0}
+  GachaPanel: {fileID: 0}
   giftBoxController: {fileID: 0}
   autoCreateBtn: {fileID: 0}
 --- !u!114 &3323029437379976358
@@ -469,8 +469,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 160}
-  m_SizeDelta: {x: 20, y: 340}
+  m_AnchoredPosition: {x: 0, y: 130}
+  m_SizeDelta: {x: 20, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6403305638298531635
 CanvasRenderer:
@@ -548,8 +548,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1304}
-  m_SizeDelta: {x: 280, y: 280}
+  m_AnchoredPosition: {x: 0, y: -1360}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8131920390709738069
 CanvasRenderer:
@@ -705,7 +705,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -120}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3939020706514396305
@@ -787,8 +787,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 293, y: -1364}
-  m_SizeDelta: {x: 280, y: 280}
+  m_AnchoredPosition: {x: 293, y: -1400}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1401245002927252167
 CanvasRenderer:
@@ -905,6 +905,7 @@ MonoBehaviour:
   - {fileID: 0}
   UpgradePanel: {fileID: 0}
   candyController: {fileID: 0}
+  GachaManager: {fileID: 0}
 --- !u!1 &9072614759883847399
 GameObject:
   m_ObjectHideFlags: 0
