@@ -277,7 +277,7 @@ public class CandyController : MonoBehaviour
     private IEnumerator AnimateScale(Transform candy)
     {
        
-        isMergingInProgress = true; // 병합 중임을 표시
+        // isMergingInProgress = true; // 병합 중임을 표시
        
         Vector3 originalScale = candy.localScale;
         Vector3 targetScale = originalScale * 1.2f;

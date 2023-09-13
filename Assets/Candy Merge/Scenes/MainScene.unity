@@ -28990,6 +28990,10 @@ PrefabInstance:
       propertyPath: boxManager
       value: 
       objectReference: {fileID: 749087271}
+    - target: {fileID: 2221666015251756703, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: candyLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2267336230178927041, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
       propertyPath: equipMentPoolTransform
       value: 
