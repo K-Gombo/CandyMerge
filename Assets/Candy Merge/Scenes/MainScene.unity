@@ -29049,6 +29049,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 469863040}
     - target: {fileID: 8957363607456649543, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: GachaManager
+      value: 
+      objectReference: {fileID: 411645544}
+    - target: {fileID: 8957363607456649543, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: UpgradePanel
       value: 
       objectReference: {fileID: 2082548631}
