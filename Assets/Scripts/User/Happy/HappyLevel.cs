@@ -47,6 +47,14 @@ public class HappyLevel : MonoBehaviour
         UpdateDiaText();
     }
 
+    public void InitUI()
+    {
+        UpdateLevelText();
+        UpdateHappinessText();
+        UpdateDiaText();
+        UpdateHappinessBar();
+    }
+
     private void UpdateLevelText()
     {
         // Level Text 오브젝트의 텍스트를 현재 레벨로 설정
@@ -75,6 +83,7 @@ public class HappyLevel : MonoBehaviour
     public void AddExperience(int amount)
     {
         currentExperience += amount;
+        DataController.instance.Player_Experience_Save();
         while (currentExperience >= HappylevelUp[CurrentLevel + 1])
         {
             LevelUp();
@@ -93,6 +102,7 @@ public class HappyLevel : MonoBehaviour
     private void LevelUp()
     {
         CurrentLevel++;
+        DataController.instance.Player_Level_Save();
         UpdateLevelText();
         GiveLevelUpReward(); // 레벨업 보상 주기
         // currentExperience 초기화
