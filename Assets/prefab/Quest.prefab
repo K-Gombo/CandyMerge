@@ -38,7 +38,7 @@ RectTransform:
   - {fileID: 2877166798608815499}
   - {fileID: 4271122471679152564}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -73,8 +73,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 131611a137aa2488a8c367aa519baee3, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: bf1bbaee0da3d4763a031b08dfd80860, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -105,7 +105,7 @@ MonoBehaviour:
   questImage: {fileID: 8752421512687586058}
   RequestCandy2: {fileID: 2812335771209621310}
   isSpecialQuest: 0
-  reward: 500
+  reward: 450
 --- !u!1 &2429920939433489086
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a05e5a7a69d19429f91e3defc42dde65, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5e321d8db32544119e82d487f586fd1, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
