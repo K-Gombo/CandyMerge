@@ -411,29 +411,35 @@ public class EquipmentManager : MonoBehaviour
         equipmentStatus.UpdateUI();
     }
     
-    public void UpdateRankLevelOnMerge(EquipmentStatus equipmentStatus)
+    public void UpdateRankLevelOnMerge(EquipmentStatus mainEquipment, GameObject[] mergedEquipments)
     {
         // 현재 등급의 최대 rankLevel을 확인
-        int maxRankLevel = maxLevelsPerRank[equipmentStatus.equipRank];
+        int maxRankLevel = maxLevelsPerRank[mainEquipment.equipRank];
 
         // 현재 rankLevel이 최대 rankLevel에 도달했다면
-        if (equipmentStatus.rankLevel >= maxRankLevel)
+        if (mainEquipment.rankLevel >= maxRankLevel)
         {
             // 다음 등급으로 올리고, rankLevel을 1로 초기화
-            equipmentStatus.equipRank = GetNextRank(equipmentStatus.equipRank);
-            equipmentStatus.rankLevel = 1;
+            mainEquipment.equipRank = GetNextRank(mainEquipment.equipRank);
+            mainEquipment.rankLevel = 1;
         }
         else
         {
             // 아니라면 현재 등급에서 rankLevel만 증가
-            equipmentStatus.rankLevel++;
+            mainEquipment.rankLevel++;
         }
 
         // 새로운 등급의 시작 레벨과 최대 레벨을 설정
-        if (levelDataMap.ContainsKey(equipmentStatus.equipRank.ToString()))
+        if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
         {
-            EquipLevelData levelData = levelDataMap[equipmentStatus.equipRank.ToString()];
-            equipmentStatus.equipLevel = levelData.startLevel;
+            EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
+            mainEquipment.equipLevel = levelData.startLevel;
+        }
+
+        // 합성에 사용된 장비를 풀로 반환
+        foreach (GameObject equipment in mergedEquipments)
+        {
+            ReturnEquipToPool(equipment);
         }
     }
 

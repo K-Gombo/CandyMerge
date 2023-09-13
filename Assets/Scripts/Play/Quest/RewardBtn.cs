@@ -85,8 +85,16 @@ public class RewardButton : MonoBehaviour
             rewardButton.interactable = true;
             Image questImage = parentQuest.GetComponent<Image>();
             if (questImage != null)
-            {
-                questImage.color = new Color(0.78f, 0.92f, 0.46f, 1.0f); // 색상을 변경
+            {   
+                if (parentQuest.isSpecialQuest) 
+                {
+                    questImage.color = new Color(0.9f, 0.48f, 1f, 1.0f); // 특별 퀘스트의 경우 다른 색상으로 설정
+                }
+                else
+                {   
+                    questImage.color = new Color(0.78f, 0.92f, 0.46f, 1.0f); // 색상을 변경
+                }
+              
             }
         }
         else
