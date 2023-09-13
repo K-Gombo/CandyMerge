@@ -206,7 +206,7 @@ public class CandyController : MonoBehaviour
             if (t.childCount > 0 && t.GetChild(0).name == candy.name)
             {
                 float dist = Vector3.Distance(t.position, candy.position);
-                if (dist < 0.2f)
+                if (dist < 0.5f)
                 {
                     return t.GetChild(0);
                 }

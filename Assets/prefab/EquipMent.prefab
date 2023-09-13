@@ -754,9 +754,11 @@ MonoBehaviour:
   backgroundImageComponent: {fileID: 7899845762787001645}
   slotImageComponent: {fileID: 478676505122546662}
   equipLevel: 0
+  maxEquipLevel: 0
   rankLevel: 0
   equipLevelText: {fileID: 1882861914411009457}
   rankLevelText: {fileID: 3348615878373077510}
+  EquipButton: {fileID: 8495533990269110767}
 --- !u!223 &3260011616207160637
 Canvas:
   m_ObjectHideFlags: 0
@@ -823,7 +825,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4121843096961907413}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8495533990269110767}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!210 &1592690328278377670
 SortingGroup:
   m_ObjectHideFlags: 0

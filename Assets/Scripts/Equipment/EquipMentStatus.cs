@@ -20,6 +20,7 @@ public class EquipmentStatus : MonoBehaviour
     public int rankLevel = 1; 
     public Text equipLevelText;
     public Text rankLevelText;
+    public Button EquipButton; 
     
     
     void Awake()
@@ -31,6 +32,12 @@ public class EquipmentStatus : MonoBehaviour
         }
     }
     
+    void Start()
+        {
+            EquipButton = GetComponent<Button>(); // Button 컴포넌트 가져오기
+            EquipButton.onClick.AddListener(() => EquipmentController.instance.OnEquipmentClick(this)); 
+        }
+        
     public void UpdateUI()
     {
        
@@ -40,4 +47,6 @@ public class EquipmentStatus : MonoBehaviour
     
 
 }
+    
+
 
