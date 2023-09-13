@@ -32,13 +32,13 @@ public class RewardButton : MonoBehaviour
     {
         if (parentQuest == null)
         {
-            Debug.Log("parentQuest is null");
+            Debug.Log("UpdateButtonState: parentQuest is null");
             return;
         }
 
         if (rewardButton == null)
         {
-            Debug.Log("Rewardbutton is null");
+            Debug.Log("UpdateButtonState: Rewardbutton is null");
             return;
         }
 
@@ -46,6 +46,8 @@ public class RewardButton : MonoBehaviour
         int currentCount1 = int.Parse(countText1[0]);
         int requiredCount1 = int.Parse(countText1[1]);
         bool isCondition1Met = currentCount1 >= requiredCount1;
+
+        // Debug.Log($"UpdateButtonState: currentCount1 = {currentCount1}, requiredCount1 = {requiredCount1}, isCondition1Met = {isCondition1Met}");
 
         bool isCondition2Met = false;
         Sprite requestCandy2 = parentQuest.requestCandy2.sprite;
@@ -56,6 +58,9 @@ public class RewardButton : MonoBehaviour
             int currentCount2 = int.Parse(countText2[0]);
             int requiredCount2 = int.Parse(countText2[1]);
             isCondition2Met = currentCount2 >= requiredCount2;
+
+            // Debug.Log($"UpdateButtonState: currentCount2 = {currentCount2}, requiredCount2 = {requiredCount2}, isCondition2Met = {isCondition2Met}");
+
             Check2.SetActive(isCondition2Met);
         }
         else
@@ -74,25 +79,34 @@ public class RewardButton : MonoBehaviour
             Check1.SetActive(false);
         }
 
-        // if (isCondition2Met)
-        // {
-        //     Check2.SetActive(true);
-        // }
-        // else
-        // {
-        //     Check2.SetActive(false);
-        // }
-        
         // 조건 충족 확인
         if (isCondition1Met && isCondition2Met)
-        {   
-            rewardButton.interactable = true; // 조건 충족 시 활성화
+        {
+            rewardButton.interactable = true;
+            Image questImage = parentQuest.GetComponent<Image>();
+            if (questImage != null)
+            {
+                questImage.color = new Color(0.78f, 0.92f, 0.46f, 1.0f); // 색상을 변경
+            }
         }
         else
         {
-            rewardButton.interactable = false; // 조건 미충족 시 비활성화
+            rewardButton.interactable = false;
+            Image questImage = parentQuest.GetComponent<Image>();
+            if (questImage != null)
+            {
+                if (parentQuest.isSpecialQuest) 
+                {
+                    questImage.color = new Color(1f, 0.8f, 1f, 1.0f); // 특별 퀘스트의 경우 다른 색상으로 설정
+                }
+                else
+                {
+                    questImage.color = Color.white; // 원래 색상으로 복구
+                }
+            }
         }
     }
+
 
     Vector3 pulsY = new Vector3(0, 845, 0);
     private void OnRewardButtonClicked()

@@ -147,7 +147,7 @@ public class CandyManager : MonoBehaviour
         }
         else
         {
-            candyCountText.text = $"{currentCandyCount}/{MaxCandyCount}"; // 그 외의 경우, 괄호와 괄호 안의 숫자를 표시
+            candyCountText.text = $"{currentCandyCount}/{MaxCandyCount} "; // 그 외의 경우, 괄호와 괄호 안의 숫자를 표시
         }
     }
     
