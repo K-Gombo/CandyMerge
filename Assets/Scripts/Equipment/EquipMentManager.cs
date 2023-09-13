@@ -319,9 +319,14 @@ public class EquipmentManager : MonoBehaviour
             {
                 EquipLevelData levelData = levelDataMap[chosenRank.ToString()];
                 equipComponent.equipLevel = levelData.startLevel;  // 장비의 초기 레벨을 설정
+                Debug.Log($"장비의 초기 레벨이 {levelData.startLevel}로 설정되었습니다.");
             }
-            
-           
+            else
+            {
+                Debug.LogError($"등급 {chosenRank}에 해당하는 levelData가 없습니다.");
+            }
+
+             
         }
     }
     
@@ -407,14 +412,5 @@ public class EquipmentManager : MonoBehaviour
         equipmentStatus.UpdateUI();
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
 

@@ -27,8 +27,8 @@ public class GachaBtn : MonoBehaviour
     void OnClickGacha()
     {    Debug.Log("OnClickGacha called");
         if (GachaManager != null)
-        {   
+        {  
             GachaManager.EquipGacha();
         }
-    }
+    } 
 }

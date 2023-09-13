@@ -168,7 +168,17 @@ public class QuestManager : MonoBehaviour
     public int RandomCandyLevel()
     {
         int baseLevel = candyStatus.GetBaseLevel(); // 기본 제작 캔디 레벨 가져오기
-        int randomLevel = Random.Range(baseLevel, baseLevel + 4); // n, n+1, n+2, n+3 중 하나를 랜덤하게 선택
+        int randomLevel;
+
+        if (HappyLevel.instance.CurrentLevel < 3)
+        {
+            randomLevel = Random.Range(baseLevel, baseLevel + 2); // n, n+1 중 하나를 랜덤하게 선택
+        }
+        else
+        {
+            randomLevel = Random.Range(baseLevel, baseLevel + 4); // n, n+1, n+2, n+3 중 하나를 랜덤하게 선택
+        }
+
         return Mathf.Min(randomLevel, candyStatus.GetMaxCandyLevel()); // 선택된 레벨과 최대 캔디 레벨 중 작은 값 반환
     }
     
@@ -306,9 +316,16 @@ public class QuestManager : MonoBehaviour
             questKey += $"-{candyLevel2}-{candyCount2}";
         }
 
+        // HappyLevel이 3 미만일 경우 중복 퀘스트를 허용
+        if (HappyLevel.instance.CurrentLevel < 3)
+        {
+            return true;
+        }
+
         // 같은 키가 이미 존재하는지 확인
         return !activeQuestsInfo.ContainsKey(questKey);
     }
+
 
     public void AddQuestInfo(int candyLevel1, int candyCount1, int candyLevel2 = -1, int candyCount2 = -1)
     {
