@@ -337,14 +337,10 @@ public class EquipmentManager : MonoBehaviour
             if (levelDataMap.ContainsKey(chosenRank.ToString()))
             {
                 EquipLevelData levelData = levelDataMap[chosenRank.ToString()];
-                equipComponent.equipLevel = levelData.startLevel;  // 장비의 초기 레벨을 설정
-                Debug.Log($"장비의 초기 레벨이 {levelData.startLevel}로 설정되었습니다.");
+                equipComponent.equipLevel = levelData.startLevel;
+                equipComponent.maxEquipLevel = levelData.maxLevel;  // 최대 레벨 설정
+                equipComponent.rankLevel = 1;
             }
-            else
-            {
-                Debug.LogError($"등급 {chosenRank}에 해당하는 levelData가 없습니다.");
-            }
-
              
         }
     }
@@ -395,18 +391,16 @@ public class EquipmentManager : MonoBehaviour
     }
     
     
-    public void UpdateEquipLevelAndRank()
+
+    
+    public void UpdateEquipLevel(EquipmentStatus equipmentStatus)
     {
-        if (maxLevelsPerRank.ContainsKey(equipmentStatus.equipRank))
+        if (levelDataMap.ContainsKey(equipmentStatus.equipRank.ToString()))
         {
-            if (equipmentStatus.equipLevel >= maxLevelsPerRank[equipmentStatus.equipRank])
+            EquipLevelData levelData = levelDataMap[equipmentStatus.equipRank.ToString()];
+            if (equipmentStatus.equipLevel < levelData.maxLevel)
             {
-                equipmentStatus.equipRank = GetNextRank(equipmentStatus.equipRank); // 등급을 다음 등급으로 변경
-                equipmentStatus.equipLevel = 1;  // 레벨을 초기화
-            }
-            else
-            {
-                equipmentStatus.equipLevel++; // 레벨을 하나 올림
+                equipmentStatus.equipLevel++;
             }
         }
         else
@@ -414,22 +408,37 @@ public class EquipmentManager : MonoBehaviour
             // 해당 등급에 대한 정보가 없으면 그냥 레벨을 올림
             equipmentStatus.equipLevel++;
         }
+        equipmentStatus.UpdateUI();
     }
     
-    public void UpdateEquipLevel()
+    public void UpdateRankLevelOnMerge(EquipmentStatus equipmentStatus)
     {
-        if (equipmentStatus.equipLevel < maxLevelsPerRank[equipmentStatus.equipRank])
+        // 현재 등급의 최대 rankLevel을 확인
+        int maxRankLevel = maxLevelsPerRank[equipmentStatus.equipRank];
+
+        // 현재 rankLevel이 최대 rankLevel에 도달했다면
+        if (equipmentStatus.rankLevel >= maxRankLevel)
         {
-            equipmentStatus.equipLevel++;
-            UpdateEquipLevelAndRank();
+            // 다음 등급으로 올리고, rankLevel을 1로 초기화
+            equipmentStatus.equipRank = GetNextRank(equipmentStatus.equipRank);
+            equipmentStatus.rankLevel = 1;
         }
         else
         {
-            equipmentStatus.equipRank = GetNextRank(equipmentStatus.equipRank);
-            equipmentStatus.equipLevel = 1;
+            // 아니라면 현재 등급에서 rankLevel만 증가
+            equipmentStatus.rankLevel++;
         }
-        equipmentStatus.UpdateUI();
+
+        // 새로운 등급의 시작 레벨과 최대 레벨을 설정
+        if (levelDataMap.ContainsKey(equipmentStatus.equipRank.ToString()))
+        {
+            EquipLevelData levelData = levelDataMap[equipmentStatus.equipRank.ToString()];
+            equipmentStatus.equipLevel = levelData.startLevel;
+        }
     }
+
+
+
     
 }
 

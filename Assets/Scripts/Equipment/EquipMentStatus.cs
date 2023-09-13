@@ -16,7 +16,8 @@ public class EquipmentStatus : MonoBehaviour
     public Image backgroundImageComponent;
     public Image slotImageComponent;
     public int equipLevel;
-    public int rankLevel;
+    public int maxEquipLevel;  // 추가된 코드
+    public int rankLevel = 1; 
     public Text equipLevelText;
     public Text rankLevelText;
     
