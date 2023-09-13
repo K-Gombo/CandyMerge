@@ -58,6 +58,7 @@ public class EquipmentManager : MonoBehaviour
         public float startGoldGainIncrement;
         public float upgradeGoldGainIncrement;
         public float maxGoldGainIncrement;
+        public int upgradeDefaultGoldCost;
     }
 
     private void Awake()
@@ -66,6 +67,11 @@ public class EquipmentManager : MonoBehaviour
         LoadEquipmentData(); 
         
         LevelCsvData = Resources.Load<TextAsset>("EquipLevelData");
+        if(LevelCsvData == null) {
+            Debug.LogError("LevelCsvData 로딩 실패");
+        } else {
+            Debug.Log("LevelCsvData 로딩 성공");
+        }
         LoadEquipLevelData();
     }
     
@@ -115,12 +121,11 @@ public class EquipmentManager : MonoBehaviour
                 //     Debug.Log($"Equip ID: {equipment.equipId}, Equip Name: {equipment.equipName}, SlotType: {equipment.slotType}, {equipment.skillIds[0]},{equipment.skillRanks[0]}");
                 // }
             }
-
+            InitializeEquipPool();
             AssignRandomRank();
             InitializeEquipSpriteMapping();
             InitializeSlotSpriteMapping();
             InitializeRankSpriteMapping();
-            InitializeEquipPool();
         }
     }
     
@@ -135,7 +140,7 @@ public class EquipmentManager : MonoBehaviour
             {
                 string[] data = csvData[i].Split(',');
                 EquipLevelData levelData = new EquipLevelData();
-                
+            
                 try
                 {
                     levelData.rank = data[0];
@@ -144,16 +149,29 @@ public class EquipmentManager : MonoBehaviour
                     levelData.startGoldGainIncrement = float.Parse(data[3]);
                     levelData.upgradeGoldGainIncrement = float.Parse(data[4]);
                     levelData.maxGoldGainIncrement = float.Parse(data[5]);
+                    levelData.upgradeDefaultGoldCost = int.Parse(data[6]);
                 }
                 catch (Exception e)
                 {
                     // 에러 처리
+                    Debug.LogError("CSV 파싱 에러: " + e.Message);
                 }
-                
+            
                 levelDataMap[levelData.rank] = levelData;
             }
+
+            // 디버깅 코드 추가
+            foreach (var pair in levelDataMap)
+            {
+                Debug.Log($"Key: {pair.Key}, StartLevel: {pair.Value.startLevel}");
+            }
+        }
+        else
+        {
+            Debug.LogError("LevelCsvData가 null입니다.");
         }
     }
+
 
 
     void InitializeEquipSpriteMapping()
