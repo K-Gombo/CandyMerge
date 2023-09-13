@@ -240,6 +240,7 @@ public class EquipmentManager : MonoBehaviour
         Array ranks = Enum.GetValues(typeof(Rank));
         for(int i = 0; i < ranks.Length; i++)
         {
+            if (i == rankSprites.Length) return;
             rankToSpriteMap[(Rank)ranks.GetValue(i)] = rankSprites[i];
         }
     }
