@@ -20151,6 +20151,22 @@ PrefabInstance:
       propertyPath: equipMentPoolTransform
       value: 
       objectReference: {fileID: 1095069984}
+    - target: {fileID: 2267336230178927041, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: slotSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: da74f37f9be58482d80d841bd60b135d, type: 3}
+    - target: {fileID: 2267336230178927041, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: slotSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 07509ca7d29224523af1793d36023219, type: 3}
+    - target: {fileID: 2267336230178927041, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: slotSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: fb5df5469d1ea4178806df71456e21ab, type: 3}
+    - target: {fileID: 2267336230178927041, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: slotSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: eaf9f7844139a4f6199ee0cd41a62fcf, type: 3}
     - target: {fileID: 3746255782505392246, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
       propertyPath: boxManager
       value: 
