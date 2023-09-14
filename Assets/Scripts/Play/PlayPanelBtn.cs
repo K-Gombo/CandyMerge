@@ -10,6 +10,7 @@ public class PlayPanelBtn : MonoBehaviour
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
     public GachaManager GachaManager;
+    public GameObject TrashCan;
 
     public void OnButtonClick()
     {
@@ -41,6 +42,11 @@ public class PlayPanelBtn : MonoBehaviour
             if (candyController.mergeLocked)
             {
                 candyController.mergeLocked = false;
+            }
+
+            if (!TrashCan.activeSelf)
+            {
+                TrashCan.SetActive(true);
             }
 
             giftBoxController.TogglePassiveAutoCreate(true);

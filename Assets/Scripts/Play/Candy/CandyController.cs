@@ -304,7 +304,7 @@ public class CandyController : MonoBehaviour
 
         candy.localScale = originalScale;
 
-        isMergingInProgress = false; // 병합 중이 아님을 표시
+        // isMergingInProgress = false; // 병합 중이 아님을 표시
         
     }
 

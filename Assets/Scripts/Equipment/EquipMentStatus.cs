@@ -21,6 +21,7 @@ public class EquipmentStatus : MonoBehaviour
     public Text equipLevelText;
     public Text rankLevelText;
     public Button EquipButton; 
+    public GameObject myClone;
     
     
     void Awake()

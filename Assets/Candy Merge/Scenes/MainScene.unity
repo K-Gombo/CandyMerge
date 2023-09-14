@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -499,7 +499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -383, y: -229.99992}
+  m_AnchoredPosition: {x: -383, y: -230}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &46758302
@@ -654,6 +654,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &64075946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2056678393850432943, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+  m_PrefabInstance: {fileID: 9102584590486264801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &65412522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,7 +2937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &235900876
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2950,7 +2955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 146, y: -229.99992}
+  m_AnchoredPosition: {x: 146, y: -230}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &235900877
@@ -13028,12 +13033,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2291ceb81b74f4c28b2786001e11fdba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipMixPanel: {fileID: 0}
+  equipMixPanel: {fileID: 1272144691}
   equipMixBoxes:
   - {fileID: 46758301}
-  - {fileID: 1309334759}
   - {fileID: 235900876}
-  moveSpeed: 2
+  - {fileID: 1309334759}
 --- !u!1 &928856351
 GameObject:
   m_ObjectHideFlags: 0
@@ -17710,8 +17714,8 @@ RectTransform:
   - {fileID: 44040038}
   - {fileID: 46758301}
   - {fileID: 2058429634}
-  - {fileID: 1309334759}
   - {fileID: 235900876}
+  - {fileID: 1309334759}
   - {fileID: 164301639}
   - {fileID: 1597616097}
   m_Father: {fileID: 654771647}
@@ -18286,12 +18290,12 @@ GameObject:
   - component: {fileID: 1309334761}
   - component: {fileID: 1309334760}
   m_Layer: 5
-  m_Name: MixBox1
+  m_Name: MixBox3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1309334759
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18309,7 +18313,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 476, y: -229.99992}
+  m_AnchoredPosition: {x: 476, y: -230}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309334760
@@ -18663,7 +18667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 20
     m_Right: 0
     m_Top: 40
     m_Bottom: 0
@@ -25527,6 +25531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   giftBoxController: {fileID: 1675821897}
+  upgradeManager: {fileID: 0}
 --- !u!4 &1917004876
 Transform:
   m_ObjectHideFlags: 0
@@ -28559,6 +28564,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1675821897}
     - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[0]
       value: 
       objectReference: {fileID: 1168936108}
@@ -28590,10 +28599,18 @@ PrefabInstance:
       propertyPath: allPanels.Array.data[7]
       value: 
       objectReference: {fileID: 751400241}
+    - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: allPanels.Array.data[8]
+      value: 
+      objectReference: {fileID: 64075946}
     - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: GiftBox
       value: 
       objectReference: {fileID: 827990670}
+    - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
+      propertyPath: TrashCan
+      value: 
+      objectReference: {fileID: 64075946}
     - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: GachaManager
       value: 
@@ -28830,10 +28847,6 @@ PrefabInstance:
     - target: {fileID: 6101440837307258548, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
       propertyPath: m_Name
       value: GachaTest
-      objectReference: {fileID: 0}
-    - target: {fileID: 6101440837307258548, guid: 72371f3b2c59f49c09c9d2b7c409d008, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

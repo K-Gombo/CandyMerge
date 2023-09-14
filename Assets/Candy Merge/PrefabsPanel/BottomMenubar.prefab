@@ -614,6 +614,7 @@ MonoBehaviour:
   GiftBox: {fileID: 0}
   AutoCreateBtn: {fileID: 0}
   GachaManager: {fileID: 0}
+  TrashCan: {fileID: 0}
 --- !u!114 &520149950788541427
 MonoBehaviour:
   m_ObjectHideFlags: 0
