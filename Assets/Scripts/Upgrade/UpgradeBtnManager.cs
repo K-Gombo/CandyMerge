@@ -83,7 +83,7 @@ public class UpgradeBtnManager : MonoBehaviour
 
     public void OnGoldUpButtonClick()
     {
-        upgradeManager.GoldUp();
+        //upgradeManager.GoldUp();
         DataController.instance.Upgrade_goldUpLevel_Save();
     }
 

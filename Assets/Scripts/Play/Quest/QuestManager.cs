@@ -295,8 +295,8 @@ public class QuestManager : MonoBehaviour
             {
                 activeQuests[i].transform.SetSiblingIndex(i - 1);
             }
-
-            quest.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
+            var questTemp = quest;
+            questTemp.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
             rewardButton.GetComponent<Button>().interactable = false;
             quest.gameObject.SetActive(false); // 객체를 비활성화
             questPool.Enqueue(quest); // 풀에 다시 추가

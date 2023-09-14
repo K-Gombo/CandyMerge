@@ -263,7 +263,7 @@ public class DataController : MonoBehaviour
         Upgrade_goldUpLevel_DataLoad();
         upgradeManager.goldUpLevel = GameData.goldUpLevel;
 
-        upgradeManager.GoldUp(GameData.goldUpLevel - 1);
+        //upgradeManager.GoldUp(GameData.goldUpLevel - 1);
     }
 
 

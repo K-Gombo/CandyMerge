@@ -434,61 +434,61 @@ public class UpgradeManager : MonoBehaviour
     }
 
 
-    public void GoldUp()
-    {
-        float currentGoldUp = rewardButton.GetGoldUp();
-        if (currentGoldUp >= rewardButton.maxGoldIncreaseRate)
-        {
-            Debug.Log("이미 최대로 업그레이드 되었습니다.");
-            return;
-        }
+    //public void GoldUp()
+    //{
+    //    float currentGoldUp = rewardButton.GetGoldUp();
+    //    if (currentGoldUp >= rewardButton.maxGoldIncreaseRate)
+    //    {
+    //        Debug.Log("이미 최대로 업그레이드 되었습니다.");
+    //        return;
+    //    }
 
-        if (currencyManager.SubtractCurrency("Gold", currentGoldUpCost))
-        {
-            float newGoldUp = Mathf.Min(currentGoldUp + increaseGoldUp, rewardButton.maxGoldIncreaseRate);
-            rewardButton.SetGoldUp(newGoldUp);
-            UpdateCost(ref currentGoldUpCost);
-            goldUpLevel++;
-            Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
-        }
-        else
-        {
-            Debug.Log("골드가 부족합니다.");
-        }
-    }
+    //    if (currencyManager.SubtractCurrency("Gold", currentGoldUpCost))
+    //    {
+    //        float newGoldUp = Mathf.Min(currentGoldUp + increaseGoldUp, rewardButton.maxGoldIncreaseRate);
+    //        rewardButton.SetGoldUp(newGoldUp);
+    //        UpdateCost(ref currentGoldUpCost);
+    //        goldUpLevel++;
+    //        Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("골드가 부족합니다.");
+    //    }
+    //}
 
-    public void GoldUp(int count)
-    {
-        float currentGoldUp = rewardButton.GetGoldUp();
+    //public void GoldUp(int count)
+    //{
+    //    float currentGoldUp = rewardButton.GetGoldUp();
 
-        float totalGoldIncrease = increaseGoldUp * count; // 원하는만큼 골드 획득량 증가
-        float potentialGoldUp = currentGoldUp + totalGoldIncrease; // 획득량 증가 후 잠재적인 골드 업
+    //    float totalGoldIncrease = increaseGoldUp * count; // 원하는만큼 골드 획득량 증가
+    //    float potentialGoldUp = currentGoldUp + totalGoldIncrease; // 획득량 증가 후 잠재적인 골드 업
 
-        if (currentGoldUp >= rewardButton.maxGoldIncreaseRate)
-        {
-            Debug.Log("이미 최대로 업그레이드 되었습니다.");
-            return;
-        }
+    //    if (currentGoldUp >= rewardButton.maxGoldIncreaseRate)
+    //    {
+    //        Debug.Log("이미 최대로 업그레이드 되었습니다.");
+    //        return;
+    //    }
 
-        if (potentialGoldUp > rewardButton.maxGoldIncreaseRate)
-        {
-            Debug.Log($"요청한 증가량({count}번)으로 인해 골드 획득량이 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
-            totalGoldIncrease = rewardButton.maxGoldIncreaseRate - currentGoldUp;
-        }
+    //    if (potentialGoldUp > rewardButton.maxGoldIncreaseRate)
+    //    {
+    //        Debug.Log($"요청한 증가량({count}번)으로 인해 골드 획득량이 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
+    //        totalGoldIncrease = rewardButton.maxGoldIncreaseRate - currentGoldUp;
+    //    }
 
-        int totalCost = currentGoldUpCost * count; // 요청한 증가량에 따른 전체 비용
+    //    int totalCost = currentGoldUpCost * count; // 요청한 증가량에 따른 전체 비용
 
-        if (currencyManager.SubtractCurrency("Gold", totalCost))
-        {
-            float newGoldUp = currentGoldUp + totalGoldIncrease;
-            rewardButton.SetGoldUp(newGoldUp);
-            Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
-        }
-        else
-        {
-            Debug.Log("골드가 부족합니다.");
-        }
-    }
+    //    if (currencyManager.SubtractCurrency("Gold", totalCost))
+    //    {
+    //        float newGoldUp = currentGoldUp + totalGoldIncrease;
+    //        rewardButton.SetGoldUp(newGoldUp);
+    //        Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("골드가 부족합니다.");
+    //    }
+    //}
 
     public void LuckyGoldUp()
     {
