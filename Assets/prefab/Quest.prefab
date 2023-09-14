@@ -105,7 +105,11 @@ MonoBehaviour:
   questImage: {fileID: 8752421512687586058}
   RequestCandy2: {fileID: 2812335771209621310}
   isSpecialQuest: 0
+<<<<<<< HEAD
   reward: 300
+=======
+  reward: 900
+>>>>>>> 71601261556ecb6f602d076d5983ec98a649ad95
 --- !u!1 &2429920939433489086
 GameObject:
   m_ObjectHideFlags: 0
