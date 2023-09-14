@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentController : MonoBehaviour
 {
@@ -14,68 +15,80 @@ public class EquipmentController : MonoBehaviour
     
 
     public void OnEquipmentClick(EquipmentStatus clickedEquipment)
-{
-    if (clickedEquipment.myClone != null)
     {
-        return;
+        if (!clickedEquipment.isOriginal)
+        {
+            return;
+        }
+
+        if (clickedEquipment.myClone != null)
+        {
+            return;
+        }
+
+        if (equipMixPanel.activeSelf)
+        {
+            GameObject clone = null;
+            Transform targetParent = null;
+
+            if (equipMixBoxes[0].childCount == 0 && !equipMixBoxes[1].gameObject.activeSelf && !equipMixBoxes[2].gameObject.activeSelf)
+            {
+                targetParent = equipMixBoxes[0];
+                if (!equipMixBoxes[1].gameObject.activeSelf && !equipMixBoxes[2].gameObject.activeSelf)
+                {
+                    ActivateAndMoveBoxes();
+                }
+            }
+            else if (equipMixBoxes[0].childCount > 0 && equipMixBoxes[1].gameObject.activeSelf && equipMixBoxes[2].gameObject.activeSelf)
+            {
+                if (equipMixBoxes[1].childCount == 0)
+                {
+                    targetParent = equipMixBoxes[1];
+                }
+                else if (equipMixBoxes[2].childCount == 0)
+                {
+                    targetParent = equipMixBoxes[2];
+                }
+            }
+
+            if (targetParent != null)
+            {
+                // 복사본을 생성
+                clone = Instantiate(clickedEquipment.gameObject);
+                EquipmentStatus cloneStatus = clone.GetComponent<EquipmentStatus>();
+                cloneStatus.isOriginal = false;
+
+                // 원본 클릭 이벤트 제거
+                Button originalButton = clickedEquipment.GetComponent<Button>();
+                originalButton.onClick.RemoveAllListeners();
+
+                // 원본 클릭 이벤트 재설정
+                originalButton.onClick.AddListener(() => OnEquipmentClick(clickedEquipment));
+
+                // 새로운 클릭 이벤트 추가
+                Button cloneButton = clone.GetComponent<Button>();
+                cloneButton.onClick.AddListener(() => OnCloneClick(cloneStatus));
+                
+                RectTransform cloneRect = clone.GetComponent<RectTransform>();
+                RectTransform parentRect = targetParent.GetComponent<RectTransform>();
+
+                cloneRect.anchorMin = parentRect.anchorMin;
+                cloneRect.anchorMax = parentRect.anchorMax;
+                cloneRect.anchoredPosition3D = Vector3.zero;
+                cloneRect.sizeDelta = parentRect.sizeDelta;
+                cloneRect.localScale = new Vector3(
+                    clickedEquipment.transform.localScale.x * 1.2f,
+                    clickedEquipment.transform.localScale.y * 1.2f,
+                    clickedEquipment.transform.localScale.z * 1.2f
+                );
+
+                clone.transform.SetParent(targetParent, false);
+                clone.transform.localPosition = Vector3.zero;
+
+                clickedEquipment.myClone = clone;
+            }
+        }
     }
-
-    if (equipMixPanel.activeSelf)
-    {
-        GameObject clone = null;
-        Transform targetParent = null;
-
-        if (equipMixBoxes[0].childCount == 0 && !equipMixBoxes[1].gameObject.activeSelf && !equipMixBoxes[2].gameObject.activeSelf)
-        {
-            targetParent = equipMixBoxes[0];
-            if (!equipMixBoxes[1].gameObject.activeSelf && !equipMixBoxes[2].gameObject.activeSelf)
-            {
-                ActivateAndMoveBoxes(); // 비활성화 상태일 때만 이 함수를 호출
-            }
-        }
-        else if (equipMixBoxes[0].childCount > 0 && equipMixBoxes[1].gameObject.activeSelf && equipMixBoxes[2].gameObject.activeSelf)
-        {
-            if (equipMixBoxes[1].childCount == 0)
-            {
-                targetParent = equipMixBoxes[1];
-            }
-            else if (equipMixBoxes[2].childCount == 0)
-            {
-                targetParent = equipMixBoxes[2];
-            }
-        }
-
-        if (targetParent != null)
-        {
-            // 복사본을 생성
-            clone = Instantiate(clickedEquipment.gameObject);
-
-            // 복사본의 RectTransform 설정
-            RectTransform cloneRect = clone.GetComponent<RectTransform>();
-            RectTransform parentRect = targetParent.GetComponent<RectTransform>();
-
-            cloneRect.anchorMin = parentRect.anchorMin;
-            cloneRect.anchorMax = parentRect.anchorMax;
-            cloneRect.anchoredPosition3D = Vector3.zero;
-            cloneRect.sizeDelta = parentRect.sizeDelta;
-            cloneRect.localScale = new Vector3(
-                clickedEquipment.transform.localScale.x * 1.2f,
-                clickedEquipment.transform.localScale.y * 1.2f,
-                clickedEquipment.transform.localScale.z * 1.2f
-            );
-
-            // 부모 설정
-            clone.transform.SetParent(targetParent, false);
-            clone.transform.localPosition = Vector3.zero;
-
-            clickedEquipment.myClone = clone;
-        }
-    }
-}
-
-
-
-
 
     private void ActivateAndMoveBoxes()
     {
@@ -106,15 +119,38 @@ public class EquipmentController : MonoBehaviour
 
         targetTransform.localPosition = endLocalPos;
     }
-    
-    public void ReturnEquipment(EquipmentStatus returnedEquipment)
+
+    public void OnCloneClick(EquipmentStatus clickedClone)
     {
-        if (returnedEquipment.myClone != null)
+        if (clickedClone.isOriginal)
         {
-            // 원본에 대한 참조를 해제
-            returnedEquipment.myClone = null;
+            return;
         }
-        returnedEquipment.gameObject.SetActive(false);
+
+        if (clickedClone.myClone != null)
+        {
+            clickedClone.myClone.GetComponent<EquipmentStatus>().myClone = null;
+        }
+
+        if (clickedClone.transform.parent == equipMixBoxes[0])
+        {
+            // EquipMixBox2, 3에 있는 모든 클론을 제거
+            foreach (Transform child in equipMixBoxes[1])
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in equipMixBoxes[2])
+            {
+                Destroy(child.gameObject);
+            }
+
+            // EquipMixBox2, 3를 비활성화
+            equipMixBoxes[1].gameObject.SetActive(false);
+            equipMixBoxes[2].gameObject.SetActive(false);
+        }
+
+        // 클릭된 클론 제거
+        Destroy(clickedClone.gameObject);
     }
 
 }

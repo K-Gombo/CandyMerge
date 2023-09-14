@@ -22,6 +22,7 @@ public class EquipmentStatus : MonoBehaviour
     public Text rankLevelText;
     public Button EquipButton; 
     public GameObject myClone;
+    public bool isOriginal = true;
     
     
     void Awake()

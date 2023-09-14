@@ -25,7 +25,7 @@ public class GachaManager : MonoBehaviour
         // 헤더 읽기
         string[] headers = csvData[0].Split(',');
 
-        for (int i = 1; i < csvData.Length - 1; i++)
+        for (int i = 1; i < csvData.Length; i++)
         {
             var line = csvData[i];
             var data = line.Split(',');
