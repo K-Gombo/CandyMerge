@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8185849684062930714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -104,8 +104,8 @@ MonoBehaviour:
   rewardButton: {fileID: 5311451405093990843}
   questImage: {fileID: 8752421512687586058}
   RequestCandy2: {fileID: 2812335771209621310}
-  isSpecialQuest: 0
-  reward: 674
+  isSpecialQuest: 1
+  reward: 300
 --- !u!1 &2429920939433489086
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0/6
+  m_Text: 
 --- !u!1 &2812335771209621310
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9de8daccd9959409fa539e64f23fdac7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -342,7 +342,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1.1A
+  m_Text: 261.6a
 --- !u!1 &3207905030570394797
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7e2277b505fe140a19f7de3fce0b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentQuest: {fileID: 0}
+  parentQuest: {fileID: 4756250599264335645}
   rewardButton: {fileID: 6933008789301289784}
   goldIncreaseRate: 0
   maxGoldIncreaseRate: 30
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 714a8f58bcefd4f119d1150ef397dd49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2fd8ec7be1114287ab6dc367d5e099a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6bd93f217df27496693506ce5503fc73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa8f903001a5c409b8c045d8afb7c877, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -870,4 +870,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0/6
+  m_Text: 0/2
