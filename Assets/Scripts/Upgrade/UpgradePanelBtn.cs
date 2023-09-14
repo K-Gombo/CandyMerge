@@ -7,6 +7,8 @@ public class UpgradePanelBtn : MonoBehaviour
     public GameObject UpgradePanel;    // UpgradePanel
     public CandyController candyController;
     public GachaManager GachaManager;
+    
+    
     public void OnButtonClick()
     {
         bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();

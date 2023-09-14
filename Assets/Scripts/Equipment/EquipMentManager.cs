@@ -73,6 +73,7 @@ public class EquipmentManager : MonoBehaviour
             Debug.Log("LevelCsvData 로딩 성공");
         }
         LoadEquipLevelData();
+        
     }
     
     private void LoadEquipmentData()

@@ -8,7 +8,6 @@ public class EquipmentController : MonoBehaviour
     public Transform[] equipMixBoxes;
     public static EquipmentController instance;
     public GameObject mixLockedPanel;
-    public GameObject selectCheck;
 
     void Awake()
     {

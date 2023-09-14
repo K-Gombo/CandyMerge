@@ -10,9 +10,11 @@ public class EquipPanelBtn : MonoBehaviour
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
     public GachaManager GachaManager;
-    public GameObject EquipPanel; 
-    
-    
+    public GameObject EquipPanel;
+
+
+
+
     public void OnButtonClick()
     {
         bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
