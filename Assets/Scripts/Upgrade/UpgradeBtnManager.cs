@@ -89,7 +89,7 @@ public class UpgradeBtnManager : MonoBehaviour
 
     public void OnLuckyGoldUpButtonClick()
     {
-        upgradeManager.LuckyGoldUp();
+        //upgradeManager.LuckyGoldUp();
         DataController.instance.Upgrade_luckyGoldLevel_Save();
     }
 }

@@ -29010,6 +29010,14 @@ PrefabInstance:
       propertyPath: questPoolParent
       value: 
       objectReference: {fileID: 596270954}
+    - target: {fileID: 5359170730984797543, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: activeQuests.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359170730984797543, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: activeQuests.Array.data[0]
+      value: 
+      objectReference: {fileID: 4756250599264335645, guid: cc6cca75671dfbf4993f8bbefd7a9499, type: 3}
     - target: {fileID: 7017048081078816877, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
       propertyPath: BackPanelBtn
       value: 

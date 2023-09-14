@@ -286,6 +286,6 @@ public class DataController : MonoBehaviour
         Upgrade_luckyGoldLevel_DataLoad();
         upgradeManager.luckyGoldLevel = GameData.luckyGoldLevel;
 
-        upgradeManager.LuckyGoldUp(GameData.luckyGoldLevel - 1);
+        //upgradeManager.LuckyGoldUp(GameData.luckyGoldLevel - 1);
     }
 }
