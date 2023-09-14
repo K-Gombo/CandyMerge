@@ -47,41 +47,49 @@ public class UpgradeBtnManager : MonoBehaviour
     public void OnLuckyCreateUpButtonClick()
     {
         upgradeManager.LuckyCreateUp();
+        DataController.instance.Upgrade_luckyCreateLevel_Save();
     }
 
     public void OnCreateSpeedUpButtonClick()
     {
         upgradeManager.CreateSpeedUp();
+        DataController.instance.Upgrade_createSpeedLevel_Save();
     }
 
     public void OnMaxCandiesUpButtonClick()
     {
         upgradeManager.MaxCandiesUp();
+        DataController.instance.Upgrade_maxCandiesLevel_Save();
     }
 
     public void OnCandyLevelUpButtonClick()
     {
         upgradeManager.CandyLevelUp();
+        DataController.instance.Upgrade_candyLevel_Save();
     }
     
 
     public void OnPassiveAutoCreateSpeedUpButtonClick()
     {
         upgradeManager.PassiveAutoCreateSpeedUp();
+        DataController.instance.Upgrade_passiveAutoCreateSpeedLevel_Save();
     }
 
     public void OnRemoveLockedButtonClick()
     {
         upgradeManager.RemoveLocked();
+        DataController.instance.Upgrade_removeLockedLevel_Save();
     }
 
     public void OnGoldUpButtonClick()
     {
         upgradeManager.GoldUp();
+        DataController.instance.Upgrade_goldUpLevel_Save();
     }
 
     public void OnLuckyGoldUpButtonClick()
     {
         upgradeManager.LuckyGoldUp();
+        DataController.instance.Upgrade_luckyGoldLevel_Save();
     }
 }

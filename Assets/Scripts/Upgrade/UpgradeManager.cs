@@ -94,7 +94,18 @@ public class UpgradeManager : MonoBehaviour
         }
     }
     
-    
+    public void LuckyCreateUp(int luckyCreateLevel)
+    {
+        for (int i=0; i<luckyCreateLevel; i++)
+        {
+            float currentLuckyCreate = giftBoxController.GetLuckyCreate();
+
+            float newLuckyCreate = Mathf.Min(currentLuckyCreate + increaseLuckyCreate, giftBoxController.maxLuckyCreate);
+            giftBoxController.SetLuckyCreate(newLuckyCreate);
+
+            Debug.Log($"캔디 확률 업!: {newLuckyCreate}");
+        }
+    }
     
 
     public void CreateSpeedUp() //선물상자 제작속도 업 (스킬2)
@@ -120,7 +131,19 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
-    
+
+    public void CreateSpeedUp(int createSpeedLevel)
+    {
+        for (int i=0; i < createSpeedLevel; i++)
+        {
+            float currentFillTime = giftBoxController.GetFillTime();
+
+            float newFillTime = Mathf.Max(currentFillTime - decreaseFilltime, giftBoxController.minimumFillTime);
+            giftBoxController.SetFillTime(newFillTime);
+
+            Debug.Log($"생산 쿨타임 감소!:{newFillTime}");
+        }
+    }
     
     public void RemoveLocked() //Locked 오브젝트 해제 보유 캔디 증가 업 (스킬3)
     {

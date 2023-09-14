@@ -114,6 +114,8 @@ public class DataController : MonoBehaviour
     {
         Upgrade_luckyCreateLevel_DataLoad();
         upgradeManager.luckyCreateLevel = GameData.luckyCreateLevel;
+
+        upgradeManager.LuckyCreateUp(GameData.luckyCreateLevel);
     }
 
 
@@ -135,6 +137,8 @@ public class DataController : MonoBehaviour
     {
         Upgrade_createSpeedLevel_DataLoad();
         upgradeManager.createSpeedLevel = GameData.createSpeedLevel;
+
+        upgradeManager.CreateSpeedUp(GameData.createSpeedLevel);
     }
 
 
