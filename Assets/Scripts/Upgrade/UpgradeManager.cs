@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -207,6 +208,60 @@ public class UpgradeManager : MonoBehaviour
         else
         {
             Debug.Log("골드가 부족합니다."); 
+        }
+    }
+
+    public void RemoveLocked(int count)
+    {
+        Transform boxTile = boxManager.boxTile; // BoxManager에서 boxTile 가져오기
+
+        int lockedCount = 0; // 현재 잠금 상자 개수를 저장
+        List<Transform> lockedBoxes = new List<Transform>(); // 잠금 상자 리스트
+
+        // 현재 잠금 상자 개수와 해당 상자들을 lockedBoxes 리스트에 추가
+        for (int i = 0; i < boxTile.childCount; i++)
+        {
+            Transform box = boxTile.GetChild(i);
+            if (box.CompareTag("Box"))
+            {
+                for (int j = 0; j < box.childCount; j++)
+                {
+                    Transform child = box.GetChild(j);
+                    if (child.CompareTag("Locked"))
+                    {
+                        lockedBoxes.Add(child);
+                        lockedCount++;
+                    }
+                }
+            }
+        }
+
+        if (lockedCount == 0)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (count > lockedCount)
+        {
+            Debug.Log($"요청한 잠금 해제 개수({count}개)는 현재 잠금 상자 개수({lockedCount}개)보다 많습니다. {lockedCount}개만 해제됩니다.");
+            count = lockedCount;
+        }
+
+        int totalCost = currentRemoveLockedCost * count; // 요청한 잠금 해제 개수에 따른 전체 비용
+
+        if (currencyManager.SubtractCurrency("Gold", totalCost))
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Destroy(lockedBoxes[i].gameObject);
+                CandyManager.instance.LockedTileRemoved();
+            }
+            Debug.Log($"{count}개의 Locked 오브젝트가 제거되었습니다! 남은 골드: {currencyManager.GetCurrencyAmount("Gold")}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
         }
     }
 

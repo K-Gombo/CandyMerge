@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -25532,7 +25532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   giftBoxController: {fileID: 1675821897}
-  upgradeManager: {fileID: 0}
+  upgradeManager: {fileID: 1387880594}
 --- !u!4 &1917004876
 Transform:
   m_ObjectHideFlags: 0
@@ -29098,6 +29098,10 @@ PrefabInstance:
       propertyPath: boxTile
       value: 
       objectReference: {fileID: 749087268}
+    - target: {fileID: 5091993745527870014, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
+      propertyPath: fillTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5091993745527870014, guid: 8cb42edeea4a14091b3ea7f34ce5a1fb, type: 3}
       propertyPath: boxManager
       value: 

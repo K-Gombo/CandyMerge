@@ -11,7 +11,12 @@ public class DataController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
         ALL_LOAD();
+
     }
 
     private void ALL_LOAD()
@@ -160,6 +165,11 @@ public class DataController : MonoBehaviour
     {
         Upgrade_removeLockedLevel_DataLoad();
         upgradeManager.removeLockedLevel = GameData.removeLockedLevel;
+
+        
+            
+            upgradeManager.RemoveLocked(GameData.removeLockedLevel-1);
+        
     }
 
 
