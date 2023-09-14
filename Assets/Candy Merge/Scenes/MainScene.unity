@@ -13037,6 +13037,8 @@ MonoBehaviour:
   - {fileID: 46758301}
   - {fileID: 235900876}
   - {fileID: 1309334759}
+  mixLockedPanel: {fileID: 2102023929}
+  selectCheck: {fileID: 0}
 --- !u!1 &928856351
 GameObject:
   m_ObjectHideFlags: 0
