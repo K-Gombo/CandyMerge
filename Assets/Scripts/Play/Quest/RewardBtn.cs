@@ -140,9 +140,9 @@ public class RewardButton : MonoBehaviour
 
         // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
         int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
-
+        Debug.Log("여기야");
         RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward, (transform.parent.transform.localPosition + pulsY));
-        
+        Debug.Log("돈은준다니까?");
         // 캔디 회수
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');
         int requiredCount1 = int.Parse(countText1[1]);
