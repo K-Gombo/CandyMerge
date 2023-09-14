@@ -23,6 +23,10 @@ public class EquipmentStatus : MonoBehaviour
     public Button EquipButton; 
     public GameObject myClone;
     public bool isOriginal = true;
+    public GameObject touchLock1;
+    public GameObject touchLock2;
+    public GameObject check;
+    public EquipmentStatus originalEquipment;
     
     
     void Awake()
@@ -38,6 +42,9 @@ public class EquipmentStatus : MonoBehaviour
         {
             EquipButton = GetComponent<Button>(); // Button 컴포넌트 가져오기
             EquipButton.onClick.AddListener(() => EquipmentController.instance.OnEquipmentClick(this)); 
+            touchLock1 = transform.Find("TouchLock1").gameObject;
+            touchLock2 = transform.Find("TouchLock2").gameObject;
+            check = transform.Find("Check").gameObject;
         }
         
     public void UpdateUI()
@@ -45,6 +52,16 @@ public class EquipmentStatus : MonoBehaviour
        
         equipLevelText.text = "Lv. " + equipLevel;
         rankLevelText.text = rankLevel.ToString();
+    }
+    
+    public void OnCloneDeleted()
+    {
+        if (isOriginal)
+        {
+            touchLock1.SetActive(false);
+            touchLock2.SetActive(false);
+            check.SetActive(false);
+        }
     }
     
 
