@@ -403,19 +403,18 @@ public class CandyController : MonoBehaviour
     
     public void ToggleFastAutoMerge(bool isEnabled)
     {
-                if (autoMergeCoroutine != null && !isMergingInProgress)
-                {
-                    StopCoroutine(autoMergeCoroutine);
-                }
+        if (autoMergeCoroutine != null && !isMergingInProgress)
+        {
+            StopCoroutine(autoMergeCoroutine);
+        }
 
-                isAutoMergeEnabled = isEnabled;
+        isAutoMergeEnabled = isEnabled;
 
-                if (isEnabled)
-                {
-                    autoMergeCoroutine = StartCoroutine(DelayedAutoMerge(1, 1));
-                }
+        if (isEnabled)
+        {
+            autoMergeCoroutine = StartCoroutine(DelayedAutoMerge(1, 1));
+        }
     }
-    
     
 
     private IEnumerator DelayedAutoMerge(int timesPerNSeconds, int n)
@@ -428,6 +427,7 @@ public class CandyController : MonoBehaviour
     
     public void MoveToMixBox(Transform mixBox)
     {
+        if(currentlyDraggingCandy != null)
         currentlyDraggingCandy.SetParent(mixBox); 
     }
 

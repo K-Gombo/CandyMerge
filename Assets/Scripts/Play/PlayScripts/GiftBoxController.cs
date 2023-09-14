@@ -347,6 +347,7 @@ public class GiftBoxController : MonoBehaviour
         }
         else
         {
+            if (autoCreateCoroutine == null) return;
             StopCoroutine(autoCreateCoroutine);
         }
     }
@@ -355,14 +356,12 @@ public class GiftBoxController : MonoBehaviour
     {
         if (isEnabled && !isPassiveAutoCreateRunning && delayCompleted)
         {
-            StartCoroutine(DelayStartPassiveAutoCreate());  
-            
+            StartCoroutine(DelayStartPassiveAutoCreate());
         }
         else if (!isEnabled && isPassiveAutoCreateRunning)
         {
             isPassiveAutoCreateRunning = false;
             StopCoroutine(passiveAutoCreateCoroutine);  // 저장된 코루틴 인스턴스로 멈춤
-            
         }
     }
     
@@ -373,9 +372,6 @@ public class GiftBoxController : MonoBehaviour
         passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());
         delayCompleted = true;  // 딜레이가 끝났음을 표시
     }
-
-
-    
 
     private IEnumerator DelayedAutoCreateCandy(int timesPer10Seconds)
     {

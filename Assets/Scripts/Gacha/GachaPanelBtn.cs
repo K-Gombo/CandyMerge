@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ public class GachaPanelBtn : MonoBehaviour
     public GiftBoxController giftBoxController; // GiftBoxController 인스턴스를 참조
     public AutoCreateBtn autoCreateBtn;
 
+    
     public void OnButtonClick()
     {
         giftBoxController.TogglePassiveAutoCreate(false); // 패시브 자동생성 비활성화
@@ -25,10 +27,9 @@ public class GachaPanelBtn : MonoBehaviour
         candyController.mergeLocked = true;
         candyController.UpdateBoxTransforms(); 
         autoCreateBtn.OnACOnBtnClick();
+        candyController.EnableDrag(true);
         Transform mixBox = GameObject.FindGameObjectWithTag("MixBox").transform;
         candyController.MoveToMixBox(mixBox); // 캔디를 MixBox로 이동
-        candyController.EnableDrag(true);
-        
         
     }
 }
