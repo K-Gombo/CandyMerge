@@ -281,6 +281,7 @@ MonoBehaviour:
   giftBoxFill: {fileID: 0}
   giftBoxTransform: {fileID: 0}
   createCandyText: {fileID: 0}
+  candiesRemaining: 0
   realMaxCandies: 25
   availableBoxes: []
   transparentObjectPrefab: {fileID: 4293156756022381435, guid: 7e21e310a36807b4fbc1f84c2c574c14, type: 3}
@@ -353,6 +354,7 @@ GameObject:
   - component: {fileID: 7017048081078816877}
   - component: {fileID: 8161128225355942105}
   - component: {fileID: 3917709609081623924}
+  - component: {fileID: 1493002929324658667}
   m_Layer: 0
   m_Name: EquipManager
   m_TagString: Untagged
@@ -497,6 +499,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308d0785292dc4fef90916eec2241593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1493002929324658667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380600493205725435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2291ceb81b74f4c28b2786001e11fdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipMixPanel: {fileID: 0}
+  equipMixBoxes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mixLockedPanel: {fileID: 0}
 --- !u!1 &3070196350188839145
 GameObject:
   m_ObjectHideFlags: 0
