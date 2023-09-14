@@ -166,9 +166,9 @@ public class DataController : MonoBehaviour
         Upgrade_removeLockedLevel_DataLoad();
         upgradeManager.removeLockedLevel = GameData.removeLockedLevel;
 
-        
-            
-            upgradeManager.RemoveLocked(GameData.removeLockedLevel-1);
+
+
+        upgradeManager.RemoveLocked(GameData.removeLockedLevel - 1);
         
     }
 
@@ -191,6 +191,9 @@ public class DataController : MonoBehaviour
     {
         Upgrade_maxCandiesLevel_DataLoad();
         upgradeManager.maxCandiesLevel = GameData.maxCandiesLevel;
+
+
+        upgradeManager.MaxCandiesUp(GameData.maxCandiesLevel - 1);
     }
 
 
@@ -212,6 +215,8 @@ public class DataController : MonoBehaviour
     {
         Upgrade_candyLevel_DataLoad();
         upgradeManager.candyLevel = GameData.candyLevel;
+
+        upgradeManager.CandyLevelUp(GameData.candyLevel - 1);
     }
 
 
@@ -233,6 +238,9 @@ public class DataController : MonoBehaviour
     {
         Upgrade_passiveAutoCreateSpeedLevel_DataLoad();
         upgradeManager.passiveAutoCreateSpeedLevel = GameData.passiveAutoCreateSpeedLevel;
+
+
+        upgradeManager.PassiveAutoCreateSpeedUp(GameData.passiveAutoCreateSpeedLevel - 1);
     }
 
 
@@ -254,6 +262,8 @@ public class DataController : MonoBehaviour
     {
         Upgrade_goldUpLevel_DataLoad();
         upgradeManager.goldUpLevel = GameData.goldUpLevel;
+
+        upgradeManager.GoldUp(GameData.goldUpLevel - 1);
     }
 
 
@@ -275,5 +285,7 @@ public class DataController : MonoBehaviour
     {
         Upgrade_luckyGoldLevel_DataLoad();
         upgradeManager.luckyGoldLevel = GameData.luckyGoldLevel;
+
+        upgradeManager.LuckyGoldUp(GameData.luckyGoldLevel - 1);
     }
 }

@@ -289,6 +289,40 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    public void MaxCandiesUp(int count)
+    {
+        int currentMaxCandies = giftBoxController.GetMaxCandies();
+
+        int totalCandiesToIncrease = increaseMaxCandies * count; // 원하는만큼 증가시킬 캔디 수
+        int potentialMaxCandies = currentMaxCandies + totalCandiesToIncrease; // 캔디 증가 후 잠재적인 최대 캔디 수
+
+        if (currentMaxCandies >= giftBoxController.realMaxCandies)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (potentialMaxCandies > giftBoxController.realMaxCandies)
+        {
+            Debug.Log($"요청한 증가량({count}번)으로 인해 최대 캔디 수가 실제 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
+            totalCandiesToIncrease = giftBoxController.realMaxCandies - currentMaxCandies;
+        }
+
+        int totalCost = currentMaxCandiesUpCost * count; // 요청한 증가량에 따른 전체 비용
+
+        if (currencyManager.SubtractCurrency("Gold", totalCost))
+        {
+            giftBoxController.SetMaxCandies(currentMaxCandies + totalCandiesToIncrease);
+            UpdateCost(ref currentMaxCandiesUpCost);
+            Debug.Log($"캔디 생성 증가!:{currentMaxCandies + totalCandiesToIncrease}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+
     public void CandyLevelUp() //기본 제작 캔디 레벨 업 (스킬5)
     {
         int currentBaseLevel = candyStatus.GetBaseLevel();
@@ -310,7 +344,39 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
-    
+
+    public void CandyLevelUp(int count)
+    {
+        int currentBaseLevel = candyStatus.GetBaseLevel();
+
+        int totalLevelsToIncrease = increaseBaseLevel * count; // 원하는만큼 증가시킬 레벨
+        int potentialBaseLevel = currentBaseLevel + totalLevelsToIncrease; // 레벨 증가 후 잠재적인 캔디 레벨
+
+        if (currentBaseLevel >= candyStatus.maxBaseLevel)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (potentialBaseLevel > candyStatus.maxBaseLevel)
+        {
+            Debug.Log($"요청한 증가량({count}번)으로 인해 캔디 레벨이 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
+            totalLevelsToIncrease = candyStatus.maxBaseLevel - currentBaseLevel;
+        }
+
+        int totalCost = currentCandyLevelUpCost * count; // 요청한 증가량에 따른 전체 비용
+
+        if (currencyManager.SubtractCurrency("Gold", totalCost))
+        {
+            candyStatus.SetBaseLevel(currentBaseLevel + totalLevelsToIncrease);
+            Debug.Log($"캔디 레벨업!:{currentBaseLevel + totalLevelsToIncrease}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
 
     public void PassiveAutoCreateSpeedUp() //패시브 자동 제작 속도 업 (스킬7)
     {
@@ -334,6 +400,40 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    public void PassiveAutoCreateSpeedUp(int count)
+    {
+        float currentPassiveCreateSpeed = giftBoxController.GetPassiveCreateTry();
+
+        float totalSpeedIncrease = increasePassiveAutoCreateSpeed * count; // 원하는만큼 속도 증가
+        float potentialPassiveCreateSpeed = currentPassiveCreateSpeed + totalSpeedIncrease; // 속도 증가 후 잠재적인 패시브 생성 속도
+
+        if (currentPassiveCreateSpeed >= giftBoxController.maxPassiveCreateTry)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (potentialPassiveCreateSpeed > giftBoxController.maxPassiveCreateTry)
+        {
+            Debug.Log($"요청한 증가량({count}번)으로 인해 패시브 자동 생성 속도가 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
+            totalSpeedIncrease = giftBoxController.maxPassiveCreateTry - currentPassiveCreateSpeed;
+        }
+
+        int totalCost = currentPassiveAutoCreateSpeedUpCost * count; // 요청한 증가량에 따른 전체 비용
+
+        if (currencyManager.SubtractCurrency("Gold", totalCost))
+        {
+            float newPassiveAutoCreateSpeed = currentPassiveCreateSpeed + totalSpeedIncrease;
+            giftBoxController.SetPassiveCreateTry(newPassiveAutoCreateSpeed);
+            Debug.Log($"자동 생성 속도업!:{newPassiveAutoCreateSpeed}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+
     public void GoldUp()
     {
         float currentGoldUp = rewardButton.GetGoldUp();
@@ -349,6 +449,39 @@ public class UpgradeManager : MonoBehaviour
             rewardButton.SetGoldUp(newGoldUp);
             UpdateCost(ref currentGoldUpCost);
             goldUpLevel++;
+            Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+    public void GoldUp(int count)
+    {
+        float currentGoldUp = rewardButton.GetGoldUp();
+
+        float totalGoldIncrease = increaseGoldUp * count; // 원하는만큼 골드 획득량 증가
+        float potentialGoldUp = currentGoldUp + totalGoldIncrease; // 획득량 증가 후 잠재적인 골드 업
+
+        if (currentGoldUp >= rewardButton.maxGoldIncreaseRate)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (potentialGoldUp > rewardButton.maxGoldIncreaseRate)
+        {
+            Debug.Log($"요청한 증가량({count}번)으로 인해 골드 획득량이 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
+            totalGoldIncrease = rewardButton.maxGoldIncreaseRate - currentGoldUp;
+        }
+
+        int totalCost = currentGoldUpCost * count; // 요청한 증가량에 따른 전체 비용
+
+        if (currencyManager.SubtractCurrency("Gold", totalCost))
+        {
+            float newGoldUp = currentGoldUp + totalGoldIncrease;
+            rewardButton.SetGoldUp(newGoldUp);
             Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
         }
         else
@@ -379,8 +512,40 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
-    
-    
-    
+
+    public void LuckyGoldUp(int count)
+    {
+        float currentLuckyGoldUp = rewardButton.GetLuckyGoldUp();
+
+        float totalLuckyGoldIncrease = increaseLuckyGold * count; // 요청한 횟수만큼 확률 증가
+        float potentialLuckyGoldUp = currentLuckyGoldUp + totalLuckyGoldIncrease; // 증가 후의 잠재적인 확률
+
+        if (currentLuckyGoldUp >= rewardButton.maxLuckyGoldProbability)
+        {
+            Debug.Log("이미 최대로 업그레이드 되었습니다.");
+            return;
+        }
+
+        if (potentialLuckyGoldUp > rewardButton.maxLuckyGoldProbability)
+        {
+            Debug.Log($"요청한 증가량({count}번)으로 인해 확률이 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
+            totalLuckyGoldIncrease = rewardButton.maxLuckyGoldProbability - currentLuckyGoldUp;
+        }
+
+        int totalCost = currentLuckyGoldUpCost * count; // 요청한 횟수만큼의 전체 비용 계산
+
+        if (currencyManager.SubtractCurrency("Gold", totalCost))
+        {
+            float newLuckyGoldUp = currentLuckyGoldUp + totalLuckyGoldIncrease;
+            rewardButton.SetLuckyGoldUp(newLuckyGoldUp);
+            Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
+
 }
 
