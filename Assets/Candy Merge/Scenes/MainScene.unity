@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17310,6 +17310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   giftBoxController: {fileID: 4273026987875504513}
   upgradeManager: {fileID: 7147849547990594848}
+  upgradeUI: {fileID: 7647821949377435576}
 --- !u!4 &1917004876
 Transform:
   m_ObjectHideFlags: 0
