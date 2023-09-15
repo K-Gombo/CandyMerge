@@ -14,6 +14,7 @@ public class UpgradeBtnManager : MonoBehaviour
 
     public UpgradeManager upgradeManager;
     public CurrencyManager currencyManager;  // CurrencyManager 참조 추가
+    public UpgradeUI upgradeUI;
 
     private void Start()
     {
@@ -48,24 +49,28 @@ public class UpgradeBtnManager : MonoBehaviour
     {
         upgradeManager.LuckyCreateUp();
         DataController.instance.Upgrade_luckyCreateLevel_Save();
+        upgradeUI.UpdateUI();
     }
 
     public void OnCreateSpeedUpButtonClick()
     {
         upgradeManager.CreateSpeedUp();
         DataController.instance.Upgrade_createSpeedLevel_Save();
+        upgradeUI.UpdateUI();
     }
 
     public void OnMaxCandiesUpButtonClick()
     {
         upgradeManager.MaxCandiesUp();
         DataController.instance.Upgrade_maxCandiesLevel_Save();
+        upgradeUI.UpdateUI();
     }
 
     public void OnCandyLevelUpButtonClick()
     {
         upgradeManager.CandyLevelUp();
         DataController.instance.Upgrade_candyLevel_Save();
+        upgradeUI.UpdateUI();
     }
     
 
@@ -73,23 +78,27 @@ public class UpgradeBtnManager : MonoBehaviour
     {
         upgradeManager.PassiveAutoCreateSpeedUp();
         DataController.instance.Upgrade_passiveAutoCreateSpeedLevel_Save();
+        upgradeUI.UpdateUI();
     }
 
     public void OnRemoveLockedButtonClick()
     {
         upgradeManager.RemoveLocked();
         DataController.instance.Upgrade_removeLockedLevel_Save();
+        upgradeUI.UpdateUI();
     }
 
     public void OnGoldUpButtonClick()
     {
         //upgradeManager.GoldUp();
         DataController.instance.Upgrade_goldUpLevel_Save();
+        upgradeUI.UpdateUI();
     }
 
     public void OnLuckyGoldUpButtonClick()
     {
         //upgradeManager.LuckyGoldUp();
         DataController.instance.Upgrade_luckyGoldLevel_Save();
+        upgradeUI.UpdateUI();
     }
 }

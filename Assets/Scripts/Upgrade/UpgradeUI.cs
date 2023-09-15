@@ -28,22 +28,8 @@ public class UpgradeUI : MonoBehaviour
     public Text luckyGoldUpLevelText;
     
     
-    
-    // Start is called before the first frame update
-    void Start()
-    {  
-       UpdateUI();
-        
-    }
-   
 
-    // Update is called once per frame
-    void Update()
-    {
-       UpdateUI();
-    }
-
-    void UpdateUI()
+    public void UpdateUI()
     {
         // 각 업그레이드의 현재 비용 표시
         luckyCreateUpCostText.text =BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentLuckyCreateUpCost.ToString());

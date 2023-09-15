@@ -231,7 +231,7 @@ public class QuestManager : MonoBehaviour
     private void InitializePool()
     {
         for (int i = 0; i < poolSize; i++)
-        {
+        {   
             Quest newQuest = Instantiate(quest, questPoolParent);
             newQuest.gameObject.SetActive(false);
             questPool.Enqueue(newQuest);

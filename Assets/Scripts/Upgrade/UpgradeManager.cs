@@ -20,6 +20,8 @@ public class UpgradeManager : MonoBehaviour
     public float increaseLuckyGold = 0.5f;
     
     public float costMultiplier = 2.0f; //업그레이드 비용 증가 비율
+
+    
     
      
     public int LuckyCreateUpCost = 800; 
