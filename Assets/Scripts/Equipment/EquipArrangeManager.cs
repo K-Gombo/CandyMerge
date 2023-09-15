@@ -97,6 +97,19 @@ public class EquipArrangeManager : MonoBehaviour
         }
     }
     
+    public void FilterByRankAndName(EquipmentManager.Rank rank, string name , int rankLevel)
+    {
+        // 먼저 모든 장비를 비활성화합니다.
+        DeactivateAll();
+
+        // 필터링된 리스트를 생성합니다.
+        filteredList = equipList.Where(e => e.equipRank == rank && e.equipName == name && e.rankLevel == rankLevel).ToList();
+
+        // 필터링된 리스트의 항목만 활성화합니다.
+        ActivateFiltered();
+    }
+
+    
     
 
     private int GetRankValue(EquipmentManager.Rank rank)
@@ -142,11 +155,14 @@ public class EquipArrangeManager : MonoBehaviour
     
     public void DeactivateAll()
     {
+        equipList.RemoveAll(item => item == null);
+
         foreach (var item in equipList)
         {
             item.gameObject.SetActive(false);
         }
     }
+
 
     public void ActivateFiltered()
     {
