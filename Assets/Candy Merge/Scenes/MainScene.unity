@@ -8805,6 +8805,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027718469}
   m_CullTransparentMesh: 1
+--- !u!1 &1033542318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1291762836550508992, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
+  m_PrefabInstance: {fileID: 1404544681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1051538715 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2909513628751786840, guid: a11b17254b90a4b5c98c7e3a3a00880e, type: 3}
@@ -16872,7 +16877,7 @@ PrefabInstance:
     - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1033542318}
     - target: {fileID: 9077454698705625840, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[4]
       value: 
