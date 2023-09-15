@@ -15,9 +15,9 @@ public class EquipmentStatus : MonoBehaviour
     public float[] skillPoints = new float[4];
     public Image backgroundImageComponent;
     public Image slotImageComponent;
-    public int equipLevel;
+    public int equipLevel = 1;
     public int maxEquipLevel;  // 추가된 코드
-    public int rankLevel = 1; 
+    public int rankLevel;
     public Text equipLevelText;
     public Text rankLevelText;
     public Button EquipButton; 
@@ -34,7 +34,7 @@ public class EquipmentStatus : MonoBehaviour
         EquipArrangeManager equipArrangeManager = FindObjectOfType<EquipArrangeManager>();
         if (equipArrangeManager != null)
         {
-            equipArrangeManager.AddEquipment(this);
+            equipArrangeManager.AddEquipment(this); 
         }
     }
     
@@ -42,14 +42,8 @@ public class EquipmentStatus : MonoBehaviour
         {
             EquipButton = GetComponent<Button>(); // Button 컴포넌트 가져오기
             EquipButton.onClick.AddListener(() => EquipmentController.instance.OnEquipmentClick(this));
+            EquipmentUI.instance.UpdateLevelUI();
         }
-        
-    public void UpdateUI()
-    {
-       
-        equipLevelText.text = "Lv. " + equipLevel;
-        rankLevelText.text = rankLevel.ToString();
-    }
     
     public void OnCloneDeleted()
     {

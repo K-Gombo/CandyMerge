@@ -107,14 +107,11 @@ public class EquipmentManager : MonoBehaviour
                             equip.skillPoints[j] = equipSkill.skillPoint;
                         }
                     }
-                    
-
                 }
                 catch (Exception e)
                 {
-
+                    Debug.LogError("EquioDataCSV 파싱 에러: " + e.Message);
                 }
-
                 equipList.Add(equip);
                 // foreach (var equipment in equipList)
                 // {
@@ -154,7 +151,7 @@ public class EquipmentManager : MonoBehaviour
                 catch (Exception e)
                 {
                     // 에러 처리
-                    Debug.LogError("CSV 파싱 에러: " + e.Message);
+                    Debug.LogError("EquipLevelCSV 파싱 에러: " + e.Message);
                 }
             
                 levelDataMap[levelData.rank] = levelData;
@@ -254,7 +251,6 @@ public class EquipmentManager : MonoBehaviour
             slotToSpriteMap[(SlotType)slotTypes.GetValue(i)] = slotSprites[i];
         }
     }
-
     
     
     public void CreateEquipPrefab(Transform parentTransform, float[] rankProbabilities)
@@ -333,15 +329,14 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
             }
             
-            // 초기 장비 레벨을 설정. 예를 들어, F 등급이면 시작 레벨이 1이 될 수 있습니다.
+            // 초기 장비 레벨을 설정. ex) F 등급이면 시작 등급 레벨은 0 equipLevel은 데이터에서 불러온 시작레벨
             if (levelDataMap.ContainsKey(chosenRank.ToString()))
             {
                 EquipLevelData levelData = levelDataMap[chosenRank.ToString()];
                 equipComponent.equipLevel = levelData.startLevel;
                 equipComponent.maxEquipLevel = levelData.maxLevel;  // 최대 레벨 설정
-                equipComponent.rankLevel = 1;
+                equipComponent.rankLevel = 0;
             }
-             
         }
     }
     
@@ -408,7 +403,7 @@ public class EquipmentManager : MonoBehaviour
             // 해당 등급에 대한 정보가 없으면 그냥 레벨을 올림
             equipmentStatus.equipLevel++;
         }
-        equipmentStatus.UpdateUI();
+        EquipmentUI.instance.UpdateLevelUI();
     }
     
     public void UpdateRankLevelOnMerge(EquipmentStatus mainEquipment, GameObject[] mergedEquipments)
@@ -419,7 +414,7 @@ public class EquipmentManager : MonoBehaviour
         // 현재 rankLevel이 최대 rankLevel에 도달했다면
         if (mainEquipment.rankLevel >= maxRankLevel)
         {
-            // 다음 등급으로 올리고, rankLevel을 1로 초기화
+            // 다음 등급으로 올리고, rankLevel을 0로 초기화
             mainEquipment.equipRank = GetNextRank(mainEquipment.equipRank);
             mainEquipment.rankLevel = 0;
         }
