@@ -348,13 +348,13 @@ public class EquipmentManager : MonoBehaviour
     // 각 랭크의 최대 레벨을 관리하는 딕셔너리
     public static Dictionary<Rank, int> maxLevelsPerRank = new Dictionary<Rank, int>
     {
-        { Rank.F, 1 }, // F는 rankLevel이 1이 최대이므로 바로 다음 등급으로 상승
-        { Rank.D, 1 },
-        { Rank.C, 2 }, // C는 rankLevel이 2가 최대이므로 2이상일 경우 B등급으로 상승
-        { Rank.B, 2 },
-        { Rank.A, 3 },
-        { Rank.S, 3 },
-        { Rank.SS, 4 },
+        { Rank.F, 0 }, // F는 rankLevel이 0이 최대이므로 바로 다음 등급으로 상승
+        { Rank.D, 0 },
+        { Rank.C, 1 }, // C는 rankLevel이 1가 최대이므로 1이상일 경우 B등급으로 상승
+        { Rank.B, 1 },
+        { Rank.A, 2 },
+        { Rank.S, 2 },
+        { Rank.SS, 3 },
 
     };
     
@@ -421,7 +421,7 @@ public class EquipmentManager : MonoBehaviour
         {
             // 다음 등급으로 올리고, rankLevel을 1로 초기화
             mainEquipment.equipRank = GetNextRank(mainEquipment.equipRank);
-            mainEquipment.rankLevel = 1;
+            mainEquipment.rankLevel = 0;
         }
         else
         {

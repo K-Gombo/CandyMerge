@@ -41,10 +41,7 @@ public class EquipmentStatus : MonoBehaviour
     void Start()
         {
             EquipButton = GetComponent<Button>(); // Button 컴포넌트 가져오기
-            EquipButton.onClick.AddListener(() => EquipmentController.instance.OnEquipmentClick(this)); 
-            touchLock1 = transform.Find("TouchLock1").gameObject;
-            touchLock2 = transform.Find("TouchLock2").gameObject;
-            check = transform.Find("Check").gameObject;
+            EquipButton.onClick.AddListener(() => EquipmentController.instance.OnEquipmentClick(this));
         }
         
     public void UpdateUI()

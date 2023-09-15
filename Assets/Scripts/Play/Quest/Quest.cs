@@ -83,18 +83,18 @@ public class Quest : MonoBehaviour
     int candyLevel2 = -1;
     int candyCount2 = 0;
 
-    while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
-    {
-        candyLevel1 = QuestManager.instance.RandomCandyLevel();
-        if (HappyLevel.instance.CurrentLevel < 3)
-        {
-            candyCount1 = Random.Range(2, 5); // 2개~4개 사이
-        }
-        else
-        {
-            candyCount1 = Random.Range(3, 8); 
-        }
-    }
+    // while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
+    // {
+    //     candyLevel1 = QuestManager.instance.RandomCandyLevel();
+    //     if (HappyLevel.instance.CurrentLevel < 3)
+    //     {
+    //         candyCount1 = Random.Range(2, 5); // 2개~4개 사이
+    //     }
+    //     else
+    //     {
+    //         candyCount1 = Random.Range(3, 8); 
+    //     }
+    // }
 
     QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
 
@@ -208,18 +208,18 @@ public class Quest : MonoBehaviour
     int candyLevel2 = -1;
     int candyCount2 = 0;
 
-    while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
-    {
-        candyLevel1 = QuestManager.instance.RandomCandyLevel();
-        if (HappyLevel.instance.CurrentLevel < 3)
-        {
-            candyCount1 = Random.Range(2, 5); // 2개~4개 사이
-        }
-        else
-        {
-            candyCount1 = Random.Range(3, 8); 
-        }
-    }
+    // while (!QuestManager.instance.IsQuestValid(candyLevel1, candyCount1, candyLevel2, candyCount2))
+    // {
+    //     candyLevel1 = QuestManager.instance.RandomCandyLevel();
+    //     if (HappyLevel.instance.CurrentLevel < 3)
+    //     {
+    //         candyCount1 = Random.Range(2, 5); // 2개~4개 사이
+    //     }
+    //     else
+    //     {
+    //         candyCount1 = Random.Range(3, 8); 
+    //     }
+    // }
 
     QuestManager.instance.AddQuestInfo(candyLevel1, candyCount1, candyLevel2, candyCount2);
 
