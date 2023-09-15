@@ -7200,6 +7200,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884410077}
   m_CullTransparentMesh: 1
+--- !u!224 &898822674 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2043684698238705446, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &905125689
 GameObject:
   m_ObjectHideFlags: 0
@@ -18000,7 +18005,9 @@ MonoBehaviour:
   mixLockedPanel: {fileID: 2102023929}
   equipMixBtn: {fileID: 943042642}
   equipArrangeManager: {fileID: 4304388173809711829}
-  BackBtn: {fileID: 400460368}
+  backBtn: {fileID: 400460368}
+  equipMixResultBox: {fileID: 898822674}
+  equipmentManager: {fileID: 7102599355080192638}
 --- !u!114 &7647821949377435576
 MonoBehaviour:
   m_ObjectHideFlags: 0

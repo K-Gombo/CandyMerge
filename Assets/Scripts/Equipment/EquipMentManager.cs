@@ -362,9 +362,6 @@ public class EquipmentManager : MonoBehaviour
         { Rank.SS2, 2 },
         { Rank.SS3, 3 }
     };
-
-    
-    
     
     public Rank GetNextRank(Rank currentRank)
     {
@@ -395,7 +392,6 @@ public class EquipmentManager : MonoBehaviour
 
         return currentRank; // 목록에 없는 등급은 그대로 반환
     }
-    
     
     public void UpdateRankLevelOnMerge()
     {
