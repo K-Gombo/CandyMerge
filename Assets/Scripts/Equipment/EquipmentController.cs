@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class EquipmentController : MonoBehaviour
     public static EquipmentController instance;
     public GameObject mixLockedPanel;
     public GameObject equipMixBtn;
+    public List<EquipmentStatus> allEquipmentList;
 
     void Awake()
     {
@@ -192,12 +194,5 @@ public class EquipmentController : MonoBehaviour
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
-
 
 }
