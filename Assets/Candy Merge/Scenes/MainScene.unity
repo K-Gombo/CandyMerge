@@ -16729,7 +16729,7 @@ PrefabInstance:
     - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1033542318}
     - target: {fileID: 4786292779940625718, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[4]
       value: 
@@ -16793,7 +16793,7 @@ PrefabInstance:
     - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1033542318}
     - target: {fileID: 7629314781782432856, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[5]
       value: 
@@ -16829,7 +16829,7 @@ PrefabInstance:
     - target: {fileID: 8957363607456649543, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1033542318}
     - target: {fileID: 8957363607456649543, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
       propertyPath: allPanels.Array.data[4]
       value: 
