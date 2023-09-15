@@ -50,8 +50,8 @@ public class EquipmentStatus : MonoBehaviour
     
     public void UpdateLevelUI()
     {
-      equipLevelText.text = "Lv. " + equipLevel;
-      rankLevelText.text = rankLevel.ToString();
+        equipLevelText.text = "Lv. " + equipLevel;
+        rankLevelText.text = rankLevel.ToString();
     }
     
     public void OnCloneDeleted()

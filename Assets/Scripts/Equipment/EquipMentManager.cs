@@ -432,7 +432,9 @@ public class EquipmentManager : MonoBehaviour
                 EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
                 mainEquipment.equipLevel = levelData.startLevel;
             }
-
+            
+            mainEquipment.UpdateLevelUI();
+            
             // EquipMixbox[1]과 EquipMixbox[2]의 원본을 풀로 리턴하고 클론 제거
             for (int i = 1; i <= 2; i++)
             {
