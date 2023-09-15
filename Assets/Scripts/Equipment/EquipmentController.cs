@@ -8,6 +8,7 @@ public class EquipmentController : MonoBehaviour
     public Transform[] equipMixBoxes;
     public static EquipmentController instance;
     public GameObject mixLockedPanel;
+    public GameObject equipMixBtn;
 
     void Awake()
     {
@@ -34,7 +35,8 @@ public class EquipmentController : MonoBehaviour
         if (equipMixBoxes[0].childCount == 0)
         {
             targetParent = equipMixBoxes[0];
-            mixLockedPanel.SetActive(true); // mixLockedPanel 활성화
+            mixLockedPanel.SetActive(true); 
+            equipMixBtn.SetActive(true); 
             if (!equipMixBoxes[1].gameObject.activeSelf && !equipMixBoxes[2].gameObject.activeSelf)
             {
                 ActivateAndMoveBoxes();
@@ -165,6 +167,7 @@ public class EquipmentController : MonoBehaviour
             equipMixBoxes[1].gameObject.SetActive(false);
             equipMixBoxes[2].gameObject.SetActive(false);
             mixLockedPanel.SetActive(false); // mixLockedPanel 비활성화
+            equipMixBtn.SetActive(false); 
         }
 
         // 원본의 특정 오브젝트 비활성화
@@ -176,5 +179,22 @@ public class EquipmentController : MonoBehaviour
         }
         Destroy(clickedClone.gameObject);
     }
+    
+    public bool AreAllEquipMixBoxesFilled()
+    {
+        // EquipMixBox가 3개 있고 모두 채워져야한다고 가정합니다.
+        for (int i = 0; i < 3; i++)
+        {
+            if (equipMixBoxes[i].childCount == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
+    
+
 
 }
