@@ -42,8 +42,15 @@ public class EquipmentStatus : MonoBehaviour
         {
             EquipButton = GetComponent<Button>(); // Button 컴포넌트 가져오기
             EquipButton.onClick.AddListener(() => EquipmentController.instance.OnEquipmentClick(this));
-            EquipmentUI.instance.UpdateLevelUI();
+            UpdateLevelUI();
         }
+    
+    
+    public void UpdateLevelUI()
+    {
+      equipLevelText.text = "Lv. " + equipLevel;
+      rankLevelText.text = rankLevel.ToString();
+    }
     
     public void OnCloneDeleted()
     {

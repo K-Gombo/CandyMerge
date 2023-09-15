@@ -329,7 +329,7 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
             }
             
-            // 초기 장비 레벨을 설정. ex) F 등급이면 시작 등급 레벨은 0 equipLevel은 데이터에서 불러온 시작레벨
+           
             if (levelDataMap.ContainsKey(chosenRank.ToString()))
             {
                 EquipLevelData levelData = levelDataMap[chosenRank.ToString()];
@@ -388,57 +388,59 @@ public class EquipmentManager : MonoBehaviour
     
 
     
-    public void UpdateEquipLevel(EquipmentStatus equipmentStatus)
+ 
+    public void UpdateRankLevelOnMerge()
     {
-        if (levelDataMap.ContainsKey(equipmentStatus.equipRank.ToString()))
+        // EquipmentController의 equipMixBoxes를 가져옵니다.
+        Transform[] equipMixBoxes = EquipmentController.instance.equipMixBoxes;
+    
+        // 모든 EquipMixBoxes가 채워져 있는지 확인
+        bool areAllEquipMixBoxesFilled = EquipmentController.instance.AreAllEquipMixBoxesFilled();
+    
+        // 모든 EquipMixBoxes가 채워져 있다면
+        if (areAllEquipMixBoxesFilled)
         {
-            EquipLevelData levelData = levelDataMap[equipmentStatus.equipRank.ToString()];
-            if (equipmentStatus.equipLevel < levelData.maxLevel)
+            EquipmentStatus mainEquipment = equipMixBoxes[0].GetChild(0).GetComponent<EquipmentStatus>().originalEquipment;
+        
+            // 현재 등급의 최대 rankLevel을 확인
+            int maxRankLevel = maxLevelsPerRank[mainEquipment.equipRank];
+
+            // 현재 rankLevel이 최대 rankLevel에 도달했다면
+            if (mainEquipment.rankLevel >= maxRankLevel)
             {
-                equipmentStatus.equipLevel++;
+                Debug.Log("Current Rank: " + mainEquipment.equipRank);
+                mainEquipment.equipRank = GetNextRank(mainEquipment.equipRank);
+                Debug.Log("New Rank: " + mainEquipment.equipRank);
+                mainEquipment.rankLevel = 0;
             }
+            else
+            {
+                // 원본(mainEquipment)의 rankLevel 증가
+                mainEquipment.rankLevel++;
+            }
+
+            // 새로운 등급의 시작 레벨과 최대 레벨을 설정
+            if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
+            {
+                EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
+                mainEquipment.equipLevel = levelData.startLevel;
+            }
+
+            // EquipMixbox[1]과 EquipMixbox[2]의 원본을 풀로 리턴하고 클론 제거
+            for (int i = 1; i <= 2; i++)
+            {
+                GameObject cloneObj = equipMixBoxes[i].GetChild(0).gameObject;
+                GameObject originalObj = cloneObj.GetComponent<EquipmentStatus>().originalEquipment.gameObject;
+
+                Destroy(cloneObj);
+                ReturnEquipToPool(originalObj);
+            }
+
+            // EquipMixbox[0]의 클론 제거
+            Destroy(equipMixBoxes[0].GetChild(0).gameObject);
         }
-        else
-        {
-            // 해당 등급에 대한 정보가 없으면 그냥 레벨을 올림
-            equipmentStatus.equipLevel++;
-        }
-        EquipmentUI.instance.UpdateLevelUI();
     }
-    
-    public void UpdateRankLevelOnMerge(EquipmentStatus mainEquipment, GameObject[] mergedEquipments)
-    {
-        
-        // 현재 등급의 최대 rankLevel을 확인
-        int maxRankLevel = maxLevelsPerRank[mainEquipment.equipRank];
 
-        // 현재 rankLevel이 최대 rankLevel에 도달했다면
-        if (mainEquipment.rankLevel >= maxRankLevel)
-        {
-            // 다음 등급으로 올리고, rankLevel을 0로 초기화
-            mainEquipment.equipRank = GetNextRank(mainEquipment.equipRank);
-            mainEquipment.rankLevel = 0;
-        }
-        else
-        {
-            // 원본(mainEquipment)의 rankLevel 증가
-            mainEquipment.rankLevel++;
-
-        }
-
-        // 새로운 등급의 시작 레벨과 최대 레벨을 설정
-        if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
-        {
-            EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
-            mainEquipment.equipLevel = levelData.startLevel;
-        }
-        
-    }
-    
-    
-
-
-
-    
 }
+
 
