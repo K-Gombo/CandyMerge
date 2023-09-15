@@ -828,7 +828,9 @@ MonoBehaviour:
   - 0
   - 0
   backgroundImageComponent: {fileID: 7899845762787001645}
+  levelCircleComponent: {fileID: 7145625456842672853}
   slotImageComponent: {fileID: 2523453118552312498}
+  slotBarComponent: {fileID: 6524589534136522820}
   equipLevel: 0
   maxEquipLevel: 0
   rankLevel: 0

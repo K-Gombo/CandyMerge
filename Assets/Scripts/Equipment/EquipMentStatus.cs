@@ -14,7 +14,9 @@ public class EquipmentStatus : MonoBehaviour
     public string[] skillNames = new string[4];
     public float[] skillPoints = new float[4];
     public Image backgroundImageComponent;
+    public Image levelCircleComponent;
     public Image slotImageComponent;
+    public Image slotBarComponent;
     public int equipLevel = 1;
     public int maxEquipLevel;  // 추가된 코드
     public int rankLevel;

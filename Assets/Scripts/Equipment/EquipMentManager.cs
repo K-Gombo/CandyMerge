@@ -10,7 +10,7 @@ public class EquipmentManager : MonoBehaviour
     public TextAsset LevelCsvData { get; set; } 
     public List<Equip> equipList = new List<Equip>();
     public Sprite[] equipSprites;
-    public Sprite[] rankSprites;
+    public Color[] rankColors;
     public Sprite[] slotSprites;
     public GachaManager GachaManager;
     public EquipSkillManager equipSkillManager;
@@ -19,7 +19,7 @@ public class EquipmentManager : MonoBehaviour
     public int poolSize = 40;
     public Transform equipMentPoolTransform;
     public Dictionary<string, Sprite> equipNameToSpriteMap = new Dictionary<string, Sprite>();
-    public Dictionary<Rank, Sprite> rankToSpriteMap = new Dictionary<Rank, Sprite>();
+    public Dictionary<Rank, Color> rankToColorMap = new Dictionary<Rank, Color>();
     public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
     public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
     
@@ -122,7 +122,7 @@ public class EquipmentManager : MonoBehaviour
             AssignRandomRank();
             InitializeEquipSpriteMapping();
             InitializeSlotSpriteMapping();
-            InitializeRankSpriteMapping();
+            InitializeRankColorMapping();
         }
     }
     
@@ -231,14 +231,14 @@ public class EquipmentManager : MonoBehaviour
         equipPool.Enqueue(obj);
     }
     
-    void InitializeRankSpriteMapping()
+    void InitializeRankColorMapping()
     {
         
         Array ranks = Enum.GetValues(typeof(Rank));
         for(int i = 0; i < ranks.Length; i++)
         {
-            if (i == rankSprites.Length) return;
-            rankToSpriteMap[(Rank)ranks.GetValue(i)] = rankSprites[i];
+            if (i == rankColors.Length) return;
+            rankToColorMap[(Rank)ranks.GetValue(i)] = rankColors[i];
         }
     }
     
@@ -318,9 +318,11 @@ public class EquipmentManager : MonoBehaviour
             }
             
             // 랭크에 따라 배경 스프라이트 설정
-            if (rankToSpriteMap.ContainsKey(chosenRank))
+            if (rankToColorMap.ContainsKey(chosenRank))
             {
-                equipComponent.backgroundImageComponent.sprite = rankToSpriteMap[chosenRank];
+                equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
+                equipComponent.levelCircleComponent.color = rankToColorMap[chosenRank];
+                equipComponent.slotBarComponent.color = rankToColorMap[chosenRank];
             }
 
             // SlotType에 따라 슬롯 스프라이트 설정
@@ -340,18 +342,18 @@ public class EquipmentManager : MonoBehaviour
         }
     }
     
-    // 각 랭크의 최대 레벨을 관리하는 딕셔너리
+    
     public static Dictionary<Rank, int> maxLevelsPerRank = new Dictionary<Rank, int>
     {
-        { Rank.F, 0 }, // F는 rankLevel이 0이 최대이므로 바로 다음 등급으로 상승
+        { Rank.F, 0 },
         { Rank.D, 0 },
-        { Rank.C, 1 }, // C는 rankLevel이 1가 최대이므로 1이상일 경우 B등급으로 상승
-        { Rank.B, 1 },
-        { Rank.A, 2 },
-        { Rank.S, 2 },
-        { Rank.SS, 3 },
-
+        { Rank.C, 1 },  // rankLevel 1까지 가능
+        { Rank.B, 1 },  // rankLevel 1까지 가능
+        { Rank.A, 2 },  // rankLevel 2까지 가능
+        { Rank.S, 2 },  // rankLevel 2까지 가능
+        { Rank.SS, 3 }, // rankLevel 3까지 가능
     };
+
     
     
     
@@ -402,20 +404,15 @@ public class EquipmentManager : MonoBehaviour
         {
             EquipmentStatus mainEquipment = equipMixBoxes[0].GetChild(0).GetComponent<EquipmentStatus>().originalEquipment;
         
-            // 현재 등급의 최대 rankLevel을 확인
             int maxRankLevel = maxLevelsPerRank[mainEquipment.equipRank];
 
-            // 현재 rankLevel이 최대 rankLevel에 도달했다면
             if (mainEquipment.rankLevel >= maxRankLevel)
             {
-                Debug.Log("Current Rank: " + mainEquipment.equipRank);
                 mainEquipment.equipRank = GetNextRank(mainEquipment.equipRank);
-                Debug.Log("New Rank: " + mainEquipment.equipRank);
                 mainEquipment.rankLevel = 0;
             }
             else
             {
-                // 원본(mainEquipment)의 rankLevel 증가
                 mainEquipment.rankLevel++;
             }
 
@@ -439,6 +436,7 @@ public class EquipmentManager : MonoBehaviour
             // EquipMixbox[0]의 클론 제거
             Destroy(equipMixBoxes[0].GetChild(0).gameObject);
         }
+        equipmentStatus.UpdateLevelUI();
     }
 
 }
