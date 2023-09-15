@@ -397,9 +397,6 @@ public class EquipmentManager : MonoBehaviour
     }
     
     
-
-    
- 
     public void UpdateRankLevelOnMerge()
     {
         // EquipmentController의 equipMixBoxes를 가져옵니다.
@@ -433,6 +430,15 @@ public class EquipmentManager : MonoBehaviour
                 mainEquipment.equipLevel = levelData.startLevel;
             }
             
+            // 등급에 따라 색상 업데이트
+            if (rankToColorMap.ContainsKey(mainEquipment.equipRank))
+            {
+                Color newColor = rankToColorMap[mainEquipment.equipRank];
+                mainEquipment.backgroundImageComponent.color = newColor;
+                mainEquipment.levelCircleComponent.color = newColor;
+                mainEquipment.slotBarComponent.color = newColor;
+            }
+            
             mainEquipment.UpdateLevelUI();
             
             // EquipMixbox[1]과 EquipMixbox[2]의 원본을 풀로 리턴하고 클론 제거
@@ -457,6 +463,7 @@ public class EquipmentManager : MonoBehaviour
         if (rank == Rank.SS3) return 3;
         return 0; // 기본값
     }
+    
 
 }
 
