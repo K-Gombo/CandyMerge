@@ -7,7 +7,7 @@ public class DataController : MonoBehaviour
     public static DataController instance;
     [SerializeField] GiftBoxController giftBoxController;
     [SerializeField] UpgradeManager upgradeManager;
-
+    [SerializeField] UpgradeUI upgradeUI;
     private void Awake()
     {
         instance = this;
@@ -35,6 +35,7 @@ public class DataController : MonoBehaviour
 
 
         HappyLevel.instance.InitUI();
+        upgradeUI.UpdateUI();
     }
 
     private void CandiesRemaining_DataSave()
