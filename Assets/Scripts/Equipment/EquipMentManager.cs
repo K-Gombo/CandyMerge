@@ -347,11 +347,20 @@ public class EquipmentManager : MonoBehaviour
     {
         { Rank.F, 0 },
         { Rank.D, 0 },
-        { Rank.C, 1 },  // rankLevel 1까지 가능
-        { Rank.B, 1 },  // rankLevel 1까지 가능
-        { Rank.A, 2 },  // rankLevel 2까지 가능
-        { Rank.S, 2 },  // rankLevel 2까지 가능
-        { Rank.SS, 3 }, // rankLevel 3까지 가능
+        { Rank.C, 0 },
+        { Rank.C1, 1 },
+        { Rank.B, 0 },
+        { Rank.B1, 0 },
+        { Rank.A, 0 },
+        { Rank.A1, 1 },
+        { Rank.A2, 2 },
+        { Rank.S, 0 },
+        { Rank.S1, 1 },
+        { Rank.S2, 2 },
+        { Rank.SS, 0 },
+        { Rank.SS1, 1 },
+        { Rank.SS2, 2 },
+        { Rank.SS3, 3 }
     };
 
     
@@ -404,12 +413,13 @@ public class EquipmentManager : MonoBehaviour
         {
             EquipmentStatus mainEquipment = equipMixBoxes[0].GetChild(0).GetComponent<EquipmentStatus>().originalEquipment;
         
-            int maxRankLevel = maxLevelsPerRank[mainEquipment.equipRank];
+            int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
 
             if (mainEquipment.rankLevel >= maxRankLevel)
             {
-                mainEquipment.equipRank = GetNextRank(mainEquipment.equipRank);
-                mainEquipment.rankLevel = 0;
+                Rank nextRank = GetNextRank(mainEquipment.equipRank);
+                mainEquipment.rankLevel = nextRank == mainEquipment.equipRank ? 0 : ConvertRankToLevel(nextRank);
+                mainEquipment.equipRank = nextRank;
             }
             else
             {
@@ -436,7 +446,14 @@ public class EquipmentManager : MonoBehaviour
             // EquipMixbox[0]의 클론 제거
             Destroy(equipMixBoxes[0].GetChild(0).gameObject);
         }
-        equipmentStatus.UpdateLevelUI();
+    }
+    
+    public int ConvertRankToLevel(Rank rank)
+    {
+        if (rank == Rank.C1 ||rank == Rank.B1 || rank == Rank.A1 || rank == Rank.S1 || rank == Rank.SS1) return 1;
+        if (rank == Rank.A2 || rank == Rank.S2 || rank == Rank.SS2) return 2;
+        if (rank == Rank.SS3) return 3;
+        return 0; // 기본값
     }
 
 }
