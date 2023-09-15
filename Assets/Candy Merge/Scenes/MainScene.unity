@@ -20315,10 +20315,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Equip
       objectReference: {fileID: 0}
-    - target: {fileID: 7493051836597960836, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8168095094269028169, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -20764,6 +20760,7 @@ MonoBehaviour:
   - {fileID: 1309334759}
   mixLockedPanel: {fileID: 2102023929}
   equipMixBtn: {fileID: 943042642}
+  allEquipmentList: []
 --- !u!114 &7647821949377435576
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -87,6 +87,18 @@ public class EquipmentController : MonoBehaviour
             clone.transform.localPosition = Vector3.zero;
 
             clickedEquipment.myClone = clone;
+            
+            foreach (EquipmentStatus equipment in allEquipmentList)
+            {
+                if (equipment.equipRank == clickedEquipment.equipRank && equipment.equipName == clickedEquipment.equipName)
+                {
+                    equipment.gameObject.SetActive(true);
+                }
+                else
+                {
+                    equipment.gameObject.SetActive(false);
+                }
+            }
 
             // 원본에 있는 특정 오브젝트 활성화
             clickedEquipment.touchLock1.SetActive(true);
@@ -140,7 +152,7 @@ public class EquipmentController : MonoBehaviour
 
         if (clickedClone.transform.parent == equipMixBoxes[0])
         {
-            // equipMixBoxes[1]에 있는 클론들의 원본 객체들을 비활성화
+            // equipMixBoxes[1]과 equipMixBoxes[2]에 있는 클론들의 원본 객체들을 비활성화
             foreach (Transform child in equipMixBoxes[1])
             {
                 EquipmentStatus original = child.GetComponent<EquipmentStatus>().originalEquipment;
@@ -153,7 +165,6 @@ public class EquipmentController : MonoBehaviour
                 Destroy(child.gameObject);
             }
 
-            // equipMixBoxes[2]에 있는 클론들의 원본 객체들을 비활성화
             foreach (Transform child in equipMixBoxes[2])
             {
                 EquipmentStatus original = child.GetComponent<EquipmentStatus>().originalEquipment;
@@ -168,8 +179,14 @@ public class EquipmentController : MonoBehaviour
 
             equipMixBoxes[1].gameObject.SetActive(false);
             equipMixBoxes[2].gameObject.SetActive(false);
-            mixLockedPanel.SetActive(false); // mixLockedPanel 비활성화
+            mixLockedPanel.SetActive(false); 
             equipMixBtn.SetActive(false); 
+
+            // 모든 장비를 다시 보이게 함
+            foreach (EquipmentStatus equipment in allEquipmentList)
+            {
+                equipment.gameObject.SetActive(true);
+            }
         }
 
         // 원본의 특정 오브젝트 비활성화
@@ -179,6 +196,7 @@ public class EquipmentController : MonoBehaviour
             clickedClone.originalEquipment.touchLock2.SetActive(false);
             clickedClone.originalEquipment.check.SetActive(false);
         }
+
         Destroy(clickedClone.gameObject);
     }
     
