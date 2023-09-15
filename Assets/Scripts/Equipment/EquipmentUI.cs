@@ -13,25 +13,17 @@ public class EquipmentUI : MonoBehaviour
    {
       instance = this;
    }
+    
 
-   public void UpdateLevelUI()
-   {
-      equipmentStatus.equipLevelText.text = "Lv. " + equipmentStatus.equipLevel;
-      equipmentStatus.rankLevelText.text = equipmentStatus.rankLevel.ToString();
-   }
-
-   public void UpdateEquipNameExplainUI()
+   public void UpdateEquipNameExplain()
    {
       
    }
 
-   public void UpdateEquipLevelExplainUI()
+   public void UpdateEquipLevelExplain()
    {
       
    }
-
-   public void UpdateEquipGoldUpExplainUI()
-   {
-      
-   }
+   
+   
 }

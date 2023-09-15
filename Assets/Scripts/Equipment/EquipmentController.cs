@@ -195,6 +195,9 @@ public class EquipmentController : MonoBehaviour
     
     
     
+    
+    
+    
 
 
 }
