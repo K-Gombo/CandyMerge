@@ -5,7 +5,7 @@ using System.Linq;
 public class EquipArrangeManager : MonoBehaviour
 {
     public List<EquipmentStatus> equipList = new List<EquipmentStatus>();
-    private List<EquipmentStatus> filteredList = new List<EquipmentStatus>();
+    public List<EquipmentStatus> filteredList = new List<EquipmentStatus>();
     public EquipmentManager equipmentManager;
     public GameObject equipGridGameObject;
 
@@ -31,12 +31,18 @@ public class EquipArrangeManager : MonoBehaviour
     public void SortBySlotType()
     {
         UpdateEquipList();
-        equipList = equipList.OrderBy(e => e.slotType).ToList();
+        equipList = equipList
+            .OrderBy(e => e.slotType)               // 1. slotType으로 정렬
+            .ThenByDescending(e => GetRankValue(e.equipRank)) // 2. 같은 slotType 내에서 equipRank로 내림차순 정렬
+            .ThenBy(e => e.equipName)                // 3. 같은 rank 내에서 equipName으로 오름차순 정렬
+            .ToList();
+
         for (int i = 0; i < equipList.Count; i++)
         {
             equipList[i].transform.SetSiblingIndex(i);
         }
     }
+
 
     // 랭크별로 정렬하는 메서드
     public void SortByRank()
@@ -49,7 +55,11 @@ public class EquipArrangeManager : MonoBehaviour
             item.gameObject.SetActive(true);
         }
 
-        equipList = equipList.OrderByDescending(e => GetRankValue(e.equipRank)).ToList();
+        equipList = equipList
+            .OrderByDescending(e => GetRankValue(e.equipRank))
+            .ThenBy(e => e.equipName) // 같은 등급 내에서 equipName으로 정렬
+            .ToList();
+
         for (int i = 0; i < equipList.Count; i++)
         {
             equipList[i].transform.SetSiblingIndex(i);
@@ -57,10 +67,15 @@ public class EquipArrangeManager : MonoBehaviour
     }
 
 
+
     public void FilterAndSortByCook()
     {
         DeactivateAll();
-        filteredList = equipList.Where(e => e.slotType == EquipmentManager.SlotType.Cook).ToList();
+        filteredList = equipList
+            .Where(e => e.slotType == EquipmentManager.SlotType.Cook)
+            .OrderByDescending(e => GetRankValue(e.equipRank)) // equipRank로 내림차순 정렬
+            .ThenBy(e => e.equipName) // 같은 equipRank 내에서 equipName으로 정렬
+            .ToList();
         ActivateFiltered();
         UpdateEquipGrid(filteredList);
     }
@@ -68,7 +83,11 @@ public class EquipArrangeManager : MonoBehaviour
     public void FilterAndSortByCap()
     {
         DeactivateAll();
-        filteredList = equipList.Where(e => e.slotType == EquipmentManager.SlotType.Cap).ToList();
+        filteredList = equipList
+            .Where(e => e.slotType == EquipmentManager.SlotType.Cap)
+            .OrderByDescending(e => GetRankValue(e.equipRank)) // equipRank로 내림차순 정렬
+            .ThenBy(e => e.equipName) // 같은 equipRank 내에서 equipName으로 정렬
+            .ToList();
         ActivateFiltered();
         UpdateEquipGrid(filteredList);
     }
@@ -76,7 +95,11 @@ public class EquipArrangeManager : MonoBehaviour
     public void FilterAndSortByCloth()
     {
         DeactivateAll();
-        filteredList = equipList.Where(e => e.slotType == EquipmentManager.SlotType.Cloth).ToList();
+        filteredList = equipList
+            .Where(e => e.slotType == EquipmentManager.SlotType.Cloth)
+            .OrderByDescending(e => GetRankValue(e.equipRank)) // equipRank로 내림차순 정렬
+            .ThenBy(e => e.equipName) // 같은 equipRank 내에서 equipName으로 정렬
+            .ToList();
         ActivateFiltered();
         UpdateEquipGrid(filteredList);
     }
@@ -84,10 +107,15 @@ public class EquipArrangeManager : MonoBehaviour
     public void FilterAndSortByShoes()
     {
         DeactivateAll();
-        filteredList = equipList.Where(e => e.slotType == EquipmentManager.SlotType.Shoes).ToList();
+        filteredList = equipList
+            .Where(e => e.slotType == EquipmentManager.SlotType.Shoes)
+            .OrderByDescending(e => GetRankValue(e.equipRank)) // equipRank로 내림차순 정렬
+            .ThenBy(e => e.equipName) // 같은 equipRank 내에서 equipName으로 정렬
+            .ToList();
         ActivateFiltered();
         UpdateEquipGrid(filteredList);
     }
+
 
     public void UpdateEquipGrid(List<EquipmentStatus> listToSort)
     {
