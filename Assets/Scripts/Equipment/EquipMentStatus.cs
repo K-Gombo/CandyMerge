@@ -18,7 +18,7 @@ public class EquipmentStatus : MonoBehaviour
     public Image slotImageComponent;
     public Image slotBarComponent;
     public int equipLevel = 1;
-    public int maxEquipLevel;  // 추가된 코드
+    public int maxEquipLevel; 
     public int rankLevel;
     public Text equipLevelText;
     public Text rankLevelText;
@@ -29,7 +29,7 @@ public class EquipmentStatus : MonoBehaviour
     public GameObject touchLock2;
     public GameObject check;
     public EquipmentStatus originalEquipment;
-    
+    public GameObject rankLevelSlot;
     
     void Awake()
     {

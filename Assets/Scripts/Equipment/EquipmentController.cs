@@ -12,8 +12,13 @@ public class EquipmentController : MonoBehaviour
     public EquipArrangeManager equipArrangeManager;
     public GameObject backBtn;
     public Transform equipMixResultBox;
-    public EquipmentManager equipmentManager;
+    public EquipmentManager equipmentManager;public GameObject equipNameExplain;
+    public Text equipNameExplainText;
+    public GameObject equipRankExplain;
+    public Text equipRankExplainText;
     public GameObject equipArrangeBtnGroup;
+    public GameObject equipExplain;
+    
 
     void Awake()
     {
@@ -104,8 +109,7 @@ public class EquipmentController : MonoBehaviour
                 GameObject previewClone = Instantiate(clickedEquipment.gameObject);
                 EquipmentStatus previewCloneStatus = previewClone.GetComponent<EquipmentStatus>();
                 previewCloneStatus.isOriginal = false;
-                Debug.Log("previewClone 생성됨: " + previewClone.activeSelf);
-                
+
                 // 여기에 scale을 1.3배로 설정
                 previewClone.transform.localScale = new Vector3(
                     clickedEquipment.transform.localScale.x * 1.3f,
@@ -113,8 +117,21 @@ public class EquipmentController : MonoBehaviour
                     clickedEquipment.transform.localScale.z * 1.3f
                 );
 
-                // rankLevel을 1만큼 증가
-                previewCloneStatus.rankLevel = clickedEquipment.rankLevel + 1;
+                // 새로운 rankLevel과 equipRank을 계산
+                // 새로운 rankLevel과 equipRank을 계산
+                int maxRankLevel = EquipmentManager.maxLevelsPerRank.ContainsKey(clickedEquipment.equipRank) ? EquipmentManager.maxLevelsPerRank[clickedEquipment.equipRank] : 0;
+                int newRankLevel;
+                if (clickedEquipment.rankLevel >= maxRankLevel)
+                {
+                    EquipmentManager.Rank nextRank = equipmentManager.GetNextRank(clickedEquipment.equipRank);
+                    newRankLevel = equipmentManager.ConvertRankToLevel(nextRank);
+                    previewCloneStatus.equipRank = nextRank;
+                }
+                else
+                {
+                    newRankLevel = clickedEquipment.rankLevel + 1;
+                }
+                previewCloneStatus.rankLevel = newRankLevel;
 
                 // 색상 업데이트
                 if (equipmentManager.rankToColorMap.ContainsKey(previewCloneStatus.equipRank))
@@ -128,11 +145,11 @@ public class EquipmentController : MonoBehaviour
                 // UI 업데이트
                 previewCloneStatus.UpdateLevelUI();
 
-                Debug.Log("UI 업데이트 후 previewClone 상태: " + previewClone.activeSelf);
+                // 여기에 SetRankLevelSlotActive 메서드 호출을 추가
+                equipmentManager.SetRankLevelSlotActive(newRankLevel, previewCloneStatus.rankLevelSlot);
 
                 previewClone.transform.SetParent(equipMixResultBox, false);
                 previewClone.transform.localPosition = Vector3.zero;
-                Debug.Log("부모 설정 후 previewClone 상태: " + previewClone.activeSelf);
             }
             else
             {   
@@ -141,15 +158,20 @@ public class EquipmentController : MonoBehaviour
                 {
                     existingPreviewClone.SetActive(true);  // 비활성화된 상태라면 활성화
                 }
-                Debug.Log("previewClone 이미 존재: " + equipMixResultBox.GetChild(0).gameObject.activeSelf);
             }
             
             // 원본에 있는 특정 오브젝트 활성화
             clickedEquipment.touchLock1.SetActive(true);
-            clickedEquipment.touchLock2.SetActive(true);
+            if (clickedEquipment.rankLevel != 0)
+            {
+                clickedEquipment.touchLock2.SetActive(true);
+            }
             clickedEquipment.check.SetActive(true);
         }
-        
+        equipExplain.SetActive(false);
+        equipNameExplain.SetActive(true);
+        equipRankExplain.SetActive(true);
+        EquipExplainUpdate(clickedEquipment);
     }
     
 }
@@ -237,6 +259,9 @@ public class EquipmentController : MonoBehaviour
             equipMixBtn.SetActive(false); 
             equipArrangeManager.SortByRank();
             equipArrangeBtnGroup.SetActive(true);
+            equipExplain.SetActive(true);
+            equipNameExplain.SetActive(false);
+            equipRankExplain.SetActive(false);
         }
 
         // 원본의 특정 오브젝트 비활성화
@@ -278,6 +303,9 @@ public class EquipmentController : MonoBehaviour
         }
         equipMixBoxes[1].gameObject.SetActive(false);
         equipMixBoxes[2].gameObject.SetActive(false);
+        equipExplain.SetActive(true);
+        equipNameExplain.SetActive(false);
+        equipRankExplain.SetActive(false);
     }
     
     public void OnbackBtnClick()
@@ -314,6 +342,39 @@ public class EquipmentController : MonoBehaviour
         }
         equipMixBoxes[1].gameObject.SetActive(false);
         equipMixBoxes[2].gameObject.SetActive(false);
+        equipExplain.SetActive(true);
+        equipNameExplain.SetActive(false);
+        equipRankExplain.SetActive(false);
+    }
+
+
+    public void EquipExplainUpdate(EquipmentStatus clickedEquipment)
+    {
+        equipNameExplainText.text = clickedEquipment.equipName;
+
+        // 현재 장비 등급과 다음 장비 등급을 얻습니다.
+        EquipmentManager.Rank currentRank = clickedEquipment.equipRank;
+        EquipmentManager.Rank nextRank = equipmentManager.GetNextRank(currentRank);
+
+        // 등급을 문자열로 변환합니다.
+        string currentRankStr = currentRank.ToString();
+        string nextRankStr = nextRank.ToString();
+    
+        if (currentRankStr.EndsWith("1") || currentRankStr.EndsWith("2") || currentRankStr.EndsWith("3"))
+        {
+            equipRankExplainText.text = $"랭크업 : {currentRankStr} -> {currentRankStr.Substring(0, currentRankStr.Length - 1)}+1";
+        }
+        else if (nextRankStr.EndsWith("1") || nextRankStr.EndsWith("2") || nextRankStr.EndsWith("3"))
+        {
+            equipRankExplainText.text = $"랭크업 : {currentRankStr} -> {nextRankStr.Substring(0, nextRankStr.Length - 1)}+1";
+        }
+        else
+        {
+            equipRankExplainText.text = $"랭크업 : {currentRankStr} -> {nextRankStr}";
+        }
     }
     
+    
+
+
 }

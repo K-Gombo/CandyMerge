@@ -23,7 +23,6 @@ public class EquipmentManager : MonoBehaviour
     public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
     public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
     
-    
     // 장비 등급을 나타내는 enum
     public enum Rank
     { F,D,C,B,A,S,SS,C1,B1,A1,A2,S1,S2,SS1,SS2,SS3}
@@ -317,7 +316,7 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
             }
             
-            // 랭크에 따라 배경 스프라이트 설정
+            // 랭크에 따라 배경 컬러 설정
             if (rankToColorMap.ContainsKey(chosenRank))
             {
                 equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
@@ -338,6 +337,7 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.equipLevel = levelData.startLevel;
                 equipComponent.maxEquipLevel = levelData.maxLevel;  // 최대 레벨 설정
                 equipComponent.rankLevel = 0;
+                SetRankLevelSlotActive(equipComponent.rankLevel ,equipComponent.rankLevelSlot);
             }
         }
     }
@@ -418,6 +418,8 @@ public class EquipmentManager : MonoBehaviour
             {
                 mainEquipment.rankLevel++;
             }
+            
+            SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
 
             // 새로운 등급의 시작 레벨과 최대 레벨을 설정
             if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
@@ -459,6 +461,20 @@ public class EquipmentManager : MonoBehaviour
         if (rank == Rank.SS3) return 3;
         return 0; // 기본값
     }
+    
+    // rankLevelSlot을 설정하는 메서드
+    public void SetRankLevelSlotActive(int rankLevel, GameObject rankLevelSlot)
+    {
+        if (rankLevel == 0)
+        {
+            rankLevelSlot.SetActive(false);
+        }
+        else
+        {   
+            rankLevelSlot.SetActive(true);
+        }
+    }
+
     
 
 }

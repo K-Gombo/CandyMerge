@@ -115,7 +115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.1, y: -69.7}
+  m_AnchoredPosition: {x: -35, y: -74}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7503781043122893860
@@ -842,6 +842,7 @@ MonoBehaviour:
   touchLock2: {fileID: 3272477371345190893}
   check: {fileID: 8536447352059482334}
   originalEquipment: {fileID: 9062808844006152309}
+  rankLevelSlot: {fileID: 8039254892209098646}
 --- !u!114 &8495533990269110767
 MonoBehaviour:
   m_ObjectHideFlags: 0
