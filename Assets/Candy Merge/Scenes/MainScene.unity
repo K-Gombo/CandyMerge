@@ -15391,6 +15391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1959438789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3038188967196242543, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1979872883
 GameObject:
   m_ObjectHideFlags: 0
@@ -18008,6 +18013,7 @@ MonoBehaviour:
   backBtn: {fileID: 400460368}
   equipMixResultBox: {fileID: 898822674}
   equipmentManager: {fileID: 7102599355080192638}
+  equipArrangeBtnGroup: {fileID: 1959438789}
 --- !u!114 &7647821949377435576
 MonoBehaviour:
   m_ObjectHideFlags: 0

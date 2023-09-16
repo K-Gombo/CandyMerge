@@ -13,6 +13,7 @@ public class EquipmentController : MonoBehaviour
     public GameObject backBtn;
     public Transform equipMixResultBox;
     public EquipmentManager equipmentManager;
+    public GameObject equipArrangeBtnGroup;
 
     void Awake()
     {
@@ -39,6 +40,7 @@ public class EquipmentController : MonoBehaviour
     {
         GameObject clone = null;
         Transform targetParent = null;
+        equipArrangeBtnGroup.SetActive(false);
 
         if (equipMixBoxes[0].childCount == 0)
         {
@@ -234,6 +236,7 @@ public class EquipmentController : MonoBehaviour
             mixLockedPanel.SetActive(false); // mixLockedPanel 비활성화
             equipMixBtn.SetActive(false); 
             equipArrangeManager.SortByRank();
+            equipArrangeBtnGroup.SetActive(true);
         }
 
         // 원본의 특정 오브젝트 비활성화

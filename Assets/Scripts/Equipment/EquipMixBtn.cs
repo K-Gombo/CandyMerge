@@ -15,14 +15,19 @@ public class EquipMixBtn : MonoBehaviour
     
 
     void OnClickMix()
-    {
-        equipmentManager.UpdateRankLevelOnMerge();
-        foreach (Transform equipMixBox in EquipmentController.instance.equipMixBoxes)
+    {   
+        bool areAllEquipMixBoxesFilled = EquipmentController.instance.AreAllEquipMixBoxesFilled();
+        if (areAllEquipMixBoxesFilled)
         {
-            EquipmentController.instance.EquipMixAfter(equipMixBox);
+            equipmentManager.UpdateRankLevelOnMerge();
+            foreach (Transform equipMixBox in EquipmentController.instance.equipMixBoxes)
+            {
+                EquipmentController.instance.EquipMixAfter(equipMixBox);
+            }
+
+            EquipmentController.instance.mixLockedPanel.SetActive(false);
+            EquipmentController.instance.equipMixBtn.SetActive(false);
+            equipArrangeManager.SortByRank();
         }
-        EquipmentController.instance.mixLockedPanel.SetActive(false); 
-        EquipmentController.instance.equipMixBtn.SetActive(false);
-        equipArrangeManager.SortByRank();
     }
 }
