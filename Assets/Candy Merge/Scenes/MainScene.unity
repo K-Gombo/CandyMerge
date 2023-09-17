@@ -9116,6 +9116,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1987169747512614031, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
   m_PrefabInstance: {fileID: 26010858820251076}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1108443194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4326611250126422615, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1125829587
 GameObject:
   m_ObjectHideFlags: 0
@@ -11120,7 +11125,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1291762836550508992, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
       propertyPath: m_Name
-      value: Panel_Equip_Explain
+      value: Panel_Equip_Status
       objectReference: {fileID: 0}
     - target: {fileID: 1291762836550508992, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
       propertyPath: m_IsActive
@@ -11209,6 +11214,14 @@ PrefabInstance:
     - target: {fileID: 7559439243539439244, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7728942944833520731, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
+      propertyPath: m_Name
+      value: RankTagText
+      objectReference: {fileID: 0}
+    - target: {fileID: 8258216848307646156, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
+      propertyPath: m_Name
+      value: RankTag
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17610,10 +17623,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2649246035438836990, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 6b1dafead04104622804ebc0c7d73173, type: 3}
     - target: {fileID: 3388006376932726088, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: equipmentManager
       value: 
@@ -17622,40 +17631,10 @@ PrefabInstance:
       propertyPath: equipArrangeManager
       value: 
       objectReference: {fileID: 4304388173809711829}
-    - target: {fileID: 3558355227188889475, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_Name
-      value: EquipRankText
-      objectReference: {fileID: 0}
     - target: {fileID: 4503205555073143916, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
       objectReference: {fileID: 1677070640}
-    - target: {fileID: 5953416712840345788, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 65
-      objectReference: {fileID: 0}
-    - target: {fileID: 6041105650023539612, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 61f266e13cab54efe8fee96fb94c143f, type: 3}
-    - target: {fileID: 6241844856456095939, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_Text
-      value: 'Rank : C -> C+1
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6241844856456095939, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 6b1dafead04104622804ebc0c7d73173, type: 3}
-    - target: {fileID: 6395315319766291798, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -85
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745994779796258996, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 6b1dafead04104622804ebc0c7d73173, type: 3}
     - target: {fileID: 7493051836597960836, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_Name
       value: Panel_Equip
@@ -17663,14 +17642,6 @@ PrefabInstance:
     - target: {fileID: 7493051836597960836, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7944140718178846046, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8070747047439600491, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 8168095094269028169, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
@@ -18128,6 +18099,8 @@ MonoBehaviour:
   equipRankExplainText: {fileID: 1295560742}
   equipArrangeBtnGroup: {fileID: 1959438789}
   equipExplain: {fileID: 1008168600}
+  equipPanel: {fileID: 1108443194}
+  equipStatusPanel: {fileID: 1033542318}
 --- !u!114 &7647821949377435576
 MonoBehaviour:
   m_ObjectHideFlags: 0

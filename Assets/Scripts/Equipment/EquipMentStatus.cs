@@ -7,6 +7,7 @@ public class EquipmentStatus : MonoBehaviour
     public int equipId;
     public EquipmentManager.SlotType slotType;
     public string equipName;
+    public string equipExplain;
     public int[] skillIds = new int[4];
     public EquipmentManager.Rank[] skillRanks = new EquipmentManager.Rank[4];
     public EquipmentManager.Rank equipRank;

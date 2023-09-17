@@ -44,6 +44,7 @@ public class EquipmentManager : MonoBehaviour
         public string[] skillNames = new string[4];
         public float[] skillPoints = new float[4];
         public Rank[] skillRanks = new Rank[4];
+        public string equipExplain;
         public Rank equipRank; // 랜덤으로 할당될 장비 등급
     }
     
@@ -106,6 +107,9 @@ public class EquipmentManager : MonoBehaviour
                             equip.skillPoints[j] = equipSkill.skillPoint;
                         }
                     }
+
+                    equip.equipExplain = data[11];
+
                 }
                 catch (Exception e)
                 {
@@ -294,6 +298,7 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.skillIds = selectedEquip.skillIds;
             equipComponent.skillRanks = selectedEquip.skillRanks;
             equipComponent.equipRank = chosenRank;
+            equipComponent.equipExplain = selectedEquip.equipExplain;
 
             for (int i = 0; i < 4; i++)
             {
