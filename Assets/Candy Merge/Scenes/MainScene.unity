@@ -11127,10 +11127,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Equip_Status
       objectReference: {fileID: 0}
-    - target: {fileID: 1291762836550508992, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7559439243539439244, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11214,14 +11210,6 @@ PrefabInstance:
     - target: {fileID: 7559439243539439244, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7728942944833520731, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
-      propertyPath: m_Name
-      value: RankTagText
-      objectReference: {fileID: 0}
-    - target: {fileID: 8258216848307646156, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
-      propertyPath: m_Name
-      value: RankTag
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14949,6 +14937,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1917401456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3491067793811719276, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1917401458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6745994779796258996, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917401456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1923457537
 GameObject:
   m_ObjectHideFlags: 0
@@ -17535,10 +17539,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 202459797}
     m_Modifications:
-    - target: {fileID: 964656938249914297, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 994455172579183257, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17639,34 +17639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Equip
       objectReference: {fileID: 0}
-    - target: {fileID: 7493051836597960836, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8168095094269028169, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1677070640}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18097,6 +18073,8 @@ MonoBehaviour:
   equipNameExplainText: {fileID: 164561924}
   equipRankExplain: {fileID: 1295560740}
   equipRankExplainText: {fileID: 1295560742}
+  equipGoldIncrementExpain: {fileID: 1917401456}
+  equipGoldIncrementExplainText: {fileID: 1917401458}
   equipArrangeBtnGroup: {fileID: 1959438789}
   equipExplain: {fileID: 1008168600}
   equipPanel: {fileID: 1108443194}

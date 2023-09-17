@@ -339,7 +339,7 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.equipLevel = levelData.startLevel;
                 equipComponent.maxEquipLevel = levelData.maxLevel;  // 최대 레벨 설정
                 equipComponent.rankLevel = 0;
-                equipComponent.startGoldIncrement = levelData.startGoldGainIncrement;
+                equipComponent.goldIncrement = levelData.startGoldGainIncrement;
                 equipComponent.upgradeGoldIncrement = levelData.upgradeGoldGainIncrement;
                 equipComponent.maxGoldIncrement = levelData.maxGoldGainIncrement;
                 equipComponent.upgradetGoldCost = levelData.upgradeDefaultGoldCost;
@@ -480,6 +480,32 @@ public class EquipmentManager : MonoBehaviour
         {   
             rankLevelSlot.SetActive(true);
         }
+    }
+    
+    public Dictionary<Rank, float> startGoldIncrementMap = new Dictionary<Rank, float>
+    {
+        {Rank.F, 0},
+        {Rank.D, 0.4f},
+        {Rank.C, 1.48f},
+        {Rank.C1, 3.44f},
+        {Rank.B, 5.68f},
+        {Rank.B1, 9.1f},
+        {Rank.A, 12.9f},
+        {Rank.A1, 18.18f},
+        {Rank.A2, 23.94f},
+        {Rank.S, 30.18f},
+        {Rank.S1, 38.3f},
+        {Rank.S2, 47f},
+        {Rank.SS, 56.28f},
+        {Rank.SS1, 67.84f},
+        {Rank.SS2, 81.88f},
+        {Rank.SS3, 98.6f},
+    };
+    
+    public float GetNextGoldIncrement(Rank currentRank)
+    {
+        Rank nextRank = GetNextRank(currentRank);
+        return startGoldIncrementMap.ContainsKey(nextRank) ? startGoldIncrementMap[nextRank] : 0f;
     }
 
     

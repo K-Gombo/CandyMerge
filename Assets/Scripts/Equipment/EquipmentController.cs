@@ -12,14 +12,18 @@ public class EquipmentController : MonoBehaviour
     public EquipArrangeManager equipArrangeManager;
     public GameObject backBtn;
     public Transform equipMixResultBox;
-    public EquipmentManager equipmentManager;public GameObject equipNameExplain;
+    public EquipmentManager equipmentManager;
+    public GameObject equipNameExplain;
     public Text equipNameExplainText;
     public GameObject equipRankExplain;
     public Text equipRankExplainText;
+    public GameObject equipGoldIncrementExpain;
+    public Text equipGoldIncrementExplainText;
     public GameObject equipArrangeBtnGroup;
     public GameObject equipExplain;
     public GameObject equipPanel;
     public GameObject equipStatusPanel;
+    
     
 
     void Awake()
@@ -137,6 +141,7 @@ public class EquipmentController : MonoBehaviour
                 equipExplain.SetActive(true);
                 equipNameExplain.SetActive(false);
                 equipRankExplain.SetActive(false);
+                equipGoldIncrementExpain.SetActive(false);
             }
 
             // 원본의 특정 오브젝트 비활성화
@@ -183,6 +188,7 @@ public class EquipmentController : MonoBehaviour
         equipExplain.SetActive(true);
         equipNameExplain.SetActive(false);
         equipRankExplain.SetActive(false);
+        equipGoldIncrementExpain.SetActive(false);
     }
     
     public void OnbackBtnClick()
@@ -222,6 +228,7 @@ public class EquipmentController : MonoBehaviour
         equipExplain.SetActive(true);
         equipNameExplain.SetActive(false);
         equipRankExplain.SetActive(false);
+        equipGoldIncrementExpain.SetActive(false);
     }
 
 
@@ -247,6 +254,9 @@ public class EquipmentController : MonoBehaviour
         {
             equipRankExplainText.text = $"랭크업 : {currentRankStr} -> {nextRankStr}";
         }
+        
+        float nextGoldIncrement = equipmentManager.GetNextGoldIncrement(clickedEquipment.equipRank);
+        equipGoldIncrementExplainText.text = $"골드 획득량 {clickedEquipment.goldIncrement} % -> {nextGoldIncrement} %";
     }
 
 
@@ -392,6 +402,7 @@ public class EquipmentController : MonoBehaviour
             equipExplain.SetActive(false);
             equipNameExplain.SetActive(true);
             equipRankExplain.SetActive(true);
+            equipGoldIncrementExpain.SetActive(true);
             EquipExplainUpdate(clickedEquipment);
         }
     }
@@ -399,6 +410,7 @@ public class EquipmentController : MonoBehaviour
     public void EquipPanelEquipClick()
     {
         equipStatusPanel.SetActive(true);
+        
     }
     
 
