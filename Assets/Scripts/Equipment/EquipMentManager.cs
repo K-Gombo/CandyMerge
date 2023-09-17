@@ -112,10 +112,7 @@ public class EquipmentManager : MonoBehaviour
                     Debug.LogError("EquioDataCSV 파싱 에러: " + e.Message);
                 }
                 equipList.Add(equip);
-                // foreach (var equipment in equipList)
-                // {
-                //     Debug.Log($"Equip ID: {equipment.equipId}, Equip Name: {equipment.equipName}, SlotType: {equipment.slotType}, {equipment.skillIds[0]},{equipment.skillRanks[0]}");
-                // }
+              
             }
             InitializeEquipPool();
             AssignRandomRank();
@@ -337,6 +334,11 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.equipLevel = levelData.startLevel;
                 equipComponent.maxEquipLevel = levelData.maxLevel;  // 최대 레벨 설정
                 equipComponent.rankLevel = 0;
+                equipComponent.startGoldIncrement = levelData.startGoldGainIncrement;
+                equipComponent.upgradeGoldIncrement = levelData.upgradeGoldGainIncrement;
+                equipComponent.maxGoldIncrement = levelData.maxGoldGainIncrement;
+                equipComponent.upgradetGoldCost = levelData.upgradeDefaultGoldCost;
+                
                 SetRankLevelSlotActive(equipComponent.rankLevel ,equipComponent.rankLevelSlot);
             }
         }

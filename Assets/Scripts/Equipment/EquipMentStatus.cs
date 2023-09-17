@@ -20,6 +20,10 @@ public class EquipmentStatus : MonoBehaviour
     public int equipLevel = 1;
     public int maxEquipLevel; 
     public int rankLevel;
+    public float startGoldIncrement;
+    public float upgradeGoldIncrement;
+    public float maxGoldIncrement;
+    public float upgradetGoldCost;
     public Text equipLevelText;
     public Text rankLevelText;
     public Button EquipButton; 

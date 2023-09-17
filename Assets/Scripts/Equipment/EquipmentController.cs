@@ -351,12 +351,10 @@ public class EquipmentController : MonoBehaviour
     public void EquipExplainUpdate(EquipmentStatus clickedEquipment)
     {
         equipNameExplainText.text = clickedEquipment.equipName;
-
-        // 현재 장비 등급과 다음 장비 등급을 얻습니다.
+        
         EquipmentManager.Rank currentRank = clickedEquipment.equipRank;
         EquipmentManager.Rank nextRank = equipmentManager.GetNextRank(currentRank);
-
-        // 등급을 문자열로 변환합니다.
+        
         string currentRankStr = currentRank.ToString();
         string nextRankStr = nextRank.ToString();
     
