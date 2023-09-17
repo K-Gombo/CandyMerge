@@ -6,7 +6,6 @@ public class EquipArrangeManager : MonoBehaviour
 {
     public List<EquipmentStatus> equipList = new List<EquipmentStatus>();
     public List<EquipmentStatus> filteredList = new List<EquipmentStatus>();
-    public EquipmentManager equipmentManager;
     public GameObject equipGridGameObject;
 
     public void UpdateEquipList()

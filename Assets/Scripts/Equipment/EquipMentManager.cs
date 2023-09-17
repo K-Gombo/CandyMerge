@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class EquipmentManager : MonoBehaviour
     public Sprite[] slotSprites;
     public GachaManager GachaManager;
     public EquipSkillManager equipSkillManager;
+    public EquipArrangeManager equipArrangeManager;
     public EquipmentStatus equipmentStatus;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
     public int poolSize = 40;
@@ -22,6 +24,10 @@ public class EquipmentManager : MonoBehaviour
     public Dictionary<Rank, Color> rankToColorMap = new Dictionary<Rank, Color>();
     public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
     public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
+    public GameObject mixBtnMixAvailable;
+    public GameObject allMixBtnMixAvailable;
+    
+    
     
     // 장비 등급을 나타내는 enum
     public enum Rank
@@ -459,6 +465,7 @@ public class EquipmentManager : MonoBehaviour
             // EquipMixbox[0]의 클론 제거
             Destroy(equipMixBoxes[0].GetChild(0).gameObject);
         }
+        CheckMixAvailability();
     }
     
     public int ConvertRankToLevel(Rank rank)
@@ -507,9 +514,107 @@ public class EquipmentManager : MonoBehaviour
         Rank nextRank = GetNextRank(currentRank);
         return startGoldIncrementMap.ContainsKey(nextRank) ? startGoldIncrementMap[nextRank] : 0f;
     }
+    
+    public void CheckMixAvailability()
+    {
+        // 장비 리스트 업데이트
+        equipArrangeManager.UpdateEquipList();
+
+        // 같은 Rank와 equipName을 가진 장비를 카운트하기 위한 딕셔너리
+        Dictionary<string, int> equipCountDictionary = new Dictionary<string, int>();
+        
+        foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
+        {
+            // Rank와 equipName을 합쳐서 키를 만듦
+            string key = equipment.equipRank + "_" + equipment.equipName;
+
+            if (equipCountDictionary.ContainsKey(key))
+            {
+                equipCountDictionary[key]++;
+            }
+            else
+            {
+                equipCountDictionary[key] = 1;
+            }
+        }
+
+        // 같은 Rank와 equipName을 가진 장비가 3개 이상 있는지 확인
+        bool mixAvailable = equipCountDictionary.Any(entry => entry.Value >= 3);
+
+        // mixBtnMixAvailable 버튼 활성화 또는 비활성화
+        mixBtnMixAvailable.SetActive(mixAvailable);
+        allMixBtnMixAvailable.SetActive(mixAvailable);
+
+        // 각 EquipmentStatus에 대한 mixAvailable 적용
+        foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
+        {
+            string key = equipment.equipRank + "_" + equipment.equipName;
+            bool shouldActivate = equipCountDictionary.ContainsKey(key) && equipCountDictionary[key] >= 3;
+            equipment.mixAvailable.SetActive(shouldActivate);
+        }
+    }
+    
+    
+    public void AllMergeEquipments()
+    {
+        // 같은 Rank와 equipName을 가진 장비를 카운트하기 위한 딕셔너리
+        Dictionary<string, List<EquipmentStatus>> equipGroups = new Dictionary<string, List<EquipmentStatus>>();
+
+        foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
+        {
+          
+            string key = equipment.equipRank + "_" + equipment.equipName;
+
+            if (equipGroups.ContainsKey(key))
+            {
+                equipGroups[key].Add(equipment);
+            }
+            else
+            {
+                equipGroups[key] = new List<EquipmentStatus> { equipment };
+            }
+        }
+
+        // 3개 이상 동일한 조건의 장비가 있으면 합성
+        foreach (var group in equipGroups)
+        {
+            while (group.Value.Count >= 3)
+            {
+                // 첫 번째 장비를 기본으로 삼아 업그레이드
+                EquipmentStatus mainEquipment = group.Value[0];
+
+                // 나머지 로직은 UpdateRankLevelOnMerge 메서드와 유사
+                int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
+
+                if (mainEquipment.rankLevel >= maxRankLevel)
+                {
+                    Rank nextRank = GetNextRank(mainEquipment.equipRank);
+                    mainEquipment.rankLevel = nextRank == mainEquipment.equipRank ? 0 : ConvertRankToLevel(nextRank);
+                    mainEquipment.equipRank = nextRank;
+                }
+                else
+                {
+                    mainEquipment.rankLevel++;
+                }
+
+                SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
+                mainEquipment.UpdateLevelUI();
+
+                // 2개의 장비를 풀로 리턴
+                for (int i = 1; i <= 2; i++)
+                {
+                    GameObject originalObj = group.Value[i].gameObject;
+                    ReturnEquipToPool(originalObj);
+                }
+
+                // 합성한 장비를 리스트에서 제거
+                group.Value.RemoveRange(0, 3);
+            }
+        }
+        CheckMixAvailability();
+    }
 
     
-
 }
 
 

@@ -2,11 +2,13 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class EquipPanelBtn : MonoBehaviour
 {
     public List<GameObject> allPanels;
     public CandyController candyController;
     public GiftBoxController giftBoxController;
+    public EquipmentManager equipmentManager;
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
     public GachaManager GachaManager;
@@ -53,7 +55,7 @@ public class EquipPanelBtn : MonoBehaviour
         }
         EquipPanel.SetActive(true);
         candyController.EnableDrag(false);
-        
-        
+        equipmentManager.CheckMixAvailability();
     }
+    
 }

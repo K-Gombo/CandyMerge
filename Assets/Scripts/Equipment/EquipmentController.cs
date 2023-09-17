@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class EquipmentController : MonoBehaviour
     public GameObject equipMixBtn;
     public EquipArrangeManager equipArrangeManager;
     public GameObject backBtn;
+    public GameObject plus;
     public Transform equipMixResultBox;
     public EquipmentManager equipmentManager;
     public GameObject equipNameExplain;
@@ -23,6 +25,7 @@ public class EquipmentController : MonoBehaviour
     public GameObject equipExplain;
     public GameObject equipPanel;
     public GameObject equipStatusPanel;
+    
     
     
 
@@ -108,7 +111,6 @@ public class EquipmentController : MonoBehaviour
                         original.touchLock2.SetActive(false);
                         original.check.SetActive(false);
                     }
-
                     Destroy(child.gameObject);
                 }
 
@@ -122,7 +124,6 @@ public class EquipmentController : MonoBehaviour
                         original.touchLock2.SetActive(false);
                         original.check.SetActive(false);
                     }
-
                     Destroy(child.gameObject);
                 }
 
@@ -134,7 +135,8 @@ public class EquipmentController : MonoBehaviour
 
                 equipMixBoxes[1].gameObject.SetActive(false);
                 equipMixBoxes[2].gameObject.SetActive(false);
-                mixLockedPanel.SetActive(false); // mixLockedPanel 비활성화
+                plus.SetActive(false);
+                mixLockedPanel.SetActive(false); 
                 equipMixBtn.SetActive(false);
                 equipArrangeManager.SortByRank();
                 equipArrangeBtnGroup.SetActive(true);
@@ -142,6 +144,7 @@ public class EquipmentController : MonoBehaviour
                 equipNameExplain.SetActive(false);
                 equipRankExplain.SetActive(false);
                 equipGoldIncrementExpain.SetActive(false);
+                equipmentManager.CheckMixAvailability();
             }
 
             // 원본의 특정 오브젝트 비활성화
@@ -151,7 +154,6 @@ public class EquipmentController : MonoBehaviour
                 clickedClone.originalEquipment.touchLock2.SetActive(false);
                 clickedClone.originalEquipment.check.SetActive(false);
             }
-
             Destroy(clickedClone.gameObject);
         }
     }
@@ -185,6 +187,7 @@ public class EquipmentController : MonoBehaviour
         }
         equipMixBoxes[1].gameObject.SetActive(false);
         equipMixBoxes[2].gameObject.SetActive(false);
+        plus.SetActive(false);
         equipExplain.SetActive(true);
         equipNameExplain.SetActive(false);
         equipRankExplain.SetActive(false);
@@ -205,6 +208,7 @@ public class EquipmentController : MonoBehaviour
             Destroy(equipMixResultBox.GetChild(0).gameObject);
         }
         equipArrangeManager.SortByRank();
+        equipmentManager.CheckMixAvailability();
     }
     
     public void EquipMixAfter(Transform equipMixBox)
@@ -225,10 +229,12 @@ public class EquipmentController : MonoBehaviour
         }
         equipMixBoxes[1].gameObject.SetActive(false);
         equipMixBoxes[2].gameObject.SetActive(false);
+        plus.SetActive(false);
         equipExplain.SetActive(true);
         equipNameExplain.SetActive(false);
         equipRankExplain.SetActive(false);
         equipGoldIncrementExpain.SetActive(false);
+        equipmentManager.CheckMixAvailability();
     }
 
 
@@ -262,6 +268,7 @@ public class EquipmentController : MonoBehaviour
 
     public void EquipMixPanelEquipClick(EquipmentStatus clickedEquipment)
     {
+        equipArrangeManager.UpdateEquipList();
         if (!clickedEquipment.isOriginal)
         {
             return;
@@ -273,10 +280,11 @@ public class EquipmentController : MonoBehaviour
         }
 
         if (equipMixPanel.activeSelf)
-        {
+        {   clickedEquipment.mixAvailable.SetActive(false);
             GameObject clone = null;
             Transform targetParent = null;
             equipArrangeBtnGroup.SetActive(false);
+            plus.SetActive(true);
 
             if (equipMixBoxes[0].childCount == 0)
             {
@@ -301,7 +309,7 @@ public class EquipmentController : MonoBehaviour
             }
 
             if (targetParent != null)
-            {
+            {   
                 clone = Instantiate(clickedEquipment.gameObject);
                 EquipmentStatus cloneStatus = clone.GetComponent<EquipmentStatus>();
                 cloneStatus.isOriginal = false;
@@ -334,6 +342,17 @@ public class EquipmentController : MonoBehaviour
                 
                 // FilterByRankAndName 메서드 호출
                 equipArrangeManager.FilterByRankAndName(clickedEquipment.equipRank, clickedEquipment.equipName , clickedEquipment.rankLevel);
+                
+                foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
+                {
+                    if (equipment.equipRank == clickedEquipment.equipRank && 
+                        equipment.equipName == clickedEquipment.equipName && 
+                        equipment.rankLevel == clickedEquipment.rankLevel)
+                    {
+                        equipment.mixAvailable.SetActive(false);
+                    }
+                }
+                
                 // 선택한 장비의 rankLevel이 1 높은 클론을 equipMixResultBox에 생성
                 if (equipMixResultBox.childCount == 0)  // 자식 오브젝트가 없을 때만 클론 생성
                 {   
@@ -410,7 +429,6 @@ public class EquipmentController : MonoBehaviour
     public void EquipPanelEquipClick()
     {
         equipStatusPanel.SetActive(true);
-        
     }
     
 

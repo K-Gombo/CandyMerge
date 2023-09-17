@@ -35,7 +35,7 @@ public class EquipmentStatus : MonoBehaviour
     public GameObject check;
     public EquipmentStatus originalEquipment;
     public GameObject rankLevelSlot;
-    
+    public GameObject mixAvailable;
     void Awake()
     {
         EquipArrangeManager equipArrangeManager = FindObjectOfType<EquipArrangeManager>();

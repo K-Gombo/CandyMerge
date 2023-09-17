@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.14357352, a: 1}
+  m_Color: {r: 1, g: 0.11129015, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -812,6 +812,7 @@ MonoBehaviour:
   equipId: 0
   slotType: 0
   equipName: 
+  equipExplain: 
   skillIds: 00000000000000000000000000000000
   skillRanks: 00000000000000000000000000000000
   equipRank: 0
@@ -833,6 +834,10 @@ MonoBehaviour:
   equipLevel: 0
   maxEquipLevel: 0
   rankLevel: 0
+  goldIncrement: 0
+  upgradeGoldIncrement: 0
+  maxGoldIncrement: 0
+  upgradetGoldCost: 0
   equipLevelText: {fileID: 1882861914411009457}
   rankLevelText: {fileID: 3348615878373077510}
   EquipButton: {fileID: 8495533990269110767}
@@ -843,6 +848,7 @@ MonoBehaviour:
   check: {fileID: 8536447352059482334}
   originalEquipment: {fileID: 9062808844006152309}
   rankLevelSlot: {fileID: 8039254892209098646}
+  mixAvailable: {fileID: 6469471440123903891}
 --- !u!114 &8495533990269110767
 MonoBehaviour:
   m_ObjectHideFlags: 0
