@@ -41,10 +41,9 @@ public class EquipmentController : MonoBehaviour
     public GameObject[] equipSkillLock;
     public GameObject StatusEquipImage;
     public Text equipStatusGoldText;
-    [HideInInspector]public GameObject currentClone; // 현재 생성된 클론을 저장
-    
-    
-    
+    public Button equipLevelUpgradeBtn;
+    [HideInInspector]public EquipmentStatus clickedEquipForUpgrade;
+    [HideInInspector]public GameObject currentClone;
     
 
     void Awake()
@@ -54,6 +53,8 @@ public class EquipmentController : MonoBehaviour
         // backBtn에 이벤트 연결
         Button backBtnComponent = backBtn.GetComponent<Button>();
         backBtnComponent.onClick.AddListener(OnbackBtnClick);
+        
+        equipLevelUpgradeBtn.onClick.AddListener(OnEquipLevelUpgradeBtnClick);
     }
 
     public void OnEquipmentClick(EquipmentStatus clickedEquipment)
@@ -67,11 +68,11 @@ public class EquipmentController : MonoBehaviour
         if (equipPanel.activeSelf)
         {
             EquipPanelEquipClick(clickedEquipment);
+            clickedEquipForUpgrade = clickedEquipment;
         }
     
     }   
-
-
+    
     private void ActivateAndMoveBoxes()
     {
         for (int i = 1; i <= 2; i++)
@@ -145,7 +146,7 @@ public class EquipmentController : MonoBehaviour
                     Destroy(child.gameObject);
                 }
 
-                // equipMixResultBox에 있는 previewClone을 삭제
+                // equipMixResultBox에 있는 previewClone 삭제
                 if (equipMixResultBox.childCount > 0)
                 {
                     Destroy(equipMixResultBox.GetChild(0).gameObject);
@@ -253,6 +254,7 @@ public class EquipmentController : MonoBehaviour
         equipRankExplain.SetActive(false);
         equipGoldIncrementExpain.SetActive(false);
         equipmentManager.CheckMixAvailability();
+        equipArrangeBtnGroup.SetActive(true);
     }
 
 
@@ -274,9 +276,7 @@ public class EquipmentController : MonoBehaviour
         float nextGoldIncrement = equipmentManager.GetNextGoldIncrement(clickedEquipment.equipRank);
         equipGoldIncrementExplainText.text = $"골드 획득량 {clickedEquipment.goldIncrement} % -> {nextGoldIncrement} %";
     }
-
-
-
+    
     public void EquipMixPanelEquipClick(EquipmentStatus clickedEquipment)
     {
         equipArrangeManager.UpdateEquipList();
@@ -351,7 +351,6 @@ public class EquipmentController : MonoBehaviour
 
                 clickedEquipment.myClone = clone;
                 
-                // FilterByRankAndName 메서드 호출
                 equipArrangeManager.FilterByRankAndName(clickedEquipment.equipRank, clickedEquipment.equipName , clickedEquipment.rankLevel);
                 
                 foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
@@ -364,22 +363,18 @@ public class EquipmentController : MonoBehaviour
                     }
                 }
                 
-                // 선택한 장비의 rankLevel이 1 높은 클론을 equipMixResultBox에 생성
-                if (equipMixResultBox.childCount == 0)  // 자식 오브젝트가 없을 때만 클론 생성
+                if (equipMixResultBox.childCount == 0)  
                 {   
                     GameObject previewClone = Instantiate(clickedEquipment.gameObject);
                     EquipmentStatus previewCloneStatus = previewClone.GetComponent<EquipmentStatus>();
                     previewCloneStatus.isOriginal = false;
-
-                    // 여기에 scale을 1.3배로 설정
+                    
                     previewClone.transform.localScale = new Vector3(
                         clickedEquipment.transform.localScale.x * 1.3f,
                         clickedEquipment.transform.localScale.y * 1.3f,
                         clickedEquipment.transform.localScale.z * 1.3f
                     );
-
-                    // 새로운 rankLevel과 equipRank을 계산
-                    // 새로운 rankLevel과 equipRank을 계산
+                    
                     int maxRankLevel = EquipmentManager.maxLevelsPerRank.ContainsKey(clickedEquipment.equipRank) ? EquipmentManager.maxLevelsPerRank[clickedEquipment.equipRank] : 0;
                     int newRankLevel;
                     if (clickedEquipment.rankLevel >= maxRankLevel)
@@ -405,8 +400,7 @@ public class EquipmentController : MonoBehaviour
 
                     // UI 업데이트
                     previewCloneStatus.UpdateLevelUI();
-
-                    // 여기에 SetRankLevelSlotActive 메서드 호출을 추가
+                    
                     equipmentManager.SetRankLevelSlotActive(newRankLevel, previewCloneStatus.rankLevelSlot);
 
                     previewClone.transform.SetParent(equipMixResultBox, false);
@@ -417,7 +411,7 @@ public class EquipmentController : MonoBehaviour
                     GameObject existingPreviewClone = equipMixResultBox.GetChild(0).gameObject;
                     if (!existingPreviewClone.activeSelf)
                     {
-                        existingPreviewClone.SetActive(true);  // 비활성화된 상태라면 활성화
+                        existingPreviewClone.SetActive(true);
                     }
                 }
                 
@@ -448,27 +442,20 @@ public class EquipmentController : MonoBehaviour
         EquipmentStatus cloneStatus = clone.GetComponent<EquipmentStatus>();
         cloneStatus.isOriginal = false;
         cloneStatus.originalEquipment = clickedEquipment;
-
-        // 클론의 RectTransform 설정
+        
         RectTransform cloneRect = clone.GetComponent<RectTransform>();
         cloneRect.anchorMin = new Vector2(0.5f, 0.5f);
         cloneRect.anchorMax = new Vector2(0.5f, 0.5f);
         cloneRect.anchoredPosition3D = Vector3.zero;
-        cloneRect.sizeDelta = new Vector2(100, 100); 
-
-        // 클릭한 장비의 1.2배 크기로 설정
+        cloneRect.sizeDelta = new Vector2(100, 100);
         Vector3 originalScale = clickedEquipment.transform.localScale;
         cloneRect.localScale = originalScale * 1.2f;
-
-        // 클론을 StatusEquipImage의 자식으로 설정
+        
         clone.transform.SetParent(StatusEquipImage.transform, false);
         clone.transform.localPosition = Vector3.zero;
         
         currentClone = clone;
     }
-
-
-    
     
     public void EquipStatusUpdate(EquipmentStatus clickedEquipment)
     {
@@ -499,14 +486,14 @@ public class EquipmentController : MonoBehaviour
         List<EquipmentManager.Rank> rankOrderList = new List<EquipmentManager.Rank>(EquipmentManager.maxLevelsPerRank.Keys);
         int equipmentRankOrder = rankOrderList.IndexOf(clickedEquipment.equipRank);
 
-        for (int i = 0; i < equipSkillLock.Length; i++)  // equipSkillLocked 배열 길이만큼 반복
+        for (int i = 0; i < equipSkillLock.Length; i++)
         {
-            if (i < clickedEquipment.skillRanks.Length)  // skillRanks 배열 길이를 넘지 않는 경우만
+            if (i < clickedEquipment.skillRanks.Length) 
             {
                 EquipmentManager.Rank skillRank = clickedEquipment.skillRanks[i];
                 int skillRankOrder = rankOrderList.IndexOf(skillRank);
 
-                if (skillRankOrder > equipmentRankOrder)  // 이 부분을 수정했습니다.
+                if (skillRankOrder > equipmentRankOrder)
                 {
                     equipSkillLock[i].SetActive(true);
                 }
@@ -521,16 +508,26 @@ public class EquipmentController : MonoBehaviour
                     equipSkillLockImages[i].color = equipmentManager.rankToColorMap[skillRank];
                 }
             }
-            else  // skillRanks 배열 길이를 넘는 경우
+            else
             {
-                equipSkillLock[i].SetActive(false);  // 기본값을 false로 설정
+                equipSkillLock[i].SetActive(false);
             }
         }
 
         string formattedGold = currencyUI.goldText.text;
-        equipStatusGoldText.text = $"{formattedGold}/{clickedEquipment.upgradetGoldCost}";
+        equipStatusGoldText.text = $"{formattedGold}/{clickedEquipment.upgradeGoldCost}";
         
     }
+    
+    public void OnEquipLevelUpgradeBtnClick()
+    {
+        if (clickedEquipForUpgrade != null) // 클릭된 장비가 있다면
+        {
+            equipmentManager.EquipLevelUpgrade(clickedEquipForUpgrade);
+        }
+    }
+    
+    
     
     
 }
