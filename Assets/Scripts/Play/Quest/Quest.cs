@@ -271,7 +271,7 @@ public class Quest : MonoBehaviour
     candyCountText1.text = $"0/{candyCount1}";
     candyCountText2.text = candySprite2 != null ? $"0/{candyCount2}" : "";
 
-    rewardText.text = QuestManager.instance.FormatGold(reward);
+    rewardText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(reward.ToString());
 }
 
     
