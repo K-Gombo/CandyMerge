@@ -518,4 +518,5 @@ public class EquipmentController : MonoBehaviour
         
     }
     
+
 }

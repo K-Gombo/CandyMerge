@@ -278,7 +278,6 @@ public class QuestManager : MonoBehaviour
             if (requiredLevel1 < baseLevel || (requiredLevel2 > 0 && requiredLevel2 < baseLevel))
             {
                 questsToRemove.Add(quest);
-                Debug.Log("Quest added to remove list");
             }
         }
 
@@ -295,7 +294,6 @@ public class QuestManager : MonoBehaviour
             {
                 activeQuests[i].transform.SetSiblingIndex(i - 1);
             }
-            Debug.LogError($"한번 보자 {quest.gameObject.name} \t {questPoolParent.gameObject.name}");
             //quest.transform.SetParent(questPoolParent, false); // 부모를 questPoolParent로 설정
             rewardButton.GetComponent<Button>().interactable = false;
             quest.gameObject.SetActive(false); // 객체를 비활성화
@@ -336,6 +334,21 @@ public class QuestManager : MonoBehaviour
         }
         activeQuestsInfo[questKey] = 1;  // 값은 무엇이든 될 수 있습니다.
     }
+    
+    
+    public int GetCurrentQuestMaxLevel()
+    {
+        int maxLevel = 0;
+        foreach (Quest quest in activeQuests)
+        {
+            int requiredLevel1 = CandyManager.instance.GetLevelBySprite(quest.requestCandy1.sprite);
+            int requiredLevel2 = quest.requestCandy2.sprite != null ? CandyManager.instance.GetLevelBySprite(quest.requestCandy2.sprite) : 0;
+        
+            maxLevel = Mathf.Max(maxLevel, requiredLevel1, requiredLevel2);
+        }
+        return maxLevel;
+    }
+
     
     
 }

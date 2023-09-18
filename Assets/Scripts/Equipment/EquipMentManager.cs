@@ -172,11 +172,11 @@ public class EquipmentManager : MonoBehaviour
                 levelDataMap[levelData.rank] = levelData;
             }
 
-            // 디버깅 코드 추가
-            foreach (var pair in levelDataMap)
-            {
-                Debug.Log($"Key: {pair.Key}, StartLevel: {pair.Value.startLevel}");
-            }
+            // // 디버깅 코드 추가
+            // foreach (var pair in levelDataMap)
+            // {
+            //     Debug.Log($"Key: {pair.Key}, StartLevel: {pair.Value.startLevel}");
+            // }
         }
         else
         {
@@ -659,23 +659,20 @@ public class EquipmentManager : MonoBehaviour
         // 업그레이드 비용 증가 (2배)
         equipment.upgradeGoldCost *= 2; 
         // 현재 유저 골드 업데이트
-        currencyUI.goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(CurrencyManager.instance.GetCurrencyAmount("Gold").ToString()); 
-        
+        currencyUI.goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(CurrencyManager.instance.GetCurrencyAmount("Gold").ToString());
         EquipmentController.instance.EquipStatusUpdate(equipment);
+        
         equipment.UpdateLevelUI();
         
-        GameObject currentClone = EquipmentController.instance.currentClone; 
+        GameObject currentClone = EquipmentController.instance.currentClone;
         
-        Debug.Log("Current Clone: " + EquipmentController.instance.currentClone);
-        
-        if (currentClone != null) // 클론이 있는지 확인
+        if (currentClone != null) 
         {
             EquipmentStatus cloneStatus = currentClone.GetComponent<EquipmentStatus>();
-            if (cloneStatus != null) // 클론에 EquipmentStatus가 있는지 확인
+            if (cloneStatus != null) 
             {   
-                cloneStatus.equipLevel = equipment.equipLevel;  // 여기에서 원본과 클론의 레벨을 동기화
-                Debug.Log("Clone Equipment Level: " + cloneStatus.equipLevel);
-                cloneStatus.UpdateLevelUI(); // 클론의 UI 업데이트
+                cloneStatus.equipLevel = equipment.equipLevel; 
+                cloneStatus.UpdateLevelUI(); 
             }
         }
 

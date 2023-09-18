@@ -316,9 +316,9 @@ public class CandyController : MonoBehaviour
     }
 
 
-    private IEnumerator AutoMergeCandies(int timesPerNSeconds, int n)
+   private IEnumerator AutoMergeCandies(int timesPerNSeconds, int n)
 {
-    while (true)
+     while (true)
     {
         if (isMergingInProgress)
         {
@@ -326,11 +326,13 @@ public class CandyController : MonoBehaviour
             continue;
         }
 
-        if (isAutoMergeEnabled || isMergingInProgress )
+        if (isAutoMergeEnabled || isMergingInProgress)
         {
+            int currentQuestMaxLevel = QuestManager.instance.GetCurrentQuestMaxLevel(); // 현재 퀘스트의 최대 레벨 가져오기
+
             for (int i = 0; i < timesPerNSeconds; i++)
             {
-                for (int targetLevel = 1; targetLevel <= 60; targetLevel++)
+                for (int targetLevel = 1; targetLevel <= currentQuestMaxLevel; targetLevel++) // 현재 퀘스트의 최대 레벨까지만 병합
                 {
                     Transform lowestLevelCandy = null;
                     Transform mergeTarget = null;
@@ -347,7 +349,7 @@ public class CandyController : MonoBehaviour
                                 {
                                     lowestLevelCandy = box.GetChild(0);
                                 }
-                                else
+                                else if(candyStatus.level + 1 <= currentQuestMaxLevel) // 추가: 병합 후의 레벨이 퀘스트 최대 레벨을 넘지 않는지 체크
                                 {
                                     float distance = Vector3.Distance(lowestLevelCandy.position,
                                         box.GetChild(0).position);
@@ -398,6 +400,9 @@ public class CandyController : MonoBehaviour
         }
     }
 }
+
+
+
 
     
     
