@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +14,7 @@ public class EquipmentController : MonoBehaviour
     public GameObject mixLockedPanel;
     public GameObject equipMixBtn;
     public EquipArrangeManager equipArrangeManager;
+    public CurrencyUI currencyUI;
     public GameObject backBtn;
     public GameObject plus;
     public Transform equipMixResultBox;
@@ -25,6 +29,20 @@ public class EquipmentController : MonoBehaviour
     public GameObject equipExplain;
     public GameObject equipPanel;
     public GameObject equipStatusPanel;
+    public Text equipNameStatusText;
+    public Image equipRankStatus;
+    public Text equipRankStatusText;
+    public Text equipGoldIncrementText;
+    public Text equipLevelStatusText;
+    public Text equipExplainText;
+    public Text[] equipSkillText;
+    public Image[] equipSkillImages;
+    public Image[] equipSkillLockImages;
+    public GameObject[] equipSkillLock;
+    public GameObject StatusEquipImage;
+    public Text equipStatusGoldText;
+    [HideInInspector]public GameObject currentClone; // 현재 생성된 클론을 저장
+    
     
     
     
@@ -39,19 +57,19 @@ public class EquipmentController : MonoBehaviour
     }
 
     public void OnEquipmentClick(EquipmentStatus clickedEquipment)
-{
-    if (equipMixPanel.activeSelf)
     {
-        EquipMixPanelEquipClick(clickedEquipment);
-        return;
-    }
+        if (equipMixPanel.activeSelf)
+        {
+            EquipMixPanelEquipClick(clickedEquipment);
+            return;
+        }
 
-    if (equipPanel.activeSelf)
-    {
-        EquipPanelEquipClick();
-    }
+        if (equipPanel.activeSelf)
+        {
+            EquipPanelEquipClick(clickedEquipment);
+        }
     
-}
+    }   
 
 
     private void ActivateAndMoveBoxes()
@@ -241,29 +259,22 @@ public class EquipmentController : MonoBehaviour
     public void EquipExplainUpdate(EquipmentStatus clickedEquipment)
     {
         equipNameExplainText.text = clickedEquipment.equipName;
-        
+    
         EquipmentManager.Rank currentRank = clickedEquipment.equipRank;
         EquipmentManager.Rank nextRank = equipmentManager.GetNextRank(currentRank);
-        
+    
         string currentRankStr = currentRank.ToString();
         string nextRankStr = nextRank.ToString();
+
+        string modifiedCurrentRankStr = Regex.Replace(currentRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
+        string modifiedNextRankStr = Regex.Replace(nextRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
     
-        if (currentRankStr.EndsWith("1") || currentRankStr.EndsWith("2") || currentRankStr.EndsWith("3"))
-        {
-            equipRankExplainText.text = $"랭크업 : {currentRankStr} -> {currentRankStr.Substring(0, currentRankStr.Length - 1)}+1";
-        }
-        else if (nextRankStr.EndsWith("1") || nextRankStr.EndsWith("2") || nextRankStr.EndsWith("3"))
-        {
-            equipRankExplainText.text = $"랭크업 : {currentRankStr} -> {nextRankStr.Substring(0, nextRankStr.Length - 1)}+1";
-        }
-        else
-        {
-            equipRankExplainText.text = $"랭크업 : {currentRankStr} -> {nextRankStr}";
-        }
-        
+        equipRankExplainText.text = $"랭크업 : {modifiedCurrentRankStr} -> {modifiedNextRankStr}";
+    
         float nextGoldIncrement = equipmentManager.GetNextGoldIncrement(clickedEquipment.equipRank);
         equipGoldIncrementExplainText.text = $"골드 획득량 {clickedEquipment.goldIncrement} % -> {nextGoldIncrement} %";
     }
+
 
 
     public void EquipMixPanelEquipClick(EquipmentStatus clickedEquipment)
@@ -426,11 +437,79 @@ public class EquipmentController : MonoBehaviour
         }
     }
 
-    public void EquipPanelEquipClick()
+    public void EquipPanelEquipClick(EquipmentStatus clickedEquipment)
     {
         equipStatusPanel.SetActive(true);
+        EquipStatusUpdate(clickedEquipment);
+
+        // 클론 생성
+        clickedEquipment.mixAvailable.SetActive(false);
+        GameObject clone = Instantiate(clickedEquipment.gameObject);
+        EquipmentStatus cloneStatus = clone.GetComponent<EquipmentStatus>();
+        cloneStatus.isOriginal = false;
+        cloneStatus.originalEquipment = clickedEquipment;
+
+        // 클론의 RectTransform 설정
+        RectTransform cloneRect = clone.GetComponent<RectTransform>();
+        cloneRect.anchorMin = new Vector2(0.5f, 0.5f);
+        cloneRect.anchorMax = new Vector2(0.5f, 0.5f);
+        cloneRect.anchoredPosition3D = Vector3.zero;
+        cloneRect.sizeDelta = new Vector2(100, 100); 
+
+        // 클릭한 장비의 1.2배 크기로 설정
+        Vector3 originalScale = clickedEquipment.transform.localScale;
+        cloneRect.localScale = originalScale * 1.2f;
+
+        // 클론을 StatusEquipImage의 자식으로 설정
+        clone.transform.SetParent(StatusEquipImage.transform, false);
+        clone.transform.localPosition = Vector3.zero;
+        
+        currentClone = clone;
+    }
+
+
+    
+    
+    public void EquipStatusUpdate(EquipmentStatus clickedEquipment)
+    {
+        equipNameStatusText.text = clickedEquipment.equipName;
+        
+        EquipmentManager.Rank statusRank = clickedEquipment.equipRank;
+        string statusRankStr = statusRank.ToString();
+        string changeStatusRankStr = Regex.Replace(statusRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
+        equipRankStatusText.text = $"{changeStatusRankStr}";
+        
+        // 변경된 부분 1: 숫자 제거 후 색상 찾기
+        string cleanedStatusRankStr = Regex.Replace(statusRankStr, @"\d", "");
+        if (Enum.TryParse(cleanedStatusRankStr, out EquipmentManager.Rank cleanedStatusRank))
+        {
+            if (equipmentManager.rankToColorMap.ContainsKey(cleanedStatusRank))
+            {
+                equipRankStatus.color = equipmentManager.rankToColorMap[cleanedStatusRank];
+            }
+        }
+        equipGoldIncrementText.text = $"{clickedEquipment.goldIncrement}%";
+        equipLevelStatusText.text = $"레벨 {clickedEquipment.equipLevel}/{clickedEquipment.maxEquipLevel}";
+        equipExplainText.text = $"{clickedEquipment.equipExplain}";
+
+        for (int i = 0; i < clickedEquipment.skillNames.Length; i++)
+        {
+            equipSkillText[i].text = $"{clickedEquipment.skillNames[i]}";
+        }
+        
+        for (int i = 0; i < clickedEquipment.skillRanks.Length; i++)
+        {
+            EquipmentManager.Rank skillRank = clickedEquipment.skillRanks[i];
+            if (equipmentManager.rankToColorMap.ContainsKey(skillRank))
+            {
+                equipSkillImages[i].color = equipmentManager.rankToColorMap[skillRank];
+                equipSkillLockImages[i].color = equipmentManager.rankToColorMap[skillRank];
+            }
+        }
+        string formattedGold = currencyUI.goldText.text;
+        equipStatusGoldText.text = $"{formattedGold}/{clickedEquipment.upgradetGoldCost}";
+        
     }
     
-
-
+    
 }

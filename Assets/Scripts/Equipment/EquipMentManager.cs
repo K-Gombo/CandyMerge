@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class EquipmentManager : MonoBehaviour
 {   
     public GameObject equipPrefab;
+    public static EquipmentManager instance;
     public TextAsset CsvData { get; set; }
     public TextAsset LevelCsvData { get; set; } 
     public List<Equip> equipList = new List<Equip>();
@@ -22,10 +23,13 @@ public class EquipmentManager : MonoBehaviour
     public Transform equipMentPoolTransform;
     public Dictionary<string, Sprite> equipNameToSpriteMap = new Dictionary<string, Sprite>();
     public Dictionary<Rank, Color> rankToColorMap = new Dictionary<Rank, Color>();
+    public Dictionary<Rank, Color> skillRankToColorMap = new Dictionary<Rank, Color>();
     public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
     public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
     public GameObject mixBtnMixAvailable;
     public GameObject allMixBtnMixAvailable;
+    public Dictionary<Rank, Rank> rankUpMap;
+    
     
     
     
@@ -69,6 +73,7 @@ public class EquipmentManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         CsvData = Resources.Load<TextAsset>("EquipmentData");
         LoadEquipmentData(); 
         
@@ -129,6 +134,7 @@ public class EquipmentManager : MonoBehaviour
             InitializeEquipSpriteMapping();
             InitializeSlotSpriteMapping();
             InitializeRankColorMapping();
+            InitializeSkillRankColorMapping();
         }
     }
     
@@ -245,6 +251,17 @@ public class EquipmentManager : MonoBehaviour
         {
             if (i == rankColors.Length) return;
             rankToColorMap[(Rank)ranks.GetValue(i)] = rankColors[i];
+        }
+    }
+    
+    void InitializeSkillRankColorMapping()
+    {
+        
+        Array ranks = Enum.GetValues(typeof(Rank));
+        for(int i = 0; i < ranks.Length; i++)
+        {
+            if (i == rankColors.Length) return;
+            skillRankToColorMap[(Rank)ranks.GetValue(i)] = rankColors[i];
         }
     }
     
