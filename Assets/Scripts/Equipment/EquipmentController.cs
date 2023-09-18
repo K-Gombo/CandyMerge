@@ -479,7 +479,6 @@ public class EquipmentController : MonoBehaviour
         string changeStatusRankStr = Regex.Replace(statusRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
         equipRankStatusText.text = $"{changeStatusRankStr}";
         
-        // 변경된 부분 1: 숫자 제거 후 색상 찾기
         string cleanedStatusRankStr = Regex.Replace(statusRankStr, @"\d", "");
         if (Enum.TryParse(cleanedStatusRankStr, out EquipmentManager.Rank cleanedStatusRank))
         {
@@ -497,15 +496,37 @@ public class EquipmentController : MonoBehaviour
             equipSkillText[i].text = $"{clickedEquipment.skillNames[i]}";
         }
         
-        for (int i = 0; i < clickedEquipment.skillRanks.Length; i++)
+        List<EquipmentManager.Rank> rankOrderList = new List<EquipmentManager.Rank>(EquipmentManager.maxLevelsPerRank.Keys);
+        int equipmentRankOrder = rankOrderList.IndexOf(clickedEquipment.equipRank);
+
+        for (int i = 0; i < equipSkillLock.Length; i++)  // equipSkillLocked 배열 길이만큼 반복
         {
-            EquipmentManager.Rank skillRank = clickedEquipment.skillRanks[i];
-            if (equipmentManager.rankToColorMap.ContainsKey(skillRank))
+            if (i < clickedEquipment.skillRanks.Length)  // skillRanks 배열 길이를 넘지 않는 경우만
             {
-                equipSkillImages[i].color = equipmentManager.rankToColorMap[skillRank];
-                equipSkillLockImages[i].color = equipmentManager.rankToColorMap[skillRank];
+                EquipmentManager.Rank skillRank = clickedEquipment.skillRanks[i];
+                int skillRankOrder = rankOrderList.IndexOf(skillRank);
+
+                if (skillRankOrder > equipmentRankOrder)  // 이 부분을 수정했습니다.
+                {
+                    equipSkillLock[i].SetActive(true);
+                }
+                else
+                {
+                    equipSkillLock[i].SetActive(false);
+                }
+
+                if (equipmentManager.rankToColorMap.ContainsKey(skillRank))
+                {
+                    equipSkillImages[i].color = equipmentManager.rankToColorMap[skillRank];
+                    equipSkillLockImages[i].color = equipmentManager.rankToColorMap[skillRank];
+                }
+            }
+            else  // skillRanks 배열 길이를 넘는 경우
+            {
+                equipSkillLock[i].SetActive(false);  // 기본값을 false로 설정
             }
         }
+
         string formattedGold = currencyUI.goldText.text;
         equipStatusGoldText.text = $"{formattedGold}/{clickedEquipment.upgradetGoldCost}";
         
