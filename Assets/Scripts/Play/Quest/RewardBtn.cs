@@ -6,7 +6,9 @@ public class RewardButton : MonoBehaviour
 {
     public Quest parentQuest;
 
-    [SerializeField] private Button rewardButton;
+    [SerializeField] public Button rewardButton;
+    
+    public static RewardButton instance;
 
     public float goldIncreaseRate = 0f;
     public float maxGoldIncreaseRate = 30f;
@@ -19,6 +21,7 @@ public class RewardButton : MonoBehaviour
    
     private void Awake()
     {
+        instance = this;
         if (GetComponent<Button>() == null)
         {
             return;

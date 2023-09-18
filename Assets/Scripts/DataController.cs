@@ -264,7 +264,7 @@ public class DataController : MonoBehaviour
         Upgrade_goldUpLevel_DataLoad();
         upgradeManager.goldUpLevel = GameData.goldUpLevel;
 
-        //upgradeManager.GoldUp(GameData.goldUpLevel - 1);
+        upgradeManager.GoldUp(GameData.goldUpLevel - 1);
     }
 
 
@@ -287,6 +287,6 @@ public class DataController : MonoBehaviour
         Upgrade_luckyGoldLevel_DataLoad();
         upgradeManager.luckyGoldLevel = GameData.luckyGoldLevel;
 
-        //upgradeManager.LuckyGoldUp(GameData.luckyGoldLevel - 1);
+        upgradeManager.LuckyGoldUp(GameData.luckyGoldLevel - 1);
     }
 }
