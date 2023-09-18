@@ -1,18 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
 
 public class EquipmentManager : MonoBehaviour
 {   
     public GameObject equipPrefab;
+    public static EquipmentManager instance;
     public TextAsset CsvData { get; set; }
     public TextAsset LevelCsvData { get; set; } 
     public List<Equip> equipList = new List<Equip>();
     public Sprite[] equipSprites;
     public Color[] rankColors;
     public Sprite[] slotSprites;
+    public CurrencyUI currencyUI; 
     public GachaManager GachaManager;
     public EquipSkillManager equipSkillManager;
     public EquipArrangeManager equipArrangeManager;
@@ -22,10 +26,13 @@ public class EquipmentManager : MonoBehaviour
     public Transform equipMentPoolTransform;
     public Dictionary<string, Sprite> equipNameToSpriteMap = new Dictionary<string, Sprite>();
     public Dictionary<Rank, Color> rankToColorMap = new Dictionary<Rank, Color>();
+    public Dictionary<Rank, Color> skillRankToColorMap = new Dictionary<Rank, Color>();
     public Dictionary<SlotType, Sprite> slotToSpriteMap = new Dictionary<SlotType, Sprite>();
     public Dictionary<string, EquipLevelData> levelDataMap = new Dictionary<string, EquipLevelData>(); //LevelData 저장할 Dictionary
     public GameObject mixBtnMixAvailable;
     public GameObject allMixBtnMixAvailable;
+    public Dictionary<Rank, Rank> rankUpMap;
+    
     
     
     
@@ -69,6 +76,7 @@ public class EquipmentManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         CsvData = Resources.Load<TextAsset>("EquipmentData");
         LoadEquipmentData(); 
         
@@ -129,6 +137,7 @@ public class EquipmentManager : MonoBehaviour
             InitializeEquipSpriteMapping();
             InitializeSlotSpriteMapping();
             InitializeRankColorMapping();
+            InitializeSkillRankColorMapping();
         }
     }
     
@@ -248,6 +257,17 @@ public class EquipmentManager : MonoBehaviour
         }
     }
     
+    void InitializeSkillRankColorMapping()
+    {
+        
+        Array ranks = Enum.GetValues(typeof(Rank));
+        for(int i = 0; i < ranks.Length; i++)
+        {
+            if (i == rankColors.Length) return;
+            skillRankToColorMap[(Rank)ranks.GetValue(i)] = rankColors[i];
+        }
+    }
+    
     void InitializeSlotSpriteMapping()
     {
         // 예를 들어, slotSprites 배열이 Cook, Cap, Cloth, Shoes 순서로 정렬되어 있다고 가정
@@ -279,25 +299,18 @@ public class EquipmentManager : MonoBehaviour
                 }
             }
         }
-        
-
         // equipList에서 랜덤으로 Equip 객체 선택
         int randomIndex = UnityEngine.Random.Range(0, equipList.Count);
-        
-
         Equip selectedEquip = equipList[randomIndex];
-       
 
         // 장비 프리팹을 풀에서 가져옴
         GameObject newEquip = GetEquipFromPool();
         newEquip.transform.SetParent(parentTransform, false);
-
-
+        
         // 생성된 프리팹에 Equip 정보를 할당
         EquipmentStatus equipComponent = newEquip.GetComponent<EquipmentStatus>();
         if (equipComponent != null)
         {
-            
             equipComponent.equipId = selectedEquip.equipId;
             equipComponent.slotType = selectedEquip.slotType;
             equipComponent.equipName = selectedEquip.equipName;
@@ -315,15 +328,12 @@ public class EquipmentManager : MonoBehaviour
                     equipComponent.skillNames[i] = equipSkill.skillName;
                     equipComponent.skillPoints[i] = equipSkill.skillPoint;
                 }
-               
             }
             // 장비에 따라 스프라이트 설정
             if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
             {
-          
                 equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
             }
-            
             // 랭크에 따라 배경 컬러 설정
             if (rankToColorMap.ContainsKey(chosenRank))
             {
@@ -337,7 +347,6 @@ public class EquipmentManager : MonoBehaviour
             {
                 equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
             }
-            
            
             if (levelDataMap.ContainsKey(chosenRank.ToString()))
             {
@@ -348,7 +357,7 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.goldIncrement = levelData.startGoldGainIncrement;
                 equipComponent.upgradeGoldIncrement = levelData.upgradeGoldGainIncrement;
                 equipComponent.maxGoldIncrement = levelData.maxGoldGainIncrement;
-                equipComponent.upgradetGoldCost = levelData.upgradeDefaultGoldCost;
+                equipComponent.upgradeGoldCost = levelData.upgradeDefaultGoldCost;
                 
                 SetRankLevelSlotActive(equipComponent.rankLevel ,equipComponent.rankLevelSlot);
             }
@@ -612,6 +621,65 @@ public class EquipmentManager : MonoBehaviour
             }
         }
         CheckMixAvailability();
+    }
+
+    public void EquipLevelUpgrade(EquipmentStatus equipment)
+    {   
+        // CurrencyManager에서 현재 유저의 골드 양을 가져온다.
+        int UserGold = CurrencyManager.instance.GetCurrencyAmount("Gold"); 
+
+        // 업그레이드 가능한지 검사 (골드는 따로 확인해야 함)
+        if (equipment.equipLevel >= equipment.maxEquipLevel)
+        {
+            Debug.Log("이미 최대 레벨입니다.");
+            return;
+        }
+        // 업그레이드 비용 확인 (골드를 소지하고 있는지)
+        if (UserGold < equipment.upgradeGoldCost) 
+        {
+            Debug.Log("골드가 부족합니다.");
+            
+            return;
+        }
+
+        // 업그레이드 처리
+        equipment.equipLevel++;
+        
+        // CurrencyManager를 통해 골드를 차감한다.
+        CurrencyManager.instance.SubtractCurrency("Gold", equipment.upgradeGoldCost); 
+
+        // 골드 증가량 업데이트
+        equipment.goldIncrement += equipment.upgradeGoldIncrement;
+
+        if (equipment.goldIncrement > equipment.maxGoldIncrement)
+        {
+            equipment.goldIncrement = equipment.maxGoldIncrement;
+        }
+
+        // 업그레이드 비용 증가 (2배)
+        equipment.upgradeGoldCost *= 2; 
+        // 현재 유저 골드 업데이트
+        currencyUI.goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(CurrencyManager.instance.GetCurrencyAmount("Gold").ToString()); 
+        
+        EquipmentController.instance.EquipStatusUpdate(equipment);
+        equipment.UpdateLevelUI();
+        
+        GameObject currentClone = EquipmentController.instance.currentClone; 
+        
+        Debug.Log("Current Clone: " + EquipmentController.instance.currentClone);
+        
+        if (currentClone != null) // 클론이 있는지 확인
+        {
+            EquipmentStatus cloneStatus = currentClone.GetComponent<EquipmentStatus>();
+            if (cloneStatus != null) // 클론에 EquipmentStatus가 있는지 확인
+            {   
+                cloneStatus.equipLevel = equipment.equipLevel;  // 여기에서 원본과 클론의 레벨을 동기화
+                Debug.Log("Clone Equipment Level: " + cloneStatus.equipLevel);
+                cloneStatus.UpdateLevelUI(); // 클론의 UI 업데이트
+            }
+        }
+
+        
     }
 
     

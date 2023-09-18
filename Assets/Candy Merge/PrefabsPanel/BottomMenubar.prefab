@@ -139,6 +139,7 @@ MonoBehaviour:
   - {fileID: 0}
   candyController: {fileID: 0}
   giftBoxController: {fileID: 0}
+  equipmentManager: {fileID: 0}
   GiftBox: {fileID: 0}
   AutoCreateBtn: {fileID: 0}
   GachaManager: {fileID: 0}
@@ -379,10 +380,6 @@ MonoBehaviour:
   GachaPanel: {fileID: 0}
   giftBoxController: {fileID: 0}
   autoCreateBtn: {fileID: 0}
-  mixBoxes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &3323029437379976358
 MonoBehaviour:
   m_ObjectHideFlags: 0

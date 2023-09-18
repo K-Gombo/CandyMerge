@@ -167,7 +167,7 @@ public class Quest : MonoBehaviour
             questObject.requestCandy2.gameObject.SetActive(false); // 1종류일 때 비활성화
         }
 
-        questObject.rewardText.text = formattedReward;
+        questObject.rewardText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(reward.ToString());
         QuestManager.instance.activeQuests.Add(questObject);
     }
 
@@ -271,7 +271,7 @@ public class Quest : MonoBehaviour
     candyCountText1.text = $"0/{candyCount1}";
     candyCountText2.text = candySprite2 != null ? $"0/{candyCount2}" : "";
 
-    rewardText.text = QuestManager.instance.FormatGold(reward);
+    rewardText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(reward.ToString());
 }
 
     

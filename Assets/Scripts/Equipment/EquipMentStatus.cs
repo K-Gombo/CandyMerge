@@ -1,3 +1,4 @@
+using Keiwando.BigInteger;
 using UnityEngine;
 using UnityEngine.UI; // Image 컴포넌트를 사용하기 위해 추가
 
@@ -24,7 +25,7 @@ public class EquipmentStatus : MonoBehaviour
     public float goldIncrement;
     public float upgradeGoldIncrement;
     public float maxGoldIncrement;
-    public float upgradetGoldCost;
+    public int upgradeGoldCost;
     public Text equipLevelText;
     public Text rankLevelText;
     public Button EquipButton; 
@@ -59,15 +60,6 @@ public class EquipmentStatus : MonoBehaviour
         rankLevelText.text = rankLevel.ToString();
     }
     
-    public void OnCloneDeleted()
-    {
-        if (isOriginal)
-        {
-            touchLock1.SetActive(false);
-            touchLock2.SetActive(false);
-            check.SetActive(false);
-        }
-    }
     
 
 }
