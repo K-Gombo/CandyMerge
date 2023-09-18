@@ -41,7 +41,6 @@ public class EquipmentController : MonoBehaviour
     public GameObject[] equipSkillLock;
     public GameObject StatusEquipImage;
     public Text equipStatusGoldText;
-    public Button equipLevelUpgradeBtn;
     [HideInInspector]public EquipmentStatus clickedEquipForUpgrade;
     [HideInInspector]public GameObject currentClone;
     
@@ -54,7 +53,6 @@ public class EquipmentController : MonoBehaviour
         Button backBtnComponent = backBtn.GetComponent<Button>();
         backBtnComponent.onClick.AddListener(OnbackBtnClick);
         
-        equipLevelUpgradeBtn.onClick.AddListener(OnEquipLevelUpgradeBtnClick);
     }
 
     public void OnEquipmentClick(EquipmentStatus clickedEquipment)
@@ -515,19 +513,9 @@ public class EquipmentController : MonoBehaviour
         }
 
         string formattedGold = currencyUI.goldText.text;
-        equipStatusGoldText.text = $"{formattedGold}/{clickedEquipment.upgradeGoldCost}";
+        string formattedUpgradeGoldCost = BigIntegerCtrl_global.bigInteger.ChangeMoney(clickedEquipment.upgradeGoldCost.ToString());
+        equipStatusGoldText.text = $"{formattedGold}/{formattedUpgradeGoldCost}";
         
     }
-    
-    public void OnEquipLevelUpgradeBtnClick()
-    {
-        if (clickedEquipForUpgrade != null) // 클릭된 장비가 있다면
-        {
-            equipmentManager.EquipLevelUpgrade(clickedEquipForUpgrade);
-        }
-    }
-    
-    
-    
     
 }

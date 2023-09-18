@@ -634,22 +634,19 @@ public class EquipmentManager : MonoBehaviour
             Debug.Log("이미 최대 레벨입니다.");
             return;
         }
-
         // 업그레이드 비용 확인 (골드를 소지하고 있는지)
-        if (UserGold < equipment.upgradeGoldCost) // int에서 BigInteger로 변경
+        if (UserGold < equipment.upgradeGoldCost) 
         {
             Debug.Log("골드가 부족합니다.");
-            EquipmentController.instance.equipLevelUpgradeBtn.interactable = false;
+            
             return;
         }
-
-        EquipmentController.instance.equipLevelUpgradeBtn.interactable = true; 
 
         // 업그레이드 처리
         equipment.equipLevel++;
         
         // CurrencyManager를 통해 골드를 차감한다.
-        CurrencyManager.instance.SubtractCurrency("Gold", equipment.upgradeGoldCost); // int에서 BigInteger로 변경
+        CurrencyManager.instance.SubtractCurrency("Gold", equipment.upgradeGoldCost); 
 
         // 골드 증가량 업데이트
         equipment.goldIncrement += equipment.upgradeGoldIncrement;
@@ -660,11 +657,29 @@ public class EquipmentManager : MonoBehaviour
         }
 
         // 업그레이드 비용 증가 (2배)
-        equipment.upgradeGoldCost *= 2; // int에서 BigInteger로 변경
+        equipment.upgradeGoldCost *= 2; 
         // 현재 유저 골드 업데이트
         currencyUI.goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(CurrencyManager.instance.GetCurrencyAmount("Gold").ToString()); 
         
         EquipmentController.instance.EquipStatusUpdate(equipment);
+        equipment.UpdateLevelUI();
+        
+        GameObject currentClone = EquipmentController.instance.currentClone; 
+        
+        Debug.Log("Current Clone: " + EquipmentController.instance.currentClone);
+        
+        if (currentClone != null) // 클론이 있는지 확인
+        {
+            EquipmentStatus cloneStatus = currentClone.GetComponent<EquipmentStatus>();
+            if (cloneStatus != null) // 클론에 EquipmentStatus가 있는지 확인
+            {   
+                cloneStatus.equipLevel = equipment.equipLevel;  // 여기에서 원본과 클론의 레벨을 동기화
+                Debug.Log("Clone Equipment Level: " + cloneStatus.equipLevel);
+                cloneStatus.UpdateLevelUI(); // 클론의 UI 업데이트
+            }
+        }
+
+        
     }
 
     

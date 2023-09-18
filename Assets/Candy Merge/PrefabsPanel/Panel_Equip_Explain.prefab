@@ -2823,6 +2823,7 @@ GameObject:
   - component: {fileID: 4064899319405532914}
   - component: {fileID: 3721931606099569161}
   - component: {fileID: 5372591793380020528}
+  - component: {fileID: 2530413115376874186}
   m_Layer: 5
   m_Name: Upgrade Tag
   m_TagString: Untagged
@@ -2933,6 +2934,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2530413115376874186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6492937146751598596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ac930373f9f4e8cafd21124d5dc046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentManager: {fileID: 0}
+  currencyManager: {fileID: 0}
 --- !u!1 &6577083100834328455
 GameObject:
   m_ObjectHideFlags: 0
