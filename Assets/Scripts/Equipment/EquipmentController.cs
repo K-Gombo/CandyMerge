@@ -461,7 +461,15 @@ public class EquipmentController : MonoBehaviour
         cloneRect.anchoredPosition3D = Vector3.zero;
         cloneRect.sizeDelta = new Vector2(100, 100);
         Vector3 originalScale = clickedEquipment.transform.localScale;
-        cloneRect.localScale = originalScale * 1.2f;
+        if (clickedEquipment.isEquipped)
+        {
+            cloneRect.localScale = clickedEquipment.originalScale * 1.2f;
+        }
+        else
+        {
+            cloneRect.localScale = originalScale * 1.2f;
+        }
+        
         
         clone.transform.SetParent(StatusEquipImage.transform, false);
         clone.transform.localPosition = Vector3.zero;
@@ -547,6 +555,12 @@ public class EquipmentController : MonoBehaviour
             equipmentManager.EquipmentSlotEquip(clickedEquipForUpgrade);
         }
         
+        // 생성된 클론을 제거
+        if (currentClone != null)
+        {
+            Destroy(currentClone);
+           currentClone = null; // 클론 제거 후 null로 설정
+        }
         equipStatusPanel.SetActive(false);
     }
     
