@@ -32,8 +32,7 @@ public class EquipmentManager : MonoBehaviour
     public GameObject mixBtnMixAvailable;
     public GameObject allMixBtnMixAvailable;
     public Dictionary<Rank, Rank> rankUpMap;
-    
-    
+    public GameObject[] equipSlotBoxes; 
     
     
     // 장비 등급을 나타내는 enum
@@ -678,6 +677,68 @@ public class EquipmentManager : MonoBehaviour
 
         
     }
+
+    public void EquipmentSlotEquip(EquipmentStatus equipmentStatus)
+    {
+        if (equipmentStatus == null) return;
+
+        // 원래의 부모와 크기를 저장
+        equipmentStatus.originalParent = equipmentStatus.transform.parent;
+        equipmentStatus.originalScale = equipmentStatus.transform.localScale;
+
+        int slotIndex = (int) equipmentStatus.slotType;
+        if (slotIndex >= 0 && slotIndex < equipSlotBoxes.Length)
+        {
+            // 해당 슬롯에 이미 장비가 장착되어 있는지 확인
+            if (equipSlotBoxes[slotIndex].transform.childCount > 0)
+            {
+                // 이미 장착된 장비를 해제
+                EquipmentStatus equippedItem = equipSlotBoxes[slotIndex].transform.GetChild(0).GetComponent<EquipmentStatus>();
+                if (equippedItem)
+                {
+                    EquipmentSlotUnequip(equippedItem);
+                }
+            }
+
+            // 새로운 장비를 장착
+            equipmentStatus.transform.SetParent(equipSlotBoxes[slotIndex].transform);
+
+            // 장비 크기를 1.3배로 변경
+            equipmentStatus.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+
+            // 장비를 부모의 정중앙에 위치시킴
+            equipmentStatus.transform.localPosition = Vector3.zero;
+
+            equipmentStatus.isEquipped = true;
+        }
+        else
+        {
+            Debug.LogError("Invalid slot index: " + slotIndex);
+        }
+    }
+
+
+    
+    
+    public void EquipmentSlotUnequip(EquipmentStatus equipmentStatus)
+    {
+        if (equipmentStatus == null || equipmentStatus.originalParent == null) return;
+
+        // 원래의 부모로 장비를 이동
+        equipmentStatus.transform.SetParent(equipmentStatus.originalParent);
+
+        // 원래의 크기로 장비를 변경
+        equipmentStatus.transform.localScale = equipmentStatus.originalScale;
+
+        // 원래의 위치로 장비를 이동
+        equipmentStatus.transform.localPosition = Vector3.zero;
+        
+        equipmentStatus.isEquipped = false;
+
+    }
+
+
+
 
     
 }

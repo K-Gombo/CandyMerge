@@ -43,6 +43,8 @@ public class EquipmentController : MonoBehaviour
     public Text equipStatusGoldText;
     [HideInInspector]public EquipmentStatus clickedEquipForUpgrade;
     [HideInInspector]public GameObject currentClone;
+    public Button equipmentEquipBtn;
+    public Text equipmentEquipBtnText;
     
 
     void Awake()
@@ -52,6 +54,8 @@ public class EquipmentController : MonoBehaviour
         // backBtn에 이벤트 연결
         Button backBtnComponent = backBtn.GetComponent<Button>();
         backBtnComponent.onClick.AddListener(OnbackBtnClick);
+        
+        equipmentEquipBtn.onClick.AddListener(OnEquipmentEquipBtnClick);
         
     }
 
@@ -67,6 +71,16 @@ public class EquipmentController : MonoBehaviour
         {
             EquipPanelEquipClick(clickedEquipment);
             clickedEquipForUpgrade = clickedEquipment;
+
+            // 클릭한 장비의 장착 상태에 따라 버튼 텍스트를 변경
+            if (clickedEquipForUpgrade.isEquipped)
+            {
+                equipmentEquipBtnText.text = "장착 해제";
+            }
+            else
+            {
+                equipmentEquipBtnText.text = "장착";
+            }
         }
     
     }   
@@ -440,7 +454,7 @@ public class EquipmentController : MonoBehaviour
         EquipmentStatus cloneStatus = clone.GetComponent<EquipmentStatus>();
         cloneStatus.isOriginal = false;
         cloneStatus.originalEquipment = clickedEquipment;
-        
+        Destroy(clone.GetComponent<Button>());
         RectTransform cloneRect = clone.GetComponent<RectTransform>();
         cloneRect.anchorMin = new Vector2(0.5f, 0.5f);
         cloneRect.anchorMax = new Vector2(0.5f, 0.5f);
@@ -516,6 +530,24 @@ public class EquipmentController : MonoBehaviour
         string formattedUpgradeGoldCost = BigIntegerCtrl_global.bigInteger.ChangeMoney(clickedEquipment.upgradeGoldCost.ToString());
         equipStatusGoldText.text = $"{formattedGold}/{formattedUpgradeGoldCost}";
         
+    }
+    
+    public void OnEquipmentEquipBtnClick()
+    {
+        if (clickedEquipForUpgrade == null) return;
+
+        if (clickedEquipForUpgrade.isEquipped)
+        {
+            // 이미 장착되어 있다면 해제
+            equipmentManager.EquipmentSlotUnequip(clickedEquipForUpgrade);
+        }
+        else
+        {
+            // 장착되어 있지 않다면 장착
+            equipmentManager.EquipmentSlotEquip(clickedEquipForUpgrade);
+        }
+        
+        equipStatusPanel.SetActive(false);
     }
     
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1529,6 +1529,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3121686946871781034, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
   m_PrefabInstance: {fileID: 9102584590486264801}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &277161585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1802811004038402639, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
+  m_PrefabInstance: {fileID: 1404544681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &297246172 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7788245722220972680, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
@@ -7022,6 +7033,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4326611250126422615, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
   m_PrefabInstance: {fileID: 4885659583685175073}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1118332060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7076302478239698212, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
+  m_PrefabInstance: {fileID: 1404544681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1125829587
 GameObject:
   m_ObjectHideFlags: 0
@@ -8346,6 +8368,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6111199188653935551, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
   m_PrefabInstance: {fileID: 4885659583685175073}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1272573677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8439903549717793187, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1274255656
 GameObject:
   m_ObjectHideFlags: 0
@@ -9234,6 +9261,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438945789}
   m_CullTransparentMesh: 1
+--- !u!1 &1448789009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 304390536244850438, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1463342892
 GameObject:
   m_ObjectHideFlags: 0
@@ -10716,6 +10748,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 967016417811839637, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
   m_PrefabInstance: {fileID: 26010858820251076}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1688031728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7933153476325803968, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1691282071
 GameObject:
   m_ObjectHideFlags: 0
@@ -11806,6 +11843,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883713863}
   m_CullTransparentMesh: 1
+--- !u!1 &1909043089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1157079661217823554, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
+  m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1915455503 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9101560929116719226, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
@@ -14489,6 +14531,11 @@ MonoBehaviour:
   equipMentPoolTransform: {fileID: 1095069984}
   mixBtnMixAvailable: {fileID: 20204219}
   allMixBtnMixAvailable: {fileID: 4885659583685175074}
+  equipSlotBoxes:
+  - {fileID: 1448789009}
+  - {fileID: 1688031728}
+  - {fileID: 1272573677}
+  - {fileID: 1909043089}
 --- !u!114 &7147849547990594848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14604,6 +14651,8 @@ MonoBehaviour:
   equipStatusGoldText: {fileID: 1077780968}
   clickedEquipForUpgrade: {fileID: 0}
   currentClone: {fileID: 0}
+  equipmentEquipBtn: {fileID: 277161585}
+  equipmentEquipBtnText: {fileID: 1118332060}
 --- !u!114 &7647821949377435576
 MonoBehaviour:
   m_ObjectHideFlags: 0

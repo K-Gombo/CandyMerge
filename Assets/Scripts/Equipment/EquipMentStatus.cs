@@ -37,6 +37,10 @@ public class EquipmentStatus : MonoBehaviour
     public EquipmentStatus originalEquipment;
     public GameObject rankLevelSlot;
     public GameObject mixAvailable;
+    [HideInInspector]public Transform originalParent;
+    [HideInInspector]public Vector3 originalScale;
+    public bool isEquipped = false;
+    
     void Awake()
     {
         EquipArrangeManager equipArrangeManager = FindObjectOfType<EquipArrangeManager>();
