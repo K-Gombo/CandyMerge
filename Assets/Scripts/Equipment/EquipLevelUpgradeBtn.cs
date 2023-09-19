@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,8 +24,10 @@ public class EquipLevelUpgradeBtn : MonoBehaviour
         if (EquipmentController.instance.clickedEquipForUpgrade != null) // 클릭된 장비가 있다면
         {
             string userGold = currencyManager.GetCurrencyAmount("Gold"); // 유저의 현재 골드 양을 가져옵니다.
-            //(string.Compare(userGold, EquipmentController.instance.clickedEquipForUpgrade.upgradeGoldCost.ToString()) >= 0);
-            if ((string.Compare(userGold, EquipmentController.instance.clickedEquipForUpgrade.upgradeGoldCost.ToString()) >= 0))
+            BigInteger currentGoldAmount = BigInteger.Parse(userGold);
+            BigInteger costAmount = BigInteger.Parse(EquipmentController.instance.clickedEquipForUpgrade.upgradeGoldCost.ToString());
+
+            if (currentGoldAmount >= costAmount)
             {
                 button.interactable = true;
             }

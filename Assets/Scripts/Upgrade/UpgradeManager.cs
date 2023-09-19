@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using System.Numerics;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -33,14 +34,14 @@ public class UpgradeManager : MonoBehaviour
     public int LuckyGoldUpCost = 1500;
     
     // 각 업그레이드의 현재 비용
-    public int currentLuckyCreateUpCost;
-    public int currentCreateSpeedUpCost;
-    public int currentRemoveLockedCost;
-    public int currentMaxCandiesUpCost;
-    public int currentCandyLevelUpCost;
-    public int currentPassiveAutoCreateSpeedUpCost;
-    public int currentGoldUpCost;
-    public int currentLuckyGoldUpCost;
+    public BigInteger currentLuckyCreateUpCost;
+    public BigInteger currentCreateSpeedUpCost;
+    public BigInteger currentRemoveLockedCost;
+    public BigInteger currentMaxCandiesUpCost;
+    public BigInteger currentCandyLevelUpCost;
+    public BigInteger currentPassiveAutoCreateSpeedUpCost;
+    public BigInteger currentGoldUpCost;
+    public BigInteger currentLuckyGoldUpCost;
     
     // 각 업그레이드의 레벨
     public int luckyCreateLevel = 1;
@@ -65,10 +66,10 @@ public class UpgradeManager : MonoBehaviour
         currentLuckyGoldUpCost = LuckyGoldUpCost;
     }
     
-    public void UpdateCost(ref int currentCost)
-    {
-        currentCost = Mathf.FloorToInt(currentCost * costMultiplier);
-    }
+    //public void UpdateCost(ref int currentCost)
+    //{
+    //    currentCost = (currentCost * costMultiplier);
+    //}
 
     
    
@@ -85,7 +86,6 @@ public class UpgradeManager : MonoBehaviour
         {
             float newLuckyCreate = Mathf.Min(currentLuckyCreate + increaseLuckyCreate, giftBoxController.maxLuckyCreate);
             giftBoxController.SetLuckyCreate(newLuckyCreate);
-            UpdateCost(ref currentLuckyCreateUpCost);
             luckyCreateLevel++;
             Debug.Log($"캔디 확률 업!: {newLuckyCreate}");
             
@@ -123,7 +123,6 @@ public class UpgradeManager : MonoBehaviour
         {
             float newFillTime = Mathf.Max(currentFillTime - decreaseFilltime, giftBoxController.minimumFillTime);
             giftBoxController.SetFillTime(newFillTime);
-            UpdateCost(ref currentCreateSpeedUpCost);
             createSpeedLevel++;
             Debug.Log($"생산 쿨타임 감소!:{newFillTime}");
             
@@ -197,7 +196,6 @@ public class UpgradeManager : MonoBehaviour
                         {
                             Destroy(child.gameObject);
                             CandyManager.instance.LockedTileRemoved();
-                            UpdateCost(ref currentRemoveLockedCost);
                             removeLockedLevel++;
                             Debug.Log($"Locked 오브젝트 제거 완료! 남은 골드: {currencyManager.GetCurrencyAmount("Gold")}");
                             return;
@@ -249,7 +247,7 @@ public class UpgradeManager : MonoBehaviour
             count = lockedCount;
         }
 
-        int totalCost = currentRemoveLockedCost * count; // 요청한 잠금 해제 개수에 따른 전체 비용
+        BigInteger totalCost = currentRemoveLockedCost * count; // 요청한 잠금 해제 개수에 따른 전체 비용
 
         if (currencyManager.SubtractCurrency("Gold", totalCost))
         {
@@ -280,7 +278,6 @@ public class UpgradeManager : MonoBehaviour
         {
             int newMaxCandies = currentMaxCandies + increaseMaxCandies;
             giftBoxController.SetMaxCandies(newMaxCandies);
-            UpdateCost(ref currentMaxCandiesUpCost);
             maxCandiesLevel++;
             Debug.Log($"캔디 생성 증가!:{newMaxCandies}");
         }
@@ -309,12 +306,11 @@ public class UpgradeManager : MonoBehaviour
             totalCandiesToIncrease = giftBoxController.realMaxCandies - currentMaxCandies;
         }
 
-        int totalCost = currentMaxCandiesUpCost * count; // 요청한 증가량에 따른 전체 비용
+        BigInteger totalCost = currentMaxCandiesUpCost * count; // 요청한 증가량에 따른 전체 비용
 
         if (currencyManager.SubtractCurrency("Gold", totalCost))
         {
             giftBoxController.SetMaxCandies(currentMaxCandies + totalCandiesToIncrease);
-            UpdateCost(ref currentMaxCandiesUpCost);
             Debug.Log($"캔디 생성 증가!:{currentMaxCandies + totalCandiesToIncrease}");
         }
         else
@@ -336,7 +332,6 @@ public class UpgradeManager : MonoBehaviour
         {
             int newBaseLevel = currentBaseLevel + increaseBaseLevel;
             candyStatus.SetBaseLevel(newBaseLevel);
-            UpdateCost(ref currentCandyLevelUpCost);
             candyLevel++;
             Debug.Log($"캔디 레벨업!:{newBaseLevel}");
         }
@@ -365,7 +360,7 @@ public class UpgradeManager : MonoBehaviour
             totalLevelsToIncrease = candyStatus.maxBaseLevel - currentBaseLevel;
         }
 
-        int totalCost = currentCandyLevelUpCost * count; // 요청한 증가량에 따른 전체 비용
+        BigInteger totalCost = currentCandyLevelUpCost * count; // 요청한 증가량에 따른 전체 비용
 
         if (currencyManager.SubtractCurrency("Gold", totalCost))
         {
@@ -391,7 +386,6 @@ public class UpgradeManager : MonoBehaviour
         {
             float newPassiveAutoCreateSpeed = Mathf.Min(currentPassiveCreateSpeed + increasePassiveAutoCreateSpeed, giftBoxController.maxPassiveCreateTry);
             giftBoxController.SetPassiveCreateTry(newPassiveAutoCreateSpeed);
-            UpdateCost(ref currentPassiveAutoCreateSpeedUpCost);
             passiveAutoCreateSpeedLevel++;
             Debug.Log($"자동 생성 속도업!:{newPassiveAutoCreateSpeed}");
         }
@@ -420,7 +414,7 @@ public class UpgradeManager : MonoBehaviour
             totalSpeedIncrease = giftBoxController.maxPassiveCreateTry - currentPassiveCreateSpeed;
         }
 
-        int totalCost = currentPassiveAutoCreateSpeedUpCost * count; // 요청한 증가량에 따른 전체 비용
+        BigInteger totalCost = currentPassiveAutoCreateSpeedUpCost * count; // 요청한 증가량에 따른 전체 비용
 
         if (currencyManager.SubtractCurrency("Gold", totalCost))
         {
@@ -448,7 +442,6 @@ public class UpgradeManager : MonoBehaviour
         {
             float newGoldUp = Mathf.Min(currentGoldUp + increaseGoldUp, RewardButton.instance.maxGoldIncreaseRate);
             RewardButton.instance.SetGoldUp(newGoldUp);
-            UpdateCost(ref currentGoldUpCost);
             goldUpLevel++;
             Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
         }
@@ -477,7 +470,7 @@ public class UpgradeManager : MonoBehaviour
             totalGoldIncrease = RewardButton.instance.maxGoldIncreaseRate - currentGoldUp;
         }
 
-        int totalCost = currentGoldUpCost * count; // 요청한 증가량에 따른 전체 비용
+        BigInteger totalCost = currentGoldUpCost * count; // 요청한 증가량에 따른 전체 비용
 
         if (currencyManager.SubtractCurrency("Gold", totalCost))
         {
@@ -504,7 +497,6 @@ public class UpgradeManager : MonoBehaviour
         {
             float newLuckyGoldUp = Mathf.Min(currentLuckyGoldUp + increaseLuckyGold, RewardButton.instance.maxLuckyGoldProbability);
             RewardButton.instance.SetLuckyGoldUp(newLuckyGoldUp);
-            UpdateCost(ref currentLuckyGoldUpCost);
             luckyGoldLevel++;
             Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}");
         }
@@ -533,7 +525,7 @@ public class UpgradeManager : MonoBehaviour
             totalLuckyGoldIncrease = RewardButton.instance.maxLuckyGoldProbability - currentLuckyGoldUp;
         }
 
-        int totalCost = currentLuckyGoldUpCost * count; // 요청한 횟수만큼의 전체 비용 계산
+        BigInteger totalCost = currentLuckyGoldUpCost * count; // 요청한 횟수만큼의 전체 비용 계산
 
         if (currencyManager.SubtractCurrency("Gold", totalCost))
         {

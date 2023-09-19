@@ -1,27 +1,29 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Numerics;
 
 public class Currency
 {
     public string currencyName;
     public string amount;
 
-    public void Add(int value)
+    public void Add(BigInteger value)
     {
-        long currentAmount = long.Parse(amount);
+        BigInteger currentAmount = BigInteger.Parse(amount);
         currentAmount += value;
         amount = currentAmount.ToString();
     }
 
-    public bool Subtract(int value)
+    public bool Subtract(BigInteger value)
     {
-        long currentAmount = long.Parse(amount);
+        BigInteger currentAmount = BigInteger.Parse(amount);
         if (currentAmount - value < 0) return false;
         currentAmount -= value;
         amount = currentAmount.ToString();
         return true;
     }
+
 
     public Currency(string currencyName, string initialAmount)
     {
@@ -73,7 +75,7 @@ public class CurrencyManager : MonoBehaviour
         }
     }
 
-    public void AddCurrency(string currencyName, int value)
+    public void AddCurrency(string currencyName, BigInteger value)
     {
         Currency currency = currencies.Find(c => c.currencyName == currencyName);
         if (currency != null)
@@ -84,7 +86,7 @@ public class CurrencyManager : MonoBehaviour
         }
     }
 
-    public bool SubtractCurrency(string currencyName, int value)
+    public bool SubtractCurrency(string currencyName, BigInteger value)
     {
         Currency currency = currencies.Find(c => c.currencyName == currencyName);
         if (currency != null)

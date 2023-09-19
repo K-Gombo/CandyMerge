@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Numerics;
 
 public class UpgradeBtnManager : MonoBehaviour
 {
@@ -29,22 +30,22 @@ public class UpgradeBtnManager : MonoBehaviour
         luckyGoldUpButton.interactable = true;
     }
 
+
     private void Update()
     {
-        // 골드가 부족하면 버튼 비활성화
-        string currentGold = currencyManager.GetCurrencyAmount("Gold");
+        BigInteger currentGoldAmount = BigInteger.Parse(currencyManager.GetCurrencyAmount("Gold"));
 
         // 초기 설정된 비용 대신 'current' 비용을 참조
-        //(string.Compare(currentGold, upgradeManager.currentLuckyGoldUpCost.ToString()) >= 0);
-        luckyCreateUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentLuckyCreateUpCost.ToString()) >= 0);
-        createSpeedUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentCreateSpeedUpCost.ToString()) >= 0);
-        maxCandiesUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentMaxCandiesUpCost.ToString()) >= 0);
-        candyLevelUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentCandyLevelUpCost.ToString()) >= 0);
-        passiveAutoCreateSpeedUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentPassiveAutoCreateSpeedUpCost.ToString()) >= 0);
-        RemoveLokcedButton.interactable = (string.Compare(currentGold, upgradeManager.currentRemoveLockedCost.ToString()) >= 0);
-        goldUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentGoldUpCost.ToString()) >= 0);
-        luckyGoldUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentLuckyGoldUpCost.ToString()) >= 0);
+        luckyCreateUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentLuckyCreateUpCost.ToString());
+        createSpeedUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentCreateSpeedUpCost.ToString());
+        maxCandiesUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentMaxCandiesUpCost.ToString());
+        candyLevelUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentCandyLevelUpCost.ToString());
+        passiveAutoCreateSpeedUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentPassiveAutoCreateSpeedUpCost.ToString());
+        RemoveLokcedButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentRemoveLockedCost.ToString());
+        goldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentGoldUpCost.ToString());
+        luckyGoldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentLuckyGoldUpCost.ToString());
     }
+
 
     public void OnLuckyCreateUpButtonClick()
     {
