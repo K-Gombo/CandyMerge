@@ -495,6 +495,39 @@ public class CandyController : MonoBehaviour
         newLuckyCandyLevelUpProbability = Mathf.Round(newLuckyCandyLevelUpProbability * 10f) / 10f;
         luckyCandyLevelUpProbability = newLuckyCandyLevelUpProbability;
     }
+    
+    
+    public void ResetEquipLuckyCandyLevelUp(EquipmentStatus equipment)
+    {
+        float currentEquipLuckyCandyLevelUp = GetEquipLuckyCandyLevelUp();
+        float newEquipLuckyCandyLevelUp = currentEquipLuckyCandyLevelUp;
+        bool skillIdExists = false;
+
+        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        int[] targetSkillIds = { 16, 17, 18, 19, 20 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipLuckyCandyLevelUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipLuckyCandyLevelUp(newEquipLuckyCandyLevelUp);
+        Debug.Log($"캔디 레벨 2단계 상승 확률 초기화: {newEquipLuckyCandyLevelUp}");
+    }
 
 
 
