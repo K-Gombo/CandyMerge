@@ -96,8 +96,7 @@ public class EquipSkillManager : MonoBehaviour
         float currentLuckyCandyLevelUp = CandyController.instance.GetEquipLuckyCandyLevelUp();
         float newEquipLuckyCandyLevelUp = currentLuckyCandyLevelUp;
         bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
-    
-        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        
         int[] targetSkillIds = { 16, 17, 18, 19, 20 };
     
         for (int i = 0; i < equipment.skillIds.Length; i++)
@@ -128,7 +127,7 @@ public class EquipSkillManager : MonoBehaviour
         float newEquipLuckyExperienceUp = currentExperienceUp;
         bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
     
-        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+       
         int[] targetSkillIds = { 11, 12, 13, 14, 15 };
     
         for (int i = 0; i < equipment.skillIds.Length; i++)
@@ -152,7 +151,70 @@ public class EquipSkillManager : MonoBehaviour
         QuestManager.instance.SetEquipLuckyExperienceUp(newEquipLuckyExperienceUp);
         Debug.Log($"퀘스트 완료 경험치 2배 확률 업!: {newEquipLuckyExperienceUp}");
     }
+    
+    public void EquipEquipQuestDiaUp(EquipmentStatus equipment)
+    {
+        float currentQuestDiaUp = RewardButton.instance.GetEquipQuestDiaUp();
+        float newEquipQuestDiaUp = currentQuestDiaUp;
+        bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
+        
+        int[] targetSkillIds = { 25, 26, 27 };
+    
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+    
+                // 해당 skillId의 skillPoints를 불러와서 적용
+                newEquipQuestDiaUp += equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+    
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+    
+        RewardButton.instance.SetEquipQuestDiaUp(newEquipQuestDiaUp);
+        Debug.Log($"다이아 퀘스트 보상 증가!: {newEquipQuestDiaUp}");
+    }
 
+    
+    public void EquipEquipLuckyDiaQuestUp(EquipmentStatus equipment)
+    {   Debug.Log("EquipEquipLuckyDiaQuestUp 메서드 시작");
+        Debug.Log($"메서드 시작 전 다이아 퀘스트 생성 확률: {Quest.instance.GetEquipLuckyDiaQuestUp()}");
+        float currentLuckyDiaQuestUp = Quest.instance.GetEquipLuckyDiaQuestUp();
+        float newEquipLuckyDiaQuestUp = currentLuckyDiaQuestUp;
+        bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
+        
+        int[] targetSkillIds = { 21, 22, 23, 24 };
+    
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+    
+                // 해당 skillId의 skillPoints를 불러와서 적용
+                newEquipLuckyDiaQuestUp += equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+    
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+    
+        Quest.instance.SetEquipLuckyDiaQuestUp(newEquipLuckyDiaQuestUp);
+        Debug.Log($"다이아 퀘스트 생성 확률 업!: {newEquipLuckyDiaQuestUp}");
+        
+        
+    }
 
     
     

@@ -722,6 +722,8 @@ public class EquipmentManager : MonoBehaviour
             equipSkillManager.EquipLuckyGoldUp(equipmentStatus);
             equipSkillManager.EquipLuckyCandyLevelUp(equipmentStatus);
             equipSkillManager.EquipLuckyExperienceUp(equipmentStatus);
+            equipSkillManager.EquipEquipQuestDiaUp(equipmentStatus);
+            equipSkillManager.EquipEquipLuckyDiaQuestUp(equipmentStatus);
         }
         else
         {
@@ -753,10 +755,11 @@ public class EquipmentManager : MonoBehaviour
         RewardButton.instance.ResetEquipLuckyGoldUp(equipmentStatus);
         CandyController.instance.ResetEquipLuckyCandyLevelUp(equipmentStatus);
         QuestManager.instance.ResetEquipLuckyExperienceUp(equipmentStatus);
-        
-        
+        RewardButton.instance.ResetEquipQuestDiaUp(equipmentStatus);
+        Quest.instance.ResetEquipLuckyDiaQuestUp(equipmentStatus);
+
+
     }
-    
     
     public void EquipGoldUp(EquipmentStatus equipment)
     {
@@ -766,8 +769,6 @@ public class EquipmentManager : MonoBehaviour
         RewardButton.instance.SetEquipGoldUp(newEquipGoldUp);
         Debug.Log($"추가 골드 획득 업!: {newEquipGoldUp}");
     }
-
-    
     
     
 }

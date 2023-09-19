@@ -20,6 +20,7 @@ public class CandyManager : MonoBehaviour
     public Transform CandyPool; // 캔디 풀 위치
     
     public BoxManager boxManager; // BoxManager 참조
+    
 
     private void Awake()
     {

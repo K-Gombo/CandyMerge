@@ -34,6 +34,18 @@ public class GiftBoxController : MonoBehaviour
     private GameObject transparentObject;
     public bool isPassiveAutoCreateRunning = false;
     private bool delayCompleted = true;
+    
+    public GameObject equipKeyPrefab;
+    public float equipKeyCreatProbability = 0f;
+    public float luckyEquipKeyProbability = 0f;
+    public Transform keyBox;
+    public Text keyBoxCountText;
+    private int keyCount;
+    
+    public GameObject equipKeyPool;  // EquipKey를 담을 부모 GameObject
+    private List<GameObject> equipKeyPoolList;  // EquipKey 객체를 담을 리스트
+    public int initialEquipKeyPoolSize = 10;  // 초기 풀 크기
+    
 
    
     
@@ -46,6 +58,7 @@ public class GiftBoxController : MonoBehaviour
         TogglePassiveAutoCreate(true);
         giftBoxTransform = GameObject.Find("GiftBox").transform;
         giftBoxButton.onClick.AddListener(OnGiftBoxClick);
+        InitializeEquipKeyPool();
         
     }
 
@@ -103,8 +116,44 @@ public class GiftBoxController : MonoBehaviour
             fillTime = minimumFillTime; // 최소치를 넘으면 최소치로 설정
         }
     }
+    
+    private void InitializeEquipKeyPool()
+    {
+        equipKeyPoolList = new List<GameObject>();
 
+        for (int i = 0; i < initialEquipKeyPoolSize; i++)
+        {
+            GameObject obj = Instantiate(equipKeyPrefab, equipKeyPool.transform);
+            obj.SetActive(false);
+            equipKeyPoolList.Add(obj);
+        }
+    }
 
+    private GameObject GetPooledEquipKey()
+    {
+        foreach (GameObject obj in equipKeyPoolList)
+        {
+            if (!obj.activeInHierarchy)
+            {
+                return obj;
+            }
+        }
+
+        // 풀에 사용 가능한 객체가 없을 경우 새로 생성
+        GameObject newObj = Instantiate(equipKeyPrefab, equipKeyPool.transform);
+        newObj.SetActive(false);
+        equipKeyPoolList.Add(newObj);
+        
+        return newObj;
+    }
+    
+    private void ReturnToPool(GameObject obj)
+    {
+        obj.SetActive(false);
+        obj.transform.SetParent(equipKeyPool.transform);
+        obj.transform.position = equipKeyPool.transform.position;
+    }
+    
 
     public float GetLuckyCreate()
     {
@@ -255,59 +304,106 @@ public class GiftBoxController : MonoBehaviour
     
 
     private void CreateCandy()
+{
+    availableBoxes.Clear();
+    
+    for (int i = 0; i < boxTile.childCount; i++)
     {
-     
-        availableBoxes.Clear();
-
-        for (int i = 0; i < boxTile.childCount; i++)
+        Transform child = boxTile.GetChild(i);
+        if (child.childCount == 0 && child.CompareTag("Box"))
         {
-            Transform child = boxTile.GetChild(i);
-            if (child.childCount == 0 && child.CompareTag("Box"))
-            {
-                availableBoxes.Add(child);
-            }
+            availableBoxes.Add(child);
         }
-
-        // 드래그 중인 캔디의 시작 위치에 해당하는 인덱스
-        int startIndex = candyController.GetBoxIndexFromPosition(candyController.startPosition);
-
-        // 시작 위치의 박스를 사용 가능한 목록에서 제거
-        if (startIndex >= 0 && startIndex < availableBoxes.Count)
-        {
-            availableBoxes.RemoveAt(startIndex);
-        }
-
-        int numberOfCandiesToCreate = luckyCreate >= 100f ? 2 : (Random.Range(0f, 100f) < luckyCreate ? 2 : 1);
-
-        // availableBoxes.Count가 1개라면 1개만 생성
-        if (availableBoxes.Count == 1) numberOfCandiesToCreate = 1;
-
-        // 2개의 캔디를 생성해야 하지만 사용 가능한 박스가 2개 미만인 경우 반환
-        if (numberOfCandiesToCreate == 2 && availableBoxes.Count < 2) return;
-
-        for (int n = 0; n < numberOfCandiesToCreate; n++)
-        {
-            if (availableBoxes.Count > 0) // 사용 가능한 박스가 있는지 확인
-            {
-                int randomIndex = Random.Range(0, availableBoxes.Count);
-                Transform selectedBox = availableBoxes[randomIndex];
-                availableBoxes.RemoveAt(randomIndex); // 선택한 박스를 사용 가능한 목록에서 제거
-
-                StartCoroutine(TransParentCandy(selectedBox));
-                GameObject candy = CandyManager.instance.SpawnFromPool(giftBoxTransform.position, Quaternion.identity);
-
-                candy.GetComponent<CandyStatus>().boxName = selectedBox.gameObject.name;
-                selectedBox.GetComponent<Box>().SetCandy(candy.GetComponent<CandyStatus>().level);
-                candy.transform.localScale = Vector3.one;
-                candy.transform.position = transform.position;
-                CandyManager.instance.AddCount();
-                StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
-            }
-            
-        }
-        
     }
-   
+
+    int startIndex = candyController.GetBoxIndexFromPosition(candyController.startPosition);
+    
+    if (startIndex >= 0 && startIndex < availableBoxes.Count)
+    {
+        availableBoxes.RemoveAt(startIndex);
+    }
+
+    float randomValue = Random.Range(0f, 100f);
+    
+    // equipKeyPrefab을 생성할 확률
+    if (randomValue < equipKeyCreatProbability)
+    {
+        int numberOfKeysToCreate = Random.Range(0f, 100f) < luckyEquipKeyProbability ? 2 : 1;
+
+        for (int i = 0; i < numberOfKeysToCreate; i++) 
+        {
+            GameObject equipKey = GetPooledEquipKey();
+            equipKey.transform.position = giftBoxTransform.position; // 시작 위치 설정
+            equipKey.transform.localScale = Vector3.one; // 초기 크기 설정
+            equipKey.SetActive(true);
+
+            // 날라가는 애니메이션 시작
+            StartCoroutine(MoveEquipKey(equipKey.transform, keyBox.position, i * 0.1f)); // 딜레이 추가
+    
+            keyCount++;
+        }
+    
+        keyBoxCountText.text = keyCount + " / 5";
+        return;
+    }
+
+
+
+    int numberOfCandiesToCreate = luckyCreate >= 100f ? 2 : (Random.Range(0f, 100f) < luckyCreate ? 2 : 1);
+    if (availableBoxes.Count == 1) numberOfCandiesToCreate = 1;
+    if (numberOfCandiesToCreate == 2 && availableBoxes.Count < 2) return;
+
+    for (int n = 0; n < numberOfCandiesToCreate; n++)
+    {
+        if (availableBoxes.Count > 0)
+        {
+            int randomIndex = Random.Range(0, availableBoxes.Count);
+            Transform selectedBox = availableBoxes[randomIndex];
+            availableBoxes.RemoveAt(randomIndex);
+
+            StartCoroutine(TransParentCandy(selectedBox));
+            GameObject candy = CandyManager.instance.SpawnFromPool(giftBoxTransform.position, Quaternion.identity);
+
+            candy.GetComponent<CandyStatus>().boxName = selectedBox.gameObject.name;
+            selectedBox.GetComponent<Box>().SetCandy(candy.GetComponent<CandyStatus>().level);
+            candy.transform.localScale = Vector3.one;
+            candy.transform.position = transform.position;
+            CandyManager.instance.AddCount();
+            StartCoroutine(MoveCandy(candy.transform, selectedBox.position, selectedBox, transparentObject));
+        }
+    }
+}
+    
+    
+    private IEnumerator MoveEquipKey(Transform equipKey, Vector3 targetPosition, float delay = 0f)
+    {
+        yield return new WaitForSeconds(delay); // 여기에 딜레이 적용
+    
+        float timeElapsed = 0f;
+        float duration = 0.5f; // 원하는 지속 시간을 설정
+        Vector3 startPosition = giftBoxTransform.position; // 시작 위치를 giftBoxTransform.position으로 설정
+        Vector3 startScale = equipKey.localScale;
+
+        while (timeElapsed < duration)
+        {
+            timeElapsed += Time.deltaTime;
+            float t = timeElapsed / duration;
+
+            // 위치를 업데이트
+            equipKey.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+            // 크기를 점점 줄임
+            equipKey.localScale = Vector3.Lerp(startScale, Vector3.zero, t);
+
+            yield return null;
+        }
+
+        // 여기에서 풀로 반환
+        equipKey.gameObject.SetActive(false);
+        equipKey.SetParent(equipKeyPool.transform);
+        equipKey.localScale = startScale;
+    }
+
     
     private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox, GameObject transparentObject)
     {
