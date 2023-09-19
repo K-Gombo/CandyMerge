@@ -32,7 +32,9 @@ public class EquipmentManager : MonoBehaviour
     public GameObject mixBtnMixAvailable;
     public GameObject allMixBtnMixAvailable;
     public Dictionary<Rank, Rank> rankUpMap;
-    public GameObject[] equipSlotBoxes; 
+    public GameObject[] equipSlotBoxes;
+    public GameObject[] equipSlotBoxesImage;
+    
     
     
     // 장비 등급을 나타내는 enum
@@ -708,6 +710,8 @@ public class EquipmentManager : MonoBehaviour
 
             // 장비를 부모의 정중앙에 위치시킴
             equipmentStatus.transform.localPosition = Vector3.zero;
+            
+            equipSlotBoxesImage[slotIndex].SetActive(false);
 
             equipmentStatus.isEquipped = true;
             
@@ -734,6 +738,8 @@ public class EquipmentManager : MonoBehaviour
 
         // 원래의 위치로 장비를 이동
         equipmentStatus.transform.localPosition = Vector3.zero;
+        
+        equipSlotBoxesImage[(int)equipmentStatus.slotType].SetActive(true);
         
         equipmentStatus.isEquipped = false;
         

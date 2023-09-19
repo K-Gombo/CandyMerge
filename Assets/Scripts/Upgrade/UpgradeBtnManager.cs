@@ -35,7 +35,6 @@ public class UpgradeBtnManager : MonoBehaviour
         string currentGold = currencyManager.GetCurrencyAmount("Gold");
 
         // 초기 설정된 비용 대신 'current' 비용을 참조
-        //(string.Compare(currentGold, upgradeManager.currentLuckyGoldUpCost.ToString()) >= 0);
         luckyCreateUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentLuckyCreateUpCost.ToString()) >= 0);
         createSpeedUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentCreateSpeedUpCost.ToString()) >= 0);
         maxCandiesUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentMaxCandiesUpCost.ToString()) >= 0);
