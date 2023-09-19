@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -143,9 +144,7 @@ public class RewardButton : MonoBehaviour
 
         // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
         int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
-        Debug.Log("여기야");
         RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward, (transform.parent.transform.localPosition + pulsY));
-        Debug.Log("돈은준다니까?");
         // 캔디 회수
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');
         int requiredCount1 = int.Parse(countText1[1]);
@@ -192,33 +191,25 @@ public class RewardButton : MonoBehaviour
     
     private int ConvertRewardStringToInt(string rewardString)
     {
-        var match = Regex.Match(rewardString, @"(\d+\.?\d*)([a-d]?)");
+        var match = Regex.Match(rewardString, @"(\d+\.?\d*)([a-zA-Z]+)?");
         string numberPart = match.Groups[1].Value;
         string suffix = match.Groups[2].Value;
         double baseValue = double.Parse(numberPart);
 
-        int reward = 0;
-        switch(suffix)
+        string[] unit = BigIntegerCtrl_global.bigInteger.GetUnits(); // BigIntegerCtrl_global에서 unit 배열을 가져오는 함수를 작성해야 함.
+
+        int unitIndex = Array.IndexOf(unit, suffix);
+        if (unitIndex == -1)
         {
-            case "a":
-                reward = (int)(baseValue * 1000);
-                break;
-            case "b":
-                reward = (int)(baseValue * 1000000);
-                break;
-            case "c":
-                reward = (int)(baseValue * 1000000000);
-                break;
-            case "d":
-                reward = (int)(baseValue * 1000000000000);
-                break;
-            default:
-                reward = (int)baseValue;
-                break;
+            return (int)baseValue; // Suffix가 없거나 일치하는 것이 없으면 그냥 반환
         }
+
+        double multiplier = Math.Pow(1000, unitIndex);
+        int reward = (int)(baseValue * multiplier);
 
         return reward;
     }
+
     
     public float GetGoldUp()
     {

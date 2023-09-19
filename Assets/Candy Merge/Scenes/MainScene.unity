@@ -8846,6 +8846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Equip_Status
       objectReference: {fileID: 0}
+    - target: {fileID: 1291762836550508992, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2530413115376874186, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
       propertyPath: currencyManager
       value: 
