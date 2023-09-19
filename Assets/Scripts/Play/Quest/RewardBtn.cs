@@ -21,6 +21,8 @@ public class RewardButton : MonoBehaviour
     public float luckyGoldProbability = 0;
     public float maxLuckyGoldProbability = 40f;
 
+    public float luckyDiaProbability = 0f;
+
     [SerializeField] private GameObject Check1;
     [SerializeField] private GameObject Check2;
    
@@ -93,8 +95,12 @@ public class RewardButton : MonoBehaviour
             rewardButton.interactable = true;
             Image questImage = parentQuest.GetComponent<Image>();
             if (questImage != null)
-            {   
-                if (parentQuest.isSpecialQuest) 
+            {
+                if (parentQuest.isDiaQuest)
+                {
+                    questImage.color = new Color(0f, 0.84f, 1.0f, 1.0f); // 다이아 퀘스트의 경우 다른 색상으로 설정
+                }
+                else if (parentQuest.isSpecialQuest) 
                 {
                     questImage.color = new Color(0.9f, 0.48f, 1f, 1.0f); // 특별 퀘스트의 경우 다른 색상으로 설정
                 }
@@ -111,9 +117,13 @@ public class RewardButton : MonoBehaviour
             Image questImage = parentQuest.GetComponent<Image>();
             if (questImage != null)
             {
-                if (parentQuest.isSpecialQuest) 
+                if (parentQuest.isDiaQuest)
                 {
-                    questImage.color = new Color(1f, 0.8f, 1f, 1.0f); // 특별 퀘스트의 경우 다른 색상으로 설정
+                    questImage.color = new Color(0.55f, 0.94f, 1.0f, 1.0f); // 다이아 퀘스트의 경우 다른 색상으로 설정
+                }
+                else if (parentQuest.isSpecialQuest) 
+                {
+                    questImage.color = new Color(1f, 0.8f, 1.0f, 1.0f); // 특별 퀘스트의 경우 다른 색상으로 설정
                 }
                 else
                 {
@@ -131,26 +141,40 @@ public class RewardButton : MonoBehaviour
         {
             return;
         }
-    
+
         // 보상 계산을 위한 초기 설정
         string rewardString = parentQuest.rewardText.text;
         int baseReward = ConvertRewardStringToInt(rewardString);
 
-        // 2배 확률 체크
-        float randomValue = UnityEngine.Random.Range(0f, 100f);
-        float combinedLuckyGoldProbability = luckyGoldProbability + equipLuckyGoldProbability;
-        if (randomValue < combinedLuckyGoldProbability)
+        // diaQuest인 경우 특별한 보상 로직
+        if (parentQuest.isDiaQuest)
         {
-            baseReward *= 2;
+            // luckyDiaProbability를 적용해서 20% 증가한 보상을 계산
+            float actualIncreaseRate = 1 + (luckyDiaProbability / 100);
+            int increasedReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
+
+            RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Dia, increasedReward, (transform.parent.transform.localPosition + pulsY));
+            parentQuest.Dia.SetActive(false);
+        }
+        else
+        {
+            // 2배 확률 체크
+            float randomValue = UnityEngine.Random.Range(0f, 100f);
+            float combinedLuckyGoldProbability = luckyGoldProbability + equipLuckyGoldProbability;
+            if (randomValue < combinedLuckyGoldProbability)
+            {
+                baseReward *= 2;
+            }
+
+            // 실제 증가 비율 계산
+            float combinedGoldIncreaseRate = goldIncreaseRate + equipGoldIncreaseRate;
+            float actualIncreaseRate = 1 + (combinedGoldIncreaseRate / 100);
+
+            // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
+            int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
+            RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward, (transform.parent.transform.localPosition + pulsY));
         }
 
-        // 실제 증가 비율 계산
-        float combinedGoldIncreaseRate = goldIncreaseRate + equipGoldIncreaseRate;
-        float actualIncreaseRate = 1 + (combinedGoldIncreaseRate / 100);
-
-        // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
-        int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
-        RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward, (transform.parent.transform.localPosition + pulsY));
         // 캔디 회수
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');
         int requiredCount1 = int.Parse(countText1[1]);
@@ -162,12 +186,12 @@ public class RewardButton : MonoBehaviour
             int requiredCount2 = int.Parse(countText2[1]);
             CollectCandy(parentQuest.requestCandy2.sprite, requiredCount2);
         }
-            
+    
         // 퀘스트 완료 처리
         QuestManager.instance.CompleteQuest(parentQuest);
         parentQuest = null; // 부모 퀘스트 참조를 끊음
-        
     }
+
 
     private void CollectCandy(Sprite sprite, int requiredCount)
     {   

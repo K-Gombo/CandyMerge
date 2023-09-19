@@ -379,8 +379,7 @@ public class QuestManager : MonoBehaviour
         float currentEquipLuckyExperienceUp = GetEquipLuckyExperienceUp();
         float newEquipLuckyExperienceUp = currentEquipLuckyExperienceUp;
         bool skillIdExists = false;
-
-        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        
         int[] targetSkillIds = { 11, 12, 13, 14, 15 };
 
         for (int i = 0; i < equipment.skillIds.Length; i++)
@@ -405,6 +404,9 @@ public class QuestManager : MonoBehaviour
         SetEquipLuckyExperienceUp(newEquipLuckyExperienceUp);
         Debug.Log($"퀘스트 완료 경험치 2배 확률 초기화: {newEquipLuckyExperienceUp}");
     }
+    
+    
+    
 
     
     
