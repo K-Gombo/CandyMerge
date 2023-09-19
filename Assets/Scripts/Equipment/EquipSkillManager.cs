@@ -56,9 +56,5 @@ public class EquipSkillManager : MonoBehaviour
     }
     
     
-
-
-
-
 }
 

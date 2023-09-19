@@ -710,6 +710,8 @@ public class EquipmentManager : MonoBehaviour
             equipmentStatus.transform.localPosition = Vector3.zero;
 
             equipmentStatus.isEquipped = true;
+            
+            EquipGoldUp(equipmentStatus);
         }
         else
         {
@@ -734,12 +736,22 @@ public class EquipmentManager : MonoBehaviour
         equipmentStatus.transform.localPosition = Vector3.zero;
         
         equipmentStatus.isEquipped = false;
+        
+        RewardButton.instance.ResetEquipGoldUp(equipmentStatus.goldIncrement);
 
     }
-
-
-
-
+    
+    
+    
+    
+    public void EquipGoldUp(EquipmentStatus equipment)
+    {
+        float currentEquipGoldUp = RewardButton.instance.GetEquipGoldUp();
+        
+        float newEquipGoldUp = currentEquipGoldUp + equipment.goldIncrement;
+        RewardButton.instance.SetEquipGoldUp(newEquipGoldUp);
+        Debug.Log($"추가 골드 획득 업!: {newEquipGoldUp}");
+    }
     
 }
 
