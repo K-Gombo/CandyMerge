@@ -2,28 +2,31 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Currency
 {
     public string currencyName;
-    public int amount;
+    public string amount;
 
     public void Add(int value)
     {
-        amount += value;
+        long currentAmount = long.Parse(amount);
+        currentAmount += value;
+        amount = currentAmount.ToString();
     }
 
     public bool Subtract(int value)
     {
-        if (amount - value < 0) return false;
-        amount -= value;
+        long currentAmount = long.Parse(amount);
+        if (currentAmount - value < 0) return false;
+        currentAmount -= value;
+        amount = currentAmount.ToString();
         return true;
     }
 
-    public Currency(string currencyName, int amount)
+    public Currency(string currencyName, string initialAmount)
     {
         this.currencyName = currencyName;
-        this.amount = amount;
+        this.amount = initialAmount;
     }
 }
 
@@ -35,8 +38,7 @@ public class CurrencyManager : MonoBehaviour
 
     public List<Currency> currencies = new List<Currency>();
 
-    public event Action<string, int> OnCurrencyChanged;
-
+    public event Action<string, string> OnCurrencyChanged;
 
     private void Awake()
     {
@@ -47,14 +49,14 @@ public class CurrencyManager : MonoBehaviour
     {
         if (!LoadCurrencies())
         {
-            currencies.Add(new Currency("Gold", 0));
+            currencies.Add(new Currency("Gold", "0"));
         }
 
         if (!LoadCurrencies())
         {
-            currencies.Add(new Currency("Dia",0));
+            currencies.Add(new Currency("Dia", "0"));
         }
-        
+
     }
 
     private void Update()
@@ -62,7 +64,7 @@ public class CurrencyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("uhguygg");
-            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, 10000000);
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, 1000000000);
         }
 
         if (Input.GetKeyDown(KeyCode.H))
@@ -97,10 +99,10 @@ public class CurrencyManager : MonoBehaviour
         return false;
     }
 
-    public int GetCurrencyAmount(string currencyName)
+    public string GetCurrencyAmount(string currencyName)
     {
         Currency currency = currencies.Find(c => c.currencyName == currencyName);
-        return currency?.amount ?? 0;
+        return currency?.amount ?? "0";
     }
 
     public void SaveCurrencies()
@@ -121,6 +123,4 @@ public class CurrencyManager : MonoBehaviour
         else return false;
         return true;
     }
-    
-   
 }

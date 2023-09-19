@@ -17,18 +17,18 @@ public class CurrencyUI : MonoBehaviour
         currencyManager.OnCurrencyChanged -= UpdateCurrencyUI;
     }
 
-    private void UpdateCurrencyUI(string currencyName, int amount)
+    private void UpdateCurrencyUI(string currencyName, string amount)
     {
         if (currencyName == "Gold")
         {
-            goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(amount.ToString());
+            goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(amount);
             
 
         }
 
         if (currencyName == "Dia")
         {
-            diaText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(amount.ToString());
+            diaText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(amount);
         }
         
         

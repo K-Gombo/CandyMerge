@@ -625,7 +625,7 @@ public class EquipmentManager : MonoBehaviour
     public void EquipLevelUpgrade(EquipmentStatus equipment)
     {   
         // CurrencyManager에서 현재 유저의 골드 양을 가져온다.
-        int UserGold = CurrencyManager.instance.GetCurrencyAmount("Gold"); 
+        string UserGold = CurrencyManager.instance.GetCurrencyAmount("Gold"); 
 
         // 업그레이드 가능한지 검사 (골드는 따로 확인해야 함)
         if (equipment.equipLevel >= equipment.maxEquipLevel)
@@ -634,7 +634,7 @@ public class EquipmentManager : MonoBehaviour
             return;
         }
         // 업그레이드 비용 확인 (골드를 소지하고 있는지)
-        if (UserGold < equipment.upgradeGoldCost) 
+        if (string.Compare(UserGold , equipment.upgradeGoldCost.ToString()) == -1) 
         {
             Debug.Log("골드가 부족합니다.");
             

@@ -32,17 +32,18 @@ public class UpgradeBtnManager : MonoBehaviour
     private void Update()
     {
         // 골드가 부족하면 버튼 비활성화
-        int currentGold = currencyManager.GetCurrencyAmount("Gold");
-    
+        string currentGold = currencyManager.GetCurrencyAmount("Gold");
+
         // 초기 설정된 비용 대신 'current' 비용을 참조
-        luckyCreateUpButton.interactable = currentGold >= upgradeManager.currentLuckyCreateUpCost;
-        createSpeedUpButton.interactable = currentGold >= upgradeManager.currentCreateSpeedUpCost;
-        maxCandiesUpButton.interactable = currentGold >= upgradeManager.currentMaxCandiesUpCost;
-        candyLevelUpButton.interactable = currentGold >= upgradeManager.currentCandyLevelUpCost;
-        passiveAutoCreateSpeedUpButton.interactable = currentGold >= upgradeManager.currentPassiveAutoCreateSpeedUpCost;
-        RemoveLokcedButton.interactable = currentGold >= upgradeManager.currentRemoveLockedCost;
-        goldUpButton.interactable = currentGold >= upgradeManager.currentGoldUpCost;
-        luckyGoldUpButton.interactable = currentGold >= upgradeManager.currentLuckyGoldUpCost;
+        //(string.Compare(currentGold, upgradeManager.currentLuckyGoldUpCost.ToString()) >= 0);
+        luckyCreateUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentLuckyCreateUpCost.ToString()) >= 0);
+        createSpeedUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentCreateSpeedUpCost.ToString()) >= 0);
+        maxCandiesUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentMaxCandiesUpCost.ToString()) >= 0);
+        candyLevelUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentCandyLevelUpCost.ToString()) >= 0);
+        passiveAutoCreateSpeedUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentPassiveAutoCreateSpeedUpCost.ToString()) >= 0);
+        RemoveLokcedButton.interactable = (string.Compare(currentGold, upgradeManager.currentRemoveLockedCost.ToString()) >= 0);
+        goldUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentGoldUpCost.ToString()) >= 0);
+        luckyGoldUpButton.interactable = (string.Compare(currentGold, upgradeManager.currentLuckyGoldUpCost.ToString()) >= 0);
     }
 
     public void OnLuckyCreateUpButtonClick()
