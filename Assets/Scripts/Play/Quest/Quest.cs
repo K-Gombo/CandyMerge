@@ -49,6 +49,52 @@ public class Quest : MonoBehaviour
     
     
     
+    public float GetEquipLuckyDiaQuestUp()
+    {   
+        return diaQuestProbability;
+    }
+
+    public void SetEquipLuckyDiaQuestUp(float newLuckyDiaQuestProbability)
+    {
+        newLuckyDiaQuestProbability = Mathf.Round(newLuckyDiaQuestProbability * 10f) / 10f;
+        diaQuestProbability = newLuckyDiaQuestProbability;
+    }
+    
+    
+    public void ResetEquipLuckyDiaQuestUp(EquipmentStatus equipment)
+    {
+        float currentEquipLuckyDiaQuestUp = GetEquipLuckyDiaQuestUp();
+        float newEquipLuckyDiaQuestUp = currentEquipLuckyDiaQuestUp;
+        bool skillIdExists = false;
+
+        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        int[] targetSkillIds = { 21, 22, 23, 24 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipLuckyDiaQuestUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipLuckyDiaQuestUp(newEquipLuckyDiaQuestUp);
+        Debug.Log($"다이아 퀘스트 생성 확률 초기화!: {newEquipLuckyDiaQuestUp}");
+    }
+    
+    
+    
     public void CreateQuest(Quest quest)
 {
     float randProbability = Random.Range(0f, 100f);
@@ -348,51 +394,6 @@ public class Quest : MonoBehaviour
         {
             QuestManager.instance.ReturnAvatarIndex(avatarIndex);
         }
-    }
-    
-    
-    public float GetEquipLuckyDiaQuestUp()
-    {   
-        return diaQuestProbability;
-    }
-
-    public void SetEquipLuckyDiaQuestUp(float newLuckyDiaQuestProbability)
-    {
-        newLuckyDiaQuestProbability = Mathf.Round(newLuckyDiaQuestProbability * 10f) / 10f;
-        diaQuestProbability = newLuckyDiaQuestProbability;
-    }
-    
-    
-    public void ResetEquipLuckyDiaQuestUp(EquipmentStatus equipment)
-    {
-        float currentEquipLuckyDiaQuestUp = GetEquipLuckyDiaQuestUp();
-        float newEquipLuckyDiaQuestUp = currentEquipLuckyDiaQuestUp;
-        bool skillIdExists = false;
-
-        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
-        int[] targetSkillIds = { 21, 22, 23, 24 };
-
-        for (int i = 0; i < equipment.skillIds.Length; i++)
-        {
-            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
-            {
-                // 해당 번호가 있음을 표시
-                skillIdExists = true;
-
-                // 해당 skillId의 skillPoints를 빼기
-                newEquipLuckyDiaQuestUp -= equipment.skillPoints[i];
-                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
-            }
-        }
-
-        if (!skillIdExists)  // 해당 번호가 없을 경우
-        {
-            Debug.Log("대상 skillId 없음.");
-        }
-
-        // 새로운 값을 설정
-        SetEquipLuckyDiaQuestUp(newEquipLuckyDiaQuestUp);
-        Debug.Log($"다이아 퀘스트 생성 확률 초기화!: {newEquipLuckyDiaQuestUp}");
     }
     
 

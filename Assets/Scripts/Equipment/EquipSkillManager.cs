@@ -58,7 +58,7 @@ public class EquipSkillManager : MonoBehaviour
     
     
     
-    public void EquipLuckyGoldUp(EquipmentStatus equipment)
+    public void EquipLuckyGoldUp(EquipmentStatus equipment) 
     {
         float currentEquipLuckyGoldUp = RewardButton.instance.GetEquipLuckyGoldUp();
         float newEquipLuckyGoldUp = currentEquipLuckyGoldUp;
@@ -152,7 +152,7 @@ public class EquipSkillManager : MonoBehaviour
         Debug.Log($"퀘스트 완료 경험치 2배 확률 업!: {newEquipLuckyExperienceUp}");
     }
     
-    public void EquipEquipQuestDiaUp(EquipmentStatus equipment)
+    public void EquipQuestDiaUp(EquipmentStatus equipment)
     {
         float currentQuestDiaUp = RewardButton.instance.GetEquipQuestDiaUp();
         float newEquipQuestDiaUp = currentQuestDiaUp;
@@ -183,7 +183,7 @@ public class EquipSkillManager : MonoBehaviour
     }
 
     
-    public void EquipEquipLuckyDiaQuestUp(EquipmentStatus equipment)
+    public void EquipLuckyDiaQuestUp(EquipmentStatus equipment)
     {   Debug.Log("EquipEquipLuckyDiaQuestUp 메서드 시작");
         Debug.Log($"메서드 시작 전 다이아 퀘스트 생성 확률: {Quest.instance.GetEquipLuckyDiaQuestUp()}");
         float currentLuckyDiaQuestUp = Quest.instance.GetEquipLuckyDiaQuestUp();
@@ -216,7 +216,66 @@ public class EquipSkillManager : MonoBehaviour
         
     }
 
+    public void EquipLuckyCreatKeyUp(EquipmentStatus equipment)
+    {
+        float currentLuckyCreatKeyUp = GiftBoxController.instance.GetEquipLuckyCreatKeyUp();
+        float newEquipLuckyCreatKeyUp = currentLuckyCreatKeyUp;
+        bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
     
+       
+        int[] targetSkillIds = { 28, 29, 30, 31 };
     
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+    
+                // 해당 skillId의 skillPoints를 불러와서 적용
+                newEquipLuckyCreatKeyUp += equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+    
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+    
+        GiftBoxController.instance.SetEquipLuckyCreatKeyUp(newEquipLuckyCreatKeyUp);
+        Debug.Log($"장비 열쇠 획득 확률 업!: {newEquipLuckyCreatKeyUp}");
+    }
+        
+    public void EquipKeyDoubleUp(EquipmentStatus equipment)
+    {
+        float currentEquipKeyDoubleUp = GiftBoxController.instance.GetEquipKeyDoubleUp();
+        float newEquipKeyDoubleUp = currentEquipKeyDoubleUp;
+        bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
+    
+       
+        int[] targetSkillIds = { 32, 33, 34, 35 };
+    
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+    
+                // 해당 skillId의 skillPoints를 불러와서 적용
+                newEquipKeyDoubleUp += equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+    
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+    
+        GiftBoxController.instance.SetEquipKeyDoubleUp(newEquipKeyDoubleUp);
+        Debug.Log($"장비 열쇠 2개 획득 확률 업!: {newEquipKeyDoubleUp}");
+    }
 }
 

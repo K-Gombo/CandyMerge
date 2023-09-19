@@ -106,7 +106,7 @@ MonoBehaviour:
   questImage: {fileID: 8752421512687586058}
   RequestCandy2: {fileID: 2812335771209621310}
   isSpecialQuest: 1
-  reward: 2025
+  reward: 2022
   Dia: {fileID: 8425994034920477854}
   isDiaQuest: 1
   diaQuestProbability: 0
@@ -207,7 +207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5108452584126272017
 RectTransform:
   m_ObjectHideFlags: 0

@@ -34,10 +34,11 @@ public class GiftBoxController : MonoBehaviour
     private GameObject transparentObject;
     public bool isPassiveAutoCreateRunning = false;
     private bool delayCompleted = true;
+    public static GiftBoxController instance;
     
     public GameObject equipKeyPrefab;
     public float equipKeyCreatProbability = 0f;
-    public float luckyEquipKeyProbability = 0f;
+    public float equipKeyDoubleProbability = 0f;
     public Transform keyBox;
     public Text keyBoxCountText;
     private int keyCount;
@@ -45,10 +46,12 @@ public class GiftBoxController : MonoBehaviour
     public GameObject equipKeyPool;  // EquipKey를 담을 부모 GameObject
     private List<GameObject> equipKeyPoolList;  // EquipKey 객체를 담을 리스트
     public int initialEquipKeyPoolSize = 10;  // 초기 풀 크기
-    
 
-   
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
 
     private void Start()
@@ -300,6 +303,94 @@ public class GiftBoxController : MonoBehaviour
         transparentObject.transform.SetParent(selectedBox);
         yield return null;
     }
+    
+    
+    public float GetEquipLuckyCreatKeyUp()
+    {   
+        return equipKeyCreatProbability;
+    }
+
+    public void SetEquipLuckyCreatKeyUp(float newLuckyEquipKeyCreatProbability)
+    {
+        newLuckyEquipKeyCreatProbability = Mathf.Round(newLuckyEquipKeyCreatProbability * 10f) / 10f;
+        equipKeyCreatProbability = newLuckyEquipKeyCreatProbability;
+    }
+    
+    
+    public void ResetEquipLuckyCreatKeyUp(EquipmentStatus equipment)
+    {
+        float currentEquipLuckyCreatKeyUp = GetEquipLuckyCreatKeyUp();
+        float newEquipLuckyCreatKeyUp = currentEquipLuckyCreatKeyUp;
+        bool skillIdExists = false;
+        
+        int[] targetSkillIds = { 28, 29, 30, 31 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipLuckyCreatKeyUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipLuckyCreatKeyUp(newEquipLuckyCreatKeyUp);
+        Debug.Log($"장비 열쇠 획득 확률 초기화: {newEquipLuckyCreatKeyUp}");
+    }
+    
+    
+    public float GetEquipKeyDoubleUp()
+    {   
+        return equipKeyDoubleProbability;
+    }
+
+    public void SetEquipKeyDoubleUp(float newEquipKeyDoubleUpProbability)
+    {
+        newEquipKeyDoubleUpProbability = Mathf.Round(newEquipKeyDoubleUpProbability * 10f) / 10f;
+        equipKeyDoubleProbability = newEquipKeyDoubleUpProbability;
+    }
+    
+    
+    public void ResetEquipKeyDoubleUp(EquipmentStatus equipment)
+    {
+        float currentEquipKeyDoubleUp = GetEquipKeyDoubleUp();
+        float newEquipKeyDoubleUp = currentEquipKeyDoubleUp;
+        bool skillIdExists = false;
+        
+        int[] targetSkillIds = { 32, 33, 34, 35 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipKeyDoubleUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipKeyDoubleUp(newEquipKeyDoubleUp);
+        Debug.Log($"장비 열쇠 2개 획득 확률 초기화: {newEquipKeyDoubleUp}");
+    }
 
     
 
@@ -327,8 +418,9 @@ public class GiftBoxController : MonoBehaviour
     
     // equipKeyPrefab을 생성할 확률
     if (randomValue < equipKeyCreatProbability)
-    {
-        int numberOfKeysToCreate = Random.Range(0f, 100f) < luckyEquipKeyProbability ? 2 : 1;
+    {   Debug.Log($"equipKeyPrefab 생성확률은 지금 : {equipKeyCreatProbability}");
+        int numberOfKeysToCreate = Random.Range(0f, 100f) < equipKeyDoubleProbability ? 2 : 1;
+        Debug.Log($"equipKeyPrefab 2개 생성확률은 지금 : {equipKeyDoubleProbability}");
 
         for (int i = 0; i < numberOfKeysToCreate; i++) 
         {
@@ -474,6 +566,9 @@ public class GiftBoxController : MonoBehaviour
         yield return new WaitForSeconds(1f); // 1초의 딜레이
         yield return AutoCreateCandy(timesPer10Seconds); // 생성 시작
     }
+    
+    
+    
     
 
 }

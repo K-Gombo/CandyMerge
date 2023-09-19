@@ -722,8 +722,10 @@ public class EquipmentManager : MonoBehaviour
             equipSkillManager.EquipLuckyGoldUp(equipmentStatus);
             equipSkillManager.EquipLuckyCandyLevelUp(equipmentStatus);
             equipSkillManager.EquipLuckyExperienceUp(equipmentStatus);
-            equipSkillManager.EquipEquipQuestDiaUp(equipmentStatus);
-            equipSkillManager.EquipEquipLuckyDiaQuestUp(equipmentStatus);
+            equipSkillManager.EquipQuestDiaUp(equipmentStatus);
+            equipSkillManager.EquipLuckyDiaQuestUp(equipmentStatus);
+            equipSkillManager.EquipLuckyCreatKeyUp(equipmentStatus);
+            equipSkillManager.EquipKeyDoubleUp(equipmentStatus);
         }
         else
         {
@@ -756,7 +758,9 @@ public class EquipmentManager : MonoBehaviour
         CandyController.instance.ResetEquipLuckyCandyLevelUp(equipmentStatus);
         QuestManager.instance.ResetEquipLuckyExperienceUp(equipmentStatus);
         RewardButton.instance.ResetEquipQuestDiaUp(equipmentStatus);
-        Quest.instance.ResetEquipLuckyDiaQuestUp(equipmentStatus);
+        Quest.instance.ResetEquipLuckyDiaQuestUp(equipmentStatus);  
+        GiftBoxController.instance.ResetEquipLuckyCreatKeyUp(equipmentStatus);
+        GiftBoxController.instance.ResetEquipKeyDoubleUp(equipmentStatus);
 
 
     }

@@ -135,6 +135,104 @@ public class RewardButton : MonoBehaviour
 
 
     Vector3 pulsY = new Vector3(0, 845, 0);
+    
+    public float GetEquipLuckyGoldUp()
+    {   
+        return equipLuckyGoldProbability;
+    }
+
+    public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
+    {
+        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
+        equipLuckyGoldProbability = newDoubleGoldProbability;
+    }
+    
+    public void ResetEquipGoldUp(float goldToSubtract)
+    {
+        float currentEquipGoldUp = GetEquipGoldUp();
+        float newEquipGoldUp = currentEquipGoldUp - goldToSubtract;
+        SetEquipGoldUp(newEquipGoldUp);
+        Debug.Log($"장비골드 획득 초기화 : {newEquipGoldUp}");
+    }
+    
+    
+    public void ResetEquipLuckyGoldUp(EquipmentStatus equipment)
+    {
+        float currentEquipLuckyGoldUp = GetEquipLuckyGoldUp();
+        float newEquipLuckyGoldUp = currentEquipLuckyGoldUp;
+        bool skillIdExists = false;
+
+        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        int[] targetSkillIds = { 6, 7, 8, 9, 10 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipLuckyGoldUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipLuckyGoldUp(newEquipLuckyGoldUp);
+        Debug.Log($"장비 골드 두배 획득 확률 초기화: {newEquipLuckyGoldUp}");
+    }
+    
+    
+    public float GetEquipQuestDiaUp()
+    {   
+        return questDiaIncrement;
+    }
+
+    public void SetEquipQuestDiaUp(float newQuestDiaIncrement)
+    {
+        newQuestDiaIncrement = Mathf.Round(newQuestDiaIncrement * 10f) / 10f;
+        questDiaIncrement = newQuestDiaIncrement;
+    }
+    
+    
+    public void ResetEquipQuestDiaUp(EquipmentStatus equipment)
+    {
+        float currentEquipQuestDiaUp = GetEquipQuestDiaUp();
+        float newEquipQuestDiaUp = currentEquipQuestDiaUp;
+        bool skillIdExists = false;
+
+    
+        int[] targetSkillIds = { 25, 26, 27 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipQuestDiaUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipQuestDiaUp(newEquipQuestDiaUp);
+        Debug.Log($"다이아 퀘스트 보상 증가 초기화!: {newEquipQuestDiaUp}");
+    }
+    
     private void OnRewardButtonClicked()
     {
         if (parentQuest == null)
@@ -274,102 +372,7 @@ public class RewardButton : MonoBehaviour
         equipGoldIncreaseRate = newGoldIncreaseRate;
     }
     
-    public float GetEquipLuckyGoldUp()
-    {   
-        return equipLuckyGoldProbability;
-    }
-
-    public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
-    {
-        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
-        equipLuckyGoldProbability = newDoubleGoldProbability;
-    }
     
-    public void ResetEquipGoldUp(float goldToSubtract)
-    {
-        float currentEquipGoldUp = GetEquipGoldUp();
-        float newEquipGoldUp = currentEquipGoldUp - goldToSubtract;
-        SetEquipGoldUp(newEquipGoldUp);
-        Debug.Log($"장비골드 획득 초기화 : {newEquipGoldUp}");
-    }
-    
-    
-    public void ResetEquipLuckyGoldUp(EquipmentStatus equipment)
-    {
-        float currentEquipLuckyGoldUp = GetEquipLuckyGoldUp();
-        float newEquipLuckyGoldUp = currentEquipLuckyGoldUp;
-        bool skillIdExists = false;
-
-        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
-        int[] targetSkillIds = { 6, 7, 8, 9, 10 };
-
-        for (int i = 0; i < equipment.skillIds.Length; i++)
-        {
-            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
-            {
-                // 해당 번호가 있음을 표시
-                skillIdExists = true;
-
-                // 해당 skillId의 skillPoints를 빼기
-                newEquipLuckyGoldUp -= equipment.skillPoints[i];
-                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
-            }
-        }
-
-        if (!skillIdExists)  // 해당 번호가 없을 경우
-        {
-            Debug.Log("대상 skillId 없음.");
-        }
-
-        // 새로운 값을 설정
-        SetEquipLuckyGoldUp(newEquipLuckyGoldUp);
-        Debug.Log($"장비 골드 두배 획득 확률 초기화: {newEquipLuckyGoldUp}");
-    }
-    
-    
-    public float GetEquipQuestDiaUp()
-    {   
-        return questDiaIncrement;
-    }
-
-    public void SetEquipQuestDiaUp(float newQuestDiaIncrement)
-    {
-        newQuestDiaIncrement = Mathf.Round(newQuestDiaIncrement * 10f) / 10f;
-        questDiaIncrement = newQuestDiaIncrement;
-    }
-    
-    
-    public void ResetEquipQuestDiaUp(EquipmentStatus equipment)
-    {
-        float currentEquipQuestDiaUp = GetEquipQuestDiaUp();
-        float newEquipQuestDiaUp = currentEquipQuestDiaUp;
-        bool skillIdExists = false;
-
-    
-        int[] targetSkillIds = { 25, 26, 27 };
-
-        for (int i = 0; i < equipment.skillIds.Length; i++)
-        {
-            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
-            {
-                // 해당 번호가 있음을 표시
-                skillIdExists = true;
-
-                // 해당 skillId의 skillPoints를 빼기
-                newEquipQuestDiaUp -= equipment.skillPoints[i];
-                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
-            }
-        }
-
-        if (!skillIdExists)  // 해당 번호가 없을 경우
-        {
-            Debug.Log("대상 skillId 없음.");
-        }
-
-        // 새로운 값을 설정
-        SetEquipQuestDiaUp(newEquipQuestDiaUp);
-        Debug.Log($"다이아 퀘스트 보상 증가 초기화!: {newEquipQuestDiaUp}");
-    }
 
     
 
