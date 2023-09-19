@@ -248,7 +248,6 @@ public class RewardButton : MonoBehaviour
     {   
         newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 10f) / 10f; // 소수 둘째자리에서 반올림
         equipGoldIncreaseRate = newGoldIncreaseRate;
-        Debug.Log(newGoldIncreaseRate);
     }
     
     public float GetEquipLuckyGoldUp()
@@ -271,12 +270,38 @@ public class RewardButton : MonoBehaviour
     }
     
     
-    public void ResetEquipLuckyGoldUp(float goldToSubtract)
+    public void ResetEquipLuckyGoldUp(EquipmentStatus equipment)
     {
         float currentEquipLuckyGoldUp = GetEquipLuckyGoldUp();
-        float newEquipGoldUp = currentEquipLuckyGoldUp - goldToSubtract;
-        SetEquipLuckyGoldUp(newEquipGoldUp);
-        Debug.Log($"장비골드 획득 초기화 : {newEquipGoldUp}");
+        float newEquipLuckyGoldUp = currentEquipLuckyGoldUp;
+        bool skillIdExists = false;
+
+        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        int[] targetSkillIds = { 6, 7, 8, 9, 10 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipLuckyGoldUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipLuckyGoldUp(newEquipLuckyGoldUp);
+        Debug.Log($"장비 골드 두배 획득 확률 초기화: {newEquipLuckyGoldUp}");
     }
+
+    
 
 }

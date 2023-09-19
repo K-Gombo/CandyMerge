@@ -41,6 +41,7 @@ public class EquipmentStatus : MonoBehaviour
     [HideInInspector]public Vector3 originalScale;
     public bool isEquipped = false;
     
+    
     void Awake()
     {
         EquipArrangeManager equipArrangeManager = FindObjectOfType<EquipArrangeManager>();

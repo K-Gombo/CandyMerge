@@ -32,7 +32,9 @@ public class EquipmentManager : MonoBehaviour
     public GameObject mixBtnMixAvailable;
     public GameObject allMixBtnMixAvailable;
     public Dictionary<Rank, Rank> rankUpMap;
-    public GameObject[] equipSlotBoxes; 
+    public GameObject[] equipSlotBoxes;
+    public GameObject[] equipSlotBoxesImage;
+    
     
     
     // 장비 등급을 나타내는 enum
@@ -711,10 +713,13 @@ public class EquipmentManager : MonoBehaviour
 
             // 장비를 부모의 정중앙에 위치시킴
             equipmentStatus.transform.localPosition = Vector3.zero;
+            
+            equipSlotBoxesImage[slotIndex].SetActive(false);
 
             equipmentStatus.isEquipped = true;
             
             EquipGoldUp(equipmentStatus);
+            equipSkillManager.EquipLuckyGoldUp(equipmentStatus);
         }
         else
         {
@@ -738,13 +743,15 @@ public class EquipmentManager : MonoBehaviour
         // 원래의 위치로 장비를 이동
         equipmentStatus.transform.localPosition = Vector3.zero;
         
+        equipSlotBoxesImage[(int)equipmentStatus.slotType].SetActive(true);
+        
         equipmentStatus.isEquipped = false;
         
         RewardButton.instance.ResetEquipGoldUp(equipmentStatus.goldIncrement);
-
+        RewardButton.instance.ResetEquipLuckyGoldUp(equipmentStatus);
+        
+        
     }
-    
-    
     
     
     public void EquipGoldUp(EquipmentStatus equipment)
@@ -755,6 +762,9 @@ public class EquipmentManager : MonoBehaviour
         RewardButton.instance.SetEquipGoldUp(newEquipGoldUp);
         Debug.Log($"추가 골드 획득 업!: {newEquipGoldUp}");
     }
+
+    
+    
     
 }
 

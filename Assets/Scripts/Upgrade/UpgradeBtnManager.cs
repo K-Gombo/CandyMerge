@@ -44,6 +44,7 @@ public class UpgradeBtnManager : MonoBehaviour
         RemoveLokcedButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentRemoveLockedCost.ToString());
         goldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentGoldUpCost.ToString());
         luckyGoldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentLuckyGoldUpCost.ToString());
+
     }
 
 
