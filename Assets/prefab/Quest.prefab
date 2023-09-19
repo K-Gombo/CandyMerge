@@ -105,7 +105,7 @@ MonoBehaviour:
   questImage: {fileID: 8752421512687586058}
   RequestCandy2: {fileID: 2812335771209621310}
   isSpecialQuest: 1
-  reward: 750
+  reward: 300
 --- !u!1 &2429920939433489086
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +634,8 @@ MonoBehaviour:
   rewardButton: {fileID: 6933008789301289784}
   goldIncreaseRate: 0
   maxGoldIncreaseRate: 30
+  equipGoldIncreaseRate: 0
+  equipLuckyGoldProbability: 0
   luckyGoldProbability: 0
   maxLuckyGoldProbability: 40
   Check1: {fileID: 3207905030570394797}
