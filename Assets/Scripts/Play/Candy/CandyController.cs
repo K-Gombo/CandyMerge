@@ -22,7 +22,8 @@ public class CandyController : MonoBehaviour
     public BoxManager boxManager; // BoxManager 참조
     private Vector3 mouseDownPosition; // 마우스 버튼을 누를 때의 위치
     public bool isDragEnabled = true; // 드래그가 가능한지를 나타내는 변수
-
+    public float luckyCandyLevelUpProbability = 0f;
+    public static CandyController instance;
     
     public bool mergeLocked = false;
     public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
@@ -33,6 +34,7 @@ public class CandyController : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        instance = this;
     }
 
     private void Start()
@@ -217,61 +219,66 @@ public class CandyController : MonoBehaviour
     }
 
     private void MergeCandies(Transform candy1, Transform candy2)
-    {   
-        // Null 체크
+    {
         if (candy1 == null || candy2 == null)
         {
             Debug.LogError("candy1 또는 candy2가 null입니다.");
             return;
         }
 
-        if(EffectPooler.Instance == null) 
+        if (EffectPooler.Instance == null)
         {
             Debug.LogError("EffectPooler.Instance가 null입니다.");
             return;
         }
 
-        // 병합 이펙트 인스턴스화
         EffectPooler.Instance.SpawnFromPool("MergeEffect", new Vector3(candy2.position.x, candy2.position.y, 0), Quaternion.identity);
 
         CandyStatus candyStatus1 = candy1.GetComponent<CandyStatus>();
         CandyStatus candyStatus2 = candy2.GetComponent<CandyStatus>();
-        
+
         if (candyStatus1 == null || candyStatus2 == null)
         {
             Debug.LogError("candyStatus1 또는 candyStatus2가 null입니다.");
             return;
         }
-        
+
         if (candyStatus1.level == candyStatus2.level)
         {
-            // 캔디 레벨이 최대 레벨인지 확인
-            if (candyStatus1.level >= 60 && candyStatus2.level >= 60) 
+            if (candyStatus1.level >= 60 && candyStatus2.level >= 60)
             {
-                // 최대 레벨일 경우 병합을 하지 않습니다.
                 return;
             }
-            
 
-            candyStatus2.level++;
-            CandyManager.instance.SetAppearance(candy2.gameObject); // 이미지를 먼저 바꾸기
+            float randomChance = UnityEngine.Random.Range(0f, 100f);
+            Debug.Log("Random Chance: " + randomChance + ", LuckyCandyLevelUp: " + luckyCandyLevelUpProbability);
+            if (randomChance < luckyCandyLevelUpProbability)
+            {
+                Debug.Log("레벨이 2 증가해야 함");
+                candyStatus2.level += 2;
+            }
+            else
+            {
+                Debug.Log("레벨이 1 증가해야 함");
+                candyStatus2.level++;
+            }
+
+            CandyManager.instance.SetAppearance(candy2.gameObject);
             candy2.position = candy2.parent.position;
-
             candy2.parent.GetComponent<Box>().SetCandy(candyStatus2.level);
-
             boxTransforms.Remove(candy1);
             CandyManager.instance.CandyDestroyed();
-            CandyManager.instance.ReturnToPool(candy1.gameObject); // 캔디 반환
+            CandyManager.instance.ReturnToPool(candy1.gameObject);
 
             SoundManager.Instance.PlaySoundEffect("Merge");
 
-            // 새로운 이미지에 대한 Scale 변경 코루틴 시작
             StartCoroutine(AnimateScale(candy2));
         }
         else
         {
             candy1.position = startPosition;
         }
+
         CandyManager.instance.AddCount();
         BoxManager.instance.UpdateCandyCount();
     }
@@ -475,6 +482,18 @@ public class CandyController : MonoBehaviour
         {
             Debug.Log("비어있는 박스 또는 이동 가능한 캔디가 부족합니다.");
         }
+    }
+    
+    
+    public float GetEquipLuckyCandyLevelUp()
+    {   
+        return luckyCandyLevelUpProbability;
+    }
+
+    public void SetEquipLuckyCandyLevelUp(float newLuckyCandyLevelUpProbability)
+    {
+        newLuckyCandyLevelUpProbability = Mathf.Round(newLuckyCandyLevelUpProbability * 10f) / 10f;
+        luckyCandyLevelUpProbability = newLuckyCandyLevelUpProbability;
     }
 
 

@@ -716,6 +716,7 @@ public class EquipmentManager : MonoBehaviour
             equipmentStatus.isEquipped = true;
             
             EquipGoldUp(equipmentStatus);
+            equipSkillManager.EquipLuckyGoldUp(equipmentStatus);
         }
         else
         {
@@ -744,10 +745,10 @@ public class EquipmentManager : MonoBehaviour
         equipmentStatus.isEquipped = false;
         
         RewardButton.instance.ResetEquipGoldUp(equipmentStatus.goldIncrement);
-
+        RewardButton.instance.ResetEquipLuckyGoldUp(equipmentStatus);
+        
+        
     }
-    
-    
     
     
     public void EquipGoldUp(EquipmentStatus equipment)
@@ -758,6 +759,9 @@ public class EquipmentManager : MonoBehaviour
         RewardButton.instance.SetEquipGoldUp(newEquipGoldUp);
         Debug.Log($"추가 골드 획득 업!: {newEquipGoldUp}");
     }
+
+    
+    
     
 }
 
