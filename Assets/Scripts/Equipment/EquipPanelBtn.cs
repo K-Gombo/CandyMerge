@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 
 public class EquipPanelBtn : MonoBehaviour
 {
@@ -16,12 +16,15 @@ public class EquipPanelBtn : MonoBehaviour
 
 
 
-
     public void OnButtonClick()
     {
         bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
 
         SoundManager.Instance.PlaySoundEffect("ButtonLight");
+
+        GameManager.instance.DownImage.Invoke();
+
+        UpImage();
 
         if (hasCandiesInMixBox)
         {
@@ -59,5 +62,24 @@ public class EquipPanelBtn : MonoBehaviour
         candyController.EnableDrag(false);
         equipmentManager.CheckMixAvailability();
     }
-    
+
+    void UpImage()
+    {
+        GetComponent<RectTransform>().anchoredPosition += new Vector2(0, 40);
+        Color color = GetComponent<Image>().color;
+        color.a = 1;
+        GetComponent<Image>().color = color;
+        transform.GetChild(0).gameObject.SetActive(true);
+        GameManager.instance.DownImage.AddListener(DownImage);
+    }
+
+    public void DownImage()
+    {
+        GetComponent<RectTransform>().anchoredPosition -= new Vector2(0, 40);
+        Color color = GetComponent<Image>().color;
+        color.a = 0.5f;
+        GetComponent<Image>().color = color;
+        transform.GetChild(0).gameObject.SetActive(false);
+        GameManager.instance.DownImage.RemoveListener(DownImage);
+    }
 }

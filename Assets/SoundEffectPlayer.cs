@@ -26,9 +26,11 @@ public class SoundEffectPlayer : MonoBehaviour
     // 사운드 이펙트 중지 및 객체 제거
     public void StopEffect()
     {
+        Debug.Log($"A : {audioSource != null} B : {audioSource.isPlaying}");
         if (audioSource != null && audioSource.isPlaying)
         {
             audioSource.Stop();
+            Debug.Log("삭제!");
             Destroy(gameObject);
         }
     }
@@ -39,8 +41,7 @@ public class SoundEffectPlayer : MonoBehaviour
         while (audioSource.isPlaying)
         {
             yield return null; // 다음 프레임까지 기다림
-        }
-
+;        }
         StopEffect();
     }
 }
