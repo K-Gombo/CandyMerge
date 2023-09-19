@@ -13,7 +13,11 @@ public class RewardButton : MonoBehaviour
 
     public float goldIncreaseRate = 0f;
     public float maxGoldIncreaseRate = 30f;
+    
+    public float equipGoldIncreaseRate = 0f;
 
+    public float equipLuckyGoldProbability = 0;
+    
     public float luckyGoldProbability = 0;
     public float maxLuckyGoldProbability = 40f;
 
@@ -127,20 +131,22 @@ public class RewardButton : MonoBehaviour
         {
             return;
         }
-        
+    
         // 보상 계산을 위한 초기 설정
         string rewardString = parentQuest.rewardText.text;
         int baseReward = ConvertRewardStringToInt(rewardString);
 
         // 2배 확률 체크
         float randomValue = UnityEngine.Random.Range(0f, 100f);
-        if (randomValue < luckyGoldProbability)
+        float combinedLuckyGoldProbability = luckyGoldProbability + equipLuckyGoldProbability;
+        if (randomValue < combinedLuckyGoldProbability)
         {
             baseReward *= 2;
         }
 
         // 실제 증가 비율 계산
-        float actualIncreaseRate = 1 + (goldIncreaseRate / 100);
+        float combinedGoldIncreaseRate = goldIncreaseRate + equipGoldIncreaseRate;
+        float actualIncreaseRate = 1 + (combinedGoldIncreaseRate / 100);
 
         // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
         int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
@@ -182,7 +188,7 @@ public class RewardButton : MonoBehaviour
 
                     if (collectedCount >= requiredCount)
                     {
-                        return; // 요구 개수만큼 캔디를 회수했으므로 메서드를 종료합니다.
+                        return; 
                     }
                 }
             }
@@ -196,7 +202,7 @@ public class RewardButton : MonoBehaviour
         string suffix = match.Groups[2].Value;
         double baseValue = double.Parse(numberPart);
 
-        string[] unit = BigIntegerCtrl_global.bigInteger.GetUnits(); // BigIntegerCtrl_global에서 unit 배열을 가져오는 함수를 작성해야 함.
+        string[] unit = BigIntegerCtrl_global.bigInteger.GetUnits();
 
         int unitIndex = Array.IndexOf(unit, suffix);
         if (unitIndex == -1)
@@ -231,6 +237,46 @@ public class RewardButton : MonoBehaviour
     {
         newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
         luckyGoldProbability = Mathf.Min(newDoubleGoldProbability, maxLuckyGoldProbability);
+    }
+    
+    public float GetEquipGoldUp()
+    {   
+        return equipGoldIncreaseRate;
+    }
+
+    public void SetEquipGoldUp(float newGoldIncreaseRate)
+    {   
+        newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 10f) / 10f; // 소수 둘째자리에서 반올림
+        equipGoldIncreaseRate = newGoldIncreaseRate;
+        Debug.Log(newGoldIncreaseRate);
+    }
+    
+    public float GetEquipLuckyGoldUp()
+    {   
+        return equipLuckyGoldProbability;
+    }
+
+    public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
+    {
+        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
+        equipLuckyGoldProbability = newDoubleGoldProbability;
+    }
+    
+    public void ResetEquipGoldUp(float goldToSubtract)
+    {
+        float currentEquipGoldUp = GetEquipGoldUp();
+        float newEquipGoldUp = currentEquipGoldUp - goldToSubtract;
+        SetEquipGoldUp(newEquipGoldUp);
+        Debug.Log($"장비골드 획득 초기화 : {newEquipGoldUp}");
+    }
+    
+    
+    public void ResetEquipLuckyGoldUp(float goldToSubtract)
+    {
+        float currentEquipLuckyGoldUp = GetEquipLuckyGoldUp();
+        float newEquipGoldUp = currentEquipLuckyGoldUp - goldToSubtract;
+        SetEquipLuckyGoldUp(newEquipGoldUp);
+        Debug.Log($"장비골드 획득 초기화 : {newEquipGoldUp}");
     }
 
 }

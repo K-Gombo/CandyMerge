@@ -283,7 +283,7 @@ public class EquipmentController : MonoBehaviour
         string modifiedCurrentRankStr = Regex.Replace(currentRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
         string modifiedNextRankStr = Regex.Replace(nextRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
     
-        equipRankExplainText.text = $"랭크업 : {modifiedCurrentRankStr} -> {modifiedNextRankStr}";
+        equipRankExplainText.text = $"등급 : {modifiedCurrentRankStr} -> {modifiedNextRankStr}";
     
         float nextGoldIncrement = equipmentManager.GetNextGoldIncrement(clickedEquipment.equipRank);
         equipGoldIncrementExplainText.text = $"골드 획득량 {clickedEquipment.goldIncrement} % -> {nextGoldIncrement} %";
