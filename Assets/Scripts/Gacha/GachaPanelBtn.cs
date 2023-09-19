@@ -14,7 +14,10 @@ public class GachaPanelBtn : MonoBehaviour
     public void OnButtonClick()
     {
         giftBoxController.TogglePassiveAutoCreate(false); // 패시브 자동생성 비활성화
-        
+
+
+        SoundManager.Instance.PlaySoundEffect("ButtonLight");
+
         // 모든 패널 비활성화
         foreach (GameObject panel in allPanels)
         {

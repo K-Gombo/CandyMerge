@@ -82,7 +82,7 @@ public class RewardMovingManager : MonoBehaviour
             {
                 ResetIconPositionAndRotation(icon, i);
             }
-
+            SoundManager.Instance.PlaySoundEffect(type.ToString());
             delay += 0.1f;
         }
 

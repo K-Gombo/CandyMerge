@@ -21,6 +21,8 @@ public class EquipPanelBtn : MonoBehaviour
     {
         bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
 
+        SoundManager.Instance.PlaySoundEffect("ButtonLight");
+
         if (hasCandiesInMixBox)
         {
             candyController.MoveToRandomBox();  // 캔디가 있다면 원래 박스로 이동

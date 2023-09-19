@@ -69,8 +69,6 @@ public class CurrencyManager : MonoBehaviour
         {
             RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, 10000000);
         }
-        
-        
     }
 
     public void AddCurrency(string currencyName, int value)

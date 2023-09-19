@@ -262,7 +262,9 @@ public class CandyController : MonoBehaviour
             boxTransforms.Remove(candy1);
             CandyManager.instance.CandyDestroyed();
             CandyManager.instance.ReturnToPool(candy1.gameObject); // 캔디 반환
-    
+
+            SoundManager.Instance.PlaySoundEffect("Merge");
+
             // 새로운 이미지에 대한 Scale 변경 코루틴 시작
             StartCoroutine(AnimateScale(candy2));
         }
