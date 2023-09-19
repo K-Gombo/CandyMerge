@@ -3190,7 +3190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9145372107027065503
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4325,7 +4325,6 @@ GameObject:
   - component: {fileID: 5393325492437613604}
   - component: {fileID: 2690965256824236009}
   - component: {fileID: 100644867985115109}
-  - component: {fileID: 8316176333070626468}
   m_Layer: 5
   m_Name: MixResultExplainBox
   m_TagString: Untagged
@@ -4354,8 +4353,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 315, y: 181.00017}
-  m_SizeDelta: {x: 550, y: 300}
+  m_AnchoredPosition: {x: 310, y: 182}
+  m_SizeDelta: {x: 630, y: 330}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2690965256824236009
 CanvasRenderer:
@@ -4378,7 +4377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.745283, g: 0.6763254, b: 0.58708614, a: 1}
+  m_Color: {r: 0.92549026, g: 0.86666673, b: 0.78823537, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4395,21 +4394,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8316176333070626468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221279421157187107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.5660378, g: 0.36390537, b: 0, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
-  m_UseGraphicAlpha: 0
 --- !u!1 &3491067793811719276
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,7 +5710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4138462546244506456
 RectTransform:
   m_ObjectHideFlags: 0
