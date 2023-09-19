@@ -3,6 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum RewardType
+{
+    None,
+    AutoCreate,
+    OffLine,
+    BoxOpen,
+    LevelUp
+}
+
 public class AdsManager : MonoBehaviour
 {
     public static AdsManager instance;
@@ -15,6 +25,7 @@ public class AdsManager : MonoBehaviour
     private int interstitialRetryAttempt;
     private int rewardedRetryAttempt;
 
+    RewardType currentRewardType;
 
     private void Awake()
     {
@@ -113,7 +124,6 @@ public class AdsManager : MonoBehaviour
         Debug.Log("Rewarded ad clicked");
     }
 
-    //보여주던 광고를 다 보여줬다!
     private void OnRewardedAdDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
         // Rewarded ad is hidden. Pre-load the next ad
@@ -123,6 +133,8 @@ public class AdsManager : MonoBehaviour
 
     private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
     {
+
+        
 
         // Rewarded ad was displayed and user should receive the reward
         Debug.Log("Rewarded ad received reward");
@@ -144,7 +156,27 @@ public class AdsManager : MonoBehaviour
 
     }
 
-
+    public void ShowRewarded(RewardType rewardType)
+    {
+        switch (rewardType)
+        {
+            case RewardType.AutoCreate:
+                currentRewardType = RewardType.AutoCreate;
+                break;
+            case RewardType.OffLine:
+                currentRewardType = RewardType.OffLine;
+                break;
+            case RewardType.BoxOpen:
+                currentRewardType = RewardType.BoxOpen;
+                break;
+            case RewardType.LevelUp:
+                currentRewardType = RewardType.LevelUp;
+                break;
+            default:
+                return;
+        }
+        ShowRewardedAd();
+    }
     
     #endregion
 
