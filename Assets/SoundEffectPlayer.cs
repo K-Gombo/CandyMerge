@@ -27,7 +27,7 @@ public class SoundEffectPlayer : MonoBehaviour
     public void StopEffect()
     {
         Debug.Log($"A : {audioSource != null} B : {audioSource.isPlaying}");
-        if (audioSource != null && audioSource.isPlaying)
+        if (audioSource != null && !audioSource.isPlaying)
         {
             audioSource.Stop();
             Debug.Log("삭제!");

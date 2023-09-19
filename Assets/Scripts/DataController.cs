@@ -121,7 +121,7 @@ public class DataController : MonoBehaviour
         Upgrade_luckyCreateLevel_DataLoad();
         upgradeManager.luckyCreateLevel = GameData.luckyCreateLevel;
 
-        upgradeManager.LuckyCreateUp(GameData.luckyCreateLevel);
+        upgradeManager.LuckyCreateUp(GameData.luckyCreateLevel - 1);
     }
 
 
@@ -144,7 +144,7 @@ public class DataController : MonoBehaviour
         Upgrade_createSpeedLevel_DataLoad();
         upgradeManager.createSpeedLevel = GameData.createSpeedLevel;
 
-        upgradeManager.CreateSpeedUp(GameData.createSpeedLevel);
+        upgradeManager.CreateSpeedUp(GameData.createSpeedLevel - 1);
     }
 
 
@@ -169,7 +169,7 @@ public class DataController : MonoBehaviour
 
 
 
-        upgradeManager.RemoveLocked(GameData.removeLockedLevel - 1);
+        upgradeManager.RemoveLocked(10);
         
     }
 
