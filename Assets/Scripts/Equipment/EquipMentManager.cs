@@ -721,6 +721,7 @@ public class EquipmentManager : MonoBehaviour
             EquipGoldUp(equipmentStatus);
             equipSkillManager.EquipLuckyGoldUp(equipmentStatus);
             equipSkillManager.EquipLuckyCandyLevelUp(equipmentStatus);
+            equipSkillManager.EquipLuckyExperienceUp(equipmentStatus);
         }
         else
         {
@@ -751,6 +752,7 @@ public class EquipmentManager : MonoBehaviour
         RewardButton.instance.ResetEquipGoldUp(equipmentStatus.goldIncrement);
         RewardButton.instance.ResetEquipLuckyGoldUp(equipmentStatus);
         CandyController.instance.ResetEquipLuckyCandyLevelUp(equipmentStatus);
+        QuestManager.instance.ResetEquipLuckyExperienceUp(equipmentStatus);
         
         
     }

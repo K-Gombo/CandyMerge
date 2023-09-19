@@ -27,7 +27,8 @@ public class QuestManager : MonoBehaviour
     public HappyLevel happyLevel;
     private int specialQuestCounter = 0; // 특별 퀘스트 카운팅
     public int specialQuestProbability = 15; // 특별 퀘스트 확률 (15회 중 1회)
-    
+    public float luckyExperienceUpProbability = 0f; // 추가된 변수
+
     
     public Dictionary<string, int> activeQuestsInfo = new Dictionary<string, int>(); //활성화된 퀘스트 담는 딕셔너리
     
@@ -139,7 +140,17 @@ public class QuestManager : MonoBehaviour
         quest.OnQuestComplete();
         CreateNewQuest(); // 새로운 퀘스트 생성
 
-        happyLevel.AddExperience(1);
+        float randomChance = Random.Range(0f, 100f);
+
+        // 경험치 추가 로직
+        if (randomChance < luckyExperienceUpProbability)
+        {
+            happyLevel.AddExperience(2); // 확률로 경험치가 2 추가
+        }
+        else
+        {
+            happyLevel.AddExperience(1); // 그 외에는 경험치가 1 추가
+        }
         happyLevel.UpdateHappinessBar();
     }
 
@@ -347,6 +358,52 @@ public class QuestManager : MonoBehaviour
             maxLevel = Mathf.Max(maxLevel, requiredLevel1, requiredLevel2);
         }
         return maxLevel;
+    }
+    
+    
+    
+    public float GetEquipLuckyExperienceUp()
+    {   
+        return luckyExperienceUpProbability;
+    }
+
+    public void SetEquipLuckyExperienceUp(float newExperienceUpProbability)
+    {
+        newExperienceUpProbability = Mathf.Round(newExperienceUpProbability * 10f) / 10f;
+        luckyExperienceUpProbability = newExperienceUpProbability;
+    }
+    
+    
+    public void ResetEquipLuckyExperienceUp(EquipmentStatus equipment)
+    {
+        float currentEquipLuckyExperienceUp = GetEquipLuckyExperienceUp();
+        float newEquipLuckyExperienceUp = currentEquipLuckyExperienceUp;
+        bool skillIdExists = false;
+
+        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        int[] targetSkillIds = { 11, 12, 13, 14, 15 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipLuckyExperienceUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipLuckyExperienceUp(newEquipLuckyExperienceUp);
+        Debug.Log($"퀘스트 완료 경험치 2배 확률 초기화: {newEquipLuckyExperienceUp}");
     }
 
     
