@@ -108,7 +108,7 @@ public class HappyLevel : MonoBehaviour
         GiveLevelUpReward(); // 레벨업 보상 주기
         // currentExperience 초기화
         currentExperience = 0;
-        
+        DataController.instance.Player_Experience_Save();
     }
     
     public void UpdateHappinessBar()
