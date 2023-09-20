@@ -94,6 +94,7 @@ public class DataController : MonoBehaviour
     {
         GameData.player_Experience = ES3.Load("player_Experience", 0);
     }
+
     public void Player_Experience_Load()
     {
         Player_Experience_DataLoad();

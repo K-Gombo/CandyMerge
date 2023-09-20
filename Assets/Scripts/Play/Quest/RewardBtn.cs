@@ -12,14 +12,14 @@ public class RewardButton : MonoBehaviour
     
     public static RewardButton instance;
 
-    //public float goldIncreaseRate = 0f;
-    //public float maxGoldIncreaseRate = 30f;
-    
-    //public float equipGoldIncreaseRate = 0f;
-    //public float equipLuckyGoldProbability = 0;
-    
-    //public float luckyGoldProbability = 0;
-    //public float maxLuckyGoldProbability = 40f;
+    public float goldIncreaseRate = 0f;
+    public float maxGoldIncreaseRate = 30f;
+
+    public float equipGoldIncreaseRate = 0f;
+    public float equipLuckyGoldProbability = 0;
+
+    public float luckyGoldProbability = 0;
+    public float maxLuckyGoldProbability = 40f;
 
     public float questDiaIncrement = 0f;
 

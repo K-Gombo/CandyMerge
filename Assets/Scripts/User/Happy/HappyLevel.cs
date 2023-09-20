@@ -68,6 +68,7 @@ public class HappyLevel : MonoBehaviour
 
     private void UpdateHappinessText()
     {
+        Debug.Log("나 불렸다.");
         // HappylevelUp 딕셔너리에서 현재 레벨에 필요한 경험치 가져오기
         int requiredExperience = HappylevelUp[CurrentLevel + 1]; // 현재 레벨의 다음 레벨 경험치
 
