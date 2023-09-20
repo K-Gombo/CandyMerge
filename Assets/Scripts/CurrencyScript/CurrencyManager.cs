@@ -72,7 +72,7 @@ public class CurrencyManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            //RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, 10000000);
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, "10000000");
         }
     }
 
