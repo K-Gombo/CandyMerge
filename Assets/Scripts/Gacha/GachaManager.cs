@@ -18,11 +18,13 @@ public class GachaManager : MonoBehaviour
     public GameObject mask;
     private GameObject equipmentClone; // 장비 복사본 저장
     private GameObject lastCreatedEquip;
-    public Button AutoGachaBtn;
-
-
+    public Button autoGachaBtn;
+    public Button equipKeyCountBtn;
+    public GameObject equipKeyPanel;
+    public Text equipGachaKeyCountText;
+    public Text equipKeyGachaAvailavleText;
     
-
+    
     // 범위와 확률을 저장하는 딕셔너리
     Dictionary<string, Dictionary<string, float>> rankProbabilities = new Dictionary<string, Dictionary<string, float>>();
 
@@ -55,13 +57,38 @@ public class GachaManager : MonoBehaviour
     {
         // 이벤트 구독
         equipmentManager.OnEquipCreated += EquipCreated;
-        AutoGachaBtn.onClick.AddListener(() => {
+        autoGachaBtn.onClick.AddListener(() => {
             int candyCount = 3;
-            Debug.Log("MoveHighestLevelCandiesToMixBox called");
+           
             candyController.MoveHighestLevelCandiesToMixBox(candyCount);
-            Debug.Log("MoveHighestLevelCandiesToMixBox called");    
+           
         });
-        
+        equipKeyCountBtn.onClick.AddListener(OnEquipKeyCountBtnClick);
+    }
+    
+    private void Update()
+    {
+        // keyCount 값에 따라 버튼의 활성화 상태를 변경
+        if (GiftBoxController.instance.keyCount < 5)
+        {
+            equipKeyCountBtn.interactable = false;
+        }
+        else
+        {
+            equipKeyCountBtn.interactable = true;
+        }
+    }
+    
+    public void OnEquipKeyCountBtnClick()
+    {
+        equipKeyPanel.SetActive(true);
+        EquipGachaTextUpdate();
+    }
+
+    public void EquipGachaTextUpdate()
+    {
+        equipGachaKeyCountText.text = GiftBoxController.instance.keyCount.ToString();
+        equipKeyGachaAvailavleText.text = (GiftBoxController.instance.keyCount / 5).ToString();
     }
     
     void EquipCreated(GameObject newEquip)

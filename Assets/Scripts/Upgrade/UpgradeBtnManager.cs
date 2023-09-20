@@ -28,6 +28,16 @@ public class UpgradeBtnManager : MonoBehaviour
         RemoveLokcedButton.interactable = true;
         goldUpButton.interactable = true;
         luckyGoldUpButton.interactable = true;
+
+        // 버튼에 대한 리스너 추가
+        luckyCreateUpButton.onClick.AddListener(OnLuckyCreateUpButtonClick);
+        createSpeedUpButton.onClick.AddListener(OnCreateSpeedUpButtonClick);
+        maxCandiesUpButton.onClick.AddListener(OnMaxCandiesUpButtonClick);
+        candyLevelUpButton.onClick.AddListener(OnCandyLevelUpButtonClick);
+        passiveAutoCreateSpeedUpButton.onClick.AddListener(OnPassiveAutoCreateSpeedUpButtonClick);
+        RemoveLokcedButton.onClick.AddListener(OnRemoveLockedButtonClick);
+        goldUpButton.onClick.AddListener(OnGoldUpButtonClick);
+        luckyGoldUpButton.onClick.AddListener(OnLuckyGoldUpButtonClick);
     }
 
 

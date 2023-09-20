@@ -41,7 +41,7 @@ public class GiftBoxController : MonoBehaviour
     public float equipKeyDoubleProbability = 0f;
     public Transform keyBox;
     public Text keyBoxCountText;
-    private int keyCount;
+    public int keyCount;
     
     public GameObject equipKeyPool;  // EquipKey를 담을 부모 GameObject
     private List<GameObject> equipKeyPoolList;  // EquipKey 객체를 담을 리스트
@@ -418,24 +418,28 @@ public class GiftBoxController : MonoBehaviour
     
     // equipKeyPrefab을 생성할 확률
     if (randomValue < equipKeyCreatProbability)
-    {   Debug.Log($"equipKeyPrefab 생성확률은 지금 : {equipKeyCreatProbability}");
+    { 
         int numberOfKeysToCreate = Random.Range(0f, 100f) < equipKeyDoubleProbability ? 2 : 1;
-        Debug.Log($"equipKeyPrefab 2개 생성확률은 지금 : {equipKeyDoubleProbability}");
 
         for (int i = 0; i < numberOfKeysToCreate; i++) 
         {
             GameObject equipKey = GetPooledEquipKey();
             equipKey.transform.position = giftBoxTransform.position; // 시작 위치 설정
             equipKey.transform.localScale = Vector3.one; // 초기 크기 설정
+            Vector3 vec3 = giftBoxTransform.transform.position;
+            float value = Random.Range(-0.5f, 0.5f);
+            vec3.x = vec3.x - value;
+            equipKey.transform.position = vec3;
+            
             equipKey.SetActive(true);
 
             // 날라가는 애니메이션 시작
-            StartCoroutine(MoveEquipKey(equipKey.transform, keyBox.position, i * 0.1f)); // 딜레이 추가
+            StartCoroutine(MoveEquipKey(equipKey.transform, keyBox.position, i * 0.2f)); // 딜레이 추가
     
             keyCount++;
         }
     
-        keyBoxCountText.text = keyCount + " / 5";
+        keyBoxCountText.text = keyCount+ " / 5";
         return;
     }
 

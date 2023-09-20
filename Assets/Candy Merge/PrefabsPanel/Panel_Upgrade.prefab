@@ -240,7 +240,6 @@ GameObject:
   - component: {fileID: 565034533764918670}
   - component: {fileID: 7374169459606468726}
   - component: {fileID: 1985392936056361309}
-  - component: {fileID: 6306236426551607848}
   m_Layer: 5
   m_Name: CreateSpeedBtn
   m_TagString: Untagged
@@ -351,42 +350,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7374169459606468726}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6306236426551607848}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnCreateSpeedUpButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6306236426551607848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274877015557887539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 1496759563582793594}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &491354549356861627
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,9 +701,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -2425}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2377059252442721695
@@ -792,7 +756,6 @@ GameObject:
   - component: {fileID: 2516089589688519256}
   - component: {fileID: 6116058851187627378}
   - component: {fileID: 5511470524293619600}
-  - component: {fileID: 5869714019858921939}
   m_Layer: 5
   m_Name: PassiveCreateBtn
   m_TagString: Untagged
@@ -903,42 +866,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6116058851187627378}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5869714019858921939}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnPassiveAutoCreateSpeedUpButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5869714019858921939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967376509268929202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 1496759563582793594}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &1137288860103621581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,9 +1616,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -3165}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1499020314563910068
@@ -2727,7 +2655,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 3340}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1521570601624977403
 MonoBehaviour:
@@ -3488,7 +3416,6 @@ GameObject:
   - component: {fileID: 4638568468273846955}
   - component: {fileID: 6697117618751127414}
   - component: {fileID: 416997116630745412}
-  - component: {fileID: 2523148714604862866}
   m_Layer: 5
   m_Name: GoldUpBtn
   m_TagString: Untagged
@@ -3599,42 +3526,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6697117618751127414}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2523148714604862866}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnGoldUpButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2523148714604862866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3958396677368115595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 416997116630745412}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &4141197933844723167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3957,7 +3849,6 @@ GameObject:
   - component: {fileID: 7501711212599087395}
   - component: {fileID: 8175763440012315077}
   - component: {fileID: 1631087341127138748}
-  - component: {fileID: 1218805865598375887}
   m_Layer: 5
   m_Name: MaxCandyBtn
   m_TagString: Untagged
@@ -4068,42 +3959,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8175763440012315077}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1218805865598375887}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnMaxCandiesUpButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1218805865598375887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4369369894840327617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 1496759563582793594}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &4456586824130177161
 GameObject:
   m_ObjectHideFlags: 0
@@ -4142,9 +3998,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -945}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1048512882265333654
@@ -4934,9 +4790,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -2055}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1715247202645515339
@@ -5171,9 +5027,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -2795}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4389297802775720525
@@ -5231,7 +5087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2325233301862857706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5676,9 +5532,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -205}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2361778110350997064
@@ -7141,7 +6997,6 @@ GameObject:
   - component: {fileID: 1802125524876010986}
   - component: {fileID: 6948512525019616618}
   - component: {fileID: 7059699069819143752}
-  - component: {fileID: 4277238787492138285}
   m_Layer: 5
   m_Name: HaveCandyBtn
   m_TagString: Untagged
@@ -7252,42 +7107,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6948512525019616618}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4277238787492138285}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnRemoveLockedButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4277238787492138285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7513377339435225989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 1496759563582793594}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &7608454613729437573
 GameObject:
   m_ObjectHideFlags: 0
@@ -7792,9 +7612,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -1315}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4227253339356037766
@@ -8193,9 +8013,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -575}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6344200556198622294
@@ -8274,9 +8094,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -1685}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6789894932373472128
@@ -8646,7 +8466,6 @@ GameObject:
   - component: {fileID: 2385743682746054829}
   - component: {fileID: 2263120956479137767}
   - component: {fileID: 495617300354422981}
-  - component: {fileID: 2583789281140987314}
   m_Layer: 5
   m_Name: CandyLevelBtn
   m_TagString: Untagged
@@ -8757,42 +8576,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2263120956479137767}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2583789281140987314}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnCandyLevelUpButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2583789281140987314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8601740331632537455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 1496759563582793594}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &8630672671784652666
 GameObject:
   m_ObjectHideFlags: 0
@@ -8805,7 +8589,6 @@ GameObject:
   - component: {fileID: 4038290580632508111}
   - component: {fileID: 8550004225753942167}
   - component: {fileID: 1496759563582793594}
-  - component: {fileID: 3339604091867032373}
   m_Layer: 5
   m_Name: LuckyGoldBtn
   m_TagString: Untagged
@@ -8916,42 +8699,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8550004225753942167}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3339604091867032373}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnLuckyGoldUpButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3339604091867032373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8630672671784652666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 416997116630745412}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &8640922753145765757
 GameObject:
   m_ObjectHideFlags: 0
@@ -9278,7 +9026,6 @@ GameObject:
   - component: {fileID: 2458047552819036096}
   - component: {fileID: 5920234411819326550}
   - component: {fileID: 5536466789041760787}
-  - component: {fileID: 4419757224664644014}
   m_Layer: 5
   m_Name: LuckyCreateBtn
   m_TagString: Untagged
@@ -9389,42 +9136,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5920234411819326550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4419757224664644014}
-        m_TargetAssemblyTypeName: UpgradeBtnManager, Assembly-CSharp
-        m_MethodName: OnLuckyCreateUpButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4419757224664644014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8843081885380617714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927c2128061e3434d900a46a6cfad9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  luckyCreateUpButton: {fileID: 5536466789041760787}
-  createSpeedUpButton: {fileID: 1985392936056361309}
-  maxCandiesUpButton: {fileID: 1631087341127138748}
-  candyLevelUpButton: {fileID: 495617300354422981}
-  passiveAutoCreateSpeedUpButton: {fileID: 5511470524293619600}
-  RemoveLokcedButton: {fileID: 7059699069819143752}
-  goldUpButton: {fileID: 416997116630745412}
-  luckyGoldUpButton: {fileID: 1496759563582793594}
-  upgradeManager: {fileID: 0}
-  currencyManager: {fileID: 0}
-  upgradeUI: {fileID: 0}
+      m_Calls: []
 --- !u!1 &8936109175735458216
 GameObject:
   m_ObjectHideFlags: 0

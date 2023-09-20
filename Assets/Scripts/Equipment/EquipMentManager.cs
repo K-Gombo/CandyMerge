@@ -39,9 +39,6 @@ public class EquipmentManager : MonoBehaviour
     
     public delegate void EquipCreatedHandler(GameObject newEquip);
     public event EquipCreatedHandler OnEquipCreated;
-
-    
-    
     
     
     // 장비 등급을 나타내는 enum
