@@ -992,6 +992,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &349483955 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5858419895857976102, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+  m_PrefabInstance: {fileID: 9102584590486264801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &385320987 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6971061821273900163, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
@@ -1001,6 +1006,11 @@ RectTransform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 671127514027668945, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
   m_PrefabInstance: {fileID: 4885659583685175073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &400505352 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 713999909211009539, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+  m_PrefabInstance: {fileID: 9102584590486264801}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &463114249 stripped
 RectTransform:
@@ -3725,6 +3735,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1673040589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 789037583445166705, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+  m_PrefabInstance: {fileID: 9102584590486264801}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1677070640 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 967016417811839637, guid: 2ccf1d6e52295d9489975b2b7d06816d, type: 3}
@@ -4270,6 +4291,11 @@ GameObject:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4117619057468867961, guid: 5476fdade32c6469baf6fee6688e5748, type: 3}
   m_PrefabInstance: {fileID: 1404544681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1997561996 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 873157075063777296, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+  m_PrefabInstance: {fileID: 9102584590486264801}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2015600734 stripped
 MonoBehaviour:
@@ -5870,6 +5896,7 @@ MonoBehaviour:
   GachaUIManager: {fileID: 1192532030053063347}
   chestGachaAnimator: {fileID: 1586375598}
   mask: {fileID: 218759641}
+  AutoGachaBtn: {fileID: 1673040589}
 --- !u!1001 &5265937124601844145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6130,6 +6157,10 @@ MonoBehaviour:
   boxManager: {fileID: 749087271}
   isDragEnabled: 1
   luckyCandyLevelUpProbability: 0
+  mixBoxes:
+  - {fileID: 400505352}
+  - {fileID: 1997561996}
+  - {fileID: 349483955}
   mergeLocked: 0
   draggingParentCanvas: {fileID: 124782620}
 --- !u!4 &5708944592267780962

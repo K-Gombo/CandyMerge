@@ -24,6 +24,7 @@ public class CandyController : MonoBehaviour
     public bool isDragEnabled = true; // 드래그가 가능한지를 나타내는 변수
     public float luckyCandyLevelUpProbability = 0f;
     public static CandyController instance;
+    public Transform[] mixBoxes;
     
     public bool mergeLocked = false;
     public Transform draggingParentCanvas; // 드래그 중에 Candy가 소속될 Canvas
@@ -196,11 +197,57 @@ public class CandyController : MonoBehaviour
             }
         }
     }
+    
+    public void MoveHighestLevelCandiesToMixBox(int count)
+    {
+        Debug.Log("MoveHighestLevelCandiesToMixBox 시작");
+
+        // 모든 Box에서 캔디들을 찾는다.
+        List<Transform> allCandies = new List<Transform>();
+        foreach (Transform box in boxTransforms)
+        {
+            foreach (Transform candy in box)
+            {
+                if (candy.CompareTag("Candy"))
+                {
+                    allCandies.Add(candy);
+                }
+            }
+        }
+
+        Debug.Log($"총 찾은 캔디 개수: {allCandies.Count}");
+
+        // 캔디들을 레벨에 따라 정렬한다.
+        allCandies.Sort((c1, c2) => c2.GetComponent<CandyStatus>().level.CompareTo(c1.GetComponent<CandyStatus>().level));
+
+        Debug.Log("캔디 정렬 완료");
+
+        int movedCandyCount = 0;
+        for (int i = 0; i < Mathf.Min(count, allCandies.Count); i++)
+        {
+            if (movedCandyCount >= count) break;
+
+            int targetBoxIndex = movedCandyCount % mixBoxes.Length;  // MixBox에만 들어가게
+
+            // MixBox에 자식 객체가 한 개 이상 있으면 건너뜀
+            if (mixBoxes[targetBoxIndex].childCount >= 1) continue;
+
+            Debug.Log($"캔디를 옮길 MixBox 인덱스: {targetBoxIndex}");
+
+            allCandies[i].SetParent(mixBoxes[targetBoxIndex]);
+            allCandies[i].localPosition = Vector3.zero;  // 캔디의 로컬 위치를 초기화
+
+            Debug.Log($"{movedCandyCount + 1}번째 캔디가 옮겨짐");
+
+            movedCandyCount++;
+        }
+
+        Debug.Log("MoveHighestLevelCandiesToMixBox 종료");
+    }
+
 
 
     
-    
-
     private Transform GetMergeTarget(Transform candy)
     {
         foreach (Transform t in boxTransforms)

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GachaManager : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class GachaManager : MonoBehaviour
     public Animator chestGachaAnimator;
     public GameObject mask;
     private GameObject equipmentClone; // 장비 복사본 저장
-    
     private GameObject lastCreatedEquip;
+    public Button AutoGachaBtn;
 
 
     
@@ -54,16 +55,21 @@ public class GachaManager : MonoBehaviour
     {
         // 이벤트 구독
         equipmentManager.OnEquipCreated += EquipCreated;
+        AutoGachaBtn.onClick.AddListener(() => {
+            int candyCount = 3;
+            Debug.Log("MoveHighestLevelCandiesToMixBox called");
+            candyController.MoveHighestLevelCandiesToMixBox(candyCount);
+            Debug.Log("MoveHighestLevelCandiesToMixBox called");    
+        });
+        
     }
     
     void EquipCreated(GameObject newEquip)
     {
         lastCreatedEquip = newEquip;
     }
-
-
-
-
+    
+    
     // MixBox에 캔디가 있는지 확인하고 있다면 원래 Box로 이동
     public bool CheckCandiesExistInMixBox()
     {
@@ -162,8 +168,7 @@ public class GachaManager : MonoBehaviour
 
         return probabilities;
     }
-
-
+    
     // 캔디가 mixMox에 3개가 있는지 확인
     public bool CheckCandiesCount()
     {
@@ -212,16 +217,12 @@ public class GachaManager : MonoBehaviour
             }));
         }
     }
-
-
-    
     
     private IEnumerator WaitForAnimationToEnd(Action callback)
     {
         yield return new WaitForSeconds(2.0f);
         callback();
     }
-
 
     // MixBox에 있는 모든 캔디를 반환하는 함수
     private void ReturnAllCandiesInMixBox()
