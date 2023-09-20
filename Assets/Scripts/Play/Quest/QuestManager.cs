@@ -31,9 +31,19 @@ public class QuestManager : MonoBehaviour
 
     
     public Dictionary<string, int> activeQuestsInfo = new Dictionary<string, int>(); //활성화된 퀘스트 담는 딕셔너리
-    
-    
-    
+
+    [Header("[ 퀘스트버튼 공용변수 ]")]
+    public float goldIncreaseRate = 0f;
+    public float maxGoldIncreaseRate = 30f;
+
+    public float equipGoldIncreaseRate = 0f;
+
+    public float equipLuckyGoldProbability = 0;
+
+    public float luckyGoldProbability = 0;
+    public float maxLuckyGoldProbability = 40f;
+
+
 
     private void Awake()
     {
@@ -404,12 +414,21 @@ public class QuestManager : MonoBehaviour
         SetEquipLuckyExperienceUp(newEquipLuckyExperienceUp);
         Debug.Log($"퀘스트 완료 경험치 2배 확률 초기화: {newEquipLuckyExperienceUp}");
     }
-    
-    
-    
 
-    
-    
+
+
+    // 아래 두 함수는 RewardBtn.cs 에서 옮긴 코드
+    public float GetEquipLuckyGoldUp()
+    {
+        return equipLuckyGoldProbability;
+    }
+    public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
+    {
+        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
+        equipLuckyGoldProbability = newDoubleGoldProbability;
+    }
+
+
 }
 
 

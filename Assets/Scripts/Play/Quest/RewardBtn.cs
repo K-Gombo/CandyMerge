@@ -12,15 +12,14 @@ public class RewardButton : MonoBehaviour
     
     public static RewardButton instance;
 
-    public float goldIncreaseRate = 0f;
-    public float maxGoldIncreaseRate = 30f;
+    //public float goldIncreaseRate = 0f;
+    //public float maxGoldIncreaseRate = 30f;
     
-    public float equipGoldIncreaseRate = 0f;
-
-    public float equipLuckyGoldProbability = 0;
+    //public float equipGoldIncreaseRate = 0f;
+    //public float equipLuckyGoldProbability = 0;
     
-    public float luckyGoldProbability = 0;
-    public float maxLuckyGoldProbability = 40f;
+    //public float luckyGoldProbability = 0;
+    //public float maxLuckyGoldProbability = 40f;
 
     public float questDiaIncrement = 0f;
 
@@ -137,20 +136,20 @@ public class RewardButton : MonoBehaviour
 
     Vector3 pulsY = new Vector3(0, 845, 0);
     
-    public float GetEquipLuckyGoldUp()
-    {   
-        return equipLuckyGoldProbability;
-    }
+    //public float GetEquipLuckyGoldUp()
+    //{   
+    //    return equipLuckyGoldProbability;
+    //}
 
-    public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
-    {
-        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
-        equipLuckyGoldProbability = newDoubleGoldProbability;
-    }
+    //public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
+    //{
+    //    newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
+    //    equipLuckyGoldProbability = newDoubleGoldProbability;
+    //}
     
     public void ResetEquipLuckyGoldUp(EquipmentStatus equipment)
     {
-        float currentEquipLuckyGoldUp = GetEquipLuckyGoldUp();
+        float currentEquipLuckyGoldUp = QuestManager.instance.GetEquipLuckyGoldUp();
         float newEquipLuckyGoldUp = currentEquipLuckyGoldUp;
         bool skillIdExists = false;
 
@@ -176,7 +175,7 @@ public class RewardButton : MonoBehaviour
         }
 
         // 새로운 값을 설정
-        SetEquipLuckyGoldUp(newEquipLuckyGoldUp);
+        QuestManager.instance.SetEquipLuckyGoldUp(newEquipLuckyGoldUp);
         Debug.Log($"장비 골드 두배 획득 확률 초기화: {newEquipLuckyGoldUp}");
     }
     
@@ -250,14 +249,14 @@ public class RewardButton : MonoBehaviour
         {
             // 2배 확률 체크
             float randomValue = UnityEngine.Random.Range(0f, 100f);
-            float combinedLuckyGoldProbability = luckyGoldProbability + equipLuckyGoldProbability;
+            float combinedLuckyGoldProbability = QuestManager.instance.luckyGoldProbability + QuestManager.instance.equipLuckyGoldProbability;
             if (randomValue < combinedLuckyGoldProbability)
             {
                 baseReward *= 2;
             }
 
             // 실제 증가 비율 계산
-            float combinedGoldIncreaseRate = goldIncreaseRate + equipGoldIncreaseRate;
+            float combinedGoldIncreaseRate = QuestManager.instance.goldIncreaseRate + QuestManager.instance.equipGoldIncreaseRate;
             float actualIncreaseRate = 1 + (combinedGoldIncreaseRate / 100);
 
             // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
@@ -333,35 +332,35 @@ public class RewardButton : MonoBehaviour
     
     public float GetGoldUp()
     {
-        return goldIncreaseRate;
+        return QuestManager.instance.goldIncreaseRate;
     }
 
     public void SetGoldUp(float newGoldIncreaseRate)
     {
         newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 10f) / 10f; // 소수 둘째자리에서 반올림
-        goldIncreaseRate = Mathf.Min(newGoldIncreaseRate, maxGoldIncreaseRate);
+        QuestManager.instance.goldIncreaseRate = Mathf.Min(newGoldIncreaseRate, QuestManager.instance.maxGoldIncreaseRate);
     }
     
     public float GetLuckyGoldUp()
     {
-        return luckyGoldProbability;
+        return QuestManager.instance.luckyGoldProbability;
     }
 
     public void SetLuckyGoldUp(float newDoubleGoldProbability)
     {
         newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
-        luckyGoldProbability = Mathf.Min(newDoubleGoldProbability, maxLuckyGoldProbability);
+        QuestManager.instance.luckyGoldProbability = Mathf.Min(newDoubleGoldProbability, QuestManager.instance.maxLuckyGoldProbability);
     }
     
     public float GetEquipGoldUp()
     {   
-        return equipGoldIncreaseRate;
+        return QuestManager.instance.equipGoldIncreaseRate;
     }
 
     public void SetEquipGoldUp(float newGoldIncreaseRate)
     {   
         newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 10f) / 10f; // 소수 둘째자리에서 반올림
-        equipGoldIncreaseRate = newGoldIncreaseRate;
+        QuestManager.instance.equipGoldIncreaseRate = newGoldIncreaseRate;
     }
     
     public void ResetEquipGoldUp(float goldToSubtract)
