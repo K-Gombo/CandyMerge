@@ -34,6 +34,8 @@ public class EquipmentManager : MonoBehaviour
     public Dictionary<Rank, Rank> rankUpMap;
     public GameObject[] equipSlotBoxes;
     public GameObject[] equipSlotBoxesImage;
+    private GameObject lastCreatedEquip;  // 마지막으로 생성된 장비를 저장할 변수
+
     
     
     
@@ -280,6 +282,30 @@ public class EquipmentManager : MonoBehaviour
     }
     
     
+    public void ApplyEquipVisuals(EquipmentStatus equipComponent, Equip selectedEquip, Rank chosenRank)
+    {
+        // 장비에 따라 스프라이트 설정
+        if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
+        {
+            equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
+        }
+        // 랭크에 따라 배경 컬러 설정
+        if (rankToColorMap.ContainsKey(chosenRank))
+        {
+            equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
+            equipComponent.levelCircleComponent.color = rankToColorMap[chosenRank];
+            equipComponent.slotBarComponent.color = rankToColorMap[chosenRank];
+        }
+
+        // SlotType에 따라 슬롯 스프라이트 설정
+        if (slotToSpriteMap.ContainsKey(equipComponent.slotType))
+        {
+            equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
+        }
+    }
+
+    
+    
     public void CreateEquipPrefab(Transform parentTransform, float[] rankProbabilities)
     {
         
@@ -330,24 +356,7 @@ public class EquipmentManager : MonoBehaviour
                     equipComponent.skillPoints[i] = equipSkill.skillPoint;
                 }
             }
-            // 장비에 따라 스프라이트 설정
-            if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
-            {
-                equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
-            }
-            // 랭크에 따라 배경 컬러 설정
-            if (rankToColorMap.ContainsKey(chosenRank))
-            {
-                equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
-                equipComponent.levelCircleComponent.color = rankToColorMap[chosenRank];
-                equipComponent.slotBarComponent.color = rankToColorMap[chosenRank];
-            }
-
-            // SlotType에 따라 슬롯 스프라이트 설정
-            if (slotToSpriteMap.ContainsKey(equipComponent.slotType))
-            {
-                equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
-            }
+            ApplyEquipVisuals(equipComponent, selectedEquip, chosenRank);
            
             if (levelDataMap.ContainsKey(chosenRank.ToString()))
             {
@@ -361,8 +370,16 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.upgradeGoldCost = levelData.upgradeDefaultGoldCost;
                 
                 SetRankLevelSlotActive(equipComponent.rankLevel ,equipComponent.rankLevelSlot);
+                
+                
             }
+            lastCreatedEquip = newEquip; 
         }
+    }
+    
+    public GameObject GetLastCreatedEquip()
+    {
+        return lastCreatedEquip;
     }
     
     
@@ -732,8 +749,15 @@ public class EquipmentManager : MonoBehaviour
             Debug.LogError("Invalid slot index: " + slotIndex);
         }
     }
-
-
+    
+    public void EquipGoldUp(EquipmentStatus equipment)
+    {
+        float currentEquipGoldUp = RewardButton.instance.GetEquipGoldUp();
+        
+        float newEquipGoldUp = currentEquipGoldUp + equipment.goldIncrement;
+        RewardButton.instance.SetEquipGoldUp(newEquipGoldUp);
+        Debug.Log($"추가 골드 획득 업!: {newEquipGoldUp}");
+    }
     
     
     public void EquipmentSlotUnequip(EquipmentStatus equipmentStatus)
@@ -765,14 +789,6 @@ public class EquipmentManager : MonoBehaviour
 
     }
     
-    public void EquipGoldUp(EquipmentStatus equipment)
-    {
-        float currentEquipGoldUp = RewardButton.instance.GetEquipGoldUp();
-        
-        float newEquipGoldUp = currentEquipGoldUp + equipment.goldIncrement;
-        RewardButton.instance.SetEquipGoldUp(newEquipGoldUp);
-        Debug.Log($"추가 골드 획득 업!: {newEquipGoldUp}");
-    }
     
     
 }

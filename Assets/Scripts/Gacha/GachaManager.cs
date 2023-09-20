@@ -12,6 +12,10 @@ public class GachaManager : MonoBehaviour
     public Transform equipSpawnLocation; // 장비가 생성될 위치
     public CandyManager candyManager;
     public GachaUIManager GachaUIManager; // GachaUIManager에 대한 참조 추가
+    
+    public Animator chestGachaAnimator;
+    public GameObject gachaEquipment;
+    
 
     // 범위와 확률을 저장하는 딕셔너리
     Dictionary<string, Dictionary<string, float>> rankProbabilities = new Dictionary<string, Dictionary<string, float>>();
@@ -40,7 +44,9 @@ public class GachaManager : MonoBehaviour
             rankProbabilities[rangeString] = rankInfo;
         }
     }
+    
 
+    
 
     // MixBox에 캔디가 있는지 확인하고 있다면 원래 Box로 이동
     public bool CheckCandiesExistInMixBox()
@@ -161,21 +167,38 @@ public class GachaManager : MonoBehaviour
     {
         if (CheckCandiesCount())
         {
-            int totalLevel = GachaUIManager.totalLevelSum; // GachaUIManager에서 캔디 총합 레벨을 가져옴
-           
-            float[] rankProbabilities = GetRankProbabilities(totalLevel);
-            
-            foreach (float prob in rankProbabilities)
+            chestGachaAnimator.SetTrigger("PlayTrigger");
+
+            StartCoroutine(WaitForAnimationToEnd(() =>
             {
-                Debug.Log(prob);
-            }
+                int totalLevel = GachaUIManager.totalLevelSum;
 
-            equipmentManager.CreateEquipPrefab(equipSpawnLocation, rankProbabilities);
+                float[] rankProbabilities = GetRankProbabilities(totalLevel);
 
-            // 여기서 MixBox에 있는 모든 캔디를 반환
-            ReturnAllCandiesInMixBox();
+                equipmentManager.CreateEquipPrefab(equipSpawnLocation, rankProbabilities);
+
+                GameObject createdEquip = equipmentManager.GetLastCreatedEquip();
+
+                // 새로운 게임 오브젝트를 생성하고 컴포넌트를 복사합니다.
+                GameObject gachaEquipment = Instantiate(createdEquip);
+                
+
+                ReturnAllCandiesInMixBox();
+                chestGachaAnimator.SetTrigger("ExitTrigger");
+            }));
         }
     }
+
+
+
+
+    
+    private IEnumerator WaitForAnimationToEnd(Action callback)
+    {
+        yield return new WaitForSeconds(2.0f);
+        callback();
+    }
+
 
     // MixBox에 있는 모든 캔디를 반환하는 함수
     private void ReturnAllCandiesInMixBox()

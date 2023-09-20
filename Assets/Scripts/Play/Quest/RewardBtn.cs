@@ -147,15 +147,6 @@ public class RewardButton : MonoBehaviour
         equipLuckyGoldProbability = newDoubleGoldProbability;
     }
     
-    public void ResetEquipGoldUp(float goldToSubtract)
-    {
-        float currentEquipGoldUp = GetEquipGoldUp();
-        float newEquipGoldUp = currentEquipGoldUp - goldToSubtract;
-        SetEquipGoldUp(newEquipGoldUp);
-        Debug.Log($"장비골드 획득 초기화 : {newEquipGoldUp}");
-    }
-    
-    
     public void ResetEquipLuckyGoldUp(EquipmentStatus equipment)
     {
         float currentEquipLuckyGoldUp = GetEquipLuckyGoldUp();
@@ -372,8 +363,13 @@ public class RewardButton : MonoBehaviour
         equipGoldIncreaseRate = newGoldIncreaseRate;
     }
     
-    
-
+    public void ResetEquipGoldUp(float goldToSubtract)
+    {
+        float currentEquipGoldUp = GetEquipGoldUp();
+        float newEquipGoldUp = currentEquipGoldUp - goldToSubtract;
+        SetEquipGoldUp(newEquipGoldUp);
+        Debug.Log($"장비골드 획득 초기화 : {newEquipGoldUp}");
+    }
     
 
 }
