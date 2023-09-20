@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Numerics;
+//using System.Numerics;
+using Keiwando.BigInteger;
 
 public class Currency
 {
@@ -10,14 +11,14 @@ public class Currency
 
     public void Add(BigInteger value)
     {
-        BigInteger currentAmount = BigInteger.Parse(amount);
+        BigInteger currentAmount = new BigInteger(amount);
         currentAmount += value;
         amount = currentAmount.ToString();
     }
 
     public bool Subtract(BigInteger value)
     {
-        BigInteger currentAmount = BigInteger.Parse(amount);
+        BigInteger currentAmount = new BigInteger(amount);
         if (currentAmount - value < 0) return false;
         currentAmount -= value;
         amount = currentAmount.ToString();
@@ -66,12 +67,12 @@ public class CurrencyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("uhguygg");
-            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, 1000000000);
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, "1000000000");
         }
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, 10000000);
+            //RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, 10000000);
         }
     }
 

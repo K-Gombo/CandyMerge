@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using System.Numerics;
+//using System.Numerics;
+using Keiwando.BigInteger;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -64,6 +65,8 @@ public class UpgradeManager : MonoBehaviour
         currentPassiveAutoCreateSpeedUpCost = PassiveAutoCreateSpeedUpCost;
         currentGoldUpCost = GoldUpCost;
         currentLuckyGoldUpCost = LuckyGoldUpCost;
+
+
     }
     
     //public void UpdateCost(ref int currentCost)

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.UI;
+using Keiwando.BigInteger;
 
 public enum CurrencyType
 {
@@ -62,7 +63,8 @@ public class RewardMovingManager : MonoBehaviour
         }
     }
 
-    public void RequestMovingCurrency(int count, CurrencyType type, int reward, Vector2? dynamicStartPosition = null)
+    //public void RequestMovingCurrency(int count, CurrencyType type, int reward, Vector2? dynamicStartPosition = null)
+    public void RequestMovingCurrency(int count, CurrencyType type, string reward, Vector2? dynamicStartPosition = null)
     {
         currencyIconContainer.gameObject.SetActive(true);
         var delay = 0f;
@@ -87,9 +89,10 @@ public class RewardMovingManager : MonoBehaviour
         }
 
         GameObject activeFadeOut = RequestFadeOutInstance(currencyData);
-        activeFadeOut.GetComponent<FadeOutController>().SetFadeOutText($"+{BigIntegerCtrl_global.bigInteger.ChangeMoney(reward.ToString())}");
+        activeFadeOut.GetComponent<FadeOutController>().SetFadeOutText($"+{BigIntegerCtrl_global.bigInteger.ChangeMoney(reward)}");
 
-        CurrencyManager.instance.AddCurrency(type.ToString(), reward);
+        BigInteger Bigreward = new BigInteger(reward);
+        CurrencyManager.instance.AddCurrency(type.ToString(), Bigreward);
 
     }
 

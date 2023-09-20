@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using Keiwando.BigInteger;
 
 public class RewardButton : MonoBehaviour
 {
@@ -240,9 +241,9 @@ public class RewardButton : MonoBehaviour
         {    Debug.Log($" 퀘스트 다이아 증가율은 지금 : {questDiaIncrement}");
             // questDiaIncrement를 적용해서 20% 증가한 보상을 계산
             float actualIncreaseRate = 1 + (questDiaIncrement / 100);
-            int increasedReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
+            BigInteger increasedReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
 
-            RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Dia, increasedReward, (transform.parent.transform.localPosition + pulsY));
+            RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Dia, increasedReward.ToString(), (transform.parent.transform.localPosition + pulsY));
             parentQuest.Dia.SetActive(false);
         }
         else
@@ -260,8 +261,8 @@ public class RewardButton : MonoBehaviour
             float actualIncreaseRate = 1 + (combinedGoldIncreaseRate / 100);
 
             // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
-            int finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
-            RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward, (transform.parent.transform.localPosition + pulsY));
+            BigInteger finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
+            RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward.ToString(), (transform.parent.transform.localPosition + pulsY));
         }
 
         // 캔디 회수

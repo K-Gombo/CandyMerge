@@ -5858,6 +5858,8 @@ MonoBehaviour:
   equipSpawnLocation: {fileID: 1373033894}
   candyManager: {fileID: 515677172727006469}
   GachaUIManager: {fileID: 1192532030053063347}
+  chestGachaAnimator: {fileID: 0}
+  gachaEquipment: {fileID: 0}
 --- !u!1001 &5265937124601844145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7851,6 +7853,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072756118976376500, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3142305396832628123, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3180358961602571669, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
