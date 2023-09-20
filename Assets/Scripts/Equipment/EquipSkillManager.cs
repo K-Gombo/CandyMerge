@@ -60,7 +60,7 @@ public class EquipSkillManager : MonoBehaviour
     
     public void EquipLuckyGoldUp(EquipmentStatus equipment) 
     {
-        float currentEquipLuckyGoldUp = RewardButton.instance.GetEquipLuckyGoldUp();
+        float currentEquipLuckyGoldUp = QuestManager.instance.GetEquipLuckyGoldUp();
         float newEquipLuckyGoldUp = currentEquipLuckyGoldUp;
         bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
 
@@ -85,7 +85,7 @@ public class EquipSkillManager : MonoBehaviour
             Debug.Log("대상 skillId 없음.");
         }
 
-        RewardButton.instance.SetEquipLuckyGoldUp(newEquipLuckyGoldUp);
+        QuestManager.instance.SetEquipLuckyGoldUp(newEquipLuckyGoldUp);
         Debug.Log($"추가 골드 두배 획득 확률 업!: {newEquipLuckyGoldUp}");
     }
     

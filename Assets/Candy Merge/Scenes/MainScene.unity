@@ -6313,6 +6313,12 @@ MonoBehaviour:
   happyLevel: {fileID: 4961331737653602102}
   specialQuestProbability: 15
   luckyExperienceUpProbability: 0
+  goldIncreaseRate: 0
+  maxGoldIncreaseRate: 30
+  equipGoldIncreaseRate: 0
+  equipLuckyGoldProbability: 0
+  luckyGoldProbability: 0
+  maxLuckyGoldProbability: 40
 --- !u!1 &4053359211317095527
 GameObject:
   m_ObjectHideFlags: 0
@@ -7265,14 +7271,13 @@ MonoBehaviour:
   candyController: {fileID: 5628353824016411593}
   boxManager: {fileID: 749087271}
   currencyManager: {fileID: 1365960799557702912}
-  decreaseFilltime: 0.5
   increaseLuckyCreate: 0.5
+  decreaseFilltime: 0.5
   increaseMaxCandies: 1
   increaseBaseLevel: 1
   increasePassiveAutoCreateSpeed: 0.1
   increaseGoldUp: 0.2
   increaseLuckyGold: 0.2
-  costMultiplier: 2
   LuckyCreateUpCost: 800
   CreateSpeedUpCost: 1000
   RemoveLockedCost: 1000
@@ -7289,6 +7294,14 @@ MonoBehaviour:
   passiveAutoCreateSpeedLevel: 1
   goldUpLevel: 1
   luckyGoldLevel: 1
+  maxLuckyCreateUpgradeLevel: 40
+  maxCreateSpeedUpgradeLevel: 5
+  maxRemoveLockedUpgradeLevel: 33
+  maxCandiesUpgradeLevel: 30
+  maxCandyLevelUpgradeLevel: 57
+  maxPassiveAutoCreateSpeedUpgradeLevel: 100
+  maxGoldUpUpgradeLevel: 100
+  maxLuckyGoldUpgradeLevel: 150
 --- !u!114 &7592651654139907156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8206,14 +8219,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1347792437273661965, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 220
-      objectReference: {fileID: 0}
-    - target: {fileID: 1347792437273661965, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 75
-      objectReference: {fileID: 0}
     - target: {fileID: 1460393147172253561, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8862,10 +8867,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6043894829183004120, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 6b1dafead04104622804ebc0c7d73173, type: 3}
     - target: {fileID: 6044858165385867035, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
