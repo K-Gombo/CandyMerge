@@ -14,7 +14,12 @@ public class GachaManager : MonoBehaviour
     public GachaUIManager GachaUIManager; // GachaUIManager에 대한 참조 추가
     
     public Animator chestGachaAnimator;
-    public GameObject gachaEquipment;
+    public GameObject mask;
+    private GameObject equipmentClone; // 장비 복사본 저장
+    
+    private GameObject lastCreatedEquip;
+
+
     
 
     // 범위와 확률을 저장하는 딕셔너리
@@ -45,8 +50,19 @@ public class GachaManager : MonoBehaviour
         }
     }
     
-
+    void Start()
+    {
+        // 이벤트 구독
+        equipmentManager.OnEquipCreated += EquipCreated;
+    }
     
+    void EquipCreated(GameObject newEquip)
+    {
+        lastCreatedEquip = newEquip;
+    }
+
+
+
 
     // MixBox에 캔디가 있는지 확인하고 있다면 원래 Box로 이동
     public bool CheckCandiesExistInMixBox()
@@ -167,31 +183,38 @@ public class GachaManager : MonoBehaviour
     {
         if (CheckCandiesCount())
         {
+            // PlayTrigger가 시작되기 전에 클론 생성
+            int totalLevel = GachaUIManager.totalLevelSum; // GachaUIManager에서 캔디 총합 레벨을 가져옴
+            float[] rankProbabilities = GetRankProbabilities(totalLevel);
+            equipmentManager.CreateEquipPrefab(equipSpawnLocation, rankProbabilities);
+        
+            if (lastCreatedEquip == null)
+            {
+                return;
+            }
+            GameObject clone = Instantiate(lastCreatedEquip, mask.transform.position, Quaternion.identity, mask.transform);
+    
+            // 클론의 크기를 원본의 1.2배로 설정
+            clone.transform.localScale = lastCreatedEquip.transform.localScale * 1.2f;
+            
+
+            // 애니메이션 트리거 설정
             chestGachaAnimator.SetTrigger("PlayTrigger");
 
-            StartCoroutine(WaitForAnimationToEnd(() =>
+            // 애니메이션이 끝난 후에 할 일
+            StartCoroutine(WaitForAnimationToEnd(() => 
             {
-                int totalLevel = GachaUIManager.totalLevelSum;
-
-                float[] rankProbabilities = GetRankProbabilities(totalLevel);
-
-                equipmentManager.CreateEquipPrefab(equipSpawnLocation, rankProbabilities);
-
-                GameObject createdEquip = equipmentManager.GetLastCreatedEquip();
-
-                // 새로운 게임 오브젝트를 생성하고 컴포넌트를 복사합니다.
-                GameObject gachaEquipment = Instantiate(createdEquip);
-                
-
+                // 여기서 MixBox에 있는 모든 캔디를 반환
                 ReturnAllCandiesInMixBox();
+
+                // 애니메이션 종료
                 chestGachaAnimator.SetTrigger("ExitTrigger");
             }));
         }
     }
 
 
-
-
+    
     
     private IEnumerator WaitForAnimationToEnd(Action callback)
     {

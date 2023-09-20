@@ -666,6 +666,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &218759641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6125348203496064161, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+  m_PrefabInstance: {fileID: 9102584590486264801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &227661523 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9065823493399407256, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
@@ -3678,6 +3683,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581751441}
   m_CullTransparentMesh: 1
+--- !u!95 &1586375598 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6542697299173688044, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+  m_PrefabInstance: {fileID: 9102584590486264801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1628447771
 GameObject:
   m_ObjectHideFlags: 0
@@ -5858,8 +5868,8 @@ MonoBehaviour:
   equipSpawnLocation: {fileID: 1373033894}
   candyManager: {fileID: 515677172727006469}
   GachaUIManager: {fileID: 1192532030053063347}
-  chestGachaAnimator: {fileID: 0}
-  gachaEquipment: {fileID: 0}
+  chestGachaAnimator: {fileID: 1586375598}
+  mask: {fileID: 218759641}
 --- !u!1001 &5265937124601844145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7701,10 +7711,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072756118976376500, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3142305396832628123, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3180358961602571669, guid: a119303524bd24dc48446f5232e91ec6, type: 3}

@@ -34,8 +34,11 @@ public class EquipmentManager : MonoBehaviour
     public Dictionary<Rank, Rank> rankUpMap;
     public GameObject[] equipSlotBoxes;
     public GameObject[] equipSlotBoxesImage;
-    private GameObject lastCreatedEquip;  // 마지막으로 생성된 장비를 저장할 변수
+    
+    public delegate void EquipCreatedHandler(GameObject newEquip);
+    public event EquipCreatedHandler OnEquipCreated;
 
+    
     
     
     
@@ -282,30 +285,6 @@ public class EquipmentManager : MonoBehaviour
     }
     
     
-    public void ApplyEquipVisuals(EquipmentStatus equipComponent, Equip selectedEquip, Rank chosenRank)
-    {
-        // 장비에 따라 스프라이트 설정
-        if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
-        {
-            equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
-        }
-        // 랭크에 따라 배경 컬러 설정
-        if (rankToColorMap.ContainsKey(chosenRank))
-        {
-            equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
-            equipComponent.levelCircleComponent.color = rankToColorMap[chosenRank];
-            equipComponent.slotBarComponent.color = rankToColorMap[chosenRank];
-        }
-
-        // SlotType에 따라 슬롯 스프라이트 설정
-        if (slotToSpriteMap.ContainsKey(equipComponent.slotType))
-        {
-            equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
-        }
-    }
-
-    
-    
     public void CreateEquipPrefab(Transform parentTransform, float[] rankProbabilities)
     {
         
@@ -345,6 +324,8 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.skillRanks = selectedEquip.skillRanks;
             equipComponent.equipRank = chosenRank;
             equipComponent.equipExplain = selectedEquip.equipExplain;
+            
+            OnEquipCreated?.Invoke(newEquip);
 
             for (int i = 0; i < 4; i++)
             {
@@ -356,7 +337,24 @@ public class EquipmentManager : MonoBehaviour
                     equipComponent.skillPoints[i] = equipSkill.skillPoint;
                 }
             }
-            ApplyEquipVisuals(equipComponent, selectedEquip, chosenRank);
+            // 장비에 따라 스프라이트 설정
+            if (equipNameToSpriteMap.ContainsKey(selectedEquip.equipName))
+            {
+                equipComponent.imageComponent.sprite = equipNameToSpriteMap[selectedEquip.equipName];
+            }
+            // 랭크에 따라 배경 컬러 설정
+            if (rankToColorMap.ContainsKey(chosenRank))
+            {
+                equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
+                equipComponent.levelCircleComponent.color = rankToColorMap[chosenRank];
+                equipComponent.slotBarComponent.color = rankToColorMap[chosenRank];
+            }
+
+            // SlotType에 따라 슬롯 스프라이트 설정
+            if (slotToSpriteMap.ContainsKey(equipComponent.slotType))
+            {
+                equipComponent.slotImageComponent.sprite = slotToSpriteMap[equipComponent.slotType];
+            }
            
             if (levelDataMap.ContainsKey(chosenRank.ToString()))
             {
@@ -370,16 +368,8 @@ public class EquipmentManager : MonoBehaviour
                 equipComponent.upgradeGoldCost = levelData.upgradeDefaultGoldCost;
                 
                 SetRankLevelSlotActive(equipComponent.rankLevel ,equipComponent.rankLevelSlot);
-                
-                
             }
-            lastCreatedEquip = newEquip; 
         }
-    }
-    
-    public GameObject GetLastCreatedEquip()
-    {
-        return lastCreatedEquip;
     }
     
     
