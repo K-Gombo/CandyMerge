@@ -32,6 +32,7 @@ public class DataController : MonoBehaviour
         Upgrade_passiveAutoCreateSpeedLevel_Load();
         Upgrade_goldUpLevel_Load();
         Upgrade_luckyGoldLevel_Load();
+        EquipmentManager.instance.LoadEquipData();
 
 
         HappyLevel.instance.InitUI();

@@ -54,6 +54,8 @@ public class EquipmentStatus : MonoBehaviour
     void Start()
         {
             EquipButton = GetComponent<Button>(); // Button 컴포넌트 가져오기
+
+        if (EquipButton == null) return;
             EquipButton.onClick.AddListener(() => EquipmentController.instance.OnEquipmentClick(this));
             UpdateLevelUI();
         }

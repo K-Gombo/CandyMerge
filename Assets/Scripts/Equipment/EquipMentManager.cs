@@ -39,8 +39,11 @@ public class EquipmentManager : MonoBehaviour
     
     public delegate void EquipCreatedHandler(GameObject newEquip);
     public event EquipCreatedHandler OnEquipCreated;
-    
-    
+
+    List<int> allEquipIds = new List<int>();
+
+    public Transform equipSpawnLocation; // 장비가 생성될 위치
+
     // 장비 등급을 나타내는 enum
     public enum Rank
     { F,D,C,B,A,S,SS,C1,B1,A1,A2,S1,S2,SS1,SS2,SS3}
@@ -64,6 +67,7 @@ public class EquipmentManager : MonoBehaviour
         public Rank[] skillRanks = new Rank[4];
         public string equipExplain;
         public Rank equipRank; // 랜덤으로 할당될 장비 등급
+        public bool isEquiped;
     }
     
     // EquipLevelData를 저장할 클래스
@@ -323,7 +327,12 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.skillRanks = selectedEquip.skillRanks;
             equipComponent.equipRank = chosenRank;
             equipComponent.equipExplain = selectedEquip.equipExplain;
-            
+            equipComponent.isEquipped = selectedEquip.isEquiped;
+
+            allEquipIds.Add(equipComponent.equipId);
+
+            SaveEquipData(equipComponent);
+
             OnEquipCreated?.Invoke(newEquip);
 
             for (int i = 0; i < 4; i++)
@@ -370,8 +379,7 @@ public class EquipmentManager : MonoBehaviour
             }
         }
     }
-    
-    
+
     public static Dictionary<Rank, int> maxLevelsPerRank = new Dictionary<Rank, int>
     {
         { Rank.F, 0 },
@@ -545,7 +553,7 @@ public class EquipmentManager : MonoBehaviour
         {Rank.SS2, 81.88f},
         {Rank.SS3, 98.6f},
     };
-    
+
     public float GetNextGoldIncrement(Rank currentRank)
     {
         Rank nextRank = GetNextRank(currentRank);
@@ -812,9 +820,117 @@ public class EquipmentManager : MonoBehaviour
 
 
     }
-    
-    
-    
+
+    public GameObject mask;
+
+
+    // 다른 멤버 변수 및 메서드 정의
+
+    // 장비 정보를 저장하고 불러오는 ES3 사용 예제
+    void SaveEquipData(EquipmentStatus equipData)
+    {
+        // 장비 데이터 저장
+        ES3.Save("Equip_" + equipData.equipId, equipData);
+        ES3.Save("AllEquipIds", allEquipIds);
+    }
+
+    public void LoadEquipData()
+    {
+        allEquipIds = ES3.Load("AllEquipIds", new List<int>());
+        // 모든 장비 ID 순회
+        foreach (int equipId in allEquipIds)
+        {
+            if (ES3.KeyExists("Equip_" + equipId))
+            {
+                // 저장된 장비 데이터 불러오기
+                EquipmentStatus savedEquipData = ES3.Load<EquipmentStatus>("Equip_" + equipId);
+
+                // 불러온 정보를 기반으로 장비 생성 또는 처리
+                GameObject newEquip = CreateEquipFromSavedData(equipSpawnLocation, savedEquipData);
+
+                // 장비를 원하는 위치에 배치 또는 처리
+                // 예를 들어, 원하는 위치에 장비를 배치하려면 다음과 같이 하면 됩니다.
+                //newEquip.transform.position = desiredPosition;
+
+                var clone = Instantiate(newEquip, mask.transform.position, UnityEngine.Quaternion.identity, mask.transform);
+                clone.transform.localScale = newEquip.transform.localScale * 1.2f;
+
+
+                if (savedEquipData.isEquipped)
+                    EquipmentController.instance.OnEquipmentClick(savedEquipData);
+            }
+        }
+    }
+
+
+    public GameObject CreateEquipFromSavedData(Transform parentTransform, EquipmentStatus savedEquipData)
+    {
+        // 저장된 랭크 정보 사용
+        Rank chosenRank = savedEquipData.equipRank;
+
+        // 장비 프리팹을 풀에서 가져옴
+        GameObject newEquip = GetEquipFromPool();
+        newEquip.transform.SetParent(parentTransform, false);
+
+        // 생성된 프리팹에 Equip 정보를 할당
+        EquipmentStatus equipComponent = newEquip.GetComponent<EquipmentStatus>();
+        if (equipComponent != null)
+        {
+            equipComponent.equipId = savedEquipData.equipId;
+            equipComponent.slotType = savedEquipData.slotType;
+            equipComponent.equipName = savedEquipData.equipName;
+            equipComponent.skillIds = savedEquipData.skillIds;
+            equipComponent.skillRanks = savedEquipData.skillRanks;
+            equipComponent.equipRank = chosenRank;
+            equipComponent.equipExplain = savedEquipData.equipExplain;
+            equipComponent.isEquipped = savedEquipData.isEquipped;
+
+            // 장비 생성 이벤트 호출
+            OnEquipCreated?.Invoke(newEquip);
+
+            // 스킬 정보 할당
+            for (int i = 0; i < 4; i++)
+            {
+                if (equipSkillManager.skillMap.ContainsKey(savedEquipData.skillIds[i]))
+                {
+                    EquipSkill equipSkill = equipSkillManager.skillMap[savedEquipData.skillIds[i]];
+                    equipComponent.skillNames[i] = equipSkill.skillName;
+                    equipComponent.skillPoints[i] = equipSkill.skillPoint;
+                }
+            }
+
+            // 장비 이름에 따른 스프라이트 설정
+            if (equipNameToSpriteMap.ContainsKey(savedEquipData.equipName))
+            {
+                equipComponent.imageComponent.sprite = equipNameToSpriteMap[savedEquipData.equipName];
+            }
+
+            // 랭크에 따른 배경 색상 설정
+            if (rankToColorMap.ContainsKey(chosenRank))
+            {
+                equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
+                equipComponent.levelCircleComponent.color = rankToColorMap[chosenRank];
+                equipComponent.slotBarComponent.color = rankToColorMap[chosenRank];
+            }
+
+            // 랭크에 따른 슬롯 스프라이트 설정
+            if (levelDataMap.ContainsKey(chosenRank.ToString()))
+            {
+                EquipLevelData levelData = levelDataMap[chosenRank.ToString()];
+                equipComponent.equipLevel = levelData.startLevel;
+                equipComponent.maxEquipLevel = levelData.maxLevel;
+                equipComponent.rankLevel = 0;
+                equipComponent.goldIncrement = levelData.startGoldGainIncrement;
+                equipComponent.upgradeGoldIncrement = levelData.upgradeGoldGainIncrement;
+                equipComponent.maxGoldIncrement = levelData.maxGoldGainIncrement;
+                equipComponent.upgradeGoldCost = levelData.upgradeDefaultGoldCost;
+
+                // 랭크 레벨 슬롯 활성화
+                SetRankLevelSlotActive(equipComponent.rankLevel, equipComponent.rankLevelSlot);
+            }
+        }
+
+        return newEquip;
+    }
+
 }
-
-
