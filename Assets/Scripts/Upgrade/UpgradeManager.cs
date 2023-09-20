@@ -45,14 +45,14 @@ public class UpgradeManager : MonoBehaviour
     public BigInteger currentLuckyGoldUpCost;
     
     // 각 업그레이드의 레벨
-    public int luckyCreateLevel = 1;
-    public int createSpeedLevel = 1;
-    public int removeLockedLevel = 1;
-    public int maxCandiesLevel = 1;
-    public int candyLevel = 1;
-    public int passiveAutoCreateSpeedLevel = 1;
-    public int goldUpLevel = 1;
-    public int luckyGoldLevel = 1;
+    public int luckyCreateLevel = 0;
+    public int createSpeedLevel = 0;
+    public int removeLockedLevel = 0;
+    public int maxCandiesLevel = 0;
+    public int candyLevel = 0;
+    public int passiveAutoCreateSpeedLevel = 0;
+    public int goldUpLevel = 0;
+    public int luckyGoldLevel = 0;
     
     private void Start()
     {

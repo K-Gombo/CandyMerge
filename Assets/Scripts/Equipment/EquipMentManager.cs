@@ -34,6 +34,8 @@ public class EquipmentManager : MonoBehaviour
     public Dictionary<Rank, Rank> rankUpMap;
     public GameObject[] equipSlotBoxes;
     public GameObject[] equipSlotBoxesImage;
+    public Text equipScoreText;
+    public int totalEquipScore = 0;
     
     public delegate void EquipCreatedHandler(GameObject newEquip);
     public event EquipCreatedHandler OnEquipCreated;
@@ -423,6 +425,27 @@ public class EquipmentManager : MonoBehaviour
         return currentRank; // 목록에 없는 등급은 그대로 반환
     }
     
+    
+    public static Dictionary<Rank, int> RankEquipScroe = new Dictionary<Rank, int>  //랭크별 장비 장착점수
+    {
+        { Rank.F, 1 },
+        { Rank.D, 2 },
+        { Rank.C, 3 },
+        { Rank.C1, 3 },
+        { Rank.B, 4 },
+        { Rank.B1, 4 },
+        { Rank.A, 5 },
+        { Rank.A1, 5 },
+        { Rank.A2, 5 },
+        { Rank.S, 6 },
+        { Rank.S1, 6 },
+        { Rank.S2, 6 },
+        { Rank.SS, 7 },
+        { Rank.SS1, 7 },
+        { Rank.SS2, 7 },
+        { Rank.SS3, 7 }
+    };
+    
     public void UpdateRankLevelOnMerge()
     {
         // EquipmentController의 equipMixBoxes를 가져옵니다.
@@ -691,54 +714,62 @@ public class EquipmentManager : MonoBehaviour
     }
 
     public void EquipmentSlotEquip(EquipmentStatus equipmentStatus)
+{
+    if (equipmentStatus == null) return;
+
+    // 원래의 부모와 크기를 저장
+    equipmentStatus.originalParent = equipmentStatus.transform.parent;
+    equipmentStatus.originalScale = equipmentStatus.transform.localScale;
+
+    int slotIndex = (int) equipmentStatus.slotType;
+    if (slotIndex >= 0 && slotIndex < equipSlotBoxes.Length)
     {
-        if (equipmentStatus == null) return;
-
-        // 원래의 부모와 크기를 저장
-        equipmentStatus.originalParent = equipmentStatus.transform.parent;
-        equipmentStatus.originalScale = equipmentStatus.transform.localScale;
-
-        int slotIndex = (int) equipmentStatus.slotType;
-        if (slotIndex >= 0 && slotIndex < equipSlotBoxes.Length)
+        // 해당 슬롯에 이미 장비가 장착되어 있는지 확인
+        if (equipSlotBoxes[slotIndex].transform.childCount > 0)
         {
-            // 해당 슬롯에 이미 장비가 장착되어 있는지 확인
-            if (equipSlotBoxes[slotIndex].transform.childCount > 0)
+            // 이미 장착된 장비를 해제
+            EquipmentStatus equippedItem = equipSlotBoxes[slotIndex].transform.GetChild(0).GetComponent<EquipmentStatus>();
+            if (equippedItem)
             {
-                // 이미 장착된 장비를 해제
-                EquipmentStatus equippedItem = equipSlotBoxes[slotIndex].transform.GetChild(0).GetComponent<EquipmentStatus>();
-                if (equippedItem)
-                {
-                    EquipmentSlotUnequip(equippedItem);
-                }
+                EquipmentSlotUnequip(equippedItem);
             }
-
-            // 새로운 장비를 장착
-            equipmentStatus.transform.SetParent(equipSlotBoxes[slotIndex].transform);
-
-            // 장비 크기를 1.3배로 변경
-            equipmentStatus.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
-
-            // 장비를 부모의 정중앙에 위치시킴
-            equipmentStatus.transform.localPosition = Vector3.zero;
-            
-            equipSlotBoxesImage[slotIndex].SetActive(false);
-
-            equipmentStatus.isEquipped = true;
-            
-            EquipGoldUp(equipmentStatus);
-            equipSkillManager.EquipLuckyGoldUp(equipmentStatus);
-            equipSkillManager.EquipLuckyCandyLevelUp(equipmentStatus);
-            equipSkillManager.EquipLuckyExperienceUp(equipmentStatus);
-            equipSkillManager.EquipQuestDiaUp(equipmentStatus);
-            equipSkillManager.EquipLuckyDiaQuestUp(equipmentStatus);
-            equipSkillManager.EquipLuckyCreatKeyUp(equipmentStatus);
-            equipSkillManager.EquipKeyDoubleUp(equipmentStatus);
         }
-        else
+
+        // 새로운 장비를 장착
+        equipmentStatus.transform.SetParent(equipSlotBoxes[slotIndex].transform);
+
+        // 장비 크기를 1.3배로 변경
+        equipmentStatus.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+
+        // 장비를 부모의 정중앙에 위치시킴
+        equipmentStatus.transform.localPosition = Vector3.zero;
+
+        equipSlotBoxesImage[slotIndex].SetActive(false);
+
+        equipmentStatus.isEquipped = true;
+        
+        if (RankEquipScroe.TryGetValue(equipmentStatus.equipRank, out int equipScore))
         {
-            Debug.LogError("Invalid slot index: " + slotIndex);
+            totalEquipScore += equipScore;
         }
+
+        equipScoreText.text = totalEquipScore.ToString();
+
+        EquipGoldUp(equipmentStatus);
+        equipSkillManager.EquipLuckyGoldUp(equipmentStatus);
+        equipSkillManager.EquipLuckyCandyLevelUp(equipmentStatus);
+        equipSkillManager.EquipLuckyExperienceUp(equipmentStatus);
+        equipSkillManager.EquipQuestDiaUp(equipmentStatus);
+        equipSkillManager.EquipLuckyDiaQuestUp(equipmentStatus);
+        equipSkillManager.EquipLuckyCreatKeyUp(equipmentStatus);
+        equipSkillManager.EquipKeyDoubleUp(equipmentStatus);
     }
+    else
+    {
+        Debug.LogError("Invalid slot index: " + slotIndex);
+    }
+}
+
     
     public void EquipGoldUp(EquipmentStatus equipment)
     {
@@ -766,6 +797,12 @@ public class EquipmentManager : MonoBehaviour
         equipSlotBoxesImage[(int)equipmentStatus.slotType].SetActive(true);
         
         equipmentStatus.isEquipped = false;
+        
+        if (RankEquipScroe.TryGetValue(equipmentStatus.equipRank, out int equipScore))
+        {
+            totalEquipScore -= equipScore;
+        }
+        equipScoreText.text = totalEquipScore.ToString();
         
         RewardButton.instance.ResetEquipGoldUp(equipmentStatus.goldIncrement);
         RewardButton.instance.ResetEquipLuckyGoldUp(equipmentStatus);
