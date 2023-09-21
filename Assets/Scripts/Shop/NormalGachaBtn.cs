@@ -54,7 +54,7 @@ public class NormalGachaBtn : MonoBehaviour
                 child.SetParent(equipSpawnLocation);
             }
         });
-
+        EquipmentManager.instance.CheckMixAvailability();
     }
 
 }

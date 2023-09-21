@@ -53,6 +53,7 @@ public class SpecialGachaBtn : MonoBehaviour
             {
                 child.SetParent(equipSpawnLocation);
             }
+            EquipmentManager.instance.CheckMixAvailability();
         });
 
     }

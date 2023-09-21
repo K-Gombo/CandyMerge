@@ -34471,54 +34471,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 202459797}
     m_Modifications:
-    - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 570
-      objectReference: {fileID: 0}
-    - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -610
-      objectReference: {fileID: 0}
     - target: {fileID: 1385771573261780503, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_Name
       value: Panel_Shop
-      objectReference: {fileID: 0}
-    - target: {fileID: 1385771573261780503, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1671211639927934703, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 3281678965574350433, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: candyController
       value: 
       objectReference: {fileID: 5628353824016411593}
-    - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 570
-      objectReference: {fileID: 0}
-    - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -120
-      objectReference: {fileID: 0}
     - target: {fileID: 7921241645711714840, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -35213,10 +35173,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 202459797}
     m_Modifications:
-    - target: {fileID: 964656938249914297, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 994455172579183257, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -35325,34 +35281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Equip
       objectReference: {fileID: 0}
-    - target: {fileID: 7493051836597960836, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8168095094269028169, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1677070640}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288425982547328950, guid: a44552cfcb8cb4ef8801add8022ce354, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35986,6 +35918,7 @@ MonoBehaviour:
   GachaManager: {fileID: 5217358751009958705}
   equipSkillManager: {fileID: 5456166006839367371}
   equipArrangeManager: {fileID: 4304388173809711829}
+  specialGachaBtn: {fileID: 1035155456}
   equipmentStatus: {fileID: 9062808844006152309, guid: 52626865b337749689e41378fa3c3f4a, type: 3}
   poolSize: 40
   equipMentPoolTransform: {fileID: 1095069984}
@@ -36003,6 +35936,7 @@ MonoBehaviour:
   - {fileID: 724946429}
   equipScoreText: {fileID: 4885659583685175075}
   totalEquipScore: 0
+  allEquipMergeResultSpawn: {fileID: 1392105441}
   equipSpawnLocation: {fileID: 1373033894}
   mask: {fileID: 218759641}
 --- !u!114 &7147849547990594848
