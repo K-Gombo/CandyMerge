@@ -502,7 +502,7 @@ public class EquipmentController : MonoBehaviour
             }
         }
         equipGoldIncrementText.text = $"{clickedEquipment.goldIncrement}%";
-        equipLevelStatusText.text = $"레벨 {clickedEquipment.equipLevel}/{clickedEquipment.maxEquipLevel}";
+        equipLevelStatusText.text = $"Level {clickedEquipment.equipLevel}/{clickedEquipment.maxEquipLevel}";
         equipExplainText.text = $"{clickedEquipment.equipExplain}";
 
         for (int i = 0; i < clickedEquipment.skillNames.Length; i++)

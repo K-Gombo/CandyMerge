@@ -693,6 +693,8 @@ public class EquipmentManager : MonoBehaviour
                 // 나머지 로직은 UpdateRankLevelOnMerge 메서드와 유사
                 int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
 
+                allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+                
                 if (mainEquipment.rankLevel >= maxRankLevel)
                 {
                     Rank nextRank = GetNextRank(mainEquipment.equipRank);
@@ -724,6 +726,9 @@ public class EquipmentManager : MonoBehaviour
 
                 mainEquipment.UpdateLevelUI();
 
+                allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+                SaveEquipData(mainEquipment);
+                
                 // 2개의 장비를 풀로 리턴 및 골드 반환
                 for (int i = 1; i <= 2; i++)
                 {
@@ -737,6 +742,7 @@ public class EquipmentManager : MonoBehaviour
                         CurrencyManager.instance.AddCurrency("Gold", otherReturnGoldBigInt);
                     }
 
+                    allEquipIds.Remove(new DataType(otherEquipment.equipId, otherEquipment.equipRank));
                     GameObject originalObj = otherEquipment.gameObject;
                     ReturnEquipToPool(originalObj);
                 }

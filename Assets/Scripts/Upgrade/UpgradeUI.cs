@@ -213,8 +213,4 @@ public class UpgradeUI : MonoBehaviour
 
     }
     
-    
-    
-    
-    
 }
