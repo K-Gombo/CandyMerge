@@ -16,7 +16,7 @@ public class GiftBoxController : MonoBehaviour
     public Text createCandyText;
     public int candiesRemaining = 0;
     private int maxCandies = 10;
-    public int realMaxCandies = 25;
+    public int realMaxCandies = 40;
     private Coroutine autoCreateCoroutine;
     private Coroutine passiveAutoCreateCoroutine;
     private float lastClickTime = 0f; // 마지막 클릭 시간

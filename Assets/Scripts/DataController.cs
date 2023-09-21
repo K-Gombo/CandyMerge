@@ -168,7 +168,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_luckyCreateLevel_DataLoad()
     {
-        GameData.luckyCreateLevel = ES3.Load("upgrade_luckyCreateLevel", 1);
+        GameData.luckyCreateLevel = ES3.Load("upgrade_luckyCreateLevel", 0);
     }
     public void Upgrade_luckyCreateLevel_Load()
     {
@@ -191,7 +191,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_createSpeedLevel_DataLoad()
     {
-        GameData.createSpeedLevel = ES3.Load("upgrade_createSpeedLevel", 1);
+        GameData.createSpeedLevel = ES3.Load("upgrade_createSpeedLevel", 0);
     }
     public void Upgrade_createSpeedLevel_Load()
     {
@@ -214,7 +214,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_removeLockedLevel_DataLoad()
     {
-        GameData.removeLockedLevel = ES3.Load("upgrade_removeLockedLevel", 1);
+        GameData.removeLockedLevel = ES3.Load("upgrade_removeLockedLevel", 0);
     }
     public void Upgrade_removeLockedLevel_Load()
     {
@@ -240,7 +240,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_maxCandiesLevel_DataLoad()
     {
-        GameData.maxCandiesLevel = ES3.Load("upgrade_maxCandiesLevel", 1);
+        GameData.maxCandiesLevel = ES3.Load("upgrade_maxCandiesLevel", 0);
     }
     public void Upgrade_maxCandiesLevel_Load()
     {
@@ -264,7 +264,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_candyLevel_DataLoad()
     {
-        GameData.candyLevel = ES3.Load("upgrade_candyLevel", 1);
+        GameData.candyLevel = ES3.Load("upgrade_candyLevel", 0);
     }
     public void Upgrade_candyLevel_Load()
     {
@@ -287,7 +287,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_passiveAutoCreateSpeedLevel_DataLoad()
     {
-        GameData.passiveAutoCreateSpeedLevel = ES3.Load("upgrade_passiveAutoCreateSpeedLevel", 1);
+        GameData.passiveAutoCreateSpeedLevel = ES3.Load("upgrade_passiveAutoCreateSpeedLevel", 0);
     }
     public void Upgrade_passiveAutoCreateSpeedLevel_Load()
     {
@@ -311,7 +311,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_goldUpLevel_DataLoad()
     {
-        GameData.goldUpLevel = ES3.Load("upgrade_goldUpLevel", 1);
+        GameData.goldUpLevel = ES3.Load("upgrade_goldUpLevel", 0);
     }
     public void Upgrade_goldUpLevel_Load()
     {
@@ -334,7 +334,7 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_luckyGoldLevel_DataLoad()
     {
-        GameData.luckyGoldLevel = ES3.Load("upgrade_luckyGoldLevel", 1);
+        GameData.luckyGoldLevel = ES3.Load("upgrade_luckyGoldLevel", 0);
     }
     public void Upgrade_luckyGoldLevel_Load()
     {
