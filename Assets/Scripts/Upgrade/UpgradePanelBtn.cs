@@ -7,12 +7,18 @@ public class UpgradePanelBtn : MonoBehaviour
     public List<GameObject> allPanels; // 모든 패널을 관리하는 리스트
     public GameObject UpgradePanel;    // UpgradePanel
     public CandyController candyController;
-    public GachaManager GachaManager;
+    public GachaManager gachaManager;
+    
 
 
     public void OnButtonClick()
-    {
-        bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
+    {   
+        if (gachaManager.isAnimationInProgress) 
+        {
+            return;
+        }
+        
+        bool hasCandiesInMixBox = gachaManager.CheckCandiesExistInMixBox();
 
         SoundManager.Instance.PlaySoundEffect("ButtonLight");
 

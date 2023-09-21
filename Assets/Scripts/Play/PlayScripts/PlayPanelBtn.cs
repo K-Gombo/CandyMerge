@@ -12,14 +12,19 @@ public class PlayPanelBtn : MonoBehaviour
     public GameObject AutoCreateBtn;
     public GachaManager GachaManager;
     public GameObject TrashCan;
-
+    public GachaManager gachaManager;
     private void Start()
     {
         GameManager.instance.DownImage.AddListener(DownImage);
     }
 
     public void OnButtonClick()
-    {
+    {   
+        
+        if (gachaManager.isAnimationInProgress) 
+        {
+            return;
+        }
         bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
 
         SoundManager.Instance.PlaySoundEffect("ButtonLight");

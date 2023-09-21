@@ -13,7 +13,7 @@ public class NormalGachaBtn : MonoBehaviour
     public Transform equipSpawnLocation;
     public Button gachaResultCloseBtn;
     public GameObject gachaResultPanel;
-    private int specialGachaCost = 100;
+    private int normalGachaCost = 80;
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class NormalGachaBtn : MonoBehaviour
             string UserDia = CurrencyManager.instance.GetCurrencyAmount("Dia");
             BigInteger currentDiaAmount = BigInteger.Parse(UserDia);
 
-            if (currentDiaAmount < specialGachaCost)
+            if (currentDiaAmount < normalGachaCost)
             {
                 Debug.Log("다이아가 부족합니다.");
                 return;
@@ -38,7 +38,7 @@ public class NormalGachaBtn : MonoBehaviour
                 equipmentManager.CreateEquipPrefab(equipGachaSpawnLocation, probabilities);
             }
             gachaResultPanel.SetActive(true);
-            CurrencyManager.instance.SubtractCurrency("Dia", specialGachaCost);
+            CurrencyManager.instance.SubtractCurrency("Dia", normalGachaCost);
         });
 
         gachaResultCloseBtn.onClick.AddListener(() =>

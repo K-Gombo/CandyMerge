@@ -9,6 +9,7 @@ public class EquipPanelBtn : MonoBehaviour
     public CandyController candyController;
     public GiftBoxController giftBoxController;
     public EquipmentManager equipmentManager;
+    public GachaManager gachaManager;
     public GameObject GiftBox;
     public GameObject AutoCreateBtn;
     public GachaManager GachaManager;
@@ -17,7 +18,12 @@ public class EquipPanelBtn : MonoBehaviour
 
 
     public void OnButtonClick()
-    {
+    {   
+        if (gachaManager.isAnimationInProgress) 
+        {
+            return;
+        }
+        
         bool hasCandiesInMixBox = GachaManager.CheckCandiesExistInMixBox();
 
         SoundManager.Instance.PlaySoundEffect("ButtonLight");
@@ -27,7 +33,11 @@ public class EquipPanelBtn : MonoBehaviour
         UpImage();
 
         if (hasCandiesInMixBox)
-        {
+        {   
+            if (gachaManager.isAnimationInProgress) 
+            {
+                return;
+            }
             candyController.MoveToRandomBox();  // 캔디가 있다면 원래 박스로 이동
         }
         else

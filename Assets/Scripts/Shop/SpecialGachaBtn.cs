@@ -12,7 +12,7 @@ public class SpecialGachaBtn : MonoBehaviour
     public Transform equipSpawnLocation;
     public Button gachaResultCloseBtn;
     public GameObject equipResultPanel;
-    private int specialGachaCost = 1000;
+    private int specialGachaCost = 200;
 
     private void Start()
     {

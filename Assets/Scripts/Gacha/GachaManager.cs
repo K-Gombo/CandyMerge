@@ -13,7 +13,6 @@ public class GachaManager : MonoBehaviour
     public Transform equipSpawnLocation; // 장비가 생성될 위치
     public CandyManager candyManager;
     public GachaUIManager GachaUIManager; // GachaUIManager에 대한 참조 추가
-    public EquipArrangeManager equipArrangeManager;
     
     public Animator chestGachaAnimator;
     public GameObject mask;
@@ -24,6 +23,8 @@ public class GachaManager : MonoBehaviour
     public GameObject equipKeyPanel;
     public Text equipGachaKeyCountText;
     public Text equipKeyGachaAvailavleText;
+    
+    public bool isAnimationInProgress = false;
     
     
     // 범위와 확률을 저장하는 딕셔너리
@@ -216,15 +217,11 @@ public class GachaManager : MonoBehaviour
     {
         if (CheckCandiesCount())
         {
+            isAnimationInProgress = true;
             // PlayTrigger가 시작되기 전에 클론 생성
             int totalLevel = GachaUIManager.totalLevelSum; // GachaUIManager에서 캔디 총합 레벨을 가져옴
             float[] rankProbabilities = GetRankProbabilities(totalLevel);
             equipmentManager.CreateEquipPrefab(equipSpawnLocation, rankProbabilities);
-            // 장비의 mixAvailable를 비활성화
-            foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
-            {
-                equipment.mixAvailable.SetActive(false);
-            }
             
             if (lastCreatedEquip == null)
             {
@@ -247,6 +244,7 @@ public class GachaManager : MonoBehaviour
 
                 // 애니메이션 종료
                 chestGachaAnimator.SetTrigger("ExitTrigger");
+                isAnimationInProgress = false; 
             }));
         }
     }
