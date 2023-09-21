@@ -868,8 +868,7 @@ public class EquipmentManager : MonoBehaviour
             }
         }
     }
-
-
+    
     public GameObject CreateEquipFromSavedData(Transform parentTransform, EquipmentStatus savedEquipData)
     {
         // 저장된 랭크 정보 사용

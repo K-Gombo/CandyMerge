@@ -13,6 +13,7 @@ public class EquipmentController : MonoBehaviour
     public static EquipmentController instance;
     public GameObject mixLockedPanel;
     public GameObject equipMixBtn;
+    public GameObject equipAllMixBtn;
     public EquipArrangeManager equipArrangeManager;
     public CurrencyUI currencyUI;
     public GameObject backBtn;
@@ -169,6 +170,7 @@ public class EquipmentController : MonoBehaviour
                 plus.SetActive(false);
                 mixLockedPanel.SetActive(false); 
                 equipMixBtn.SetActive(false);
+                equipAllMixBtn.SetActive(true);
                 equipArrangeManager.SortByRank();
                 equipArrangeBtnGroup.SetActive(true);
                 equipExplain.SetActive(true);
@@ -219,6 +221,7 @@ public class EquipmentController : MonoBehaviour
         equipMixBoxes[1].gameObject.SetActive(false);
         equipMixBoxes[2].gameObject.SetActive(false);
         plus.SetActive(false);
+        equipAllMixBtn.SetActive(true);
         equipExplain.SetActive(true);
         equipNameExplain.SetActive(false);
         equipRankExplain.SetActive(false);
@@ -234,6 +237,7 @@ public class EquipmentController : MonoBehaviour
 
         mixLockedPanel.SetActive(false); 
         equipMixBtn.SetActive(false);
+        equipAllMixBtn.SetActive(false);
         if (equipMixResultBox.childCount > 0)
         {
             Destroy(equipMixResultBox.GetChild(0).gameObject);
@@ -264,6 +268,7 @@ public class EquipmentController : MonoBehaviour
         equipExplain.SetActive(true);
         equipNameExplain.SetActive(false);
         equipRankExplain.SetActive(false);
+        equipAllMixBtn.SetActive(true);
         equipGoldIncrementExpain.SetActive(false);
         equipmentManager.CheckMixAvailability();
         equipArrangeBtnGroup.SetActive(true);
@@ -314,6 +319,7 @@ public class EquipmentController : MonoBehaviour
                 targetParent = equipMixBoxes[0];
                 mixLockedPanel.SetActive(true); 
                 equipMixBtn.SetActive(true); 
+                
                 if (!equipMixBoxes[1].gameObject.activeSelf && !equipMixBoxes[2].gameObject.activeSelf)
                 {
                     ActivateAndMoveBoxes();
@@ -438,6 +444,7 @@ public class EquipmentController : MonoBehaviour
             equipExplain.SetActive(false);
             equipNameExplain.SetActive(true);
             equipRankExplain.SetActive(true);
+            equipAllMixBtn.SetActive(false);
             equipGoldIncrementExpain.SetActive(true);
             EquipExplainUpdate(clickedEquipment);
         }
