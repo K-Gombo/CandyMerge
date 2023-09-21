@@ -25,6 +25,8 @@ public class AdsManager : MonoBehaviour
     private int interstitialRetryAttempt;
     private int rewardedRetryAttempt;
 
+    [SerializeField] OfflineRewardManager offlineRewardManager; 
+
     RewardType currentRewardType;
 
     private void Awake()
@@ -134,7 +136,7 @@ public class AdsManager : MonoBehaviour
     private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
     {
 
-        
+        AdsReward();
 
         // Rewarded ad was displayed and user should receive the reward
         Debug.Log("Rewarded ad received reward");
@@ -177,7 +179,28 @@ public class AdsManager : MonoBehaviour
         }
         ShowRewardedAd();
     }
-    
+
+    void AdsReward()
+    {
+        switch (currentRewardType)
+        {
+            case RewardType.AutoCreate:
+                currentRewardType = RewardType.AutoCreate;
+            break;
+            case RewardType.OffLine:
+                offlineRewardManager.OfflineAdsRewardCleck();
+            break;
+            case RewardType.BoxOpen:
+                currentRewardType = RewardType.BoxOpen;
+            break;
+            case RewardType.LevelUp:
+                currentRewardType = RewardType.LevelUp;
+            break;
+            default:
+                return;
+        }
+    }
+
     #endregion
 
 }
