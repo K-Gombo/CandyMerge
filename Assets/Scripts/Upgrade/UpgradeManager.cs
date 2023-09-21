@@ -23,14 +23,14 @@ public class UpgradeManager : MonoBehaviour
     public float increaseLuckyGold = 0.2f;
     
      
-    public int LuckyCreateUpCost = 800; 
-    public int CreateSpeedUpCost = 1000;
-    public int RemoveLockedCost = 1000;
-    public int MaxCandiesUpCost = 1000;
-    public int CandyLevelUpCost = 800;
-    public int PassiveAutoCreateSpeedUpCost = 900;
-    public int GoldUpCost = 1500;
-    public int LuckyGoldUpCost = 1500;
+    private int luckyCreateUpCost = 1000; 
+    private int createSpeedUpCost = 800;
+    private int removeLockedCost = 1000;
+    private int maxCandiesUpCost = 1000;
+    private int candyLevelUpCost = 1000;
+    private int passiveAutoCreateSpeedUpCost = 1500;
+    private int goldUpCost = 1500;
+    private int luckyGoldUpCost = 2000;
     
     // 각 업그레이드의 현재 비용
     public BigInteger currentLuckyCreateUpCost;
@@ -43,19 +43,19 @@ public class UpgradeManager : MonoBehaviour
     public BigInteger currentLuckyGoldUpCost;
     
     // 각 업그레이드의 레벨
-    public int luckyCreateLevel = 0;
-    public int createSpeedLevel = 0;
-    public int removeLockedLevel = 0;
-    public int maxCandiesLevel = 0;
-    public int candyLevel = 0;
-    public int passiveAutoCreateSpeedLevel = 0;
-    public int goldUpLevel = 0;
-    public int luckyGoldLevel = 0;
+    public int luckyCreateLevel ;
+    public int createSpeedLevel ;
+    public int removeLockedLevel ;
+    public int maxCandiesLevel;
+    public int candyLevel;
+    public int passiveAutoCreateSpeedLevel ;
+    public int goldUpLevel;
+    public int luckyGoldLevel;
     
     //각 업그레이드의 맥스레벨
     public int maxLuckyCreateUpgradeLevel = 40;
     public int maxCreateSpeedUpgradeLevel = 5;
-    public int maxRemoveLockedUpgradeLevel = 33;
+    public int maxRemoveLockedUpgradeLevel = 34;
     public int maxCandiesUpgradeLevel = 30;
     public int maxCandyLevelUpgradeLevel = 57;
     public int maxPassiveAutoCreateSpeedUpgradeLevel = 100;
@@ -67,19 +67,16 @@ public class UpgradeManager : MonoBehaviour
     private void Awake()
     {
         // 초기 비용 설정
-        currentLuckyCreateUpCost = LuckyCreateUpCost;
-        currentCreateSpeedUpCost = CreateSpeedUpCost;
-        currentRemoveLockedCost = RemoveLockedCost;
-        currentMaxCandiesUpCost = MaxCandiesUpCost;
-        currentCandyLevelUpCost = CandyLevelUpCost;
-        currentPassiveAutoCreateSpeedUpCost = PassiveAutoCreateSpeedUpCost;
-        currentGoldUpCost = GoldUpCost;
-        currentLuckyGoldUpCost = LuckyGoldUpCost;
-
-
+        currentLuckyCreateUpCost = luckyCreateUpCost;
+        currentCreateSpeedUpCost = createSpeedUpCost;
+        currentRemoveLockedCost = removeLockedCost;
+        currentMaxCandiesUpCost = maxCandiesUpCost;
+        currentCandyLevelUpCost = candyLevelUpCost;
+        currentPassiveAutoCreateSpeedUpCost = passiveAutoCreateSpeedUpCost;
+        currentGoldUpCost = goldUpCost;
+        currentLuckyGoldUpCost = luckyGoldUpCost;
+        
     }
-    
-
     
     public void LuckyCreateUp()
     {
@@ -102,6 +99,16 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
+    
+    public static Dictionary<int, BigInteger> createSpeedCostDictionary = new Dictionary<int, BigInteger>
+    {
+        { 1, 800 },  // createSpeedLevel이 0 -> 1이 될 때의 비용
+        { 2, 2000 },  
+        { 3, 5000 },
+        { 4, 12000 },
+        { 5, 30000 }
+    };
+    
     public void CreateSpeedUp()
     {
         if (createSpeedLevel >= maxCreateSpeedUpgradeLevel)
@@ -110,19 +117,31 @@ public class UpgradeManager : MonoBehaviour
             return;
         }
 
-        if (currencyManager.SubtractCurrency("Gold", currentCreateSpeedUpCost))
+        int nextLevel = createSpeedLevel + 1;
+
+        if (createSpeedCostDictionary.ContainsKey(nextLevel))
         {
-            float currentFillTime = giftBoxController.GetFillTime();
-            float newFillTime = currentFillTime - decreaseFilltime;
-            giftBoxController.SetFillTime(newFillTime);
-            createSpeedLevel++;
-            Debug.Log($"생산 쿨타임 감소!:{newFillTime}");
+            BigInteger requiredCost = createSpeedCostDictionary[nextLevel];
+
+            if (currencyManager.SubtractCurrency("Gold", requiredCost))
+            {
+                float currentFillTime = giftBoxController.GetFillTime();
+                float newFillTime = currentFillTime - decreaseFilltime;
+                giftBoxController.SetFillTime(newFillTime);
+                createSpeedLevel = nextLevel;
+                Debug.Log($"생산 쿨타임 감소! 현재 레벨: {createSpeedLevel}, 새로운 쿨타임: {newFillTime}");
+            }
+            else
+            {
+                Debug.Log("골드가 부족합니다.");
+            }
         }
         else
         {
-            Debug.Log("골드가 부족합니다.");
+            Debug.Log("해당 레벨에 대한 비용 정보가 없습니다.");
         }
     }
+
     
    public void RemoveLocked() // Locked 오브젝트 해제 보유 캔디 증가 업 (스킬3)
 {

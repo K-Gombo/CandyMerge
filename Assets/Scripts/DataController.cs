@@ -171,7 +171,7 @@ public class DataController : MonoBehaviour
 
 
 
-        upgradeManager.RemoveLocked(GameData.removeLockedLevel - 1);
+        upgradeManager.RemoveLocked(GameData.removeLockedLevel);
         
     }
 
