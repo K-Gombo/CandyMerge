@@ -511,9 +511,7 @@ public void RemoveLocked(int count)
     Debug.Log($"{count}개의 Locked 오브젝트가 제거되었습니다! 남은 골드: {currencyManager.GetCurrencyAmount("Gold")}");
 
 }
-
-
-
+    
 public void MaxCandiesUp(int count)
 {
     int currentMaxCandies = giftBoxController.GetMaxCandies();
