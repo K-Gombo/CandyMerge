@@ -19,7 +19,6 @@ public class EquipArrangeManager : MonoBehaviour
                 equipList.Add(status);
             }
         }
-        ES3.Save("TestSave " , equipList);
     }
     
 

@@ -1,13 +1,33 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
+using static EquipmentManager;
 using Vector3 = UnityEngine.Vector3;
 
+
+
 public class EquipmentManager : MonoBehaviour
-{   
+{
+    [Serializable]
+    public struct DataType
+    {
+        public int id;
+        public Rank rank;
+
+        public DataType(int id, Rank rank)
+        {
+            this.id = id;
+            this.rank = rank;
+        }
+    }
+
+
+
+
     public GameObject equipPrefab;
     public static EquipmentManager instance;
     public TextAsset CsvData { get; set; }
@@ -42,7 +62,8 @@ public class EquipmentManager : MonoBehaviour
     public delegate void EquipCreatedHandler(GameObject newEquip);
     public event EquipCreatedHandler OnEquipCreated;
 
-    List<int> allEquipIds = new List<int>();
+    List<DataType> allEquipIds = new List<DataType>();
+    //Hashtable asd = new Hashtable;
 
     public Transform equipSpawnLocation; // 장비가 생성될 위치
 
@@ -331,7 +352,7 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.equipExplain = selectedEquip.equipExplain;
             equipComponent.isEquipped = selectedEquip.isEquiped;
 
-            allEquipIds.Add(equipComponent.equipId);
+            allEquipIds.Add(new DataType(equipComponent.equipId, chosenRank));
 
             SaveEquipData(equipComponent);
 
@@ -465,7 +486,9 @@ public class EquipmentManager : MonoBehaviour
         if (areAllEquipMixBoxesFilled)
         {
             EquipmentStatus mainEquipment = equipMixBoxes[0].GetChild(0).GetComponent<EquipmentStatus>().originalEquipment;
-        
+
+            allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+
             int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
 
             if (mainEquipment.rankLevel >= maxRankLevel)
@@ -498,12 +521,20 @@ public class EquipmentManager : MonoBehaviour
             }
             
             mainEquipment.UpdateLevelUI();
-            
+
+            allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+            SaveEquipData(mainEquipment);
+
             // EquipMixbox[1]과 EquipMixbox[2]의 원본을 풀로 리턴하고 클론 제거
             for (int i = 1; i <= 2; i++)
             {
                 GameObject cloneObj = equipMixBoxes[i].GetChild(0).gameObject;
-                GameObject originalObj = cloneObj.GetComponent<EquipmentStatus>().originalEquipment.gameObject;
+                EquipmentStatus cloneStatus = cloneObj.GetComponent<EquipmentStatus>();
+                GameObject originalObj = cloneStatus.originalEquipment.gameObject;
+
+                allEquipIds.Remove(new DataType(cloneStatus.equipId, cloneStatus.equipRank));
+                Debug.Log("아니 너 뭐 돼?" +allEquipIds.Count);
+                DeleteEquipData(cloneStatus);
 
                 Destroy(cloneObj);
                 ReturnEquipToPool(originalObj);
@@ -841,16 +872,24 @@ public class EquipmentManager : MonoBehaviour
         ES3.Save("AllEquipIds", allEquipIds);
     }
 
+    void DeleteEquipData(EquipmentStatus equipData)
+    {
+        ES3.Save("AllEquipIds", allEquipIds);
+    }
+
     public void LoadEquipData()
     {
-        allEquipIds = ES3.Load("AllEquipIds", new List<int>());
+        allEquipIds = ES3.Load("AllEquipIds", new List<DataType>());
         // 모든 장비 ID 순회
-        foreach (int equipId in allEquipIds)
+        foreach (var equipId in allEquipIds)
         {
-            if (ES3.KeyExists("Equip_" + equipId))
+            if (ES3.KeyExists("Equip_" + equipId.id))
             {
+
                 // 저장된 장비 데이터 불러오기
-                EquipmentStatus savedEquipData = ES3.Load<EquipmentStatus>("Equip_" + equipId);
+                EquipmentStatus savedEquipData = ES3.Load<EquipmentStatus>("Equip_" + equipId.id);
+
+                savedEquipData.equipRank = equipId.rank;
 
                 // 불러온 정보를 기반으로 장비 생성 또는 처리
                 GameObject newEquip = CreateEquipFromSavedData(equipSpawnLocation, savedEquipData);
@@ -861,6 +900,8 @@ public class EquipmentManager : MonoBehaviour
 
                 var clone = Instantiate(newEquip, mask.transform.position, UnityEngine.Quaternion.identity, mask.transform);
                 clone.transform.localScale = newEquip.transform.localScale * 1.2f;
+
+                CheckUI(clone.GetComponent<EquipmentStatus>());
             }
         }
     }
@@ -910,6 +951,7 @@ public class EquipmentManager : MonoBehaviour
             // 랭크에 따른 배경 색상 설정
             if (rankToColorMap.ContainsKey(chosenRank))
             {
+                Color newColor = rankToColorMap[equipComponent.equipRank];
                 equipComponent.backgroundImageComponent.color = rankToColorMap[chosenRank];
                 equipComponent.levelCircleComponent.color = rankToColorMap[chosenRank];
                 equipComponent.slotBarComponent.color = rankToColorMap[chosenRank];
@@ -940,4 +982,27 @@ public class EquipmentManager : MonoBehaviour
         return newEquip;
     }
 
+
+    void CheckUI(EquipmentStatus mainEquipment)
+    {
+        SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
+
+        // 새로운 등급의 시작 레벨과 최대 레벨을 설정
+        if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
+        {
+            EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
+            mainEquipment.equipLevel = levelData.startLevel;
+        }
+
+        // 등급에 따라 색상 업데이트
+        if (rankToColorMap.ContainsKey(mainEquipment.equipRank))
+        {
+            Color newColor = rankToColorMap[mainEquipment.equipRank];
+            mainEquipment.backgroundImageComponent.color = newColor;
+            mainEquipment.levelCircleComponent.color = newColor;
+            mainEquipment.slotBarComponent.color = newColor;
+        }
+
+        mainEquipment.UpdateLevelUI();
+    }
 }

@@ -35,7 +35,7 @@ public class OfflineRewardManager : MonoBehaviour
             //Debug.Log(string.Format("{0} Days {1} Hours {2} Minutes {3} Seconds Ago", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
             Debug.Log(GetCurrentRewardTimeAsString());
 
-            if (totalAccumulatedTime.Seconds >= 1)
+            if (totalAccumulatedTime.Hours >= 1)
             {
                 GetOfflineReward();
             }
@@ -51,7 +51,7 @@ public class OfflineRewardManager : MonoBehaviour
 
     void GetOfflineReward()
     {
-        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Seconds;
+        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Hours;
         Debug.Log("얼마 나왔니? : " + goldReward);
         goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(goldReward.ToString());
         offlineRewardPanel.SetActive(true);
