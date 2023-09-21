@@ -175,7 +175,7 @@ public class DataController : MonoBehaviour
         Upgrade_luckyCreateLevel_DataLoad();
         upgradeManager.luckyCreateLevel = GameData.luckyCreateLevel;
 
-        upgradeManager.LuckyCreateUp();
+        upgradeManager.LuckyCreateUp(GameData.luckyCreateLevel);
     }
 
 
@@ -198,7 +198,7 @@ public class DataController : MonoBehaviour
         Upgrade_createSpeedLevel_DataLoad();
         upgradeManager.createSpeedLevel = GameData.createSpeedLevel;
 
-        upgradeManager.CreateSpeedUp();
+        upgradeManager.CreateSpeedUp(GameData.createSpeedLevel);
     }
 
 
@@ -248,7 +248,7 @@ public class DataController : MonoBehaviour
         upgradeManager.maxCandiesLevel = GameData.maxCandiesLevel;
 
 
-        upgradeManager.MaxCandiesUp();
+        upgradeManager.MaxCandiesUp(GameData.maxCandiesLevel);
     }
 
 
@@ -271,7 +271,7 @@ public class DataController : MonoBehaviour
         Upgrade_candyLevel_DataLoad();
         upgradeManager.candyLevel = GameData.candyLevel;
 
-        upgradeManager.CandyLevelUp();
+        upgradeManager.CandyLevelUp(GameData.candyLevel);
     }
 
 
@@ -295,7 +295,7 @@ public class DataController : MonoBehaviour
         upgradeManager.passiveAutoCreateSpeedLevel = GameData.passiveAutoCreateSpeedLevel;
 
 
-        upgradeManager.PassiveAutoCreateSpeedUp();
+        upgradeManager.PassiveAutoCreateSpeedUp(GameData.passiveAutoCreateSpeedLevel);
     }
 
 
@@ -318,7 +318,7 @@ public class DataController : MonoBehaviour
         Upgrade_goldUpLevel_DataLoad();
         upgradeManager.goldUpLevel = GameData.goldUpLevel;
 
-        upgradeManager.GoldUp();
+        upgradeManager.GoldUp(GameData.goldUpLevel);
     }
 
 
@@ -341,6 +341,6 @@ public class DataController : MonoBehaviour
         Upgrade_luckyGoldLevel_DataLoad();
         upgradeManager.luckyGoldLevel = GameData.luckyGoldLevel;
 
-        upgradeManager.LuckyGoldUp();
+        upgradeManager.LuckyGoldUp(GameData.luckyGoldLevel);
     }
 }
