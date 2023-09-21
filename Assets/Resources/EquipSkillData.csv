@@ -1,36 +1,36 @@
 equip_skill_id,equip_skill_name,equip_skill_point,equip_skill_rank
-1,오프라인 보상,1%,C
-2,오프라인 보상,3%,B
-3,오프라인 보상,5%,A
-4,오프라인 보상,7%,S
-5,오프라인 보상,9%,SS
-6,골드 두 배 획득 확률,3%,C
-7,골드 두 배 획득 확률,5%,B
-8,골드 두 배 획득 확률,7%,A
-9,골드 두 배 획득 확률,10%,S
-10,골드 두 배 획득 확률,15%,SS
-11,퀘스트 시 행복도가 2배로 증가할 확률,1%,C
-12,퀘스트 시 행복도가 2배로 증가할 확률,2%,B
-13,퀘스트 시 행복도가 2배로 증가할 확률,3%,A
-14,퀘스트 시 행복도가 2배로 증가할 확률,4%,S
-15,퀘스트 시 행복도가 2배로 증가할 확률,5%,SS
-16,캔디 머지 시 레벨이 2개 올라갈 확률,1%,C
-17,캔디 머지 시 레벨이 2개 올라갈 확률,2%,B
-18,캔디 머지 시 레벨이 2개 올라갈 확률,3%,A
-19,캔디 머지 시 레벨이 2개 올라갈 확률,4%,S
-20,캔디 머지 시 레벨이 2개 올라갈 확률,5%,SS
-21,퀘스트 시 다이아를 주는 손님이 올 확률,1%,B
-22,퀘스트 시 다이아를 주는 손님이 올 확률,2%,A
-23,퀘스트 시 다이아를 주는 손님이 올 확률,3%,S
-24,퀘스트 시 다이아를 주는 손님이 올 확률,5%,SS
-25,퀘스트 시 다이아를 주는 손님의 보상이 증가,20%,A
-26,퀘스트 시 다이아를 주는 손님의 보상이 증가,40%,S
-27,퀘스트 시 다이아를 주는 손님의 보상이 증가,60%,SS
-28,선물상자 클릭 시 장비 조각 획득할 확률,1%,B
-29,선물상자 클릭 시 장비 조각 획득할 확률,2%,A
-30,선물상자 클릭 시 장비 조각 획득할 확률,3%,S
-31,선물상자 클릭 시 장비 조각 획득할 확률,5%,SS
-32,선물상자 클릭 시 장비 조각을 2개 획득할 확률,1%,B
-33,선물상자 클릭 시 장비 조각을 2개 획득할 확률,2%,A
-34,선물상자 클릭 시 장비 조각을 2개 획득할 확률,3%,S
-35,선물상자 클릭 시 장비 조각을 2개 획득할 확률,5%,SS
+1,Offline reward,1%,C
+2,Offline reward,3%,B
+3,Offline reward,5%,A
+4,Offline reward,7%,S
+5,Offline reward,9%,SS
+6,Double gold reward probability,3%,C
+7,Double gold reward probability,5%,B
+8,Double gold reward probability,7%,A
+9,Double gold reward probability,10%,S
+10,Double gold reward probability,15%,SS
+11,Chance of doubling happiness as a quest reward,1%,C
+12,Chance of doubling happiness as a quest reward,2%,B
+13,Chance of doubling happiness as a quest reward,3%,A
+14,Chance of doubling happiness as a quest reward,4%,S
+15,Chance of doubling happiness as a quest reward,5%,SS
+16,Chance of 2 levels going up while merging candy,1%,C
+17,Chance of 2 levels going up while merging candy,2%,B
+18,Chance of 2 levels going up while merging candy,3%,A
+19,Chance of 2 levels going up while merging candy,4%,S
+20,Chance of 2 levels going up while merging candy,5%,SS
+21,Chance of getting diamonds as a quest reward,1%,B
+22,Chance of getting diamonds as a quest reward,2%,A
+23,Chance of getting diamonds as a quest reward,3%,S
+24,Chance of getting diamonds as a quest reward,5%,SS
+25,Increased diamond rewards on quests,20%,A
+26,Increased diamond rewards on quests,40%,S
+27,Increased diamond rewards on quests,60%,SS
+28,Chance of getting keys when clicking the gift box,1%,B
+29,Chance of getting keys when clicking the gift box,2%,A
+30,Chance of getting keys when clicking the gift box,3%,S
+31,Chance of getting keys when clicking the gift box,5%,SS
+32,Chance of getting 2 keys when clicking the gift box,1%,B
+33,Chance of getting 2 keys when clicking the gift box,2%,A
+34,Chance of getting 2 keys when clicking the gift box,3%,S
+35,Chance of getting 2 keys when clicking the gift box,5%,SS
