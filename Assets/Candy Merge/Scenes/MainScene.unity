@@ -30997,7 +30997,7 @@ MonoBehaviour:
   giftBoxController: {fileID: 4273026987875504513}
   upgradeManager: {fileID: 7147849547990594848}
   upgradeUI: {fileID: 7647821949377435576}
-  autoCreateBtn: {fileID: 0}
+  autoCreateBtn: {fileID: 751400243}
   BGMToggle: {fileID: 5667438}
   SoundToggle: {fileID: 783247301}
 --- !u!4 &1917004876
