@@ -2,11 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+//using System.Numerics;
+using Keiwando.BigInteger;
 
 public class OfflineRewardManager : MonoBehaviour
 {
     private TimeSpan totalAccumulatedTime;
-    private const double MAX_ACCUMULATION_TIME_IN_MINUTES = 0.1;//24 * 60;  // 24 hours in minutes
+    private const double MAX_ACCUMULATION_TIME_IN_MINUTES = 3 * 60;//24 * 60;  // 24 hours in minutes
+    BigInteger goldReward;
+    
+    [SerializeField] GameObject offlineRewardPanel;
+    [SerializeField] Text goldText;
 
     void Start()
     {
@@ -27,6 +34,11 @@ public class OfflineRewardManager : MonoBehaviour
 
             //Debug.Log(string.Format("{0} Days {1} Hours {2} Minutes {3} Seconds Ago", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
             Debug.Log(GetCurrentRewardTimeAsString());
+
+            if (totalAccumulatedTime.Seconds >= 1)
+            {
+                GetOfflineReward();
+            }
             Debug.Log((int)ts.TotalMinutes + "g");
         }
         else
@@ -35,6 +47,14 @@ public class OfflineRewardManager : MonoBehaviour
             Debug.Log("0g");
             totalAccumulatedTime = new TimeSpan();
         }
+    }
+
+    void GetOfflineReward()
+    {
+        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Seconds;
+        Debug.Log("얼마 나왔니? : " + goldReward);
+        goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(goldReward.ToString());
+        offlineRewardPanel.SetActive(true);
     }
 
     public string GetCurrentRewardTimeAsString()
@@ -69,5 +89,13 @@ public class OfflineRewardManager : MonoBehaviour
         ES3.Save<TimeSpan>("TOTAL_ACCUMULATED_TIME", totalAccumulatedTime);
         if (DidUserClaimReward())
             ES3.Save<bool>("CLAIMED_REWARD", false);  // Reset the reward claim flag
+    }
+
+
+    public void OfflineRewardCleck()
+    {
+        RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, goldReward.ToString());
+
+        offlineRewardPanel.SetActive(false);
     }
 }

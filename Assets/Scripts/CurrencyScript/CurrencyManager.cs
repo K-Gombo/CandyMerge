@@ -126,4 +126,5 @@ public class CurrencyManager : MonoBehaviour
         else return false;
         return true;
     }
+
 }
