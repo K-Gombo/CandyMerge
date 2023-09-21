@@ -2494,7 +2494,7 @@ GameObject:
   - component: {fileID: 5201542402120017874}
   - component: {fileID: 6047536460762545110}
   m_Layer: 5
-  m_Name: Text
+  m_Name: SlotArrangBtnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3968,7 +3968,7 @@ GameObject:
   - component: {fileID: 4005247962013607903}
   - component: {fileID: 6181107856115613291}
   m_Layer: 5
-  m_Name: EquipArrangeBtnText
+  m_Name: EquipArrangeDownBtnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5112,7 +5112,7 @@ GameObject:
   - component: {fileID: 4941640236491383133}
   - component: {fileID: 3620892862110611646}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RankArrangBtnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5290,7 +5290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5208165482118688829
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5396,7 +5396,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 270}
+  m_SizeDelta: {x: 400, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2116209771189921589
 CanvasRenderer:
@@ -5439,7 +5439,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
-  m_Text: "\uD569\uC131\uC744 \uC6D0\uD558\uB294 \uC7A5\uBE44\uB97C \n\uC120\uD0DD\uD558\uC138\uC694
+  m_Text: "\uD569\uC131\uC744 \uC6D0\uD558\uB294 \uC7A5\uBE44\uB97C \uC120\uD0DD\uD558\uC138\uC694
     !"
 --- !u!1 &4630526020205908509
 GameObject:
@@ -6225,7 +6225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1115370295170147453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8207,7 +8207,7 @@ GameObject:
   - component: {fileID: 7994814984760055927}
   - component: {fileID: 1118106381042470233}
   m_Layer: 5
-  m_Name: EquipMixText
+  m_Name: EquipMixAllText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8367,7 +8367,7 @@ GameObject:
   - component: {fileID: 4987875702765623984}
   - component: {fileID: 2630690354286821304}
   m_Layer: 5
-  m_Name: EquipMixText
+  m_Name: EquipMixPanelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10220,7 +10220,7 @@ GameObject:
   - component: {fileID: 2933294087271097864}
   - component: {fileID: 8919939637358083598}
   m_Layer: 5
-  m_Name: EquipArrangeBtnText
+  m_Name: EquipArrangeUpBtnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

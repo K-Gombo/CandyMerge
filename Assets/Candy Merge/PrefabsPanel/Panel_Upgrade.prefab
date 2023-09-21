@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 101303758021390310}
   - component: {fileID: 6793003918639851409}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: CreateSpeed TItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,9 +701,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -2425}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2377059252442721695
@@ -879,7 +879,7 @@ GameObject:
   - component: {fileID: 7991079529116580843}
   - component: {fileID: 1313670300127443348}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: OfflineRewardSkillExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1036,7 +1036,7 @@ GameObject:
   - component: {fileID: 9196342144192812041}
   - component: {fileID: 1299525712913534555}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: LuckyCreate Explain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 8271961161777324186}
   - component: {fileID: 8484960269157065539}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: GoldUpExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1263,7 +1263,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "n% \uD655\uB960\uB85C 2\uBC30\uC758 \uACE8\uB4DC\uB97C \uD68D\uB4DD"
+  m_Text: "\uACE8\uB4DC \uD68D\uB4DD\uB7C9 n% \uC99D\uAC00"
 --- !u!1 &1743614099090607103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1276,7 @@ GameObject:
   - component: {fileID: 5859464596703427956}
   - component: {fileID: 6213339664345787572}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: MaxCandy TItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1356,7 +1356,7 @@ GameObject:
   - component: {fileID: 328472313778768172}
   - component: {fileID: 4035238894679132200}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: CreateSpeed Explain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1616,9 +1616,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -3165}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1499020314563910068
@@ -1985,7 +1985,7 @@ GameObject:
   - component: {fileID: 6512779554875886552}
   - component: {fileID: 2127305483759629308}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: GoldUpSkillTItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2655,7 +2655,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 3340}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1521570601624977403
 MonoBehaviour:
@@ -3175,7 +3175,7 @@ GameObject:
   - component: {fileID: 6225281801213042215}
   - component: {fileID: 4250574026338480662}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: PassiveCreate TItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3255,7 +3255,7 @@ GameObject:
   - component: {fileID: 4141361511483956829}
   - component: {fileID: 7954683741635762376}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: HaveCandyExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3322,8 +3322,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBCF4\uC720 \uAC00\uB2A5\uD55C \uCE94\uB514\uC758 \uCD5C\uB300 \uAC1C\uC218
-    n\uAC1C \uC99D\uAC00"
+  m_Text: "\uD544\uB4DC\uC5D0 \uBCF4\uC720 \uAC00\uB2A5\uD55C \uCE94\uB514\uC758
+    \uCD5C\uB300 \uAC1C\uC218 n\uAC1C \uC99D\uAC00"
 --- !u!1 &3924439660072622747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3998,9 +3998,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -945}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1048512882265333654
@@ -4371,7 +4371,7 @@ GameObject:
   - component: {fileID: 2951428403371836045}
   - component: {fileID: 3859076305152708654}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: LuckyGoldExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4790,9 +4790,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -2055}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1715247202645515339
@@ -5027,9 +5027,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -2795}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4389297802775720525
@@ -5532,9 +5532,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -205}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2361778110350997064
@@ -5862,7 +5862,7 @@ GameObject:
   - component: {fileID: 7933533425972573334}
   - component: {fileID: 541455357273463163}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: LuckyGoldTItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6256,7 +6256,7 @@ GameObject:
   - component: {fileID: 7190754513521008024}
   - component: {fileID: 3664096411975889355}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: CandyLevelSkill Explain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6416,7 +6416,7 @@ GameObject:
   - component: {fileID: 4381121358453803995}
   - component: {fileID: 8100883357925069714}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: PassiveCreate Explain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6806,7 +6806,7 @@ GameObject:
   - component: {fileID: 6652472222480203165}
   - component: {fileID: 745768191648938519}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: OfflineRewardSkillTItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7657,9 +7657,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -1315}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4227253339356037766
@@ -7952,7 +7952,7 @@ GameObject:
   - component: {fileID: 6685868658265679295}
   - component: {fileID: 2612977294459856680}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: CandyLevelSkill TItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8058,9 +8058,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -575}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6344200556198622294
@@ -8139,9 +8139,9 @@ RectTransform:
   m_Father: {fileID: 7234986031447280639}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -1685}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1200, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6789894932373472128
@@ -8350,7 +8350,7 @@ GameObject:
   - component: {fileID: 2189340261613163870}
   - component: {fileID: 5751379359795473950}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: HaveCandyTItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8417,7 +8417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBCF4\uC720 \uCE94\uB514 \uC99D\uAC00(Max Lv.33)"
+  m_Text: "\uCE94\uB514 \uD544\uB4DC \uD655\uC7A5(Max Lv.33)"
 --- !u!1 &8441645111582377430
 GameObject:
   m_ObjectHideFlags: 0
@@ -8430,7 +8430,7 @@ GameObject:
   - component: {fileID: 6958847149506993816}
   - component: {fileID: 4281214102162272985}
   m_Layer: 5
-  m_Name: Skill Explain
+  m_Name: MaxCandyExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8837,7 +8837,7 @@ GameObject:
   - component: {fileID: 4744887424928416124}
   - component: {fileID: 696697941236170811}
   m_Layer: 5
-  m_Name: Skill TItle
+  m_Name: LuckyCreate TItle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1672,7 +1672,7 @@ GameObject:
   - component: {fileID: 6850219215634081905}
   - component: {fileID: 8534441945105011478}
   m_Layer: 5
-  m_Name: Explain
+  m_Name: SpecialBoxExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1907,6 +1907,7 @@ GameObject:
   - component: {fileID: 5059777706665624694}
   - component: {fileID: 642693326851353372}
   - component: {fileID: 1133599813772780531}
+  - component: {fileID: 8920621724976612180}
   m_Layer: 5
   m_Name: Timerbar
   m_TagString: Untagged
@@ -1973,6 +1974,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8920621724976612180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081931025508271137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11fdc07250c04a11b711b0292283617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownText: {fileID: 8434577396888379290}
+  adsButton: {fileID: 4985941753701677729}
 --- !u!1 &2120955593951302370
 GameObject:
   m_ObjectHideFlags: 0
@@ -4303,7 +4318,7 @@ GameObject:
   - component: {fileID: 9144997245653854249}
   - component: {fileID: 1694103641121683169}
   m_Layer: 5
-  m_Name: Pacakge Title Text
+  m_Name: SpecialBoxTitle Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5486,7 +5501,7 @@ GameObject:
   - component: {fileID: 500549523389065577}
   - component: {fileID: 8847002460962264552}
   m_Layer: 5
-  m_Name: Pacakge Title Text
+  m_Name: NormalBoxTitle Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8551,7 +8566,7 @@ GameObject:
   - component: {fileID: 8224329730809540308}
   - component: {fileID: 6466920949600410075}
   m_Layer: 5
-  m_Name: Explain
+  m_Name: NormalBoxExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,6 +15,7 @@ public class EquipmentController : MonoBehaviour
     public GameObject equipMixBtn;
     public GameObject equipAllMixBtn;
     public EquipArrangeManager equipArrangeManager;
+    public LanguageUIManager languageUIManager;
     public CurrencyUI currencyUI;
     public GameObject backBtn;
     public GameObject plus;
@@ -74,17 +75,10 @@ public class EquipmentController : MonoBehaviour
             clickedEquipForUpgrade = clickedEquipment;
 
             // 클릭한 장비의 장착 상태에 따라 버튼 텍스트를 변경
-            if (clickedEquipForUpgrade.isEquipped)
-            {
-                equipmentEquipBtnText.text = "장착 해제";
-            }
-            else
-            {
-                equipmentEquipBtnText.text = "장착";
-            }
+            languageUIManager.UpdateEquipBtnText(clickedEquipForUpgrade.isEquipped);  // 이 부분 추가
         }
-    
-    }   
+    }
+
     
     private void ActivateAndMoveBoxes()
     {
@@ -278,21 +272,23 @@ public class EquipmentController : MonoBehaviour
     public void EquipExplainUpdate(EquipmentStatus clickedEquipment)
     {
         equipNameExplainText.text = clickedEquipment.equipName;
-    
+
         EquipmentManager.Rank currentRank = clickedEquipment.equipRank;
         EquipmentManager.Rank nextRank = equipmentManager.GetNextRank(currentRank);
-    
+
         string currentRankStr = currentRank.ToString();
         string nextRankStr = nextRank.ToString();
 
         string modifiedCurrentRankStr = Regex.Replace(currentRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
         string modifiedNextRankStr = Regex.Replace(nextRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
-    
-        equipRankExplainText.text = $"등급 : {modifiedCurrentRankStr} -> {modifiedNextRankStr}";
-    
+
+        equipRankExplainText.text = $"Rank : {modifiedCurrentRankStr} -> {modifiedNextRankStr}";
+
         float nextGoldIncrement = equipmentManager.GetNextGoldIncrement(clickedEquipment.equipRank);
-        equipGoldIncrementExplainText.text = $"골드 획득량 {clickedEquipment.goldIncrement} % -> {nextGoldIncrement} %";
+        LanguageUIManager.Language currentLanguage = languageUIManager.GetCurrentLanguage();
+        equipGoldIncrementExplainText.text = languageUIManager.GetGoldIncrementText(clickedEquipment.goldIncrement, nextGoldIncrement, currentLanguage);
     }
+
     
     public void EquipMixPanelEquipClick(EquipmentStatus clickedEquipment)
     {
