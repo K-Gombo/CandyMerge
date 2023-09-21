@@ -487,12 +487,12 @@ public class EquipmentController : MonoBehaviour
     public void EquipStatusUpdate(EquipmentStatus clickedEquipment)
     {
         equipNameStatusText.text = clickedEquipment.equipName;
-        
+
         EquipmentManager.Rank statusRank = clickedEquipment.equipRank;
         string statusRankStr = statusRank.ToString();
         string changeStatusRankStr = Regex.Replace(statusRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
         equipRankStatusText.text = $"{changeStatusRankStr}";
-        
+
         string cleanedStatusRankStr = Regex.Replace(statusRankStr, @"\d", "");
         if (Enum.TryParse(cleanedStatusRankStr, out EquipmentManager.Rank cleanedStatusRank))
         {
@@ -509,13 +509,13 @@ public class EquipmentController : MonoBehaviour
         {
             equipSkillText[i].text = $"{clickedEquipment.skillNames[i]}";
         }
-        
+
         List<EquipmentManager.Rank> rankOrderList = new List<EquipmentManager.Rank>(EquipmentManager.maxLevelsPerRank.Keys);
         int equipmentRankOrder = rankOrderList.IndexOf(clickedEquipment.equipRank);
 
         for (int i = 0; i < equipSkillLock.Length; i++)
         {
-            if (i < clickedEquipment.skillRanks.Length) 
+            if (i < clickedEquipment.skillRanks.Length)
             {
                 EquipmentManager.Rank skillRank = clickedEquipment.skillRanks[i];
                 int skillRankOrder = rankOrderList.IndexOf(skillRank);
@@ -523,10 +523,12 @@ public class EquipmentController : MonoBehaviour
                 if (skillRankOrder > equipmentRankOrder)
                 {
                     equipSkillLock[i].SetActive(true);
+                    clickedEquipment.skillUnlocked[i] = false;  // 스킬 잠김
                 }
                 else
                 {
                     equipSkillLock[i].SetActive(false);
+                    clickedEquipment.skillUnlocked[i] = true;  // 스킬 해금
                 }
 
                 if (equipmentManager.rankToColorMap.ContainsKey(skillRank))
@@ -538,14 +540,15 @@ public class EquipmentController : MonoBehaviour
             else
             {
                 equipSkillLock[i].SetActive(false);
+                clickedEquipment.skillUnlocked[i] = false;  // 스킬 잠김
             }
         }
 
         string formattedGold = currencyUI.goldText.text;
         string formattedUpgradeGoldCost = BigIntegerCtrl_global.bigInteger.ChangeMoney(clickedEquipment.upgradeGoldCost.ToString());
         equipStatusGoldText.text = $"{formattedGold}/{formattedUpgradeGoldCost}";
-        
     }
+
     
     public void OnEquipmentEquipBtnClick()
     {

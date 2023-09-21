@@ -327,7 +327,7 @@ public class GiftBoxController : MonoBehaviour
 
         for (int i = 0; i < equipment.skillIds.Length; i++)
         {
-            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i])&& equipment.skillUnlocked[i])
             {
                 // 해당 번호가 있음을 표시
                 skillIdExists = true;
@@ -371,7 +371,7 @@ public class GiftBoxController : MonoBehaviour
 
         for (int i = 0; i < equipment.skillIds.Length; i++)
         {
-            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i]))
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i])&& equipment.skillUnlocked[i])
             {
                 // 해당 번호가 있음을 표시
                 skillIdExists = true;

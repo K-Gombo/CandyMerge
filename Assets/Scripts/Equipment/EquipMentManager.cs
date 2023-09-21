@@ -478,16 +478,25 @@ public class EquipmentManager : MonoBehaviour
     {
         // EquipmentController의 equipMixBoxes를 가져옵니다.
         Transform[] equipMixBoxes = EquipmentController.instance.equipMixBoxes;
-    
+
         // 모든 EquipMixBoxes가 채워져 있는지 확인
         bool areAllEquipMixBoxesFilled = EquipmentController.instance.AreAllEquipMixBoxesFilled();
-    
+
         // 모든 EquipMixBoxes가 채워져 있다면
         if (areAllEquipMixBoxesFilled)
         {
             EquipmentStatus mainEquipment = equipMixBoxes[0].GetChild(0).GetComponent<EquipmentStatus>().originalEquipment;
 
+            // 장비의 equipLevel이 1보다 큰 경우에만 환급
+            if (mainEquipment.equipLevel > 1)
+            {
+                int returnGold = mainEquipment.upgradeGoldCost / 2;
+                Keiwando.BigInteger.BigInteger returnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)returnGold);
+                CurrencyManager.instance.AddCurrency("Gold", returnGoldBigInt);
+            }
+
             allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+
 
             int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
 
@@ -501,17 +510,15 @@ public class EquipmentManager : MonoBehaviour
             {
                 mainEquipment.rankLevel++;
             }
-            
+
             SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
 
-            // 새로운 등급의 시작 레벨과 최대 레벨을 설정
             if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
             {
                 EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
                 mainEquipment.equipLevel = levelData.startLevel;
             }
-            
-            // 등급에 따라 색상 업데이트
+
             if (rankToColorMap.ContainsKey(mainEquipment.equipRank))
             {
                 Color newColor = rankToColorMap[mainEquipment.equipRank];
@@ -519,7 +526,7 @@ public class EquipmentManager : MonoBehaviour
                 mainEquipment.levelCircleComponent.color = newColor;
                 mainEquipment.slotBarComponent.color = newColor;
             }
-            
+
             mainEquipment.UpdateLevelUI();
 
             allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
@@ -529,22 +536,35 @@ public class EquipmentManager : MonoBehaviour
             for (int i = 1; i <= 2; i++)
             {
                 GameObject cloneObj = equipMixBoxes[i].GetChild(0).gameObject;
+                EquipmentStatus otherEquipment = cloneObj.GetComponent<EquipmentStatus>().originalEquipment;
                 EquipmentStatus cloneStatus = cloneObj.GetComponent<EquipmentStatus>();
-                GameObject originalObj = cloneStatus.originalEquipment.gameObject;
 
                 allEquipIds.Remove(new DataType(cloneStatus.equipId, cloneStatus.equipRank));
                 Debug.Log("아니 너 뭐 돼?" +allEquipIds.Count);
                 DeleteEquipData(cloneStatus);
 
+
+                // 장비의 equipLevel이 1보다 큰 경우에만 환급
+                if (otherEquipment.equipLevel > 1)
+                {
+                    int otherReturnGold = otherEquipment.upgradeGoldCost / 2;
+                    Keiwando.BigInteger.BigInteger otherReturnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)otherReturnGold);
+                    CurrencyManager.instance.AddCurrency("Gold", otherReturnGoldBigInt);
+                }
+
+                GameObject originalObj = cloneObj.GetComponent<EquipmentStatus>().originalEquipment.gameObject;
                 Destroy(cloneObj);
                 ReturnEquipToPool(originalObj);
             }
 
-            // EquipMixbox[0]의 클론 제거
             Destroy(equipMixBoxes[0].GetChild(0).gameObject);
+            EquipmentController.instance.EquipStatusUpdate(mainEquipment);
         }
         CheckMixAvailability();
     }
+
+
+
     
     public int ConvertRankToLevel(Rank rank)
     {
@@ -632,7 +652,6 @@ public class EquipmentManager : MonoBehaviour
         }
     }
     
-    
     public void AllMergeEquipments()
     {
         // 같은 Rank와 equipName을 가진 장비를 카운트하기 위한 딕셔너리
@@ -640,7 +659,6 @@ public class EquipmentManager : MonoBehaviour
 
         foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
         {
-          
             string key = equipment.equipRank + "_" + equipment.equipName;
 
             if (equipGroups.ContainsKey(key))
@@ -661,6 +679,14 @@ public class EquipmentManager : MonoBehaviour
                 // 첫 번째 장비를 기본으로 삼아 업그레이드
                 EquipmentStatus mainEquipment = group.Value[0];
 
+                // mainEquipment의 골드 반환
+                if (mainEquipment.equipLevel > 1)
+                {
+                    int returnGold = mainEquipment.upgradeGoldCost / 2;
+                    Keiwando.BigInteger.BigInteger returnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)returnGold);
+                    CurrencyManager.instance.AddCurrency("Gold", returnGoldBigInt);
+                }
+
                 // 나머지 로직은 UpdateRankLevelOnMerge 메서드와 유사
                 int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
 
@@ -676,12 +702,39 @@ public class EquipmentManager : MonoBehaviour
                 }
 
                 SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
+
+                // 새로운 등급의 시작 레벨과 최대 레벨을 설정
+                if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
+                {
+                    EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
+                    mainEquipment.equipLevel = levelData.startLevel;
+                }
+
+                // 등급에 따라 색상 업데이트
+                if (rankToColorMap.ContainsKey(mainEquipment.equipRank))
+                {
+                    Color newColor = rankToColorMap[mainEquipment.equipRank];
+                    mainEquipment.backgroundImageComponent.color = newColor;
+                    mainEquipment.levelCircleComponent.color = newColor;
+                    mainEquipment.slotBarComponent.color = newColor;
+                }
+
                 mainEquipment.UpdateLevelUI();
 
-                // 2개의 장비를 풀로 리턴
+                // 2개의 장비를 풀로 리턴 및 골드 반환
                 for (int i = 1; i <= 2; i++)
                 {
-                    GameObject originalObj = group.Value[i].gameObject;
+                    EquipmentStatus otherEquipment = group.Value[i];
+
+                    // 장비의 equipLevel이 1보다 큰 경우에만 환급
+                    if (otherEquipment.equipLevel > 1)
+                    {
+                        int otherReturnGold = otherEquipment.upgradeGoldCost / 2;
+                        Keiwando.BigInteger.BigInteger otherReturnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)otherReturnGold);
+                        CurrencyManager.instance.AddCurrency("Gold", otherReturnGoldBigInt);
+                    }
+
+                    GameObject originalObj = otherEquipment.gameObject;
                     ReturnEquipToPool(originalObj);
                 }
 
@@ -691,9 +744,12 @@ public class EquipmentManager : MonoBehaviour
                 mainEquipment.gameObject.transform.SetParent(specialGachaBtn.equipGachaSpawnLocation);
                 mainEquipment.mixAvailable.SetActive(false);
                 specialGachaBtn.equipResultPanel.SetActive(true);
+                EquipmentController.instance.EquipStatusUpdate(mainEquipment);
             }
         }
     }
+
+
 
     public void EquipLevelUpgrade(EquipmentStatus equipment)
     {   
@@ -788,6 +844,15 @@ public class EquipmentManager : MonoBehaviour
         equipSlotBoxesImage[slotIndex].SetActive(false);
 
         equipmentStatus.isEquipped = true;
+        
+        // 디버그 코드 추가
+        Debug.Log("장비 스킬 해금 상태:");
+        for (int i = 0; i < equipmentStatus.skillIds.Length; i++)
+        {
+            string unlockStatus = equipmentStatus.skillUnlocked[i] ? "해금됨" : "잠김";
+            Debug.Log($"Skill ID: {equipmentStatus.skillIds[i]}, 상태: {unlockStatus}");
+        }
+
         
         if (RankEquipScroe.TryGetValue(equipmentStatus.equipRank, out int equipScore))
         {
