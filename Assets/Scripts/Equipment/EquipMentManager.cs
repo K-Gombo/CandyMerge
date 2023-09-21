@@ -20,6 +20,7 @@ public class EquipmentManager : MonoBehaviour
     public GachaManager GachaManager;
     public EquipSkillManager equipSkillManager;
     public EquipArrangeManager equipArrangeManager;
+    public SpecialGachaBtn specialGachaBtn;
     public EquipmentStatus equipmentStatus;
     public Queue<GameObject> equipPool = new Queue<GameObject>();
     public int poolSize = 40;
@@ -36,6 +37,7 @@ public class EquipmentManager : MonoBehaviour
     public GameObject[] equipSlotBoxesImage;
     public Text equipScoreText;
     public int totalEquipScore = 0;
+    public Transform allEquipMergeResultSpawn;
     
     public delegate void EquipCreatedHandler(GameObject newEquip);
     public event EquipCreatedHandler OnEquipCreated;
@@ -654,9 +656,12 @@ public class EquipmentManager : MonoBehaviour
 
                 // 합성한 장비를 리스트에서 제거
                 group.Value.RemoveRange(0, 3);
+                
+                mainEquipment.gameObject.transform.SetParent(specialGachaBtn.equipGachaSpawnLocation);
+                mainEquipment.mixAvailable.SetActive(false);
+                specialGachaBtn.equipResultPanel.SetActive(true);
             }
         }
-        CheckMixAvailability();
     }
 
     public void EquipLevelUpgrade(EquipmentStatus equipment)
@@ -774,7 +779,7 @@ public class EquipmentManager : MonoBehaviour
         Debug.LogError("Invalid slot index: " + slotIndex);
     }
 
-        SaveEquipData(equipmentStatus);
+    SaveEquipData(equipmentStatus);
 }
 
     
@@ -856,15 +861,10 @@ public class EquipmentManager : MonoBehaviour
 
                 var clone = Instantiate(newEquip, mask.transform.position, UnityEngine.Quaternion.identity, mask.transform);
                 clone.transform.localScale = newEquip.transform.localScale * 1.2f;
-
-
-                
-                    
             }
         }
     }
-
-
+    
     public GameObject CreateEquipFromSavedData(Transform parentTransform, EquipmentStatus savedEquipData)
     {
         // 저장된 랭크 정보 사용
