@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataController : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class DataController : MonoBehaviour
     [SerializeField] GiftBoxController giftBoxController;
     [SerializeField] UpgradeManager upgradeManager;
     [SerializeField] UpgradeUI upgradeUI;
+
+    [SerializeField] Toggle BGMToggle;
+    [SerializeField] Toggle SoundToggle;
     private void Awake()
     {
         instance = this;
@@ -24,6 +28,8 @@ public class DataController : MonoBehaviour
         CandiesRemaining_Load();
         Player_Level_Load();
         Player_Experience_Load();
+        Option_BGM_Load();
+        Option_Sound_Load();
         Upgrade_luckyCreateLevel_Load();
         Upgrade_createSpeedLevel_Load();
         Upgrade_removeLockedLevel_Load();
@@ -103,6 +109,50 @@ public class DataController : MonoBehaviour
     }
 
 
+    private void Option_BGM_DataSave()
+    {
+        ES3.Save("option_BGM", GameData.option_BGM);
+    }
+
+    public void Option_BGM_Save()
+    {
+        GameData.option_BGM = BGMToggle.isOn;
+        Option_BGM_DataSave();
+    }
+
+    private void Option_BGM_DataLoad()
+    {
+         GameData.option_BGM = ES3.Load("option_BGM", true);
+    }
+    public void Option_BGM_Load()
+    {
+        Option_BGM_DataLoad();
+        BGMToggle.isOn = GameData.option_BGM;
+    }
+
+
+    private void Option_Sound_DataSave()
+    {
+        ES3.Save("option_Sound", GameData.option_Sound);
+    }
+
+    public void Option_Sound_Save()
+    {
+        GameData.option_Sound = SoundToggle.isOn;
+        Option_Sound_DataSave();
+    }
+
+    private void Option_Sound_DataLoad()
+    {
+         GameData.option_Sound = ES3.Load("option_Sound", true);
+    }
+    public void Option_Sound_Load()
+    {
+        Option_Sound_DataLoad();
+        SoundToggle.isOn = GameData.option_Sound;
+    }
+
+
     // Upgrade
     private void Upgrade_luckyCreateLevel_DataSave()
     {
@@ -171,7 +221,7 @@ public class DataController : MonoBehaviour
 
 
 
-        upgradeManager.RemoveLocked(GameData.removeLockedLevel - 1);
+        upgradeManager.RemoveLocked(GameData.removeLockedLevel);
         
     }
 
