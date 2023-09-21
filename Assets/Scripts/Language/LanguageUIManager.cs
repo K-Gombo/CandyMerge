@@ -66,6 +66,7 @@ public class LanguageUIManager : MonoBehaviour
         NormalBoxExplain,
         SpecialBoxTitle,
         NormalBoxTitle,
+        MixSumLevel
         
     }
 
@@ -153,6 +154,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.NormalBoxExplain].text = "S ~ C 등급 장비 5개 소환";
                 UILanguageList[(int)UILanguageIndex.SpecialBoxTitle].text = "특별 선물 상자";
                 UILanguageList[(int)UILanguageIndex.NormalBoxTitle].text = "일반 선물 상자";
+                UILanguageList[(int)UILanguageIndex.MixSumLevel].text = "믹스 레벨";
                 
                 
                 break;
@@ -216,6 +218,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.NormalBoxExplain].text = "S ~ C 등급 장비 5개 소환";
                 UILanguageList[(int)UILanguageIndex.SpecialBoxTitle].text = "Special Gift Box";
                 UILanguageList[(int)UILanguageIndex.NormalBoxTitle].text = "Normal Gift Box";
+                UILanguageList[(int)UILanguageIndex.MixSumLevel].text = "Mix Level";
                 
                 
                 break;
@@ -267,6 +270,20 @@ public class LanguageUIManager : MonoBehaviour
                 return "";
         }
     }
+    
+    public string GetTotalCandyLevelText(int totalLevelSum, Language currentLanguage)
+    {
+        switch (currentLanguage)
+        {
+            case Language.Korean:
+                return "캔디 총합 \n" + totalLevelSum.ToString();
+            case Language.English:
+                return "Mix Level \n" + totalLevelSum.ToString();
+            default:
+                return "";
+        }
+    }
+
     
     public Language GetCurrentLanguage()
     {
