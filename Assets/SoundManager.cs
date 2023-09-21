@@ -12,7 +12,8 @@ public class SoundManager : MonoBehaviour
     public List<AudioClip> soundEffects;
 
     // 볼륨 설정. 외부에서 읽기는 가능하나 변경은 SetMasterVolume을 통해서만 가능
-    public float masterVolume { get; private set; } = 1f;
+    public float BGMmasterVolume { get; private set; } = 1f;
+    public float SoundmasterVolume { get; private set; } = 1f;
 
     // AudioSource 컴포넌트를 재사용하기 위한 필드
     private AudioSource audioSource;
@@ -75,7 +76,7 @@ public class SoundManager : MonoBehaviour
 
         // 재사용된 AudioSource 설정
         audioSource.clip = clip;
-        audioSource.volume = masterVolume;
+        audioSource.volume = BGMmasterVolume;
         audioSource.Play();
     }
 
@@ -86,7 +87,7 @@ public class SoundManager : MonoBehaviour
         {
             GameObject soundEffectObject = new GameObject($"SoundEffect_{name}");
             SoundEffectPlayer player = soundEffectObject.AddComponent<SoundEffectPlayer>();
-            player.PlayEffect(soundEffectDictionary[name], masterVolume);
+            player.PlayEffect(soundEffectDictionary[name], SoundmasterVolume);
 
             return player;
         }
@@ -98,8 +99,13 @@ public class SoundManager : MonoBehaviour
     }
 
     // 마스터 볼륨 설정
-    public void SetMasterVolume(float volume)
+    public void SetBGMMasterVolume(float volume)
     {
-        masterVolume = volume;
+        BGMmasterVolume = volume;
+        audioSource.volume = BGMmasterVolume;
+    }
+    public void SetSoundMasterVolume(float volume)
+    {
+        SoundmasterVolume = volume;
     }
 }
