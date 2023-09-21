@@ -248,14 +248,7 @@ public class UpgradeManager : MonoBehaviour
         Debug.Log("골드가 부족합니다.");
     }
 }
-
-
-
-   
-
-
-
-
+    
    public void MaxCandiesUp() //선물상자가 최대 생성할 수 있는 캔디 수 증가 (스킬4)
    {
        if (maxCandiesLevel >= maxCandiesUpgradeLevel)
@@ -453,7 +446,7 @@ public void LuckyCreateUp(int luckyCreateLevel)
 
         Debug.Log($"캔디 확률 업!: {newLuckyCreate}");
     }
-<<<<<<< Updated upstream
+
 }
 
 public void CreateSpeedUp(int createSpeedLevel)
@@ -658,12 +651,6 @@ public void LuckyGoldUp(int count)
     Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}");
 
 }
-=======
     
-    
-    
->>>>>>> Stashed changes
-
-
 }
 
