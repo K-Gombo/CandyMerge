@@ -36,6 +36,7 @@ public class DataController : MonoBehaviour
         Upgrade_passiveAutoCreateSpeedLevel_Load();
         Upgrade_goldUpLevel_Load();
         Upgrade_luckyGoldLevel_Load();
+        Upgrade_OffLineRewardBonusUpLevel_Load();
         EquipmentManager.instance.LoadEquipData();
 
 
@@ -342,5 +343,28 @@ public class DataController : MonoBehaviour
         upgradeManager.luckyGoldLevel = GameData.luckyGoldLevel;
 
         upgradeManager.LuckyGoldUp(GameData.luckyGoldLevel);
+    }
+
+    private void Upgrade_OffLineRewardBonusUpLevel_DataSave()
+    {
+        ES3.Save("upgrade_OffLineRewardBonusUpLevel", GameData.OffLineRewardBonusUpLevel);
+    }
+    public void Upgrade_OffLineRewardBonusUpLevel_Save()
+    {
+        GameData.OffLineRewardBonusUpLevel = upgradeManager.offLineRewardBonusLevel;
+        Upgrade_OffLineRewardBonusUpLevel_DataSave();
+    }
+
+    private void Upgrade_OffLineRewardBonusUpLevel_DataLoad()
+    {
+        GameData.OffLineRewardBonusUpLevel = ES3.Load("upgrade_OffLineRewardBonusUpLevel", 0);
+    }
+
+    public void Upgrade_OffLineRewardBonusUpLevel_Load()
+    {
+        Upgrade_OffLineRewardBonusUpLevel_DataLoad();
+        upgradeManager.offLineRewardBonusLevel = GameData.OffLineRewardBonusUpLevel;
+
+        upgradeManager.OffLineRewardBonusUp(GameData.OffLineRewardBonusUpLevel);
     }
 }

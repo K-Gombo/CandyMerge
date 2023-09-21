@@ -645,6 +645,36 @@ public void LuckyGoldUp(int count)
     Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}");
 
 }
-    
+
+    public void OffLineRewardBonusUp(int count) // 스킬10
+    {
+        if (offLineRewardBonusLevel >= maxOffLineRewardBonusLevel)
+        {
+            Debug.Log("이미 최대 레벨에 도달했습니다.");
+            return;
+        }
+
+        float currentOffLineRewardBonus = offlineRewardManager.GetOffLineRewardBonusUp();
+        float totalOffLineRewardBonusIncrease = increaseOffLineRewardBonus * count; // 요청한 횟수만큼 증가
+        float newOffLineRewardBonus = currentOffLineRewardBonus + totalOffLineRewardBonusIncrease;
+
+        // 비용과 레벨을 증가시킨다.
+        for (int i = 0; i < count; i++)
+        {
+            if (offLineRewardBonusLevel >= maxOffLineRewardBonusLevel)
+            {
+                Debug.Log($"최대 레벨 {maxOffLineRewardBonusLevel}에 도달했습니다.");
+                break;
+            }
+
+            BigInteger multiplier = new BigInteger(13); // 1.3 * 10
+            currentOffLineRewardBonusCost = (currentOffLineRewardBonusCost * multiplier) / 10; // 1.3배
+        }
+
+        offlineRewardManager.SetOffLineRewardBonusUp(newOffLineRewardBonus);
+        Debug.Log($"오프라인 리워드 보너스 업!: {newOffLineRewardBonus}, 새로운 비용: {currentOffLineRewardBonusCost}");
+    }
+
+
 }
 

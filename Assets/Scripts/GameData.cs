@@ -23,4 +23,5 @@ public static class GameData
     public static int passiveAutoCreateSpeedLevel= 0;
     public static int goldUpLevel = 0;
     public static int luckyGoldLevel = 0;
+    public static int OffLineRewardBonusUpLevel = 0;
 }

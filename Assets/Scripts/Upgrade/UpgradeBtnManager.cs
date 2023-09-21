@@ -123,7 +123,7 @@ public class UpgradeBtnManager : MonoBehaviour
     public void OnOffLineRewardBonusUpButtonClick() 
     {
         upgradeManager.OffLineRewardBonusUp();
-        // DataController.instance.Upgrade_offLineRewardBonusLevel_Save(); // 저장 로직 정우쨩,...
+         DataController.instance.Upgrade_OffLineRewardBonusUpLevel_Save(); // 해뒀습니다잇!
         upgradeUI.UpdateUI();
     }
 }
