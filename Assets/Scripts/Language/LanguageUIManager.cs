@@ -164,7 +164,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.AutoMixBtn].text = "Auto Mix";
                 UILanguageList[(int)UILanguageIndex.Gacha].text = "Gacha";
                 UILanguageList[(int)UILanguageIndex.CandyLevelBtn].text = "Level";
-                UILanguageList[(int)UILanguageIndex.AraangeBtn].text = "Arrange";
+                UILanguageList[(int)UILanguageIndex.AraangeBtn].text = "Arr";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateTitle].text = "Produce double candies(Max Lv.40)";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateExplain].text = "Produce two candies with a n% chance";
                 UILanguageList[(int)UILanguageIndex.CreateSpeedTitle].text = "Quick production(Max Lv.5)";
@@ -210,8 +210,8 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.MyEquip].text = "My Equip";
                 UILanguageList[(int)UILanguageIndex.MixExplain].text = "Select the equipment you want to merge!";
                 UILanguageList[(int)UILanguageIndex.MixEquipGold].text = "Gain Gold 1 % -> 1.5 %";
-                UILanguageList[(int)UILanguageIndex.EquipArrangeUpBtn].text = "Arrange";
-                UILanguageList[(int)UILanguageIndex.EquipArrangeDownBtn].text = "Arrange";
+                UILanguageList[(int)UILanguageIndex.EquipArrangeUpBtn].text = "Arr";
+                UILanguageList[(int)UILanguageIndex.EquipArrangeDownBtn].text = "Arr";
                 UILanguageList[(int)UILanguageIndex.SpecialBoxExplain].text = "5 Equipment Gacha S ~ C Rank";
                 UILanguageList[(int)UILanguageIndex.NormalBoxExplain].text = "5 Equipment Gacha A ~ D Rank";
                 UILanguageList[(int)UILanguageIndex.SpecialBoxExplain].text = "S ~ C 등급 장비 5개 소환";
