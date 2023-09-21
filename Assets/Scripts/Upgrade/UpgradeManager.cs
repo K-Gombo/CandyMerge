@@ -313,28 +313,34 @@ public class UpgradeManager : MonoBehaviour
 
 
 
-    public void MaxCandiesUp() //선물상자가 최대 생성할 수 있는 캔디 수 증가 (스킬4)
-    {
-        if (maxCandiesLevel >= maxCandiesUpgradeLevel)
-        {
-            Debug.Log("이미 최대 레벨까지 업그레이드 되었습니다.");
-            return;
-        }
+   public void MaxCandiesUp() //선물상자가 최대 생성할 수 있는 캔디 수 증가 (스킬4)
+   {
+       if (maxCandiesLevel >= maxCandiesUpgradeLevel)
+       {
+           Debug.Log("이미 최대 레벨까지 업그레이드 되었습니다.");
+           return;
+       }
 
-        int currentMaxCandies = giftBoxController.GetMaxCandies();
-        
-        if (currencyManager.SubtractCurrency("Gold", currentMaxCandiesUpCost))
-        {
-            int newMaxCandies = currentMaxCandies + increaseMaxCandies;
-            giftBoxController.SetMaxCandies(newMaxCandies);
-            maxCandiesLevel++;
-            Debug.Log($"캔디 생성 증가!:{newMaxCandies}");
-        }
-        else
-        {
-            Debug.Log("골드가 부족합니다.");
-        }
-    }
+       int currentMaxCandies = giftBoxController.GetMaxCandies();
+    
+       if (currencyManager.SubtractCurrency("Gold", currentMaxCandiesUpCost))
+       {
+           int newMaxCandies = currentMaxCandies + increaseMaxCandies;
+           giftBoxController.SetMaxCandies(newMaxCandies);
+           maxCandiesLevel++;
+
+           // 비용을 1.5배로 증가시킵니다.
+           BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
+           BigInteger newCost = (currentMaxCandiesUpCost * multiplier) / 10;  // 1.5배
+           currentMaxCandiesUpCost = newCost;
+
+           Debug.Log($"캔디 생성 증가!:{newMaxCandies}, 새로운 비용: {currentMaxCandiesUpCost}");
+       }
+       else
+       {
+           Debug.Log("골드가 부족합니다.");
+       }
+   }
 
     public void MaxCandiesUp(int count)
     {
@@ -366,23 +372,31 @@ public class UpgradeManager : MonoBehaviour
     public void CandyLevelUp() //기본 제작 캔디 레벨 업 (스킬5)
     {
         int currentBaseLevel = candyStatus.GetBaseLevel();
-        if (candyLevel >= maxCandyLevelUpgradeLevel) 
+        if (candyLevel >= maxCandyLevelUpgradeLevel)
         {
             Debug.Log("이미 최대로 업그레이드 되었습니다.");
             return;
         }
+    
         if (currencyManager.SubtractCurrency("Gold", currentCandyLevelUpCost))
         {
             int newBaseLevel = currentBaseLevel + increaseBaseLevel;
             candyStatus.SetBaseLevel(newBaseLevel);
             candyLevel++;
-            Debug.Log($"캔디 레벨업!:{newBaseLevel}");
+
+            // 비용을 1.5배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
+            BigInteger newCost = (currentCandyLevelUpCost * multiplier) / 10;  // 1.5배
+            currentCandyLevelUpCost = newCost;
+
+            Debug.Log($"캔디 레벨업!:{newBaseLevel}, 새로운 비용: {currentCandyLevelUpCost}");
         }
         else
         {
             Debug.Log("골드가 부족합니다.");
         }
     }
+
 
 
     public void CandyLevelUp(int count)
@@ -415,23 +429,31 @@ public class UpgradeManager : MonoBehaviour
     public void PassiveAutoCreateSpeedUp() //패시브 자동 제작 속도 업 (스킬7)
     {
         float currentPassiveCreateSpeed = giftBoxController.GetPassiveCreateTry();
-        if (passiveAutoCreateSpeedLevel >= maxPassiveAutoCreateSpeedUpgradeLevel) 
+        if (passiveAutoCreateSpeedLevel >= maxPassiveAutoCreateSpeedUpgradeLevel)
         {
             Debug.Log("이미 최대로 업그레이드 되었습니다.");
             return;
         }
+    
         if (currencyManager.SubtractCurrency("Gold", currentPassiveAutoCreateSpeedUpCost))
         {
             float newPassiveAutoCreateSpeed = currentPassiveCreateSpeed + increasePassiveAutoCreateSpeed;
             giftBoxController.SetPassiveCreateTry(newPassiveAutoCreateSpeed);
             passiveAutoCreateSpeedLevel++;
-            Debug.Log($"자동 생성 속도업!:{newPassiveAutoCreateSpeed}");
+
+            // 비용을 1.3배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
+            BigInteger newCost = (currentPassiveAutoCreateSpeedUpCost * multiplier) / 10;  // 1.3배
+            currentPassiveAutoCreateSpeedUpCost = newCost;
+
+            Debug.Log($"자동 생성 속도업!:{newPassiveAutoCreateSpeed}, 새로운 비용: {currentPassiveAutoCreateSpeedUpCost}");
         }
         else
         {
             Debug.Log("골드가 부족합니다.");
         }
     }
+
 
 
     public void PassiveAutoCreateSpeedUp(int count)
@@ -477,13 +499,20 @@ public class UpgradeManager : MonoBehaviour
             float newGoldUp = currentGoldUp + increaseGoldUp;
             RewardButton.instance.SetGoldUp(newGoldUp);
             goldUpLevel++;
-            Debug.Log($"추가 골드 획득 업!: {newGoldUp}");
+
+            // 비용을 1.3배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
+            BigInteger newCost = (currentGoldUpCost * multiplier) / 10;  // 1.3배
+            currentGoldUpCost = newCost;
+
+            Debug.Log($"추가 골드 획득 업!: {newGoldUp}, 새로운 비용: {currentGoldUpCost}");
         }
         else
         {
             Debug.Log("골드가 부족합니다.");
         }
     }
+
 
     public void GoldUp(int count)
     {
@@ -527,13 +556,20 @@ public class UpgradeManager : MonoBehaviour
             float newLuckyGoldUp = currentLuckyGoldUp + increaseLuckyGold;
             RewardButton.instance.SetLuckyGoldUp(newLuckyGoldUp);
             luckyGoldLevel++;
-            Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}");
+
+            // 비용을 1.2배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(12);  // 1.2 * 10
+            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 10;  // 1.2배
+            currentLuckyGoldUpCost = newCost;
+
+            Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}, 새로운 비용: {currentLuckyGoldUpCost}");
         }
         else
         {
             Debug.Log("골드가 부족합니다.");
         }
     }
+
     
     // public void MaxCandiesUp(int count)
     // {
