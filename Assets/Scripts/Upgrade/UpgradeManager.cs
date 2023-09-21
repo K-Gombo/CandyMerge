@@ -115,10 +115,6 @@ public class UpgradeManager : MonoBehaviour
     }
 
 
-
-
-
-    
     public Dictionary<int, BigInteger> createSpeedCostDictionary = new Dictionary<int, BigInteger>
     {
         { 0, 800 },  
