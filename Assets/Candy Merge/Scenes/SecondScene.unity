@@ -3835,7 +3835,11 @@ MonoBehaviour:
   GachaUIManager: {fileID: 411645543}
   chestGachaAnimator: {fileID: 0}
   mask: {fileID: 0}
-  AutoGachaBtn: {fileID: 0}
+  autoGachaBtn: {fileID: 0}
+  equipKeyCountBtn: {fileID: 0}
+  equipKeyPanel: {fileID: 0}
+  equipGachaKeyCountText: {fileID: 0}
+  equipKeyGachaAvailavleText: {fileID: 0}
 --- !u!1 &418234461
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,19 +5490,19 @@ PrefabInstance:
       objectReference: {fileID: 129387402}
     - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 570
       objectReference: {fileID: 0}
     - target: {fileID: 1256963776523951479, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -610
       objectReference: {fileID: 0}
     - target: {fileID: 1385771573261780503, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_Name
@@ -5510,23 +5514,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1671211639927934703, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 570
       objectReference: {fileID: 0}
     - target: {fileID: 3404741210808447783, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 7921241645711714840, guid: 8bb602f02440345fd98bbcdbb1a46181, type: 3}
       propertyPath: m_Pivot.x
@@ -6862,6 +6866,10 @@ MonoBehaviour:
   allMixBtnMixAvailable: {fileID: 0}
   equipSlotBoxes: []
   equipSlotBoxesImage: []
+  equipScoreText: {fileID: 0}
+  totalEquipScore: 0
+  equipSpawnLocation: {fileID: 0}
+  mask: {fileID: 0}
 --- !u!114 &728567993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12223,14 +12231,14 @@ MonoBehaviour:
   candyController: {fileID: 1968457436}
   boxManager: {fileID: 749087271}
   currencyManager: {fileID: 477139587}
-  decreaseFilltime: 0.5
+  actualRemovedLockedCount: 0
   increaseLuckyCreate: 0.5
+  decreaseFilltime: 0.5
   increaseMaxCandies: 1
   increaseBaseLevel: 1
   increasePassiveAutoCreateSpeed: 0.2
   increaseGoldUp: 0.5
   increaseLuckyGold: 0.5
-  costMultiplier: 2
   LuckyCreateUpCost: 800
   CreateSpeedUpCost: 1000
   RemoveLockedCost: 1000
@@ -12247,6 +12255,14 @@ MonoBehaviour:
   passiveAutoCreateSpeedLevel: 1
   goldUpLevel: 1
   luckyGoldLevel: 1
+  maxLuckyCreateUpgradeLevel: 40
+  maxCreateSpeedUpgradeLevel: 5
+  maxRemoveLockedUpgradeLevel: 33
+  maxCandiesUpgradeLevel: 30
+  maxCandyLevelUpgradeLevel: 57
+  maxPassiveAutoCreateSpeedUpgradeLevel: 100
+  maxGoldUpUpgradeLevel: 100
+  maxLuckyGoldUpgradeLevel: 150
 --- !u!1 &1388160929
 GameObject:
   m_ObjectHideFlags: 0
@@ -15132,6 +15148,7 @@ MonoBehaviour:
   equipKeyDoubleProbability: 0
   keyBox: {fileID: 0}
   keyBoxCountText: {fileID: 0}
+  keyCount: 0
   equipKeyPool: {fileID: 0}
   initialEquipKeyPoolSize: 10
 --- !u!1 &1676136688
@@ -17808,6 +17825,12 @@ MonoBehaviour:
   happyLevel: {fileID: 1675821896}
   specialQuestProbability: 15
   luckyExperienceUpProbability: 0
+  goldIncreaseRate: 0
+  maxGoldIncreaseRate: 30
+  equipGoldIncreaseRate: 0
+  equipLuckyGoldProbability: 0
+  luckyGoldProbability: 0
+  maxLuckyGoldProbability: 40
 --- !u!114 &1965584767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19281,7 +19304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 505730432650082927, guid: 0d719437709de4a4caef4b9d41e258c7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2038709926480908386, guid: 0d719437709de4a4caef4b9d41e258c7, type: 3}
       propertyPath: m_Pivot.x
@@ -19680,6 +19703,10 @@ PrefabInstance:
     - target: {fileID: 5109855235390906416, guid: 4e848de3d472a4ae586066b8aa4e4b4c, type: 3}
       propertyPath: m_Name
       value: Panel_LevelUP
+      objectReference: {fileID: 0}
+    - target: {fileID: 5109855235390906416, guid: 4e848de3d472a4ae586066b8aa4e4b4c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8656383646162589942, guid: 4e848de3d472a4ae586066b8aa4e4b4c, type: 3}
       propertyPath: m_Pivot.x
@@ -20181,6 +20208,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Option
       objectReference: {fileID: 0}
+    - target: {fileID: 6212758831198149332, guid: 13e05fbeab87741a5950bbc7a5a822ae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20286,6 +20317,10 @@ PrefabInstance:
     - target: {fileID: 6000086243625644788, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
       propertyPath: m_Name
       value: Panel_AutoMerge
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000086243625644788, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
