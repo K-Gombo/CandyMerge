@@ -15,6 +15,7 @@ public class EquipmentStatus : MonoBehaviour
     public Image imageComponent;
     public string[] skillNames = new string[4];
     public float[] skillPoints = new float[4];
+    public bool[] skillUnlocked = new bool[4];
     public Image backgroundImageComponent;
     public Image levelCircleComponent;
     public Image slotImageComponent;

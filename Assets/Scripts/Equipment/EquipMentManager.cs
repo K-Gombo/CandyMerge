@@ -511,6 +511,7 @@ public class EquipmentManager : MonoBehaviour
 
             // EquipMixbox[0]의 클론 제거
             Destroy(equipMixBoxes[0].GetChild(0).gameObject);
+            EquipmentController.instance.EquipStatusUpdate(mainEquipment);
         }
         CheckMixAvailability();
     }
@@ -603,66 +604,84 @@ public class EquipmentManager : MonoBehaviour
     
     
     public void AllMergeEquipments()
+{
+    // 같은 Rank와 equipName을 가진 장비를 카운트하기 위한 딕셔너리
+    Dictionary<string, List<EquipmentStatus>> equipGroups = new Dictionary<string, List<EquipmentStatus>>();
+
+    foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
     {
-        // 같은 Rank와 equipName을 가진 장비를 카운트하기 위한 딕셔너리
-        Dictionary<string, List<EquipmentStatus>> equipGroups = new Dictionary<string, List<EquipmentStatus>>();
+        string key = equipment.equipRank + "_" + equipment.equipName;
 
-        foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
+        if (equipGroups.ContainsKey(key))
         {
-          
-            string key = equipment.equipRank + "_" + equipment.equipName;
+            equipGroups[key].Add(equipment);
+        }
+        else
+        {
+            equipGroups[key] = new List<EquipmentStatus> { equipment };
+        }
+    }
 
-            if (equipGroups.ContainsKey(key))
+    // 3개 이상 동일한 조건의 장비가 있으면 합성
+    foreach (var group in equipGroups)
+    {
+        while (group.Value.Count >= 3)
+        {
+            // 첫 번째 장비를 기본으로 삼아 업그레이드
+            EquipmentStatus mainEquipment = group.Value[0];
+
+            // 나머지 로직은 UpdateRankLevelOnMerge 메서드와 유사
+            int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
+
+            if (mainEquipment.rankLevel >= maxRankLevel)
             {
-                equipGroups[key].Add(equipment);
+                Rank nextRank = GetNextRank(mainEquipment.equipRank);
+                mainEquipment.rankLevel = nextRank == mainEquipment.equipRank ? 0 : ConvertRankToLevel(nextRank);
+                mainEquipment.equipRank = nextRank;
             }
             else
             {
-                equipGroups[key] = new List<EquipmentStatus> { equipment };
+                mainEquipment.rankLevel++;
             }
-        }
 
-        // 3개 이상 동일한 조건의 장비가 있으면 합성
-        foreach (var group in equipGroups)
-        {
-            while (group.Value.Count >= 3)
+            SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
+
+            // 새로운 등급의 시작 레벨과 최대 레벨을 설정
+            if (levelDataMap.ContainsKey(mainEquipment.equipRank.ToString()))
             {
-                // 첫 번째 장비를 기본으로 삼아 업그레이드
-                EquipmentStatus mainEquipment = group.Value[0];
-
-                // 나머지 로직은 UpdateRankLevelOnMerge 메서드와 유사
-                int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
-
-                if (mainEquipment.rankLevel >= maxRankLevel)
-                {
-                    Rank nextRank = GetNextRank(mainEquipment.equipRank);
-                    mainEquipment.rankLevel = nextRank == mainEquipment.equipRank ? 0 : ConvertRankToLevel(nextRank);
-                    mainEquipment.equipRank = nextRank;
-                }
-                else
-                {
-                    mainEquipment.rankLevel++;
-                }
-
-                SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
-                mainEquipment.UpdateLevelUI();
-
-                // 2개의 장비를 풀로 리턴
-                for (int i = 1; i <= 2; i++)
-                {
-                    GameObject originalObj = group.Value[i].gameObject;
-                    ReturnEquipToPool(originalObj);
-                }
-
-                // 합성한 장비를 리스트에서 제거
-                group.Value.RemoveRange(0, 3);
-                
-                mainEquipment.gameObject.transform.SetParent(specialGachaBtn.equipGachaSpawnLocation);
-                mainEquipment.mixAvailable.SetActive(false);
-                specialGachaBtn.equipResultPanel.SetActive(true);
+                EquipLevelData levelData = levelDataMap[mainEquipment.equipRank.ToString()];
+                mainEquipment.equipLevel = levelData.startLevel;
             }
+
+            // 등급에 따라 색상 업데이트
+            if (rankToColorMap.ContainsKey(mainEquipment.equipRank))
+            {
+                Color newColor = rankToColorMap[mainEquipment.equipRank];
+                mainEquipment.backgroundImageComponent.color = newColor;
+                mainEquipment.levelCircleComponent.color = newColor;
+                mainEquipment.slotBarComponent.color = newColor;
+            }
+
+            mainEquipment.UpdateLevelUI();
+
+            // 2개의 장비를 풀로 리턴
+            for (int i = 1; i <= 2; i++)
+            {
+                GameObject originalObj = group.Value[i].gameObject;
+                ReturnEquipToPool(originalObj);
+            }
+
+            // 합성한 장비를 리스트에서 제거
+            group.Value.RemoveRange(0, 3);
+            
+            mainEquipment.gameObject.transform.SetParent(specialGachaBtn.equipGachaSpawnLocation);
+            mainEquipment.mixAvailable.SetActive(false);
+            specialGachaBtn.equipResultPanel.SetActive(true);
+            EquipmentController.instance.EquipStatusUpdate(mainEquipment);
         }
     }
+}
+
 
     public void EquipLevelUpgrade(EquipmentStatus equipment)
     {   
@@ -757,6 +776,15 @@ public class EquipmentManager : MonoBehaviour
         equipSlotBoxesImage[slotIndex].SetActive(false);
 
         equipmentStatus.isEquipped = true;
+        
+        // 디버그 코드 추가
+        Debug.Log("장비 스킬 해금 상태:");
+        for (int i = 0; i < equipmentStatus.skillIds.Length; i++)
+        {
+            string unlockStatus = equipmentStatus.skillUnlocked[i] ? "해금됨" : "잠김";
+            Debug.Log($"Skill ID: {equipmentStatus.skillIds[i]}, 상태: {unlockStatus}");
+        }
+
         
         if (RankEquipScroe.TryGetValue(equipmentStatus.equipRank, out int equipScore))
         {
