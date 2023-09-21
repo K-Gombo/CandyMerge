@@ -36,6 +36,9 @@ public class AdsGachaBtn : MonoBehaviour
         });
 
         EquipmentManager.instance.CheckMixAvailability();
+
+        timer.CheckCooldown();
+
     }
 
     void ShowAds()
