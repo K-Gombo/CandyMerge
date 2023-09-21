@@ -194,7 +194,7 @@ public class AdsManager : MonoBehaviour
                 currentRewardType = RewardType.BoxOpen;
             break;
             case RewardType.LevelUp:
-                currentRewardType = RewardType.LevelUp;
+                HappyLevel.instance.AdsReward();
             break;
             default:
                 return;

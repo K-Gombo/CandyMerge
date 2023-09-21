@@ -107,7 +107,6 @@ public class OfflineRewardManager : MonoBehaviour
 
     public void OfflineAdsRewardCleck()
     {
-        Debug.Log("광고 봤으니 실행 해볼까?!");
         RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, (goldReward * 2).ToString());
 
         offlineRewardPanel.SetActive(false);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HappyLevel : MonoBehaviour
 {   
-    
+
     public static HappyLevel instance;
     public TextAsset CsvData { get; set; }
     
@@ -21,6 +21,9 @@ public class HappyLevel : MonoBehaviour
     public Text happinessText; // HappinessText 오브젝트
     public Image happinessBar; // Happiness Bar를 참조하는 Image 컴포넌트
     public Text DiaText;
+
+    [SerializeField] GameObject levelPanel;
+    [SerializeField] Text levelUpDiaText;
 
     private void Awake()
     {   
@@ -105,10 +108,12 @@ public class HappyLevel : MonoBehaviour
         CurrentLevel++;
         DataController.instance.Player_Level_Save();
         UpdateLevelText();
-        GiveLevelUpReward(); // 레벨업 보상 주기
         // currentExperience 초기화
         currentExperience = 0;
         DataController.instance.Player_Experience_Save();
+
+        levelUpDiaText.text = HappylevelUpReward[CurrentLevel].ToString();
+        levelPanel.SetActive(true);
     }
     
     public void UpdateHappinessBar()
@@ -121,5 +126,25 @@ public class HappyLevel : MonoBehaviour
 
         // 비율을 Happiness Bar의 Fill Amount로 설정
         happinessBar.fillAmount = fillAmount;
+    }
+
+
+    public void OkClick()
+    {
+        RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, HappylevelUpReward[CurrentLevel].ToString());
+
+        levelPanel.SetActive(false);
+    }
+
+    public void ShowAds()
+    {
+        AdsManager.instance.ShowRewarded(RewardType.LevelUp);
+    }
+
+    public void AdsReward()
+    {
+        RewardMovingManager.instance.RequestMovingCurrency(10, CurrencyType.Dia, (HappylevelUpReward[CurrentLevel] * 2).ToString());
+
+        levelPanel.SetActive(false);
     }
 }
