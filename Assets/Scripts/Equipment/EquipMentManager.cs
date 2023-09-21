@@ -779,7 +779,7 @@ public class EquipmentManager : MonoBehaviour
         Debug.LogError("Invalid slot index: " + slotIndex);
     }
 
-        SaveEquipData(equipmentStatus);
+    SaveEquipData(equipmentStatus);
 }
 
     
@@ -861,10 +861,6 @@ public class EquipmentManager : MonoBehaviour
 
                 var clone = Instantiate(newEquip, mask.transform.position, UnityEngine.Quaternion.identity, mask.transform);
                 clone.transform.localScale = newEquip.transform.localScale * 1.2f;
-
-
-                
-                    
             }
         }
     }
