@@ -41,7 +41,7 @@ public class EquipmentStatus : MonoBehaviour
     [HideInInspector]public Transform originalParent;
     [HideInInspector]public Vector3 originalScale;
     public bool isEquipped = false;
-    
+    public string totalGoldUsedForUpgrade = "0"; // 총 업그레이드에 사용된 골드 (스트링으로 저장)
     
     void Awake()
     {
