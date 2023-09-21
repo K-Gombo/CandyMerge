@@ -9,6 +9,7 @@ public class DataController : MonoBehaviour
     [SerializeField] GiftBoxController giftBoxController;
     [SerializeField] UpgradeManager upgradeManager;
     [SerializeField] UpgradeUI upgradeUI;
+    [SerializeField] AutoCreateBtn autoCreateBtn;
 
     [SerializeField] Toggle BGMToggle;
     [SerializeField] Toggle SoundToggle;
@@ -37,6 +38,7 @@ public class DataController : MonoBehaviour
         Upgrade_goldUpLevel_Load();
         Upgrade_luckyGoldLevel_Load();
         Upgrade_OffLineRewardBonusUpLevel_Load();
+        Auto_Create_Load();
         EquipmentManager.instance.LoadEquipData();
 
 
@@ -347,24 +349,55 @@ public class DataController : MonoBehaviour
 
     private void Upgrade_OffLineRewardBonusUpLevel_DataSave()
     {
-        ES3.Save("upgrade_OffLineRewardBonusUpLevel", GameData.OffLineRewardBonusUpLevel);
+        ES3.Save("upgrade_OffLineRewardBonusUpLevel", GameData.offLineRewardBonusUpLevel);
     }
     public void Upgrade_OffLineRewardBonusUpLevel_Save()
     {
-        GameData.OffLineRewardBonusUpLevel = upgradeManager.offLineRewardBonusLevel;
+        GameData.offLineRewardBonusUpLevel = upgradeManager.offLineRewardBonusLevel;
         Upgrade_OffLineRewardBonusUpLevel_DataSave();
     }
 
     private void Upgrade_OffLineRewardBonusUpLevel_DataLoad()
     {
-        GameData.OffLineRewardBonusUpLevel = ES3.Load("upgrade_OffLineRewardBonusUpLevel", 0);
+        GameData.offLineRewardBonusUpLevel = ES3.Load("upgrade_OffLineRewardBonusUpLevel", 0);
     }
 
     public void Upgrade_OffLineRewardBonusUpLevel_Load()
     {
         Upgrade_OffLineRewardBonusUpLevel_DataLoad();
-        upgradeManager.offLineRewardBonusLevel = GameData.OffLineRewardBonusUpLevel;
+        upgradeManager.offLineRewardBonusLevel = GameData.offLineRewardBonusUpLevel;
 
-        upgradeManager.OffLineRewardBonusUp(GameData.OffLineRewardBonusUpLevel);
+        upgradeManager.OffLineRewardBonusUp(GameData.offLineRewardBonusUpLevel);
+    }
+
+
+    private void Auto_Create_DataSave()
+    {
+        ES3.Save("auto_Create", GameData.autoCreateIsOn);
+    }
+    public void Auto_Create_Save()
+    {
+        GameData.autoCreateIsOn = autoCreateBtn.isOn;
+        Auto_Create_DataSave();
+    }
+
+    private void Auto_Create_DataLoad()
+    {
+        GameData.autoCreateIsOn = ES3.Load("auto_Create", false);
+    }
+
+    public void Auto_Create_Load()
+    {
+        Auto_Create_DataLoad();
+        autoCreateBtn.isOn = GameData.autoCreateIsOn;
+
+        if (GameData.autoCreateIsOn)
+        {
+            autoCreateBtn.OnACOnBtnClick();
+        }
+        else
+        {
+            autoCreateBtn.OnACOffBtnClick();
+        }
     }
 }

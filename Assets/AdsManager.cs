@@ -26,7 +26,8 @@ public class AdsManager : MonoBehaviour
     private int rewardedRetryAttempt;
 
     [SerializeField] OfflineRewardManager offlineRewardManager;
-    [SerializeField] AdsGachaBtn adsGachaBtn; 
+    [SerializeField] AdsGachaBtn adsGachaBtn;
+    [SerializeField] AutoCreateBtn autoCreateBtn;
 
     RewardType currentRewardType;
 
@@ -186,7 +187,7 @@ public class AdsManager : MonoBehaviour
         switch (currentRewardType)
         {
             case RewardType.AutoCreate:
-                currentRewardType = RewardType.AutoCreate;
+                autoCreateBtn.WatchAd();
             break;
             case RewardType.OffLine:
                 offlineRewardManager.OfflineAdsRewardCleck();
