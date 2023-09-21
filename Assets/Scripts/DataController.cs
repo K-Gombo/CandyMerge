@@ -19,11 +19,9 @@ public class DataController : MonoBehaviour
 
     private void Start()
     {
-        ALL_LOAD();
-
     }
 
-    private void ALL_LOAD()
+    public void ALL_LOAD()
     {
         CandiesRemaining_Load();
         Player_Level_Load();
@@ -128,6 +126,8 @@ public class DataController : MonoBehaviour
     {
         Option_BGM_DataLoad();
         BGMToggle.isOn = GameData.option_BGM;
+
+        BGMToggle.GetComponent<OptionToggle>().SwitchToggle(GameData.option_BGM);
     }
 
 
@@ -150,6 +150,8 @@ public class DataController : MonoBehaviour
     {
         Option_Sound_DataLoad();
         SoundToggle.isOn = GameData.option_Sound;
+
+        SoundToggle.GetComponent<OptionToggle>().SwitchToggle(GameData.option_Sound);
     }
 
 

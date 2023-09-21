@@ -9,12 +9,12 @@ public class OptionToggle : MonoBehaviour
     [SerializeField] GameObject offButton;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GetComponent<Toggle>().onValueChanged.AddListener(SwitchToggle);
     }
 
-    private void SwitchToggle(bool isSwitch)
+    public void SwitchToggle(bool isSwitch)
     {
         if (isSwitch)
         {
@@ -26,10 +26,12 @@ public class OptionToggle : MonoBehaviour
             if (parentName == "BGM")
             {
                 SoundManager.Instance.SetBGMMasterVolume(1);
+                DataController.instance.Option_BGM_Save();
             }
             else if (parentName == "Sound")
             {        
                 SoundManager.Instance.SetSoundMasterVolume(1);
+                DataController.instance.Option_Sound_Save();
             }
         }
         else
@@ -43,11 +45,14 @@ public class OptionToggle : MonoBehaviour
             if (parentName == "BGM")
             {
                 SoundManager.Instance.SetBGMMasterVolume(0);
+                DataController.instance.Option_BGM_Save();
             }
             else if (parentName == "Sound")
             {
                 SoundManager.Instance.SetSoundMasterVolume(0);
+                DataController.instance.Option_Sound_Save();
             }
+
         }
     }
 

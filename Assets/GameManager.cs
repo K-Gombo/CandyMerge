@@ -19,5 +19,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.PlayBackgroundMusic();
+
+        DataController.instance.ALL_LOAD();
     }
 }
