@@ -67,7 +67,7 @@ public class CurrencyManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("uhguygg");
-            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, "1000");
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, "9999999999");
         }
 
         if (Input.GetKeyDown(KeyCode.H))

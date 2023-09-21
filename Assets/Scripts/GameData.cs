@@ -15,12 +15,12 @@ public static class GameData
     public static bool option_Sound = true;
 
     // Upgrade
-    public static int luckyCreateLevel = 1;
-    public static int createSpeedLevel = 1;
-    public static int removeLockedLevel = 1;
-    public static int maxCandiesLevel = 1;
-    public static int candyLevel = 1;
-    public static int passiveAutoCreateSpeedLevel = 1;
-    public static int goldUpLevel = 1;
-    public static int luckyGoldLevel = 1;
+    public static int luckyCreateLevel = 0;
+    public static int createSpeedLevel = 0;
+    public static int removeLockedLevel = 0;
+    public static int maxCandiesLevel = 0;
+    public static int candyLevel = 0;
+    public static int passiveAutoCreateSpeedLevel= 0;
+    public static int goldUpLevel = 0;
+    public static int luckyGoldLevel = 0;
 }
