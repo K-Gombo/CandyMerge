@@ -25,7 +25,8 @@ public class AdsManager : MonoBehaviour
     private int interstitialRetryAttempt;
     private int rewardedRetryAttempt;
 
-    [SerializeField] OfflineRewardManager offlineRewardManager; 
+    [SerializeField] OfflineRewardManager offlineRewardManager;
+    [SerializeField] AdsGachaBtn adsGachaBtn; 
 
     RewardType currentRewardType;
 
@@ -191,7 +192,7 @@ public class AdsManager : MonoBehaviour
                 offlineRewardManager.OfflineAdsRewardCleck();
             break;
             case RewardType.BoxOpen:
-                currentRewardType = RewardType.BoxOpen;
+                adsGachaBtn.BoxOpenReward();
             break;
             case RewardType.LevelUp:
                 HappyLevel.instance.AdsReward();
