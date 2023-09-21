@@ -773,6 +773,8 @@ public class EquipmentManager : MonoBehaviour
     {
         Debug.LogError("Invalid slot index: " + slotIndex);
     }
+
+        SaveEquipData(equipmentStatus);
 }
 
     
@@ -818,7 +820,7 @@ public class EquipmentManager : MonoBehaviour
         GiftBoxController.instance.ResetEquipLuckyCreatKeyUp(equipmentStatus);
         GiftBoxController.instance.ResetEquipKeyDoubleUp(equipmentStatus);
 
-
+        SaveEquipData(equipmentStatus);
     }
 
     public GameObject mask;
@@ -856,8 +858,8 @@ public class EquipmentManager : MonoBehaviour
                 clone.transform.localScale = newEquip.transform.localScale * 1.2f;
 
 
-                if (savedEquipData.isEquipped)
-                    EquipmentController.instance.OnEquipmentClick(savedEquipData);
+                
+                    
             }
         }
     }
@@ -927,6 +929,11 @@ public class EquipmentManager : MonoBehaviour
 
                 // 랭크 레벨 슬롯 활성화
                 SetRankLevelSlotActive(equipComponent.rankLevel, equipComponent.rankLevelSlot);
+            }
+
+            if (equipComponent.isEquipped)
+            {
+                EquipmentSlotEquip(equipComponent);
             }
         }
 
