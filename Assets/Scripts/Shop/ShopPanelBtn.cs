@@ -7,10 +7,7 @@ public class ShopPanelBtn : MonoBehaviour
     public GameObject ShopPanel;    // UpgradePanel
     public CandyController candyController;
     public GachaManager gachaManager;
-    private void Start()
-    {
-        GameManager.instance.DownImage.AddListener(DownImage);
-    }
+
 
 
 
