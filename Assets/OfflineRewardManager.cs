@@ -14,6 +14,17 @@ public class OfflineRewardManager : MonoBehaviour
     
     [SerializeField] GameObject offlineRewardPanel;
     [SerializeField] Text goldText;
+    
+    public float offLineRewardIncreament = 0f;
+    public float equipOffLineRewardIncreament = 0f;
+
+    public static OfflineRewardManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
 
     void Start()
     {
@@ -52,10 +63,24 @@ public class OfflineRewardManager : MonoBehaviour
     void GetOfflineReward()
     {
         goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Hours;
+
+        // 두 증가율을 더한 값으로 적용합니다.
+        float totalIncreament = offLineRewardIncreament + equipOffLineRewardIncreament;
+
+        // BigInteger를 float로 변환
+        float goldRewardFloat = float.Parse(goldReward.ToString());
+
+        // 증가율을 적용
+        goldRewardFloat *= (1 + (totalIncreament / 100));
+
+        // 다시 BigInteger로 변환
+        goldReward = new BigInteger(Math.Round(goldRewardFloat).ToString());
+
         Debug.Log("얼마 나왔니? : " + goldReward);
         goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(goldReward.ToString());
         offlineRewardPanel.SetActive(true);
     }
+
 
     public string GetCurrentRewardTimeAsString()
     {
@@ -111,4 +136,68 @@ public class OfflineRewardManager : MonoBehaviour
 
         offlineRewardPanel.SetActive(false);
     }
+    
+    
+    
+    
+    
+    
+    public float GetEquipOffLineRewardUp()
+    {   
+        return equipOffLineRewardIncreament;
+    }
+
+    public void SetEquipOffLineRewardUp(float newequipOffLineRewardIncreament)
+    {
+        newequipOffLineRewardIncreament = Mathf.Round(newequipOffLineRewardIncreament * 10f) / 10f;
+        equipOffLineRewardIncreament = newequipOffLineRewardIncreament;
+    }
+    
+    
+    public void ResetEquipOffLineRewardUp(EquipmentStatus equipment)
+    {
+        float currentEquipOffLineRewardUp = GetEquipOffLineRewardUp();
+        float newEquipOffLineRewardUp = currentEquipOffLineRewardUp;
+        bool skillIdExists = false;
+        
+        int[] targetSkillIds = { 1, 2, 3, 4, 5 };
+
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i])&& equipment.skillUnlocked[i])
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 빼기
+                newEquipOffLineRewardUp -= equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        // 새로운 값을 설정
+        SetEquipOffLineRewardUp(newEquipOffLineRewardUp);
+        Debug.Log($"캔디 레벨 2단계 상승 확률 초기화: {newEquipOffLineRewardUp}");
+    }
+    
+    
+    
+    public float GetOffLineRewardBonusUp()
+    {
+        return offLineRewardIncreament;
+    }
+
+    public void SetOffLineRewardBonusUp(float newoffLineRewardIncreament)
+    {
+        newoffLineRewardIncreament = Mathf.Round(newoffLineRewardIncreament * 10f) / 10f; // 소수 둘째자리에서 반올림
+        offLineRewardIncreament = Mathf.Min(newoffLineRewardIncreament);
+    }
+    
+    
+    
 }

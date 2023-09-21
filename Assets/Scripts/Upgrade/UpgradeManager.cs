@@ -11,6 +11,7 @@ public class UpgradeManager : MonoBehaviour
     public CandyController candyController;
     public BoxManager boxManager;
     public CurrencyManager currencyManager;
+    public OfflineRewardManager offlineRewardManager;
     
    //몇 개의 Locked 오브젝트가 제거되었는지 저장할 변수
     public int actualRemovedLockedCount = 0;
@@ -23,6 +24,7 @@ public class UpgradeManager : MonoBehaviour
     public float increasePassiveAutoCreateSpeed = 0.1f;
     public float increaseGoldUp = 0.2f;
     public float increaseLuckyGold = 0.2f;
+    public float increaseOffLineRewardBonus = 0.3f;
     
      
     private int luckyCreateUpCost = 1000;
@@ -32,6 +34,7 @@ public class UpgradeManager : MonoBehaviour
     private int passiveAutoCreateSpeedUpCost = 1500;
     private int goldUpCost = 1500;
     private int luckyGoldUpCost = 1500;
+    private int offLineRewardBonusCost = 2000;
     
     // 각 업그레이드의 현재 비용
     public BigInteger currentLuckyCreateUpCost;
@@ -42,6 +45,7 @@ public class UpgradeManager : MonoBehaviour
     public BigInteger currentPassiveAutoCreateSpeedUpCost;
     public BigInteger currentGoldUpCost;
     public BigInteger currentLuckyGoldUpCost;
+    public BigInteger currentOffLineRewardBonusCost;
     
     // 각 업그레이드의 레벨
     public int luckyCreateLevel ;
@@ -52,6 +56,7 @@ public class UpgradeManager : MonoBehaviour
     public int passiveAutoCreateSpeedLevel ;
     public int goldUpLevel ;
     public int luckyGoldLevel ;
+    public int offLineRewardBonusLevel;
     
     //각 업그레이드의 맥스레벨
     public int maxLuckyCreateUpgradeLevel = 40;
@@ -62,6 +67,7 @@ public class UpgradeManager : MonoBehaviour
     public int maxPassiveAutoCreateSpeedUpgradeLevel = 100;
     public int maxGoldUpUpgradeLevel = 100;
     public int maxLuckyGoldUpgradeLevel = 150;
+    public int maxOffLineRewardBonusLevel = 100;
     
 
     
@@ -76,7 +82,8 @@ public class UpgradeManager : MonoBehaviour
         currentPassiveAutoCreateSpeedUpCost = passiveAutoCreateSpeedUpCost;
         currentGoldUpCost = goldUpCost;
         currentLuckyGoldUpCost = luckyGoldUpCost;
-        
+        currentOffLineRewardBonusCost = offLineRewardBonusCost;
+
     }
     
     public void LuckyCreateUp() //스킬1 
@@ -403,6 +410,36 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
+    
+    
+    public void OffLineRewardBonusUp() // 스킬10
+    {
+        if (offLineRewardBonusLevel >= maxOffLineRewardBonusLevel)
+        {
+            Debug.Log("이미 최대 레벨에 도달했습니다.");
+            return;
+        }
+
+        if (currencyManager.SubtractCurrency("Gold", currentOffLineRewardBonusCost))
+        {
+            float currentOffLineRewardBonus = offlineRewardManager.GetOffLineRewardBonusUp();
+            float newOffLineRewardBonus = currentOffLineRewardBonus + increaseOffLineRewardBonus;
+            offlineRewardManager.SetOffLineRewardBonusUp(newOffLineRewardBonus);
+            offLineRewardBonusLevel++;
+
+            // 비용을 1.3배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
+            BigInteger newCost = (currentOffLineRewardBonusCost * multiplier) / 10;  // 1.3배
+            currentOffLineRewardBonusCost = newCost;
+
+            Debug.Log($"오프라인 리워드 보너스 업!: {newOffLineRewardBonus}, 새로운 비용: {currentOffLineRewardBonusCost}");
+        }
+        else
+        {
+            Debug.Log("골드가 부족합니다.");
+        }
+    }
+
 
     
 public void LuckyCreateUp(int luckyCreateLevel)
@@ -416,6 +453,7 @@ public void LuckyCreateUp(int luckyCreateLevel)
 
         Debug.Log($"캔디 확률 업!: {newLuckyCreate}");
     }
+<<<<<<< Updated upstream
 }
 
 public void CreateSpeedUp(int createSpeedLevel)
@@ -620,6 +658,11 @@ public void LuckyGoldUp(int count)
     Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}");
 
 }
+=======
+    
+    
+    
+>>>>>>> Stashed changes
 
 
 }

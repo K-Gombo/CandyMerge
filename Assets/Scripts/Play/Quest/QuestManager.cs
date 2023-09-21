@@ -43,8 +43,6 @@ public class QuestManager : MonoBehaviour
     public float luckyGoldProbability = 0;
     public float maxLuckyGoldProbability = 40f;
 
-
-
     private void Awake()
     {
         instance = this;

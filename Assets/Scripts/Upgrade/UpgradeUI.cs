@@ -16,6 +16,7 @@ public class UpgradeUI : MonoBehaviour
     public Text passiveAutoCreateSpeedUpCostText;
     public Text goldUpCostText;
     public Text luckyGoldUpCostText;
+    public Text offLineRewardBonusUpCostText;
     
     
     public Text luckyCreateLevelText;
@@ -26,6 +27,7 @@ public class UpgradeUI : MonoBehaviour
     public Text PassiveAutoCreateSpeedUpLevelText;
     public Text goldUpLevelText;
     public Text luckyGoldUpLevelText;
+    public Text offLineRewardBonusLevelText;
     
     
 
@@ -109,6 +111,21 @@ public class UpgradeUI : MonoBehaviour
         {
             luckyGoldUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentLuckyGoldUpCost.ToString());
         }
+        
+       
+        
+        // offLineRewardBonus
+        if (upgradeManager.offLineRewardBonusLevel == upgradeManager.maxOffLineRewardBonusLevel)
+        {
+            offLineRewardBonusUpCostText.text = "Max";
+            offLineRewardBonusLevelText.text = "Max";
+        }
+        else
+        {
+            offLineRewardBonusUpCostText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentOffLineRewardBonusCost.ToString());
+            offLineRewardBonusLevelText.text = "Lv." + upgradeManager.offLineRewardBonusLevel;
+        }
+        
         
        
         // 각 업그레이드 현재 레벨 표시
@@ -195,6 +212,9 @@ public class UpgradeUI : MonoBehaviour
 
 
     }
+    
+    
+    
     
     
 }

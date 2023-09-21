@@ -12,6 +12,7 @@ public class UpgradeBtnManager : MonoBehaviour
     public Button RemoveLokcedButton;
     public Button goldUpButton;
     public Button luckyGoldUpButton;
+    public Button offLineRewardBonusUpButton;
 
     public UpgradeManager upgradeManager;
     public CurrencyManager currencyManager;  // CurrencyManager 참조 추가
@@ -28,6 +29,7 @@ public class UpgradeBtnManager : MonoBehaviour
         RemoveLokcedButton.interactable = true;
         goldUpButton.interactable = true;
         luckyGoldUpButton.interactable = true;
+        offLineRewardBonusUpButton.interactable = true;
 
         // 버튼에 대한 리스너 추가
         luckyCreateUpButton.onClick.AddListener(OnLuckyCreateUpButtonClick);
@@ -38,6 +40,8 @@ public class UpgradeBtnManager : MonoBehaviour
         RemoveLokcedButton.onClick.AddListener(OnRemoveLockedButtonClick);
         goldUpButton.onClick.AddListener(OnGoldUpButtonClick);
         luckyGoldUpButton.onClick.AddListener(OnLuckyGoldUpButtonClick);
+        offLineRewardBonusUpButton.onClick.AddListener(OnOffLineRewardBonusUpButtonClick);
+        
     }
 
 
@@ -54,6 +58,7 @@ public class UpgradeBtnManager : MonoBehaviour
         RemoveLokcedButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentRemoveLockedCost.ToString());
         goldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentGoldUpCost.ToString());
         luckyGoldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentLuckyGoldUpCost.ToString());
+        offLineRewardBonusUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentOffLineRewardBonusCost.ToString());
 
     }
 
@@ -112,6 +117,13 @@ public class UpgradeBtnManager : MonoBehaviour
     {
         upgradeManager.LuckyGoldUp();
         DataController.instance.Upgrade_luckyGoldLevel_Save();
+        upgradeUI.UpdateUI();
+    }
+    
+    public void OnOffLineRewardBonusUpButtonClick() 
+    {
+        upgradeManager.OffLineRewardBonusUp();
+        // DataController.instance.Upgrade_offLineRewardBonusLevel_Save(); // 저장 로직 정우쨩,...
         upgradeUI.UpdateUI();
     }
 }

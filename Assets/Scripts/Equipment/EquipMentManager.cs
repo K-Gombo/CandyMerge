@@ -869,6 +869,7 @@ public class EquipmentManager : MonoBehaviour
         equipSkillManager.EquipLuckyDiaQuestUp(equipmentStatus);
         equipSkillManager.EquipLuckyCreatKeyUp(equipmentStatus);
         equipSkillManager.EquipKeyDoubleUp(equipmentStatus);
+        equipSkillManager.EquipOffLineRewardUp(equipmentStatus);
     }
     else
     {
@@ -920,6 +921,7 @@ public class EquipmentManager : MonoBehaviour
         Quest.instance.ResetEquipLuckyDiaQuestUp(equipmentStatus);  
         GiftBoxController.instance.ResetEquipLuckyCreatKeyUp(equipmentStatus);
         GiftBoxController.instance.ResetEquipKeyDoubleUp(equipmentStatus);
+        OfflineRewardManager.instance.ResetEquipOffLineRewardUp(equipmentStatus);
 
         SaveEquipData(equipmentStatus);
     }

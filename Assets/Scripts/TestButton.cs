@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class TestButton : MonoBehaviour
 {
-    public Button testBtn;
     public GachaManager GachaManager; 
     public EquipmentManager equipmentManager; 
     public Transform equipSpawnLocation; 
 
-    private void Start()
+   
+    private void Update()
     {
-        testBtn.onClick.AddListener(() =>
+        if (Input.GetKeyDown(KeyCode.P)) 
         {
             // 원하는 totalLevel 설정
             int desiredTotalLevel = 180;
@@ -18,6 +18,6 @@ public class TestButton : MonoBehaviour
             float[] probabilities = GachaManager.GetRankProbabilities(desiredTotalLevel);
             //장비 생성
             equipmentManager.CreateEquipPrefab(equipSpawnLocation, probabilities);
-        });
+        }
     }
 }

@@ -277,5 +277,38 @@ public class EquipSkillManager : MonoBehaviour
         GiftBoxController.instance.SetEquipKeyDoubleUp(newEquipKeyDoubleUp);
         Debug.Log($"장비 열쇠 2개 획득 확률 업!: {newEquipKeyDoubleUp}");
     }
+    
+    
+    
+    public void EquipOffLineRewardUp(EquipmentStatus equipment) 
+    {
+        float currentEquipOffLineRewardUp = OfflineRewardManager.instance.GetEquipOffLineRewardUp();
+        float newEquipOffLineRewardUp = currentEquipOffLineRewardUp;
+        bool skillIdExists = false;  // 해당 번호가 있는지 확인하는 변수
+
+        // skillId가 6, 7, 8, 9, 10 중에 있는지 확인
+        int[] targetSkillIds = { 1, 2, 3, 4, 5};
+    
+        for (int i = 0; i < equipment.skillIds.Length; i++)
+        {
+            if (Array.Exists(targetSkillIds, element => element == equipment.skillIds[i])&& equipment.skillUnlocked[i])
+            {
+                // 해당 번호가 있음을 표시
+                skillIdExists = true;
+
+                // 해당 skillId의 skillPoints를 불러와서 적용
+                newEquipOffLineRewardUp += equipment.skillPoints[i];
+                Debug.Log($"skillId {equipment.skillIds[i]} 찾음. skillPoints는 {equipment.skillPoints[i]}");
+            }
+        }
+
+        if (!skillIdExists)  // 해당 번호가 없을 경우
+        {
+            Debug.Log("대상 skillId 없음.");
+        }
+
+        OfflineRewardManager.instance.SetEquipOffLineRewardUp(newEquipOffLineRewardUp);
+        Debug.Log($"추가 골드 두배 획득 확률 업!: {newEquipOffLineRewardUp}");
+    }
 }
 
