@@ -13,6 +13,7 @@ public class GachaManager : MonoBehaviour
     public Transform equipSpawnLocation; // 장비가 생성될 위치
     public CandyManager candyManager;
     public GachaUIManager GachaUIManager; // GachaUIManager에 대한 참조 추가
+    public EquipArrangeManager equipArrangeManager;
     
     public Animator chestGachaAnimator;
     public GameObject mask;
@@ -219,7 +220,12 @@ public class GachaManager : MonoBehaviour
             int totalLevel = GachaUIManager.totalLevelSum; // GachaUIManager에서 캔디 총합 레벨을 가져옴
             float[] rankProbabilities = GetRankProbabilities(totalLevel);
             equipmentManager.CreateEquipPrefab(equipSpawnLocation, rankProbabilities);
-        
+            // 장비의 mixAvailable를 비활성화
+            foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
+            {
+                equipment.mixAvailable.SetActive(false);
+            }
+            
             if (lastCreatedEquip == null)
             {
                 return;

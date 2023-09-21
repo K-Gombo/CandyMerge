@@ -10,6 +10,7 @@ public class GachaPanelBtn : MonoBehaviour
     public GameObject GachaPanel;    // UpgradePanel
     public GiftBoxController giftBoxController; // GiftBoxController 인스턴스를 참조
     public AutoCreateBtn autoCreateBtn;
+    public PlayPanelBtn playPanelBtn;
 
 
     public void OnButtonClick()
@@ -38,6 +39,11 @@ public class GachaPanelBtn : MonoBehaviour
         candyController.EnableDrag(true);
         Transform mixBox = GameObject.FindGameObjectWithTag("MixBox").transform;
         candyController.MoveToMixBox(mixBox); // 캔디를 MixBox로 이동
+        
+        if (!playPanelBtn.TrashCan.activeSelf)
+        {
+            playPanelBtn.TrashCan.SetActive(false);
+        }
         
     }
 
