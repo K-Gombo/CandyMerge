@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 4459492086709456876}
   - component: {fileID: 2116134646594293248}
   - component: {fileID: 1478066567916624074}
+  - component: {fileID: 9193249826918961988}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -643,18 +644,32 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 9193249826918961988}
+        m_TargetAssemblyTypeName: ShopPanelBtn, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9193249826918961988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053377672374321673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841a7865232824012bc6b27bec01d8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShopPanel: {fileID: 0}
+  candyController: {fileID: 0}
 --- !u!1 &5051901406925434204
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,6 +855,7 @@ MonoBehaviour:
   GachaPanel: {fileID: 0}
   giftBoxController: {fileID: 0}
   autoCreateBtn: {fileID: 0}
+  playPanelBtn: {fileID: 7629314781782432856}
 --- !u!114 &3323029437379976358
 MonoBehaviour:
   m_ObjectHideFlags: 0
