@@ -507,7 +507,7 @@ public class EquipmentController : MonoBehaviour
 
         for (int i = 0; i < clickedEquipment.skillNames.Length; i++)
         {
-            equipSkillText[i].text = $"{clickedEquipment.skillNames[i]}";
+            equipSkillText[i].text = $"{clickedEquipment.skillNames[i]}  {clickedEquipment.skillPoints[i]}%";
         }
 
         List<EquipmentManager.Rank> rankOrderList = new List<EquipmentManager.Rank>(EquipmentManager.maxLevelsPerRank.Keys);

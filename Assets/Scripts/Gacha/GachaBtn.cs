@@ -25,10 +25,16 @@ public class GachaBtn : MonoBehaviour
     }
 
     void OnClickGacha()
-    {    Debug.Log("OnClickGacha called");
-        if (GachaManager != null)
-        {  
+    {
+        Debug.Log("OnClickGacha called");
+        if (GachaManager != null && !GachaManager.isAnimationInProgress)
+        {
             GachaManager.EquipGacha();
         }
-    } 
+        else
+        {
+            Debug.Log("애니메이션 중이므로 가챠를 할 수 없습니다.");
+        }
+    }
+
 }
