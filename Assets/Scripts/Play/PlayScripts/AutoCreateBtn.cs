@@ -185,7 +185,7 @@ public class AutoCreateBtn : MonoBehaviour
     // 업데이트에서 쿨타임과 버프 상태를 확인
     void Update()
     {
-        Debug.Log($"기록을 보자 {hasCooldown}  /  {isBuffActive}");
+        // Debug.Log($"기록을 보자 {hasCooldown}  /  {isBuffActive}");
         if (hasCooldown && isBuffActive)
         {
             cooldownText.gameObject.SetActive(true);

@@ -185,7 +185,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.OfflineRewardSkillExplain].text = "Gain n% additional offline rewards";
                 UILanguageList[(int)UILanguageIndex.equipStatusSkillTitle].text = "Skill List";
                 UILanguageList[(int)UILanguageIndex.EquipSet].text = "Unequipped";
-                UILanguageList[(int)UILanguageIndex.EquipUpgrade].text = "UPGRADE";
+                UILanguageList[(int)UILanguageIndex.EquipUpgrade].text = "Upgrade";
                 UILanguageList[(int)UILanguageIndex.DescriptionTitle].text = "The equipped equipment has different equipment scores depending on its grade. Depending on the total sum of the scores, the probability of a special customer bringing a quest changes.";
                 UILanguageList[(int)UILanguageIndex.ShowTitle].text = "Equip Score";
                 UILanguageList[(int)UILanguageIndex.SSRankScore].text = "Score 7";

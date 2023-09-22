@@ -320,7 +320,7 @@ public class RewardButton : MonoBehaviour
 
     
     public float GetGoldUp()
-    {
+    {    Debug.Log($"GoldUp값이 몇이냐! : {QuestManager.instance.goldIncreaseRate}");
         return QuestManager.instance.goldIncreaseRate;
     }
 
@@ -331,7 +331,7 @@ public class RewardButton : MonoBehaviour
     }
     
     public float GetLuckyGoldUp()
-    {
+    { 
         return QuestManager.instance.luckyGoldProbability;
     }
 

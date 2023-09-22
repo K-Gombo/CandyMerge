@@ -17,9 +17,9 @@ public class EquipKeyGachaBtn : MonoBehaviour
     private void Start()
     {
         equipKeyGachaBtn.onClick.AddListener(() =>
-        {
+        { 
             if (equipmentManager.totalEquipScore == 0)
-            {
+            { 
                 return;
             }
             // 버튼 활성화/비활성화 로직

@@ -46,21 +46,37 @@ public class UpgradeBtnManager : MonoBehaviour
 
 
     private void Update()
-    {
-        BigInteger currentGoldAmount = BigInteger.Parse(currencyManager.GetCurrencyAmount("Gold"));
+{
+    BigInteger currentGoldAmount = BigInteger.Parse(currencyManager.GetCurrencyAmount("Gold"));
 
-        // 초기 설정된 비용 대신 'current' 비용을 참조
-        luckyCreateUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentLuckyCreateUpCost.ToString());
-        createSpeedUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentCreateSpeedUpCost.ToString());
-        maxCandiesUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentMaxCandiesUpCost.ToString());
-        candyLevelUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentCandyLevelUpCost.ToString());
-        passiveAutoCreateSpeedUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentPassiveAutoCreateSpeedUpCost.ToString());
-        RemoveLokcedButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentRemoveLockedCost.ToString());
-        goldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentGoldUpCost.ToString());
-        luckyGoldUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentLuckyGoldUpCost.ToString());
-        offLineRewardBonusUpButton.interactable = currentGoldAmount >= BigInteger.Parse(upgradeManager.currentOffLineRewardBonusCost.ToString());
+    // Lucky Create Up
+    luckyCreateUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentLuckyCreateUpCost.ToString()) || upgradeManager.luckyCreateLevel >= upgradeManager.maxLuckyCreateUpgradeLevel);
 
-    }
+    // Create Speed Up
+    createSpeedUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentCreateSpeedUpCost.ToString()) || upgradeManager.currentCreateSpeedUpCost == 30001);
+
+    // Max Candies Up
+    maxCandiesUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentMaxCandiesUpCost.ToString()) || upgradeManager.maxCandiesLevel >= upgradeManager.maxCandiesUpgradeLevel);
+
+    // Candy Level Up
+    candyLevelUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentCandyLevelUpCost.ToString()) || upgradeManager.candyLevel >= upgradeManager.maxCandyLevelUpgradeLevel);
+
+    // Passive Auto Create Speed Up
+    passiveAutoCreateSpeedUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentPassiveAutoCreateSpeedUpCost.ToString()) || upgradeManager.passiveAutoCreateSpeedLevel >= upgradeManager.maxPassiveAutoCreateSpeedUpgradeLevel);
+
+    // Remove Locked
+    RemoveLokcedButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentRemoveLockedCost.ToString()) || upgradeManager.removeLockedLevel >= upgradeManager.maxRemoveLockedUpgradeLevel);
+
+    // Gold Up
+    goldUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentGoldUpCost.ToString()) || upgradeManager.goldUpLevel >= upgradeManager.maxGoldUpUpgradeLevel);
+
+    // Lucky Gold Up
+    luckyGoldUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentLuckyGoldUpCost.ToString()) || upgradeManager.luckyGoldLevel >= upgradeManager.maxLuckyGoldUpgradeLevel);
+
+    // OffLine Reward Bonus Up
+    offLineRewardBonusUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentOffLineRewardBonusCost.ToString()) || upgradeManager.offLineRewardBonusLevel >= upgradeManager.maxOffLineRewardBonusLevel);
+}
+
 
 
     public void OnLuckyCreateUpButtonClick()
