@@ -1814,7 +1814,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &2187168917014860266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2362,7 +2362,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &2661505444820713501
 GameObject:
   m_ObjectHideFlags: 0
@@ -4518,7 +4518,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &5240054329224042359
 GameObject:
   m_ObjectHideFlags: 0
@@ -5087,7 +5087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2325233301862857706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6243,7 +6243,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &6818484339050825157
 GameObject:
   m_ObjectHideFlags: 0
@@ -7029,7 +7029,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &7513377339435225989
 GameObject:
   m_ObjectHideFlags: 0
@@ -7386,7 +7386,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &7813930807715888910
 GameObject:
   m_ObjectHideFlags: 0
@@ -7939,7 +7939,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &8041851275070157835
 GameObject:
   m_ObjectHideFlags: 0
@@ -8261,7 +8261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.1
+  m_Text: Lv.0
 --- !u!1 &8332551868425213102
 GameObject:
   m_ObjectHideFlags: 0
@@ -8824,7 +8824,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lv.2
+  m_Text: Lv.0
 --- !u!1 &8656141731178194147
 GameObject:
   m_ObjectHideFlags: 0
