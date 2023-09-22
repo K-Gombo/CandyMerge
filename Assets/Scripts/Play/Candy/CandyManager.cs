@@ -144,11 +144,11 @@ public class CandyManager : MonoBehaviour
         int totalCandyCountInBoxes = BoxManager.instance.GetCurrentTotalCandyCount(); // BoxManager를 참조해서 총 캔디 개수를 가져옴
         if (totalCandyCountInBoxes == 1)
         {
-            candyCountText.text = $"{currentCandyCount}/{MaxCandyCount}";
+            candyCountText.text = $" {currentCandyCount}/{MaxCandyCount}";
         }
         else
         {
-            candyCountText.text = $"{currentCandyCount}/{MaxCandyCount} "; // 그 외의 경우, 괄호와 괄호 안의 숫자를 표시
+            candyCountText.text = $" {currentCandyCount}/{MaxCandyCount} "; // 그 외의 경우, 괄호와 괄호 안의 숫자를 표시
         }
     }
     
