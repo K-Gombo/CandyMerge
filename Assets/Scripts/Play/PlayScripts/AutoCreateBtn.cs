@@ -102,6 +102,7 @@ public class AutoCreateBtn : MonoBehaviour
         // Hide the Ad Choice Panel
         adChoicePanel.SetActive(false);
 
+        ToggleAutoMerge(true);
 
         SaveState();
     }
