@@ -82,10 +82,18 @@ public class GiftBoxController : MonoBehaviour
                     yield return null;
                 }
 
-                candiesRemaining++;
-                createCandyText.text = candiesRemaining + "/" + maxCandies;
+                if (candiesRemaining < maxCandies)
+                {
+                    candiesRemaining++;
+                }
 
-                DataController.instance.CandiesRemaining_Save();
+                createCandyText.text = candiesRemaining + "/" + maxCandies;
+            
+                // 최종적으로 값을 검증한 후에 저장
+                if (candiesRemaining <= maxCandies)
+                {
+                    DataController.instance.CandiesRemaining_Save();
+                }
 
                 if (candiesRemaining == maxCandies)
                 {
@@ -102,6 +110,8 @@ public class GiftBoxController : MonoBehaviour
             }
         }
     }
+
+
     
     public float GetFillTime()
     {
