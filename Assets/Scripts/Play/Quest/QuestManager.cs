@@ -95,10 +95,9 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
-    
 
     public void CompleteQuest(Quest quest)
-    {
+    {   
         RewardButton rewardButton = quest.GetComponentInChildren<RewardButton>();
         if (rewardButton != null)
         {
@@ -189,7 +188,7 @@ public class QuestManager : MonoBehaviour
         int requiredCount1 = int.Parse(requiredCount1Text[1]);
         quest.candyCountText1.text = $"{count1}/{requiredCount1}";
 
-        int count2 = 0; // 여기서 count2 변수를 선언하고 초기화합니다.
+        int count2 = 0; 
 
         if (quest.requestCandy2.sprite != null)
         {
@@ -215,7 +214,6 @@ public class QuestManager : MonoBehaviour
             {
                 rewardButton.parentQuest = newQuest;  // parentQuest 재설정
             }
-
             newQuest.UpdateRequirements(); // 랜덤한 요구사항 할당
             Debug.Log($"퀘스트 받아옴!:{newQuest}");
             UpdateQuestCandyCount(newQuest); 

@@ -55,17 +55,16 @@ public class GiftBoxController : MonoBehaviour
 
 
     private void Start()
-    {   
+    {
         StartCoroutine(FillAndCreateCandies());
         createCandyText.text = candiesRemaining + "/" + maxCandies;
         TogglePassiveAutoCreate(true);
         giftBoxTransform = GameObject.Find("GiftBox").transform;
         giftBoxButton.onClick.AddListener(OnGiftBoxClick);
         InitializeEquipKeyPool();
-        
     }
 
-   
+
 
     private IEnumerator FillAndCreateCandies()
     {
@@ -94,7 +93,8 @@ public class GiftBoxController : MonoBehaviour
                 {
                     DataController.instance.CandiesRemaining_Save();
                 }
-
+                
+                
                 if (candiesRemaining == maxCandies)
                 {
                     giftBoxFill.fillAmount = 1f;

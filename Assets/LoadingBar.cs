@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -33,5 +34,7 @@ public class LoadingBar : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         gameObject.SetActive(false);
         CurrencyManager.instance.LoadCurrencies();
+        BoxManager.instance.UpdateCandyCount();
     }
+
 }
