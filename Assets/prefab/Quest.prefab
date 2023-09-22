@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8185849684062930714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   questImage: {fileID: 8752421512687586058}
   RequestCandy2: {fileID: 2812335771209621310}
   isSpecialQuest: 1
-  reward: 200
+  reward: 400
   Dia: {fileID: 8425994034920477854}
   isDiaQuest: 1
   diaQuestProbability: 0
@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7e2277b505fe140a19f7de3fce0b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentQuest: {fileID: 4756250599264335645}
+  parentQuest: {fileID: 0}
   rewardButton: {fileID: 6933008789301289784}
   goldIncreaseRate: 0
   maxGoldIncreaseRate: 30
