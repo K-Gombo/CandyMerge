@@ -38,7 +38,7 @@ public class DataController : MonoBehaviour
         Upgrade_goldUpLevel_Load();
         Upgrade_luckyGoldLevel_Load();
         Upgrade_OffLineRewardBonusUpLevel_Load();
-        Auto_Create_Load();
+        //Auto_Create_Load();
         CurrencyManager.instance.LoadCurrencies();
         EquipmentManager.instance.LoadEquipData();
 
@@ -372,33 +372,5 @@ public class DataController : MonoBehaviour
     }
 
 
-    private void Auto_Create_DataSave()
-    {
-        ES3.Save("auto_Create", GameData.autoCreateIsOn);
-    }
-    public void Auto_Create_Save()
-    {
-        GameData.autoCreateIsOn = autoCreateBtn.isOn;
-        Auto_Create_DataSave();
-    }
-
-    private void Auto_Create_DataLoad()
-    {
-        GameData.autoCreateIsOn = ES3.Load("auto_Create", false);
-    }
-
-    public void Auto_Create_Load()
-    {
-        Auto_Create_DataLoad();
-        autoCreateBtn.isOn = GameData.autoCreateIsOn;
-
-        if (GameData.autoCreateIsOn)
-        {
-            autoCreateBtn.OnACOffBtnClick();
-        }
-        else
-        {
-            autoCreateBtn.OnACOnBtnClick();
-        }
-    }
+   
 }

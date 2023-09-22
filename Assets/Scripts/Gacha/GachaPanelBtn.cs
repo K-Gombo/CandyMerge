@@ -35,7 +35,7 @@ public class GachaPanelBtn : MonoBehaviour
         // Merge 기능 비활성화
         candyController.mergeLocked = true;
         candyController.UpdateBoxTransforms(); 
-        autoCreateBtn.OnACOnGachaClick();
+        autoCreateBtn.ToggleAutoMerge(false);
         candyController.EnableDrag(true);
         Transform mixBox = GameObject.FindGameObjectWithTag("MixBox").transform;
         candyController.MoveToMixBox(mixBox); // 캔디를 MixBox로 이동
@@ -65,7 +65,7 @@ public class GachaPanelBtn : MonoBehaviour
         color.a = 0.5f;
         GetComponent<Image>().color = color;
         transform.GetChild(0).gameObject.SetActive(false);
-        autoCreateBtn.OnACOffGachaClick();
+        autoCreateBtn.ToggleAutoMerge(false);
         GameManager.instance.DownImage.RemoveListener(DownImage);
     }
 }

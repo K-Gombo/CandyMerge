@@ -1,213 +1,129 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using ES3Types;
 
 public class AutoCreateBtn : MonoBehaviour
 {
-    public Button ACOffBtn;
-    public Button ACOnBtn;
-    public GiftBoxController giftBoxController; // GiftBoxController 참조
-    public CandyController candycontroller; // candyController 참조
+    public Text durationText;
+    public GameObject adChoicePanel; // Drag your Ad Choice Panel here in Unity Editor
+    public Button onButton;
+    public Button offButton;
 
-    public bool isOn = false;
-    public Text cooldownText;
+    private bool isAutoMergeOn;
+    private float remainingDuration;
+    private float lastUpdateTime;
 
-    private DateTime pauseTime; // 앱이 비활성화되거나 종료될 때의 시간
-    private TimeSpan timeElapsedWhilePaused = TimeSpan.Zero; // 앱이 비활성화되는 동안 지난 시간을 저장
 
-    private DateTime lastAdTime;
-    private TimeSpan buffDuration = TimeSpan.FromMinutes(10);
-    private bool isBuffActive = false;
-    private bool hasCooldown = false;
-
-    [SerializeField] GameObject adsAutoPanel;
-
-    private void Start()
+    void Start()
     {
-
-        // ES3에서 마지막 광고 시간과 버프 상태를 불러옴
-        if (ES3.KeyExists("LastAdTime"))
-        {
-            lastAdTime = ES3.Load<DateTime>("LastAdTime");
-        }
-        if (ES3.KeyExists("HasCooldown"))
-        {
-            hasCooldown = ES3.Load<bool>("HasCooldown");
-        }
-
-        //ACOffBtn.gameObject.SetActive(true); // ACOffBtn을 활성화
-        //ACOnBtn.gameObject.SetActive(false); // ACOnBtn을 비활성화
-
-        ACOffBtn.onClick.AddListener(OnACOffBtnClick);
-        ACOnBtn.onClick.AddListener(OnACOnBtnClick);
-
-        if (ES3.KeyExists("LastPauseTime"))
-        {
-            DateTime lastPauseTime = ES3.Load<DateTime>("LastPauseTime");
-            TimeSpan timeElapsedWhilePaused = DateTime.Now - lastPauseTime;
-
-            // 지난 시간만큼 lastAdTime을 조정하여 버프 지속시간을 유지
-            lastAdTime += timeElapsedWhilePaused;
-        }
+        LoadState();
+        lastUpdateTime = Time.time;
+        UpdateDurationText();
     }
 
-
-    private void OnApplicationQuit()
+    void Update()
     {
-        // 앱이 종료될 때 현재 시간을 저장
-        ES3.Save("LastPauseTime", DateTime.Now);
+        if (isAutoMergeOn && remainingDuration > 0)
+        {
+            float deltaTime = Time.time - lastUpdateTime;
+            remainingDuration -= deltaTime;
+
+            if (remainingDuration <= 0)
+            {
+                isAutoMergeOn = false;
+                Debug.Log("AutoMerge turned OFF due to no remaining duration");
+            }
+
+            UpdateDurationText();
+        }
+
+        lastUpdateTime = Time.time;
     }
 
-    private void OnApplicationPause(bool pause)
+    private void UpdateDurationText()
     {
-        if (pause)
+        int totalSeconds = Mathf.FloorToInt(remainingDuration);
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        durationText.text = $"{minutes}:{seconds:D2}";
+    }
+
+    public void ToggleAutoMerge()
+    {
+        if (isAutoMergeOn)
         {
-            // 앱이 비활성화될 때 현재 시간을 저장
-            ES3.Save("LastPauseTime", DateTime.Now);
+            onButton.gameObject.SetActive(!isAutoMergeOn);
+            offButton.gameObject.SetActive(isAutoMergeOn);
+            isAutoMergeOn = false;
+            Debug.Log("AutoMerge is OFF");
         }
         else
         {
-            // 앱이 다시 활성화될 때, 마지막으로 저장된 시간이 있는지 확인
-            if (ES3.KeyExists("LastPauseTime"))
+            if (remainingDuration > 0)
             {
-                DateTime lastPauseTime = ES3.Load<DateTime>("LastPauseTime");
-                TimeSpan timeElapsedWhilePaused = DateTime.Now - lastPauseTime;
-
-                // 지난 시간만큼 lastAdTime을 조정하여 버프 지속시간을 유지
-                lastAdTime += timeElapsedWhilePaused;
+                onButton.gameObject.SetActive(!isAutoMergeOn);
+                offButton.gameObject.SetActive(isAutoMergeOn);
+                isAutoMergeOn = true;
+                Debug.Log("AutoMerge is ON");
+            }
+            else
+            {
+                // Show the Ad Choice Panel
+                adChoicePanel.SetActive(true);
             }
         }
+
+        SaveState();
     }
 
-
-    public void OnACOffBtnClick()
+    public void ToggleAutoMerge(bool isOn)
     {
-       
-        ACOffBtn.gameObject.SetActive(false);
-        ACOnBtn.gameObject.SetActive(true);
-        giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
-        candycontroller.ToggleFastAutoMerge(true); // 빠른 자동 머지 활성화
-        isOn = true;
-        ToggleBuff();
-        DataController.instance.Auto_Create_Save();
-
+        onButton.gameObject.SetActive(isOn);
+        offButton.gameObject.SetActive(!isOn);
+        isAutoMergeOn = isOn;
     }
 
-    public void OnACOnBtnClick() {
-       
-        ACOffBtn.gameObject.SetActive(true);
-        ACOnBtn.gameObject.SetActive(false);
-        giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
-        candycontroller.ToggleFastAutoMerge(false); // 빠른 자동 머지 비활성화
-        isOn = false;
-        ToggleBuff();
-        DataController.instance.Auto_Create_Save();
-    }
-
-    public void OnACOffGachaClick()
-    {
-        Debug.Log("가챠 꺼짐 : " + isOn);
-        if (isOn)
-        {
-            giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
-            candycontroller.ToggleFastAutoMerge(true); // 빠른 자동 머지 활성화
-            isBuffActive = true;
-            if (ES3.KeyExists("LastPauseTime"))
-            {
-                DateTime lastPauseTime = ES3.Load<DateTime>("LastPauseTime");
-                TimeSpan timeElapsedWhilePaused = DateTime.Now - lastPauseTime;
-
-                // 지난 시간만큼 lastAdTime을 조정하여 버프 지속시간을 유지
-                lastAdTime += timeElapsedWhilePaused;
-            }
-        }
-    }
-
-    public void OnACOnGachaClick()
-    {
-        Debug.Log("가챠 켜짐 : " + isOn);
-
-        if (isOn)
-        {
-            giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
-            candycontroller.ToggleFastAutoMerge(false); // 빠른 자동 머지 비활성화
-            isBuffActive = false;
-            ES3.Save("LastPauseTime", DateTime.Now);
-        }
-    }
-
-
-
-    // 광고를 보고 쿨타임을 얻는 메서드
     public void WatchAd()
     {
-        lastAdTime = DateTime.Now;
-        hasCooldown = true;
+        // This will actually display the ad, for demonstration we just add time
+        remainingDuration += 600; // Add 10 minutes in seconds
+        Debug.Log("Gained 10 minutes of AutoMerge duration");
 
-        // ES3로 마지막 광고 시간과 버프 상태 저장
-        ES3.Save("LastAdTime", lastAdTime);
-        ES3.Save("HasCooldown", hasCooldown);
-    }
+        // Hide the Ad Choice Panel
+        adChoicePanel.SetActive(false);
 
-    // 버프를 켜고 끄는 메서드
-    public void ToggleBuff()
-    {
-        if (isBuffActive)
-        {
-            DeactivateBuff();
-        }
-        else
-        {
-            ActivateBuff();
-        }
-    }
 
-    // 버프 활성화
-    private void ActivateBuff()
-    {
-        if (hasCooldown)
-        {
-            isBuffActive = true;
-        }
-        else
-        {
-            adsAutoPanel.SetActive(true);
-        }
+        SaveState();
     }
 
     public void ShowAds()
     {
         AdsManager.instance.ShowRewarded(RewardType.AutoCreate);
-        adsAutoPanel.SetActive(false);
     }
 
-    // 버프 비활성화
-    private void DeactivateBuff()
+    public void CancelAd()
     {
-        isBuffActive = false;
+        // Hide the Ad Choice Panel
+        adChoicePanel.SetActive(false);
     }
 
-    // 업데이트에서 쿨타임과 버프 상태를 확인
-    void Update()
+    public void SaveState()
     {
-        // Debug.Log($"기록을 보자 {hasCooldown}  /  {isBuffActive}");
-        if (hasCooldown && isBuffActive)
-        {
-            cooldownText.gameObject.SetActive(true);
-            TimeSpan remainingTime = buffDuration - (DateTime.Now - lastAdTime);
-            cooldownText.text = $"{remainingTime.Minutes}:{remainingTime.Seconds}";
+        //ES3.Save<bool>("IsAutoMergeOn", isAutoMergeOn);
+        ES3.Save<float>("RemainingDuration", remainingDuration);
+    }
 
-            if (DateTime.Now - lastAdTime >= buffDuration)
-            {
-                DeactivateBuff();
-                hasCooldown = false;
-                ES3.Save("HasCooldown", hasCooldown);
-                cooldownText.text = "Buff has ended.";
-            }
-        }
+    public void LoadState()
+    {
+        //if (ES3.KeyExists("IsAutoMergeOn"))
+        //    isAutoMergeOn = ES3.Load<bool>("IsAutoMergeOn");
+        //else
+        //    isAutoMergeOn = false;
+
+        if (ES3.KeyExists("RemainingDuration"))
+            remainingDuration = ES3.Load<float>("RemainingDuration");
         else
-        {
-            cooldownText.gameObject.SetActive(false);
-        }
+            remainingDuration = 0;
     }
 }
