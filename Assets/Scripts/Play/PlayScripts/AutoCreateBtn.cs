@@ -10,6 +10,9 @@ public class AutoCreateBtn : MonoBehaviour
     public Button onButton;
     public Button offButton;
 
+    public GiftBoxController giftBoxController;
+    public CandyController candyController;
+
     private bool isAutoMergeOn;
     private float remainingDuration;
     private float lastUpdateTime;
@@ -55,7 +58,9 @@ public class AutoCreateBtn : MonoBehaviour
         {
             onButton.gameObject.SetActive(!isAutoMergeOn);
             offButton.gameObject.SetActive(isAutoMergeOn);
-            isAutoMergeOn = false;
+            giftBoxController.ToggleFastAutoCreate(!isAutoMergeOn);
+            candyController.ToggleFastAutoMerge(!isAutoMergeOn);
+            isAutoMergeOn = !isAutoMergeOn;
             Debug.Log("AutoMerge is OFF");
         }
         else
@@ -64,7 +69,9 @@ public class AutoCreateBtn : MonoBehaviour
             {
                 onButton.gameObject.SetActive(!isAutoMergeOn);
                 offButton.gameObject.SetActive(isAutoMergeOn);
-                isAutoMergeOn = true;
+                giftBoxController.ToggleFastAutoCreate(!isAutoMergeOn);
+                candyController.ToggleFastAutoMerge(!isAutoMergeOn);
+                isAutoMergeOn = !isAutoMergeOn;
                 Debug.Log("AutoMerge is ON");
             }
             else
@@ -81,6 +88,8 @@ public class AutoCreateBtn : MonoBehaviour
     {
         onButton.gameObject.SetActive(isOn);
         offButton.gameObject.SetActive(!isOn);
+        giftBoxController.ToggleFastAutoCreate(isOn);
+        candyController.ToggleFastAutoMerge(isOn);
         isAutoMergeOn = isOn;
     }
 
