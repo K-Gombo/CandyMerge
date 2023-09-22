@@ -220,23 +220,29 @@ public class RewardButton : MonoBehaviour
             return;
         }
 
-        // 보상 계산을 위한 초기 설정
-        string rewardString = parentQuest.rewardText.text;
-        int baseReward = ConvertRewardStringToInt(rewardString);
+        BigInteger reward = parentQuest.reward;
+        BigInteger baseReward = reward;
 
-        // diaQuest인 경우 특별한 보상 로직
+        // 스케일링 팩터 (100으로 설정)
+        BigInteger scalingFactor = new BigInteger(100);
+
         if (parentQuest.isDiaQuest)
-        {    Debug.Log($" 퀘스트 다이아 증가율은 지금 : {questDiaIncrement}");
-            // questDiaIncrement를 적용해서 20% 증가한 보상을 계산
+        {
+            Debug.Log($" 퀘스트 다이아 증가율은 지금 : {questDiaIncrement}");
+            
             float actualIncreaseRate = 1 + (questDiaIncrement / 100);
-            BigInteger increasedReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
+            BigInteger actualIncreaseRateBigInt = new BigInteger((int)(actualIncreaseRate * 100)); // BigInteger로 변환
 
+            // 스케일링을 적용
+            BigInteger scaledBaseReward = baseReward * scalingFactor;
+            BigInteger scaledIncreasedReward = scaledBaseReward * actualIncreaseRateBigInt / 100; // 100으로 나눠 원래 크기로
+            BigInteger increasedReward = scaledIncreasedReward / scalingFactor;
+            
             RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Dia, increasedReward.ToString(), (transform.parent.transform.localPosition + pulsY));
             parentQuest.Dia.SetActive(false);
         }
         else
         {
-            // 2배 확률 체크
             float randomValue = UnityEngine.Random.Range(0f, 100f);
             float combinedLuckyGoldProbability = QuestManager.instance.luckyGoldProbability + QuestManager.instance.equipLuckyGoldProbability;
             if (randomValue < combinedLuckyGoldProbability)
@@ -244,16 +250,18 @@ public class RewardButton : MonoBehaviour
                 baseReward *= 2;
             }
 
-            // 실제 증가 비율 계산
             float combinedGoldIncreaseRate = QuestManager.instance.goldIncreaseRate + QuestManager.instance.equipGoldIncreaseRate;
             float actualIncreaseRate = 1 + (combinedGoldIncreaseRate / 100);
+            BigInteger actualIncreaseRateBigInt = new BigInteger((int)(actualIncreaseRate * 100)); // BigInteger로 변환
 
-            // 최종 보상 = (기본 보상 또는 2배 보상) * (1 + n%)
-            BigInteger finalReward = Mathf.FloorToInt(baseReward * actualIncreaseRate);
+            // 스케일링을 적용
+            BigInteger scaledBaseReward = baseReward * scalingFactor;
+            BigInteger scaledFinalReward = scaledBaseReward * actualIncreaseRateBigInt / 100; // 100으로 나눠 원래 크기로
+            BigInteger finalReward = scaledFinalReward / scalingFactor;
+
             RewardMovingManager.instance.RequestMovingCurrency(6, CurrencyType.Gold, finalReward.ToString(), (transform.parent.transform.localPosition + pulsY));
         }
 
-        // 캔디 회수
         string[] countText1 = parentQuest.candyCountText1.text.Split('/');
         int requiredCount1 = int.Parse(countText1[1]);
         CollectCandy(parentQuest.requestCandy1.sprite, requiredCount1);
@@ -264,11 +272,14 @@ public class RewardButton : MonoBehaviour
             int requiredCount2 = int.Parse(countText2[1]);
             CollectCandy(parentQuest.requestCandy2.sprite, requiredCount2);
         }
-    
-        // 퀘스트 완료 처리
+
         QuestManager.instance.CompleteQuest(parentQuest);
         parentQuest = null; // 부모 퀘스트 참조를 끊음
     }
+
+
+    
+    
 
 
     private void CollectCandy(Sprite sprite, int requiredCount)
@@ -297,30 +308,9 @@ public class RewardButton : MonoBehaviour
         }
     }
     
-    private int ConvertRewardStringToInt(string rewardString)
-    {
-        var match = Regex.Match(rewardString, @"(\d+\.?\d*)([a-zA-Z]+)?");
-        string numberPart = match.Groups[1].Value;
-        string suffix = match.Groups[2].Value;
-        double baseValue = double.Parse(numberPart);
-
-        string[] unit = BigIntegerCtrl_global.bigInteger.GetUnits();
-
-        int unitIndex = Array.IndexOf(unit, suffix);
-        if (unitIndex == -1)
-        {
-            return (int)baseValue; // Suffix가 없거나 일치하는 것이 없으면 그냥 반환
-        }
-
-        double multiplier = Math.Pow(1000, unitIndex);
-        int reward = (int)(baseValue * multiplier);
-
-        return reward;
-    }
-
     
     public float GetGoldUp()
-    {    Debug.Log($"GoldUp값이 몇이냐! : {QuestManager.instance.goldIncreaseRate}");
+    {  
         return QuestManager.instance.goldIncreaseRate;
     }
 

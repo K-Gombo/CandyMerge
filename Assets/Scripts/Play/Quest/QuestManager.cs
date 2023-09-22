@@ -97,27 +97,6 @@ public class QuestManager : MonoBehaviour
     }
     
 
-    public string FormatGold(long goldValue)
-    {
-        char[] unitChars = { ' ', 'a', 'b', 'c', 'd', 'e', 'f' };
-        const long unit = 1000;
-        int unitIndex = 0;
-
-        float displayValue = goldValue;
-        while (displayValue >= unit)
-        {
-            displayValue /= unit;
-            unitIndex++;
-        }
-
-        // 소수점 이하가 0인 경우 소수점 없이 표시
-        if (displayValue == (int)displayValue)
-            return $"{displayValue:0}{unitChars[unitIndex]}";
-        else
-            return $"{displayValue:0.0}{unitChars[unitIndex]}";
-    }
-
-
     public void CompleteQuest(Quest quest)
     {
         RewardButton rewardButton = quest.GetComponentInChildren<RewardButton>();
@@ -224,7 +203,7 @@ public class QuestManager : MonoBehaviour
     }
 
     private void CreateNewQuest()
-    {
+    {   Debug.Log("호출됨");
         if (activeQuests.Count < maxQuests && questPool.Count > 0)
         {
             Quest newQuest = questPool.Dequeue();
@@ -238,10 +217,13 @@ public class QuestManager : MonoBehaviour
             }
 
             newQuest.UpdateRequirements(); // 랜덤한 요구사항 할당
+            Debug.Log($"퀘스트 받아옴!:{newQuest}");
             UpdateQuestCandyCount(newQuest); 
             activeQuests.Add(newQuest);
-            
+            Debug.Log($"Quest 반환됨: reward = {newQuest.reward}, isDiaQuest = {newQuest.isDiaQuest}");
+
         }
+        Debug.Log("퀘스트 못 받아옴");
     }
 
 

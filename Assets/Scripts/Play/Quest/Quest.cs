@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Keiwando.BigInteger;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -19,7 +20,7 @@ public class Quest : MonoBehaviour
     public GameObject RequestCandy2;
     
     public bool isSpecialQuest = false; // 특별 퀘스트 여부 확인
-    public long reward; // 보상
+    public BigInteger reward; // 보상
     private int avatarIndex = -1;
     public GameObject Dia;
     public bool isDiaQuest = false;
@@ -166,7 +167,7 @@ public class Quest : MonoBehaviour
     }
     
     
-    reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
+    quest.reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
         if (numberOfCandyTypes == 2)
         {
             do
@@ -179,19 +180,19 @@ public class Quest : MonoBehaviour
             {
                 candyCount2 = Random.Range(3, remainingCandyCount + 1);
                 candySprite2 = CandyManager.instance.candySprites[candyLevel2 - 1];
-                reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
+                quest.reward += QuestManager.instance.candyPriceByLevel[candyLevel2] * candyCount2;
             }
         }
         
         // 보상 계산
     if (quest.isDiaQuest)
     {
-        reward = 5;
+        quest.reward = 5;
     }
 
     if (quest.isSpecialQuest)
     {
-        reward *= 3;
+        quest.reward *= 3;
     }
 
     if (quest.isDiaQuest && quest.questImage != null)
@@ -215,8 +216,9 @@ public class Quest : MonoBehaviour
     {
         quest.isDiaQuest = false;
     }
-
-    SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2, QuestManager.instance.FormatGold(reward));
+    Debug.Log($"Before Special Quest reward: {quest.reward}, isSpecialQuest: {quest.isSpecialQuest}");
+    SetupQuest(quest, avatar, candySprite1, candyCount1, candySprite2, candyCount2);
+    Debug.Log($"After Special Quest reward: {quest.reward}");
     QuestManager.instance.UpdateQuestCandyCount(quest);
 }
 
@@ -235,7 +237,7 @@ public class Quest : MonoBehaviour
     // }
     
 
-    public void SetupQuest(Quest questObject, Sprite avatar, Sprite candySprite1, int candyCount1, Sprite candySprite2, int candyCount2, string formattedReward)
+    public void SetupQuest(Quest questObject, Sprite avatar, Sprite candySprite1, int candyCount1, Sprite candySprite2, int candyCount2)
     {
         questObject.humanAvatar.sprite = avatar;
         questObject.requestCandy1.sprite = candySprite1;
@@ -254,7 +256,7 @@ public class Quest : MonoBehaviour
             questObject.requestCandy2.gameObject.SetActive(false); // 1종류일 때 비활성화
         }
 
-        questObject.rewardText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(reward.ToString());
+        questObject.rewardText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(questObject.reward.ToString());
         QuestManager.instance.activeQuests.Add(questObject);
     }
 
@@ -318,8 +320,8 @@ public class Quest : MonoBehaviour
     Sprite candySprite2 = null;
     
     
-    long reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
-        
+    reward = QuestManager.instance.candyPriceByLevel[candyLevel1] * candyCount1;
+   
     if (numberOfCandyTypes == 2)
     {
         do
@@ -395,6 +397,9 @@ public class Quest : MonoBehaviour
             QuestManager.instance.ReturnAvatarIndex(avatarIndex);
         }
     }
+    
+    
+    
     
 
 }
