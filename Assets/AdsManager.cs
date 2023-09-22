@@ -196,7 +196,7 @@ public class AdsManager : MonoBehaviour
                 adsGachaBtn.BoxOpenReward();
             break;
             case RewardType.LevelUp:
-                HappyLevel.instance.AdsReward();
+                HappyLevel.instance.AdsComprate();
             break;
             default:
                 return;

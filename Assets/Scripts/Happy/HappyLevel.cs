@@ -25,6 +25,9 @@ public class HappyLevel : MonoBehaviour
     [SerializeField] GameObject levelPanel;
     [SerializeField] Text levelUpDiaText;
 
+    [SerializeField] GameObject openBtnList;
+    [SerializeField] GameObject button_Get;
+
     private void Awake()
     {   
         instance = this;
@@ -139,6 +142,13 @@ public class HappyLevel : MonoBehaviour
     public void ShowAds()
     {
         AdsManager.instance.ShowRewarded(RewardType.LevelUp);
+    }
+
+    public void AdsComprate()
+    {
+        levelUpDiaText.text = (HappylevelUpReward[CurrentLevel] * 2).ToString();
+        openBtnList.SetActive(false);
+        button_Get.SetActive(true);
     }
 
     public void AdsReward()
