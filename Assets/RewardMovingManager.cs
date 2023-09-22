@@ -74,7 +74,7 @@ public class RewardMovingManager : MonoBehaviour
         {
             var icon = GetIconFromPool();
 
-            SetupIcon(icon, currencyData.sprite, delay, currencyData.targetPosition);
+            SetupIcon(icon, currencyData.sprite, delay, currencyData.targetPosition, type);
 
             if (dynamicStartPosition.HasValue)
             {
@@ -84,7 +84,6 @@ public class RewardMovingManager : MonoBehaviour
             {
                 ResetIconPositionAndRotation(icon, i);
             }
-            SoundManager.Instance.PlaySoundEffect(type.ToString());
             delay += 0.1f;
         }
 
@@ -96,7 +95,7 @@ public class RewardMovingManager : MonoBehaviour
 
     }
 
-    private void SetupIcon(Transform icon, Sprite sprite, float delay, Vector2 targetPosition)
+    private void SetupIcon(Transform icon, Sprite sprite, float delay, Vector2 targetPosition, CurrencyType type)
     {
         Image iconImage = icon.GetComponent<Image>();
         RectTransform iconTransform = icon.GetComponent<RectTransform>();
@@ -104,7 +103,10 @@ public class RewardMovingManager : MonoBehaviour
         iconImage.sprite = sprite;
 
         icon.DOScale(1f, 0.3f).SetDelay(delay).SetEase(Ease.OutBack);
-        iconTransform.DOAnchorPos(targetPosition, 0.8f).SetDelay(delay + 0.5f).SetEase(Ease.InBack);
+        iconTransform.DOAnchorPos(targetPosition, 0.8f).SetDelay(delay + 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            SoundManager.Instance.PlaySoundEffect(type.ToString());
+        });
         icon.DORotate(Vector3.zero, 0.5f).SetDelay(delay + 0.5f).SetEase(Ease.Flash);
         icon.DOScale(0f, 0.3f).SetDelay(delay + 1.5f).SetEase(Ease.OutBack).OnComplete(() =>
         {
