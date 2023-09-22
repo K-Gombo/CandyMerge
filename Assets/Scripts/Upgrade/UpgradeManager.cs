@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Keiwando.BigInteger;
 using UnityEngine.VFX;
-
+ 
 public class UpgradeManager : MonoBehaviour
 {
     public GiftBoxController giftBoxController; // GiftBoxController 참조

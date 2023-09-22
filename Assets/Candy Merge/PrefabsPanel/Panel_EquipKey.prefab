@@ -1355,7 +1355,7 @@ GameObject:
   - component: {fileID: 1477120528857626204}
   - component: {fileID: 3380998906113891547}
   m_Layer: 5
-  m_Name: InbarText
+  m_Name: EquipKeyExplain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -69,6 +69,7 @@ public class EquipmentManager : MonoBehaviour
 
     // 장비 등급을 나타내는 enum
     public enum Rank
+    //{ F, D, C,C1, B,B1,A,A1,A2,S,S1,S2,SS,SS1, SS2, SS3 }
     { F,D,C,B,A,S,SS,C1,B1,A1,A2,S1,S2,SS1,SS2,SS3}
 
 
@@ -519,8 +520,10 @@ public class EquipmentManager : MonoBehaviour
                 mainEquipment.equipLevel = levelData.startLevel;
             }
 
+            Debug.Log("나 된다아?" + rankToColorMap.ContainsKey(mainEquipment.equipRank));
             if (rankToColorMap.ContainsKey(mainEquipment.equipRank))
             {
+                Debug.Log("나 된다.");
                 Color newColor = rankToColorMap[mainEquipment.equipRank];
                 mainEquipment.backgroundImageComponent.color = newColor;
                 mainEquipment.levelCircleComponent.color = newColor;
@@ -690,6 +693,8 @@ public class EquipmentManager : MonoBehaviour
                 // 나머지 로직은 UpdateRankLevelOnMerge 메서드와 유사
                 int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
 
+                allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+                
                 if (mainEquipment.rankLevel >= maxRankLevel)
                 {
                     Rank nextRank = GetNextRank(mainEquipment.equipRank);
@@ -721,6 +726,9 @@ public class EquipmentManager : MonoBehaviour
 
                 mainEquipment.UpdateLevelUI();
 
+                allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+                SaveEquipData(mainEquipment);
+                
                 // 2개의 장비를 풀로 리턴 및 골드 반환
                 for (int i = 1; i <= 2; i++)
                 {
@@ -734,6 +742,7 @@ public class EquipmentManager : MonoBehaviour
                         CurrencyManager.instance.AddCurrency("Gold", otherReturnGoldBigInt);
                     }
 
+                    allEquipIds.Remove(new DataType(otherEquipment.equipId, otherEquipment.equipRank));
                     GameObject originalObj = otherEquipment.gameObject;
                     ReturnEquipToPool(originalObj);
                 }
@@ -958,17 +967,20 @@ public class EquipmentManager : MonoBehaviour
 
                 savedEquipData.equipRank = equipId.rank;
 
+
                 // 불러온 정보를 기반으로 장비 생성 또는 처리
                 GameObject newEquip = CreateEquipFromSavedData(equipSpawnLocation, savedEquipData);
 
+                var newEquipStatus = newEquip.GetComponent<EquipmentStatus>();
+                newEquipStatus.rankLevel = ConvertRankToLevel(savedEquipData.equipRank);
                 // 장비를 원하는 위치에 배치 또는 처리
                 // 예를 들어, 원하는 위치에 장비를 배치하려면 다음과 같이 하면 됩니다.
                 //newEquip.transform.position = desiredPosition;
 
-                var clone = Instantiate(newEquip, mask.transform.position, UnityEngine.Quaternion.identity, mask.transform);
-                clone.transform.localScale = newEquip.transform.localScale * 1.2f;
+                Debug.Log(newEquipStatus.equipId + " / " + newEquipStatus.equipRank + " / " + newEquipStatus.rankLevel);
 
-                CheckUI(clone.GetComponent<EquipmentStatus>());
+
+                CheckUI(newEquip.GetComponent<EquipmentStatus>());
             }
         }
     }
@@ -1052,6 +1064,8 @@ public class EquipmentManager : MonoBehaviour
 
     void CheckUI(EquipmentStatus mainEquipment)
     {
+        InitializeSkillRankColorMapping();
+
         SetRankLevelSlotActive(mainEquipment.rankLevel, mainEquipment.rankLevelSlot);
 
         // 새로운 등급의 시작 레벨과 최대 레벨을 설정
@@ -1061,15 +1075,54 @@ public class EquipmentManager : MonoBehaviour
             mainEquipment.equipLevel = levelData.startLevel;
         }
 
-        // 등급에 따라 색상 업데이트
-        if (rankToColorMap.ContainsKey(mainEquipment.equipRank))
+        if (slotToSpriteMap.ContainsKey(mainEquipment.slotType))
         {
-            Color newColor = rankToColorMap[mainEquipment.equipRank];
+            mainEquipment.slotImageComponent.sprite = slotToSpriteMap[mainEquipment.slotType];
+        }
+
+        // 등급에 따라 색상 업데이트
+        if (rankToColorMap.ContainsKey(ChangeRank(mainEquipment.equipRank)))
+        {
+            Color newColor = rankToColorMap[ChangeRank(mainEquipment.equipRank)];
+            Debug.Log(newColor);
             mainEquipment.backgroundImageComponent.color = newColor;
             mainEquipment.levelCircleComponent.color = newColor;
             mainEquipment.slotBarComponent.color = newColor;
         }
+        else
+        {
+            Debug.Log("너 정체가 뭐내" + (Rank)(mainEquipment.equipRank - 1));
+        }
 
         mainEquipment.UpdateLevelUI();
+    }
+
+
+    Rank ChangeRank(Rank rank)
+    {
+        switch (rank)
+        {
+            case Rank.SS3:
+                return Rank.SS;
+            case Rank.SS2:
+                return Rank.SS;
+            case Rank.SS1:
+                return Rank.SS;
+            case Rank.S2:
+                return Rank.S;
+            case Rank.S1:
+                return Rank.S;
+            case Rank.A2:
+                return Rank.A;
+            case Rank.A1:
+                return Rank.A;
+            case Rank.B1:
+                return Rank.B;
+            case Rank.C1:
+                return Rank.C;
+
+            default:
+                return rank;
+        }
     }
 }

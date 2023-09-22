@@ -292,6 +292,7 @@ public class CandyController : MonoBehaviour
 
         if (candyStatus1.level == candyStatus2.level)
         {
+            // 최대 레벨인 60레벨 이상이면 병합하지 않음
             if (candyStatus1.level >= 60 && candyStatus2.level >= 60)
             {
                 return;
@@ -299,15 +300,25 @@ public class CandyController : MonoBehaviour
 
             float randomChance = UnityEngine.Random.Range(0f, 100f);
             Debug.Log("Random Chance: " + randomChance + ", LuckyCandyLevelUp: " + luckyCandyLevelUpProbability);
-            if (randomChance < luckyCandyLevelUpProbability)
+
+            // 59레벨일 때는 레벨이 2 증가하는 부분을 적용하지 않음
+            if (candyStatus1.level == 59)
             {
-                Debug.Log("레벨이 2 증가해야 함");
-                candyStatus2.level += 2;
+                Debug.Log("레벨이 1 증가해야 함 (59레벨 제한)");
+                candyStatus2.level++;
             }
             else
             {
-                Debug.Log("레벨이 1 증가해야 함");
-                candyStatus2.level++;
+                if (randomChance < luckyCandyLevelUpProbability)
+                {
+                    Debug.Log("레벨이 2 증가해야 함");
+                    candyStatus2.level += 2;
+                }
+                else
+                {
+                    Debug.Log("레벨이 1 증가해야 함");
+                    candyStatus2.level++;
+                }
             }
 
             CandyManager.instance.SetAppearance(candy2.gameObject);

@@ -7,6 +7,8 @@ public class GachaUIManager : MonoBehaviour
     public Text LevelSumText; // LevelSum을 표시할 Text UI
     public int totalLevelSum { get; private set; } // 여기에 totalLevelSum를 멤버 변수로 선언
 
+    public LanguageUIManager languageUIManager;
+
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +30,8 @@ public class GachaUIManager : MonoBehaviour
             }
         }
 
-        LevelSumText.text = "캔디 총합 \n" + totalLevelSum.ToString(); // LevelSum 텍스트 업데이트
+        LanguageUIManager.Language currentLanguage = languageUIManager.GetCurrentLanguage();
+    
+        LevelSumText.text = languageUIManager.GetTotalCandyLevelText(totalLevelSum, currentLanguage);
     }
 }

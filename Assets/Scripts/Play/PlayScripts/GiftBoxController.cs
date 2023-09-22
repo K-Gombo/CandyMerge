@@ -474,11 +474,12 @@ public class GiftBoxController : MonoBehaviour
     private IEnumerator MoveEquipKey(Transform equipKey, Vector3 targetPosition, float delay = 0f)
     {
         yield return new WaitForSeconds(delay); // 여기에 딜레이 적용
-    
+
         float timeElapsed = 0f;
         float duration = 0.5f; // 원하는 지속 시간을 설정
         Vector3 startPosition = giftBoxTransform.position; // 시작 위치를 giftBoxTransform.position으로 설정
         Vector3 startScale = equipKey.localScale;
+        Vector3 minScale = new Vector3(0.4f, 0.4f, 0.4f); // 최소 크기를 설정
 
         while (timeElapsed < duration)
         {
@@ -489,7 +490,7 @@ public class GiftBoxController : MonoBehaviour
             equipKey.position = Vector3.Lerp(startPosition, targetPosition, t);
 
             // 크기를 점점 줄임
-            equipKey.localScale = Vector3.Lerp(startScale, Vector3.zero, t);
+            equipKey.localScale = Vector3.Lerp(startScale, minScale, t);
 
             yield return null;
         }
@@ -500,6 +501,7 @@ public class GiftBoxController : MonoBehaviour
         equipKey.localScale = startScale;
     }
 
+    
     
     private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox, GameObject transparentObject)
     {
@@ -512,7 +514,12 @@ public class GiftBoxController : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
             float t = timeElapsed / duration;
-            candy.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+            // speedFactor는 일정한 속도를 유지하기 위한 요소입니다.
+            float speedFactor = Vector3.Distance(startPosition, targetPosition) / duration;
+            Vector3 nextPosition = Vector3.MoveTowards(candy.position, targetPosition, speedFactor * Time.deltaTime);
+        
+            candy.position = nextPosition;
             yield return null;
         }
 
@@ -524,7 +531,7 @@ public class GiftBoxController : MonoBehaviour
         TransCandyPooler.Instance.ReturnToPool(transparentObject);
         BoxManager.instance.UpdateCandyCount();
     }
-
+    
 
     public void ToggleFastAutoCreate(bool isEnabled) 
     {

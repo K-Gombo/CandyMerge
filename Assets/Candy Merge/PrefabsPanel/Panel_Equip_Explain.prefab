@@ -677,7 +677,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB808\uBCA8  5/35\n"
+  m_Text: 'Level  5/35
+
+'
 --- !u!1 &1772699722105414169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1411,7 @@ GameObject:
   - component: {fileID: 6609725074083827694}
   - component: {fileID: 982883813060737688}
   m_Layer: 5
-  m_Name: Skill Text
+  m_Name: EquipUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1921,7 +1923,7 @@ GameObject:
   - component: {fileID: 7445733770294045167}
   - component: {fileID: 7076302478239698212}
   m_Layer: 5
-  m_Name: Set Text
+  m_Name: EquipSet Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2365,7 +2367,7 @@ GameObject:
   - component: {fileID: 4684433840154074952}
   - component: {fileID: 1802811004038402639}
   m_Layer: 5
-  m_Name: Set Tag
+  m_Name: EquipSet Tag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3243,7 +3245,7 @@ GameObject:
   - component: {fileID: 2249471165065258065}
   - component: {fileID: 6859631869358183893}
   m_Layer: 5
-  m_Name: Special Skill Title Text
+  m_Name: equipStatusSkilltitle Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
