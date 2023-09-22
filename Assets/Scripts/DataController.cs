@@ -393,11 +393,11 @@ public class DataController : MonoBehaviour
 
         if (GameData.autoCreateIsOn)
         {
-            autoCreateBtn.OnACOnBtnClick();
+            autoCreateBtn.OnACOffBtnClick();
         }
         else
         {
-            autoCreateBtn.OnACOffBtnClick();
+            autoCreateBtn.OnACOnBtnClick();
         }
     }
 }

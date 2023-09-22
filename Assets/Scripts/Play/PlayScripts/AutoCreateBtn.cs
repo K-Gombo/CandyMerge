@@ -28,8 +28,8 @@ public class AutoCreateBtn : MonoBehaviour
             hasCooldown = ES3.Load<bool>("HasCooldown");
         }
 
-        ACOffBtn.gameObject.SetActive(true); // ACOffBtn을 활성화
-        ACOnBtn.gameObject.SetActive(false); // ACOnBtn을 비활성화
+        //ACOffBtn.gameObject.SetActive(true); // ACOffBtn을 활성화
+        //ACOnBtn.gameObject.SetActive(false); // ACOnBtn을 비활성화
 
         ACOffBtn.onClick.AddListener(OnACOffBtnClick);
         ACOnBtn.onClick.AddListener(OnACOnBtnClick);
@@ -80,7 +80,7 @@ public class AutoCreateBtn : MonoBehaviour
         ACOnBtn.gameObject.SetActive(true);
         giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
         candycontroller.ToggleFastAutoMerge(true); // 빠른 자동 머지 활성화
-        isOn = false;
+        isOn = true;
         ToggleBuff();
         DataController.instance.Auto_Create_Save();
 
@@ -92,23 +92,41 @@ public class AutoCreateBtn : MonoBehaviour
         ACOnBtn.gameObject.SetActive(false);
         giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
         candycontroller.ToggleFastAutoMerge(false); // 빠른 자동 머지 비활성화
-        isOn = true;
+        isOn = false;
         ToggleBuff();
         DataController.instance.Auto_Create_Save();
     }
 
-    public void OnACOffGachaClick() {
+    public void OnACOffGachaClick()
+    {
+        Debug.Log("가챠 꺼짐 : " + isOn);
+        if (isOn)
+        {
+            giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
+            candycontroller.ToggleFastAutoMerge(true); // 빠른 자동 머지 활성화
+            isBuffActive = true;
+            if (ES3.KeyExists("LastPauseTime"))
+            {
+                DateTime lastPauseTime = ES3.Load<DateTime>("LastPauseTime");
+                TimeSpan timeElapsedWhilePaused = DateTime.Now - lastPauseTime;
 
-        giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
-        candycontroller.ToggleFastAutoMerge(true); // 빠른 자동 머지 활성화
-        isBuffActive = true;
+                // 지난 시간만큼 lastAdTime을 조정하여 버프 지속시간을 유지
+                lastAdTime += timeElapsedWhilePaused;
+            }
+        }
     }
 
-    public void OnACOnGachaClick() {
-       
-        giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
-        candycontroller.ToggleFastAutoMerge(false); // 빠른 자동 머지 비활성화
-        isBuffActive = false;
+    public void OnACOnGachaClick()
+    {
+        Debug.Log("가챠 켜짐 : " + isOn);
+
+        if (isOn)
+        {
+            giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
+            candycontroller.ToggleFastAutoMerge(false); // 빠른 자동 머지 비활성화
+            isBuffActive = false;
+            ES3.Save("LastPauseTime", DateTime.Now);
+        }
     }
 
 
