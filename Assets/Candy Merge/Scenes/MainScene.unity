@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2524,6 +2524,42 @@ PrefabInstance:
     - target: {fileID: 535112774515236324, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071830122663002620, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 217043935}
+    - target: {fileID: 4071830122663002620, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045949282851165952, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045949282851165952, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045949282851165952, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 751400243}
+    - target: {fileID: 5045949282851165952, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045949282851165952, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowAds
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045949282851165952, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AutoCreateBtn, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045949282851165952, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6000086243625644788, guid: a2b2f0aea5d044af2b395f1fc300ca75, type: 3}
       propertyPath: m_Name
@@ -38575,6 +38611,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: ' 0/15'
       objectReference: {fileID: 0}
+    - target: {fileID: 8341716896059214030, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
+      propertyPath: adsAutoPanel
+      value: 
+      objectReference: {fileID: 217043935}
     - target: {fileID: 8341716896059214030, guid: a119303524bd24dc48446f5232e91ec6, type: 3}
       propertyPath: candycontroller
       value: 

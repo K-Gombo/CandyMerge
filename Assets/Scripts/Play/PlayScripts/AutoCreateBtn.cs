@@ -15,6 +15,13 @@ public class AutoCreateBtn : MonoBehaviour
     private DateTime pauseTime; // 앱이 비활성화되거나 종료될 때의 시간
     private TimeSpan timeElapsedWhilePaused = TimeSpan.Zero; // 앱이 비활성화되는 동안 지난 시간을 저장
 
+    private DateTime lastAdTime;
+    private TimeSpan buffDuration = TimeSpan.FromMinutes(10);
+    private bool isBuffActive = false;
+    private bool hasCooldown = false;
+
+    [SerializeField] GameObject adsAutoPanel;
+
     private void Start()
     {
 
@@ -131,13 +138,6 @@ public class AutoCreateBtn : MonoBehaviour
 
 
 
-    private DateTime lastAdTime;
-    private TimeSpan buffDuration = TimeSpan.FromMinutes(10);
-    private bool isBuffActive = false;
-    private bool hasCooldown = false;
-
-
-
     // 광고를 보고 쿨타임을 얻는 메서드
     public void WatchAd()
     {
@@ -171,9 +171,14 @@ public class AutoCreateBtn : MonoBehaviour
         }
         else
         {
-            AdsManager.instance.ShowRewarded(RewardType.AutoCreate);
-            Debug.Log("쿨타임이 없습니다. 광고를 봐주세요.");
+            adsAutoPanel.SetActive(true);
         }
+    }
+
+    public void ShowAds()
+    {
+        AdsManager.instance.ShowRewarded(RewardType.AutoCreate);
+        adsAutoPanel.SetActive(false);
     }
 
     // 버프 비활성화
