@@ -136,17 +136,6 @@ public class RewardButton : MonoBehaviour
 
     Vector3 pulsY = new Vector3(0, 845, 0);
     
-    //public float GetEquipLuckyGoldUp()
-    //{   
-    //    return equipLuckyGoldProbability;
-    //}
-
-    //public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
-    //{
-    //    newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
-    //    equipLuckyGoldProbability = newDoubleGoldProbability;
-    //}
-    
     public void ResetEquipLuckyGoldUp(EquipmentStatus equipment)
     {
         float currentEquipLuckyGoldUp = QuestManager.instance.GetEquipLuckyGoldUp();

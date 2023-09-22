@@ -164,7 +164,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.AutoMixBtn].text = "Auto Mix";
                 UILanguageList[(int)UILanguageIndex.Gacha].text = "Gacha";
                 UILanguageList[(int)UILanguageIndex.CandyLevelBtn].text = "Level";
-                UILanguageList[(int)UILanguageIndex.AraangeBtn].text = "Arr";
+                UILanguageList[(int)UILanguageIndex.AraangeBtn].text = "Arrange";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateTitle].text = "Produce double candies(Max Lv.40)";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateExplain].text = "Produce two candies with a n% chance";
                 UILanguageList[(int)UILanguageIndex.CreateSpeedTitle].text = "Quick production(Max Lv.5)";
@@ -202,7 +202,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.ScorePercent4].text = "Score 22-28";
                 UILanguageList[(int)UILanguageIndex.AutoMergeAdsExplain].text = "watch an advertisement and run auto-merge for 10 minutes.";
                 UILanguageList[(int)UILanguageIndex.EquipKeyExplain].text = "Open the equipment box using a key";
-                UILanguageList[(int)UILanguageIndex.EquipMixAll].text = "MixALL";
+                UILanguageList[(int)UILanguageIndex.EquipMixAll].text = "ALL Mix";
                 UILanguageList[(int)UILanguageIndex.EquipMixPanel].text = "Mix";
                 UILanguageList[(int)UILanguageIndex.SlotArrangeBtn].text = "Slot";
                 UILanguageList[(int)UILanguageIndex.RankArrangeBtn].text = "Rank";
@@ -214,8 +214,6 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.EquipArrangeDownBtn].text = "Arr";
                 UILanguageList[(int)UILanguageIndex.SpecialBoxExplain].text = "5 Equipment Gacha S ~ C Rank";
                 UILanguageList[(int)UILanguageIndex.NormalBoxExplain].text = "5 Equipment Gacha A ~ D Rank";
-                UILanguageList[(int)UILanguageIndex.SpecialBoxExplain].text = "S ~ C 등급 장비 5개 소환";
-                UILanguageList[(int)UILanguageIndex.NormalBoxExplain].text = "S ~ C 등급 장비 5개 소환";
                 UILanguageList[(int)UILanguageIndex.SpecialBoxTitle].text = "Special Gift Box";
                 UILanguageList[(int)UILanguageIndex.NormalBoxTitle].text = "Normal Gift Box";
                 UILanguageList[(int)UILanguageIndex.MixSumLevel].text = "Mix Level";

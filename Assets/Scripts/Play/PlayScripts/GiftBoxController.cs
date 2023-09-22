@@ -500,30 +500,22 @@ public class GiftBoxController : MonoBehaviour
         equipKey.SetParent(equipKeyPool.transform);
         equipKey.localScale = startScale;
     }
-
-    
     
     private IEnumerator MoveCandy(Transform candy, Vector3 targetPosition, Transform targetBox, GameObject transparentObject)
     {
         float timeElapsed = 0f;
         float duration = 0.3f;
-
+    
         Vector3 startPosition = giftBoxTransform.position; // 시작 위치를 GiftBox의 위치로 설정
-
+    
         while (timeElapsed < duration)
         {
             timeElapsed += Time.deltaTime;
             float t = timeElapsed / duration;
-
-            // speedFactor는 일정한 속도를 유지하기 위한 요소입니다.
-            float speedFactor = Vector3.Distance(startPosition, targetPosition) / duration;
-            Vector3 nextPosition = Vector3.MoveTowards(candy.position, targetPosition, speedFactor * Time.deltaTime);
-        
-            candy.position = nextPosition;
+            candy.position = Vector3.Lerp(startPosition, targetPosition, t);
             yield return null;
         }
-
-        // 나머지 부분은 동일
+        
         candy.SetParent(targetBox);
         candy.localPosition = Vector3.zero;
         candy.localScale = Vector3.one;
