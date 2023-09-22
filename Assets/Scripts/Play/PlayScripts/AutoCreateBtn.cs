@@ -12,6 +12,9 @@ public class AutoCreateBtn : MonoBehaviour
     public bool isOn = false;
     public Text cooldownText;
 
+    private DateTime pauseTime; // 앱이 비활성화되거나 종료될 때의 시간
+    private TimeSpan timeElapsedWhilePaused = TimeSpan.Zero; // 앱이 비활성화되는 동안 지난 시간을 저장
+
     private void Start()
     {
 
@@ -30,7 +33,45 @@ public class AutoCreateBtn : MonoBehaviour
 
         ACOffBtn.onClick.AddListener(OnACOffBtnClick);
         ACOnBtn.onClick.AddListener(OnACOnBtnClick);
+
+        if (ES3.KeyExists("LastPauseTime"))
+        {
+            DateTime lastPauseTime = ES3.Load<DateTime>("LastPauseTime");
+            TimeSpan timeElapsedWhilePaused = DateTime.Now - lastPauseTime;
+
+            // 지난 시간만큼 lastAdTime을 조정하여 버프 지속시간을 유지
+            lastAdTime += timeElapsedWhilePaused;
+        }
     }
+
+
+    private void OnApplicationQuit()
+    {
+        // 앱이 종료될 때 현재 시간을 저장
+        ES3.Save("LastPauseTime", DateTime.Now);
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            // 앱이 비활성화될 때 현재 시간을 저장
+            ES3.Save("LastPauseTime", DateTime.Now);
+        }
+        else
+        {
+            // 앱이 다시 활성화될 때, 마지막으로 저장된 시간이 있는지 확인
+            if (ES3.KeyExists("LastPauseTime"))
+            {
+                DateTime lastPauseTime = ES3.Load<DateTime>("LastPauseTime");
+                TimeSpan timeElapsedWhilePaused = DateTime.Now - lastPauseTime;
+
+                // 지난 시간만큼 lastAdTime을 조정하여 버프 지속시간을 유지
+                lastAdTime += timeElapsedWhilePaused;
+            }
+        }
+    }
+
 
     public void OnACOffBtnClick()
     {
@@ -55,6 +96,21 @@ public class AutoCreateBtn : MonoBehaviour
         ToggleBuff();
         DataController.instance.Auto_Create_Save();
     }
+
+    public void OnACOffGachaClick() {
+
+        giftBoxController.ToggleFastAutoCreate(true); // 빠른 자동 생성 활성화
+        candycontroller.ToggleFastAutoMerge(true); // 빠른 자동 머지 활성화
+        isBuffActive = true;
+    }
+
+    public void OnACOnGachaClick() {
+       
+        giftBoxController.ToggleFastAutoCreate(false); // 빠른 자동 생성 비활성화
+        candycontroller.ToggleFastAutoMerge(false); // 빠른 자동 머지 비활성화
+        isBuffActive = false;
+    }
+
 
 
     private DateTime lastAdTime;
@@ -111,6 +167,7 @@ public class AutoCreateBtn : MonoBehaviour
     // 업데이트에서 쿨타임과 버프 상태를 확인
     void Update()
     {
+        Debug.Log($"기록을 보자 {hasCooldown}  /  {isBuffActive}");
         if (hasCooldown && isBuffActive)
         {
             cooldownText.gameObject.SetActive(true);
