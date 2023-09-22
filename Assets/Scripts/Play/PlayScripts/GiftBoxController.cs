@@ -271,6 +271,7 @@ public class GiftBoxController : MonoBehaviour
 
         if (candiesRemaining > 0 && IsSpaceAvailableInBox())
         {
+            SoundManager.Instance.PlaySoundEffect("Merge");
             CreateCandy();
             candiesRemaining--;
             createCandyText.text = candiesRemaining + "/" + maxCandies;
