@@ -7,7 +7,7 @@ public class CurrencyUI : MonoBehaviour
     public Text goldText;
     public Text diaText;
 
-    private void Start()
+    private void Awake()
     {
         currencyManager.OnCurrencyChanged += UpdateCurrencyUI;
     }

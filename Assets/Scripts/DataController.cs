@@ -39,6 +39,7 @@ public class DataController : MonoBehaviour
         Upgrade_luckyGoldLevel_Load();
         Upgrade_OffLineRewardBonusUpLevel_Load();
         Auto_Create_Load();
+        CurrencyManager.instance.LoadCurrencies();
         EquipmentManager.instance.LoadEquipData();
 
 

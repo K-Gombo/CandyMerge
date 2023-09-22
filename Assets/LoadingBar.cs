@@ -32,5 +32,6 @@ public class LoadingBar : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         gameObject.SetActive(false);
+        CurrencyManager.instance.LoadCurrencies();
     }
 }

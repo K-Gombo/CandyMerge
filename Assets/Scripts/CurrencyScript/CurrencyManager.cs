@@ -120,6 +120,7 @@ public class CurrencyManager : MonoBehaviour
             currencies = ES3.Load<List<Currency>>("currencies");
             foreach (Currency currency in currencies)
             {
+                Debug.Log("한번 보자 : " + currency.currencyName + " / " + currency.amount);
                 OnCurrencyChanged?.Invoke(currency.currencyName, currency.amount); // 로딩 후 이벤트 발생
             }
         }

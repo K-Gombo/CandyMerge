@@ -18,6 +18,9 @@ public class OfflineRewardManager : MonoBehaviour
     public float offLineRewardIncreament = 0f;
     public float equipOffLineRewardIncreament = 0f;
 
+    public GameObject openBtnList;
+    public GameObject button_Get;
+
     public static OfflineRewardManager instance;
 
     private void Awake()
@@ -46,7 +49,7 @@ public class OfflineRewardManager : MonoBehaviour
             //Debug.Log(string.Format("{0} Days {1} Hours {2} Minutes {3} Seconds Ago", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
             Debug.Log(GetCurrentRewardTimeAsString());
 
-            if (totalAccumulatedTime.Hours >= 1)
+            if (totalAccumulatedTime.Seconds >= 1)
             {
                 GetOfflineReward();
             }
@@ -62,7 +65,7 @@ public class OfflineRewardManager : MonoBehaviour
 
     void GetOfflineReward()
     {
-        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Hours;
+        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Seconds;
 
         // 두 증가율을 더한 값으로 적용합니다.
         float totalIncreament = offLineRewardIncreament + equipOffLineRewardIncreament;
@@ -128,6 +131,14 @@ public class OfflineRewardManager : MonoBehaviour
     public void ShowAds()
     {
         AdsManager.instance.ShowRewarded(RewardType.OffLine);
+    }
+
+    public void ShowAdsRwardPanel()
+    {
+        goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney((goldReward * 2).ToString());
+
+        openBtnList.SetActive(false);
+        button_Get.SetActive(true);
     }
 
     public void OfflineAdsRewardCleck()

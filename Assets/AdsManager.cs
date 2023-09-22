@@ -190,7 +190,7 @@ public class AdsManager : MonoBehaviour
                 autoCreateBtn.WatchAd();
             break;
             case RewardType.OffLine:
-                offlineRewardManager.OfflineAdsRewardCleck();
+                offlineRewardManager.ShowAdsRwardPanel();
             break;
             case RewardType.BoxOpen:
                 adsGachaBtn.BoxOpenReward();
