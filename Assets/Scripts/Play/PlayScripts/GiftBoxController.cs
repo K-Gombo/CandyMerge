@@ -55,17 +55,16 @@ public class GiftBoxController : MonoBehaviour
 
 
     private void Start()
-    {   
+    {
         StartCoroutine(FillAndCreateCandies());
         createCandyText.text = candiesRemaining + "/" + maxCandies;
         TogglePassiveAutoCreate(true);
         giftBoxTransform = GameObject.Find("GiftBox").transform;
         giftBoxButton.onClick.AddListener(OnGiftBoxClick);
         InitializeEquipKeyPool();
-        
     }
 
-   
+
 
     private IEnumerator FillAndCreateCandies()
     {
@@ -82,11 +81,20 @@ public class GiftBoxController : MonoBehaviour
                     yield return null;
                 }
 
-                candiesRemaining++;
+                if (candiesRemaining < maxCandies)
+                {
+                    candiesRemaining++;
+                }
+
                 createCandyText.text = candiesRemaining + "/" + maxCandies;
-
-                DataController.instance.CandiesRemaining_Save();
-
+            
+                // 최종적으로 값을 검증한 후에 저장
+                if (candiesRemaining <= maxCandies)
+                {
+                    DataController.instance.CandiesRemaining_Save();
+                }
+                
+                
                 if (candiesRemaining == maxCandies)
                 {
                     giftBoxFill.fillAmount = 1f;
@@ -102,6 +110,8 @@ public class GiftBoxController : MonoBehaviour
             }
         }
     }
+
+
     
     public float GetFillTime()
     {
