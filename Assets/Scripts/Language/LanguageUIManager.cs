@@ -259,10 +259,10 @@ public class LanguageUIManager : MonoBehaviour
         switch (currentLanguage)
         {
             case Language.Korean:
-                return $"골드 획득량 {currentGoldIncrement} % -> {nextGoldIncrement} %";
-
+                return $"골드 획득량 {currentGoldIncrement} %  <b><color=#00CC00>->  {nextGoldIncrement} %</color></b>";
+ 
             case Language.English:
-                return $"Gold Gain {currentGoldIncrement} % -> {nextGoldIncrement} %";
+                return $"Gold Gain {currentGoldIncrement} %  <b><color=#00CC00>->  {nextGoldIncrement} %</color></b>";
 
             default:
                 return "";

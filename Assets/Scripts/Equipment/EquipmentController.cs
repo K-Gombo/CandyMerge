@@ -282,7 +282,7 @@ public class EquipmentController : MonoBehaviour
         string modifiedCurrentRankStr = Regex.Replace(currentRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
         string modifiedNextRankStr = Regex.Replace(nextRankStr, @"(\d+)$", m => "+" + m.Groups[1].Value);
 
-        equipRankExplainText.text = $"Rank : {modifiedCurrentRankStr} -> {modifiedNextRankStr}";
+        equipRankExplainText.text = $"Rank : {modifiedCurrentRankStr} <b><color=#00CC00>->  {modifiedNextRankStr}</color></b>";
 
         float nextGoldIncrement = equipmentManager.GetNextGoldIncrement(clickedEquipment.equipRank);
         LanguageUIManager.Language currentLanguage = languageUIManager.GetCurrentLanguage();
@@ -503,7 +503,7 @@ public class EquipmentController : MonoBehaviour
 
         for (int i = 0; i < clickedEquipment.skillNames.Length; i++)
         {
-            equipSkillText[i].text = $"{clickedEquipment.skillNames[i]}  {clickedEquipment.skillPoints[i]}%";
+            equipSkillText[i].text = $"{clickedEquipment.skillNames[i]}  <b>{clickedEquipment.skillPoints[i]}%</b>";
         }
 
         List<EquipmentManager.Rank> rankOrderList = new List<EquipmentManager.Rank>(EquipmentManager.maxLevelsPerRank.Keys);
