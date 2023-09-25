@@ -11,17 +11,9 @@ public class RewardButton : MonoBehaviour
     [SerializeField] public Button rewardButton;
     
     public static RewardButton instance;
-
-    public float goldIncreaseRate = 0f;
     public float maxGoldIncreaseRate = 30f;
-
-    public float equipGoldIncreaseRate = 0f;
-    public float equipLuckyGoldProbability = 0;
-
-    public float luckyGoldProbability = 0;
     public float maxLuckyGoldProbability = 40f;
-
-    public float questDiaIncrement = 0f;
+    
 
     [SerializeField] private GameObject Check1;
     [SerializeField] private GameObject Check2;
@@ -171,13 +163,13 @@ public class RewardButton : MonoBehaviour
     
     public float GetEquipQuestDiaUp()
     {   
-        return questDiaIncrement;
+        return QuestManager.instance.questDiaIncrement;
     }
 
     public void SetEquipQuestDiaUp(float newQuestDiaIncrement)
     {
         newQuestDiaIncrement = Mathf.Round(newQuestDiaIncrement * 100f) / 100f;
-        questDiaIncrement = newQuestDiaIncrement;
+        QuestManager.instance.questDiaIncrement = newQuestDiaIncrement;
     }
     
     
@@ -228,9 +220,9 @@ public class RewardButton : MonoBehaviour
 
         if (parentQuest.isDiaQuest)
         {
-            Debug.Log($" 퀘스트 다이아 증가율은 지금 : {questDiaIncrement}");
+            Debug.Log($" 퀘스트 다이아 증가율은 지금 : {QuestManager.instance.questDiaIncrement}");
             
-            float actualIncreaseRate = 1 + (questDiaIncrement / 100);
+            float actualIncreaseRate = 1 + (QuestManager.instance.questDiaIncrement / 100);
             BigInteger actualIncreaseRateBigInt = new BigInteger((int)(actualIncreaseRate * 100)); // BigInteger로 변환
 
             // 스케일링을 적용

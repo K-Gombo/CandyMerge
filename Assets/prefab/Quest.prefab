@@ -642,7 +642,6 @@ MonoBehaviour:
   equipLuckyGoldProbability: 0
   luckyGoldProbability: 0
   maxLuckyGoldProbability: 40
-  questDiaIncrement: 0
   Check1: {fileID: 3207905030570394797}
   Check2: {fileID: 3571808693680839395}
 --- !u!1 &7166283968239458915

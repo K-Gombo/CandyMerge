@@ -25,9 +25,8 @@ public class QuestManager : MonoBehaviour
     public List<Quest> activeQuests;
     private Queue<int> availableAvatars = new Queue<int>();
     public HappyLevel happyLevel;
-    private int specialQuestCounter = 0; // 특별 퀘스트 카운팅
-    public int specialQuestProbability = 15; // 특별 퀘스트 확률 (15회 중 1회)
     public float luckyExperienceUpProbability = 0f; // 추가된 변수
+    public EquipmentManager equipmentManager;
 
     
     public Dictionary<string, int> activeQuestsInfo = new Dictionary<string, int>(); //활성화된 퀘스트 담는 딕셔너리
@@ -40,8 +39,11 @@ public class QuestManager : MonoBehaviour
 
     public float equipLuckyGoldProbability = 0;
 
+    public float questDiaIncrement = 0;
+
     public float luckyGoldProbability = 0;
     public float maxLuckyGoldProbability = 40f;
+    
 
     private void Awake()
     {
@@ -239,28 +241,36 @@ public class QuestManager : MonoBehaviour
     
     public bool IsSpecialQuest()
     {
-        bool isSpecial = Random.Range(1, specialQuestProbability + 1 - specialQuestCounter) == 1 || specialQuestCounter == 14;
+        int calculatedProbability = 15; // 기본 확률
+
+        if (equipmentManager.totalEquipScore >= 1 && equipmentManager.totalEquipScore <= 7)
+        {
+            calculatedProbability = 14;
+        }
+        else if (equipmentManager.totalEquipScore >= 8 && equipmentManager.totalEquipScore <= 14)
+        {
+            calculatedProbability = 13;
+        }
+        else if (equipmentManager.totalEquipScore >= 15 && equipmentManager.totalEquipScore <= 21)
+        {
+            calculatedProbability = 12;
+        }
+        else if (equipmentManager.totalEquipScore >= 22 && equipmentManager.totalEquipScore <= 28)
+        {
+            calculatedProbability = 10;
+        }
+
+        bool isSpecial = Random.Range(1, calculatedProbability + 1) == 1;
 
         if (isSpecial) 
         {   
-            Debug.Log("특별퀘스트 " + (specialQuestCounter + 1) + "번째에서 등장!"); // 몇 번째에서 특별퀘스트가 등장했는지 출력
-            
-
-            specialQuestCounter = 0; // 특별 퀘스트 카운팅 초기화
-        }
-        else 
-        {
-            
-            specialQuestCounter++; // 퀘스트 카운팅 증가
-        }
-
-        if (specialQuestCounter == 0)
-        {
-            Debug.Log("특별 퀘스트 생성조건 초기화!"); // 특별 퀘스트 생성조건 초기화 메시지 출력
+            Debug.Log("특별퀘스트 등장! 확률은 1/" + calculatedProbability); // 특별퀘스트가 등장했는지 출력
         }
 
         return isSpecial;
     }
+
+
 
     
     public void CheckAndReturnImpossibleQuests()
