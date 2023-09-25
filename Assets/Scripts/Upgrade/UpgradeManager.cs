@@ -418,7 +418,13 @@ public void LuckyCreateUp(int luckyCreateLevel)
     {
         float currentLuckyCreate = giftBoxController.GetLuckyCreate();
 
-        float newLuckyCreate = Mathf.Min(currentLuckyCreate + increaseLuckyCreate, giftBoxController.maxLuckyCreate);
+            // 비용을 1.4배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(14);  // 1.4 * 10
+            BigInteger newCost = (currentLuckyCreateUpCost * multiplier) / 10;  // 1.4배
+            currentLuckyCreateUpCost = newCost;
+
+
+            float newLuckyCreate = Mathf.Min(currentLuckyCreate + increaseLuckyCreate, giftBoxController.maxLuckyCreate);
         giftBoxController.SetLuckyCreate(newLuckyCreate);
 
         Debug.Log($"캔디 확률 업!: {newLuckyCreate}");
@@ -432,7 +438,12 @@ public void CreateSpeedUp(int createSpeedLevel)
     {
         float currentFillTime = giftBoxController.GetFillTime();
 
-        float newFillTime = Mathf.Max(currentFillTime - decreaseFilltime, giftBoxController.minimumFillTime);
+            // 비용을 1.4배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(14);  // 1.4 * 10
+            BigInteger newCost = (currentCreateSpeedUpCost * multiplier) / 10;  // 1.4배
+            currentCreateSpeedUpCost = newCost;
+
+            float newFillTime = Mathf.Max(currentFillTime - decreaseFilltime, giftBoxController.minimumFillTime);
         giftBoxController.SetFillTime(newFillTime);
 
         Debug.Log($"생산 쿨타임 감소!:{newFillTime}");
@@ -455,7 +466,8 @@ public void RemoveLocked(int count)
         {
             for (int j = 0; j < box.childCount; j++)
             {
-                Transform child = box.GetChild(j);
+
+                    Transform child = box.GetChild(j);
                 if (child.CompareTag("Locked"))
                 {
                     lockedBoxes.Add(child);
@@ -476,6 +488,14 @@ public void RemoveLocked(int count)
         Debug.Log($"요청한 잠금 해제 개수({count}개)는 현재 잠금 상자 개수({lockedCount}개)보다 많습니다. {lockedCount}개만 해제됩니다.");
         count = lockedCount;
     }
+
+    for (int i=0; i<count; i++)
+        {
+            // 비용을 1.5배로 증가시키는 부분
+            BigInteger multiplier = new BigInteger(30);  // 1.5 * 10  1.5배설정
+            BigInteger newCost = (currentRemoveLockedCost * multiplier) / 10;
+            currentRemoveLockedCost = newCost;
+        }
 
     BigInteger totalCost = currentRemoveLockedCost * count; // 요청한 잠금 해제 개수에 따른 전체 비용
 
@@ -508,6 +528,14 @@ public void MaxCandiesUp(int count)
         totalCandiesToIncrease = giftBoxController.realMaxCandies - currentMaxCandies;
     }
 
+    for (int i=0; i<count; i++)
+        {
+            // 비용을 1.5배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
+            BigInteger newCost = (currentMaxCandiesUpCost * multiplier) / 10;  // 1.5배
+            currentMaxCandiesUpCost = newCost;
+        }
+
     BigInteger totalCost = currentMaxCandiesUpCost * count; // 요청한 증가량에 따른 전체 비용
 
 
@@ -534,6 +562,14 @@ public void CandyLevelUp(int count)
         Debug.Log($"요청한 증가량({count}번)으로 인해 캔디 레벨이 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
         totalLevelsToIncrease = candyStatus.maxBaseLevel - currentBaseLevel;
     }
+
+    for (int i=0; i<count; i++)
+        {
+            // 비용을 1.5배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
+            BigInteger newCost = (currentCandyLevelUpCost * multiplier) / 10;  // 1.5배
+            currentCandyLevelUpCost = newCost;
+        }
 
     BigInteger totalCost = currentCandyLevelUpCost * count; // 요청한 증가량에 따른 전체 비용
 
@@ -562,6 +598,14 @@ public void PassiveAutoCreateSpeedUp(int count)
         totalSpeedIncrease = giftBoxController.maxPassiveCreateTry - currentPassiveCreateSpeed;
     }
 
+    for (int i=0; i<count; i++)
+        {
+            // 비용을 1.3배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
+            BigInteger newCost = (currentPassiveAutoCreateSpeedUpCost * multiplier) / 10;  // 1.3배
+            currentPassiveAutoCreateSpeedUpCost = newCost;
+        }
+
     BigInteger totalCost = currentPassiveAutoCreateSpeedUpCost * count; // 요청한 증가량에 따른 전체 비용
 
 
@@ -589,6 +633,14 @@ public void GoldUp(int count)
         Debug.Log($"요청한 증가량({count}번)으로 인해 골드 획득량이 최대치를 초과합니다. 가능한 최대치까지만 증가됩니다.");
         totalGoldIncrease = RewardButton.instance.maxGoldIncreaseRate - currentGoldUp;
     }
+
+    for (int i =0; i<count; i++)
+        {
+            // 비용을 1.3배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
+            BigInteger newCost = (currentGoldUpCost * multiplier) / 10;  // 1.3배
+            currentGoldUpCost = newCost;
+        }
 
     BigInteger totalCost = currentGoldUpCost * count; // 요청한 증가량에 따른 전체 비용
 
@@ -619,6 +671,14 @@ public void LuckyGoldUp(int count)
         totalLuckyGoldIncrease = RewardButton.instance.maxLuckyGoldProbability - currentLuckyGoldUp;
     }
 
+    for (int i=0; i< count; i++)
+        {
+            // 비용을 1.2배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(12);  // 1.2 * 10
+            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 10;  // 1.2배
+            currentLuckyGoldUpCost = newCost;
+        }
+
     BigInteger totalCost = currentLuckyGoldUpCost * count; // 요청한 횟수만큼의 전체 비용 계산
 
     float newLuckyGoldUp = currentLuckyGoldUp + totalLuckyGoldIncrease;
@@ -647,6 +707,7 @@ public void LuckyGoldUp(int count)
                 Debug.Log($"최대 레벨 {maxOffLineRewardBonusLevel}에 도달했습니다.");
                 break;
             }
+            // 비용을 1.3배로 증가시킵니다.
 
             BigInteger multiplier = new BigInteger(13); // 1.3 * 10
             currentOffLineRewardBonusCost = (currentOffLineRewardBonusCost * multiplier) / 10; // 1.3배

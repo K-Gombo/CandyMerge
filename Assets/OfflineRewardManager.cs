@@ -49,7 +49,7 @@ public class OfflineRewardManager : MonoBehaviour
             //Debug.Log(string.Format("{0} Days {1} Hours {2} Minutes {3} Seconds Ago", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
             Debug.Log(GetCurrentRewardTimeAsString());
 
-            if (totalAccumulatedTime.Seconds >= 1)
+            if (totalAccumulatedTime.Hours >= 1)
             {
                 GetOfflineReward();
             }
@@ -65,7 +65,7 @@ public class OfflineRewardManager : MonoBehaviour
 
     void GetOfflineReward()
     {
-        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Seconds;
+        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Hours;
 
         // 두 증가율을 더한 값으로 적용합니다.
         float totalIncreament = offLineRewardIncreament + equipOffLineRewardIncreament;
