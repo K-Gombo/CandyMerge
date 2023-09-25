@@ -35,6 +35,7 @@ public class GachaBtn : MonoBehaviour
         {
             Debug.Log("애니메이션 중이므로 가챠를 할 수 없습니다.");
         }
+        EquipmentManager.instance.CheckMixAvailability();
     }
 
 }

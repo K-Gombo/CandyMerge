@@ -13,6 +13,8 @@ public class UpgradeBtnManager : MonoBehaviour
     public Button goldUpButton;
     public Button luckyGoldUpButton;
     public Button offLineRewardBonusUpButton;
+    
+    public GameObject upgradeAvailable; 
 
     public UpgradeManager upgradeManager;
     public CurrencyManager currencyManager;  // CurrencyManager 참조 추가
@@ -48,7 +50,7 @@ public class UpgradeBtnManager : MonoBehaviour
     private void Update()
 {
     BigInteger currentGoldAmount = BigInteger.Parse(currencyManager.GetCurrencyAmount("Gold"));
-
+    
     // Lucky Create Up
     luckyCreateUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentLuckyCreateUpCost.ToString()) || upgradeManager.luckyCreateLevel >= upgradeManager.maxLuckyCreateUpgradeLevel);
 
@@ -75,6 +77,22 @@ public class UpgradeBtnManager : MonoBehaviour
 
     // OffLine Reward Bonus Up
     offLineRewardBonusUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentOffLineRewardBonusCost.ToString()) || upgradeManager.offLineRewardBonusLevel >= upgradeManager.maxOffLineRewardBonusLevel);
+    
+    // 새로 추가될 부분: 활성화된 버튼이 하나라도 있는지 체크
+    bool isAnyButtonActive = (
+        luckyCreateUpButton.interactable ||
+        createSpeedUpButton.interactable ||
+        maxCandiesUpButton.interactable ||
+        candyLevelUpButton.interactable ||
+        passiveAutoCreateSpeedUpButton.interactable ||
+        RemoveLokcedButton.interactable ||
+        goldUpButton.interactable ||
+        luckyGoldUpButton.interactable ||
+        offLineRewardBonusUpButton.interactable
+    );
+
+    // 하나라도 활성화된 버튼이 있다면 upgradeAvailable을 활성화
+    upgradeAvailable.SetActive(isAnyButtonActive);
 }
 
 

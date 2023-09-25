@@ -75,6 +75,7 @@ public class EquipKeyGachaBtn : MonoBehaviour
             });
 
         });
+        EquipmentManager.instance.CheckMixAvailability();
     }
 
 

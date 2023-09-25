@@ -58,6 +58,7 @@ public class EquipmentManager : MonoBehaviour
     public Text equipScoreText;
     public int totalEquipScore = 0;
     public Transform allEquipMergeResultSpawn;
+    public GameObject mixPanelAvailable;
     
     public delegate void EquipCreatedHandler(GameObject newEquip);
     public event EquipCreatedHandler OnEquipCreated;
@@ -645,6 +646,7 @@ public class EquipmentManager : MonoBehaviour
         // mixBtnMixAvailable 버튼 활성화 또는 비활성화
         mixBtnMixAvailable.SetActive(mixAvailable);
         allMixBtnMixAvailable.SetActive(mixAvailable);
+        mixPanelAvailable.SetActive(mixAvailable);
 
         // 각 EquipmentStatus에 대한 mixAvailable 적용
         foreach (EquipmentStatus equipment in equipArrangeManager.equipList)
