@@ -59,7 +59,7 @@ public class Quest : MonoBehaviour
 
     public void SetEquipLuckyDiaQuestUp(float newLuckyDiaQuestProbability)
     {
-        newLuckyDiaQuestProbability = Mathf.Round(newLuckyDiaQuestProbability * 10f) / 10f;
+        newLuckyDiaQuestProbability = Mathf.Round(newLuckyDiaQuestProbability * 100f) / 100f;
         diaQuestProbability = newLuckyDiaQuestProbability;
     }
     

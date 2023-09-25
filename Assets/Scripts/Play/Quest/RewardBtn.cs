@@ -176,7 +176,7 @@ public class RewardButton : MonoBehaviour
 
     public void SetEquipQuestDiaUp(float newQuestDiaIncrement)
     {
-        newQuestDiaIncrement = Mathf.Round(newQuestDiaIncrement * 10f) / 10f;
+        newQuestDiaIncrement = Mathf.Round(newQuestDiaIncrement * 100f) / 100f;
         questDiaIncrement = newQuestDiaIncrement;
     }
     
@@ -316,7 +316,7 @@ public class RewardButton : MonoBehaviour
 
     public void SetGoldUp(float newGoldIncreaseRate)
     {
-        newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 10f) / 10f; // 소수 둘째자리에서 반올림
+        newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 100f) / 100f; // 소수 둘째자리에서 반올림
         QuestManager.instance.goldIncreaseRate = Mathf.Min(newGoldIncreaseRate, QuestManager.instance.maxGoldIncreaseRate);
     }
     
@@ -327,7 +327,7 @@ public class RewardButton : MonoBehaviour
 
     public void SetLuckyGoldUp(float newDoubleGoldProbability)
     {
-        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
+        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 100f) / 100f;
         QuestManager.instance.luckyGoldProbability = Mathf.Min(newDoubleGoldProbability, QuestManager.instance.maxLuckyGoldProbability);
     }
     
@@ -338,7 +338,7 @@ public class RewardButton : MonoBehaviour
 
     public void SetEquipGoldUp(float newGoldIncreaseRate)
     {   
-        newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 10f) / 10f; // 소수 둘째자리에서 반올림
+        newGoldIncreaseRate = Mathf.Round(newGoldIncreaseRate * 100f) / 100f; // 소수 둘째자리에서 반올림
         QuestManager.instance.equipGoldIncreaseRate = newGoldIncreaseRate;
     }
     

@@ -162,7 +162,7 @@ public class OfflineRewardManager : MonoBehaviour
 
     public void SetEquipOffLineRewardUp(float newequipOffLineRewardIncreament)
     {
-        newequipOffLineRewardIncreament = Mathf.Round(newequipOffLineRewardIncreament * 10f) / 10f;
+        newequipOffLineRewardIncreament = Mathf.Round(newequipOffLineRewardIncreament * 100f) / 100f;
         equipOffLineRewardIncreament = newequipOffLineRewardIncreament;
     }
     
@@ -207,7 +207,7 @@ public class OfflineRewardManager : MonoBehaviour
 
     public void SetOffLineRewardBonusUp(float newoffLineRewardIncreament)
     {
-        newoffLineRewardIncreament = Mathf.Round(newoffLineRewardIncreament * 10f) / 10f; // 소수 둘째자리에서 반올림
+        newoffLineRewardIncreament = Mathf.Round(newoffLineRewardIncreament * 100f) / 100f; // 소수 둘째자리에서 반올림
         offLineRewardIncreament = Mathf.Min(newoffLineRewardIncreament);
     }
     

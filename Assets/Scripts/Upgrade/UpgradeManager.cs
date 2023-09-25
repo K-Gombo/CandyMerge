@@ -273,7 +273,7 @@ public class UpgradeManager : MonoBehaviour
             candyLevel++;
 
             // 비용을 1.5배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(35);  // 
+            BigInteger multiplier = new BigInteger(45);  // 
             BigInteger newCost = (currentCandyLevelUpCost * multiplier) / 10;  // 4.5배
             currentCandyLevelUpCost = newCost;
 
@@ -305,8 +305,8 @@ public class UpgradeManager : MonoBehaviour
             passiveAutoCreateSpeedLevel++;
 
             // 비용을 1.3배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
-            BigInteger newCost = (currentPassiveAutoCreateSpeedUpCost * multiplier) / 10;  // 1.3배
+            BigInteger multiplier = new BigInteger(115);  // 1.3 * 10
+            BigInteger newCost = (currentPassiveAutoCreateSpeedUpCost * multiplier) / 100;  // 1.3배
             currentPassiveAutoCreateSpeedUpCost = newCost;
 
             Debug.Log($"자동 생성 속도업!:{newPassiveAutoCreateSpeed}, 새로운 비용: {currentPassiveAutoCreateSpeedUpCost}");
@@ -338,8 +338,8 @@ public class UpgradeManager : MonoBehaviour
             goldUpLevel++;
 
             // 비용을 1.3배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
-            BigInteger newCost = (currentGoldUpCost * multiplier) / 10;  // 1.3배
+            BigInteger multiplier = new BigInteger(115);  // 1.3 * 10
+            BigInteger newCost = (currentGoldUpCost * multiplier) / 100;  // 1.3배
             currentGoldUpCost = newCost;
 
             Debug.Log($"추가 골드 획득 업!: {newGoldUp}, 새로운 비용: {currentGoldUpCost}");
@@ -349,6 +349,7 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
+
 
     
 
@@ -368,8 +369,8 @@ public class UpgradeManager : MonoBehaviour
             luckyGoldLevel++;
 
             // 비용을 1.2배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(12);  // 1.2 * 10
-            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 10;  // 1.2배
+            BigInteger multiplier = new BigInteger(114);  // 1.2 * 10
+            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 100;  // 1.2배
             currentLuckyGoldUpCost = newCost;
 
             Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}, 새로운 비용: {currentLuckyGoldUpCost}");
@@ -397,8 +398,8 @@ public class UpgradeManager : MonoBehaviour
             offLineRewardBonusLevel++;
 
             // 비용을 1.3배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
-            BigInteger newCost = (currentOffLineRewardBonusCost * multiplier) / 10;  // 1.3배
+            BigInteger multiplier = new BigInteger(115);  // 1.3 * 10
+            BigInteger newCost = (currentOffLineRewardBonusCost * multiplier) / 100;  // 1.3배
             currentOffLineRewardBonusCost = newCost;
 
             Debug.Log($"오프라인 리워드 보너스 업!: {newOffLineRewardBonus}, 새로운 비용: {currentOffLineRewardBonusCost}");
@@ -530,7 +531,7 @@ public void MaxCandiesUp(int count)
     for (int i=0; i<count; i++)
         {
             // 비용을 1.5배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
+            BigInteger multiplier = new BigInteger(30);  // 1.5 * 10
             BigInteger newCost = (currentMaxCandiesUpCost * multiplier) / 10;  // 1.5배
             currentMaxCandiesUpCost = newCost;
         }
@@ -565,7 +566,7 @@ public void CandyLevelUp(int count)
     for (int i=0; i<count; i++)
         {
             // 비용을 1.5배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
+            BigInteger multiplier = new BigInteger(45);  // 1.5 * 10
             BigInteger newCost = (currentCandyLevelUpCost * multiplier) / 10;  // 1.5배
             currentCandyLevelUpCost = newCost;
         }
@@ -600,8 +601,8 @@ public void PassiveAutoCreateSpeedUp(int count)
     for (int i=0; i<count; i++)
         {
             // 비용을 1.3배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
-            BigInteger newCost = (currentPassiveAutoCreateSpeedUpCost * multiplier) / 10;  // 1.3배
+            BigInteger multiplier = new BigInteger(115);  // 1.3 * 10
+            BigInteger newCost = (currentPassiveAutoCreateSpeedUpCost * multiplier) / 100;  // 1.3배
             currentPassiveAutoCreateSpeedUpCost = newCost;
         }
 
@@ -636,8 +637,8 @@ public void GoldUp(int count)
     for (int i =0; i<count; i++)
         {
             // 비용을 1.3배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(13);  // 1.3 * 10
-            BigInteger newCost = (currentGoldUpCost * multiplier) / 10;  // 1.3배
+            BigInteger multiplier = new BigInteger(115);  // 1.3 * 10
+            BigInteger newCost = (currentGoldUpCost * multiplier) / 100;  // 1.3배
             currentGoldUpCost = newCost;
         }
 
@@ -673,8 +674,8 @@ public void LuckyGoldUp(int count)
     for (int i=0; i< count; i++)
         {
             // 비용을 1.2배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(12);  // 1.2 * 10
-            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 10;  // 1.2배
+            BigInteger multiplier = new BigInteger(114);  // 1.2 * 10
+            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 100;  // 1.2배
             currentLuckyGoldUpCost = newCost;
         }
 
@@ -708,8 +709,8 @@ public void LuckyGoldUp(int count)
             }
             // 비용을 1.3배로 증가시킵니다.
 
-            BigInteger multiplier = new BigInteger(13); // 1.3 * 10
-            currentOffLineRewardBonusCost = (currentOffLineRewardBonusCost * multiplier) / 10; // 1.3배
+            BigInteger multiplier = new BigInteger(115); // 1.3 * 10
+            currentOffLineRewardBonusCost = (currentOffLineRewardBonusCost * multiplier) / 100; // 1.3배
         }
 
         offlineRewardManager.SetOffLineRewardBonusUp(newOffLineRewardBonus);

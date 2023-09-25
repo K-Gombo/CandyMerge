@@ -357,7 +357,7 @@ public class QuestManager : MonoBehaviour
 
     public void SetEquipLuckyExperienceUp(float newExperienceUpProbability)
     {
-        newExperienceUpProbability = Mathf.Round(newExperienceUpProbability * 10f) / 10f;
+        newExperienceUpProbability = Mathf.Round(newExperienceUpProbability * 100f) / 100f;
         luckyExperienceUpProbability = newExperienceUpProbability;
     }
     
@@ -402,7 +402,7 @@ public class QuestManager : MonoBehaviour
     }
     public void SetEquipLuckyGoldUp(float newDoubleGoldProbability)
     {
-        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 10f) / 10f;
+        newDoubleGoldProbability = Mathf.Round(newDoubleGoldProbability * 100f) / 100f;
         equipLuckyGoldProbability = newDoubleGoldProbability;
     }
 

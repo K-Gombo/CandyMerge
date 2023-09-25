@@ -175,7 +175,7 @@ public class GiftBoxController : MonoBehaviour
 
     public void SetLuckyCreate(float newLuckyCreate)
     {
-        newLuckyCreate = Mathf.Round(newLuckyCreate * 10f) / 10f; // 소수 둘째자리에서 반올림
+        newLuckyCreate = Mathf.Round(newLuckyCreate * 100f) / 100f; // 소수 둘째자리에서 반올림
         luckyCreate = Mathf.Min(newLuckyCreate, maxLuckyCreate);
     }
 
@@ -203,7 +203,7 @@ public class GiftBoxController : MonoBehaviour
 
     public void SetPassiveCreateTry(float newPassiveCreateTry)
     {
-        newPassiveCreateTry = Mathf.Round(newPassiveCreateTry * 10f) / 10f; // 소수 둘째자리에서 반올림
+        newPassiveCreateTry = Mathf.Round(newPassiveCreateTry * 100f) / 100f; // 소수 둘째자리에서 반올림
         passiveCreateTry = Mathf.Min(newPassiveCreateTry, maxPassiveCreateTry);
     }
   
@@ -323,7 +323,7 @@ public class GiftBoxController : MonoBehaviour
 
     public void SetEquipLuckyCreatKeyUp(float newLuckyEquipKeyCreatProbability)
     {
-        newLuckyEquipKeyCreatProbability = Mathf.Round(newLuckyEquipKeyCreatProbability * 10f) / 10f;
+        newLuckyEquipKeyCreatProbability = Mathf.Round(newLuckyEquipKeyCreatProbability * 100f) / 100f;
         equipKeyCreatProbability = newLuckyEquipKeyCreatProbability;
     }
     
@@ -367,7 +367,7 @@ public class GiftBoxController : MonoBehaviour
 
     public void SetEquipKeyDoubleUp(float newEquipKeyDoubleUpProbability)
     {
-        newEquipKeyDoubleUpProbability = Mathf.Round(newEquipKeyDoubleUpProbability * 10f) / 10f;
+        newEquipKeyDoubleUpProbability = Mathf.Round(newEquipKeyDoubleUpProbability * 100f) / 100f;
         equipKeyDoubleProbability = newEquipKeyDoubleUpProbability;
     }
     

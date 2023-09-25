@@ -550,7 +550,7 @@ public class CandyController : MonoBehaviour
 
     public void SetEquipLuckyCandyLevelUp(float newLuckyCandyLevelUpProbability)
     {
-        newLuckyCandyLevelUpProbability = Mathf.Round(newLuckyCandyLevelUpProbability * 10f) / 10f;
+        newLuckyCandyLevelUpProbability = Mathf.Round(newLuckyCandyLevelUpProbability * 100f) / 100f;
         luckyCandyLevelUpProbability = newLuckyCandyLevelUpProbability;
     }
     
