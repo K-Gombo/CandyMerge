@@ -53,7 +53,7 @@ public class UpgradeBtnManager : MonoBehaviour
     luckyCreateUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentLuckyCreateUpCost.ToString()) || upgradeManager.luckyCreateLevel >= upgradeManager.maxLuckyCreateUpgradeLevel);
 
     // Create Speed Up
-    createSpeedUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentCreateSpeedUpCost.ToString()) || upgradeManager.currentCreateSpeedUpCost == 30001);
+    createSpeedUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentCreateSpeedUpCost.ToString()) || upgradeManager.createSpeedLevel >= upgradeManager.maxCreateSpeedUpgradeLevel);
 
     // Max Candies Up
     maxCandiesUpButton.interactable = !(currentGoldAmount < BigInteger.Parse(upgradeManager.currentMaxCandiesUpCost.ToString()) || upgradeManager.maxCandiesLevel >= upgradeManager.maxCandiesUpgradeLevel);

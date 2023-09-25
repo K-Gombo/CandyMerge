@@ -105,7 +105,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.AraangeBtn].text = "정렬";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateTitle].text = "제작 캔디 2배 확률(Max Lv.40)";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateExplain].text = "n% 확률로 한번에 2개의 캔디 제작";
-                UILanguageList[(int)UILanguageIndex.CreateSpeedTitle].text = "빠른 제작(Max Lv.5)";
+                UILanguageList[(int)UILanguageIndex.CreateSpeedTitle].text = "빠른 제작(Max Lv.50)";
                 UILanguageList[(int)UILanguageIndex.CreateSpeedExplain].text = "캔디 제작 시간 n초 감소";
                 UILanguageList[(int)UILanguageIndex.HaveCandyTitle].text = "캔디 필드 확장(Max Lv.33)";
                 UILanguageList[(int)UILanguageIndex.HaveCandyExplain].text = "필드에 보유 가능한 캔디의 최대 개수 n개 증가";
@@ -167,7 +167,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.AraangeBtn].text = "Arrange";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateTitle].text = "Produce double candies(Max Lv.40)";
                 UILanguageList[(int)UILanguageIndex.LuckyCreateExplain].text = "Produce two candies with a n% chance";
-                UILanguageList[(int)UILanguageIndex.CreateSpeedTitle].text = "Quick production(Max Lv.5)";
+                UILanguageList[(int)UILanguageIndex.CreateSpeedTitle].text = "Quick production(Max Lv.50)";
                 UILanguageList[(int)UILanguageIndex.CreateSpeedExplain].text = "Reduce candy production time by n seconds";
                 UILanguageList[(int)UILanguageIndex.HaveCandyTitle].text = "Increase candies in the field(Max Lv.33)";
                 UILanguageList[(int)UILanguageIndex.HaveCandyExplain].text = "Increase n numbers of candies field ";

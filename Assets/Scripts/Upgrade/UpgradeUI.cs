@@ -43,8 +43,7 @@ public class UpgradeUI : MonoBehaviour
             luckyCreateUpCostText.text =BigIntegerCtrl_global.bigInteger.ChangeMoney(upgradeManager.currentLuckyCreateUpCost.ToString());
         }
         // 생성 속도 업그레이드의 현재 비용 표시
-        upgradeManager.currentCreateSpeedUpCost = upgradeManager.createSpeedCostDictionary[upgradeManager.createSpeedLevel];
-        if (upgradeManager.currentCreateSpeedUpCost == 30001)
+        if (upgradeManager.createSpeedLevel == upgradeManager.maxCreateSpeedUpgradeLevel)
         {
             createSpeedUpCostText.text = "Max";
         }

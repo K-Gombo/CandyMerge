@@ -92,7 +92,7 @@ public class CandyController : MonoBehaviour
     {
         startPosition = hit.collider.transform.position;
         originalParent = hit.collider.transform.parent;
-        hit.collider.transform.SetParent(draggingParentCanvas); // 드래그 중에는 Canvas를 부모로 설정
+        hit.collider.transform.SetParent(draggingParentCanvas); 
         originalSortingOrder = hit.collider.GetComponent<SpriteRenderer>().sortingOrder;
         hit.collider.GetComponent<SpriteRenderer>().sortingOrder = 5;
         currentlyDraggingCandy = hit.collider.transform;

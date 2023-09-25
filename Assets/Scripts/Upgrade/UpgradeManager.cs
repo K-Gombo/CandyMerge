@@ -18,7 +18,7 @@ public class UpgradeManager : MonoBehaviour
 
     
     public float increaseLuckyCreate = 0.5f;
-    public float decreaseFilltime = 0.5f; // 캔디 생성 속도 감소조절
+    public float decreaseFilltime = 0.05f; // 캔디 생성 속도 감소조절
     public int increaseMaxCandies = 1;
     public int increaseBaseLevel = 1;
     public float increasePassiveAutoCreateSpeed = 0.1f;
@@ -28,7 +28,8 @@ public class UpgradeManager : MonoBehaviour
     
      
     private int luckyCreateUpCost = 1000;
-    private int removeLockedCost = 1000;
+    private int createSpeedUpCost = 800;
+    private int removeLockedCost = 1500;
     private int maxCandiesUpCost = 1000;
     private int candyLevelUpCost = 1000;
     private int passiveAutoCreateSpeedUpCost = 1500;
@@ -60,7 +61,7 @@ public class UpgradeManager : MonoBehaviour
     
     //각 업그레이드의 맥스레벨
     public int maxLuckyCreateUpgradeLevel = 40;
-    public int maxCreateSpeedUpgradeLevel = 5;
+    public int maxCreateSpeedUpgradeLevel = 50;
     public int maxRemoveLockedUpgradeLevel = 34;
     public int maxCandiesUpgradeLevel = 30;
     public int maxCandyLevelUpgradeLevel = 57;
@@ -75,7 +76,7 @@ public class UpgradeManager : MonoBehaviour
     {
         // 초기 비용 설정
         currentLuckyCreateUpCost = luckyCreateUpCost;
-        currentCreateSpeedUpCost = createSpeedCostDictionary[createSpeedLevel];
+        currentCreateSpeedUpCost = createSpeedUpCost;
         currentRemoveLockedCost = removeLockedCost;
         currentMaxCandiesUpCost = maxCandiesUpCost;
         currentCandyLevelUpCost = candyLevelUpCost;
@@ -114,17 +115,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-
-    public Dictionary<int, BigInteger> createSpeedCostDictionary = new Dictionary<int, BigInteger>
-    {
-        { 0, 800 },  
-        { 1, 2000 },  
-        { 2, 5000 },
-        { 3, 12000 },
-        { 4, 30000 },
-        { 5, 30001 }
-    };
-
+    
     public void CreateSpeedUp() //스킬 2
     {
         if (createSpeedLevel >= maxCreateSpeedUpgradeLevel)
@@ -133,37 +124,27 @@ public class UpgradeManager : MonoBehaviour
             return;
         }
 
-        int nextLevel = createSpeedLevel;
-
-        if (createSpeedCostDictionary.ContainsKey(nextLevel))
+        if (currencyManager.SubtractCurrency("Gold", currentCreateSpeedUpCost))
         {
-            BigInteger requiredCost = createSpeedCostDictionary[nextLevel];
-            requiredCost = currentCreateSpeedUpCost;
-            if (currencyManager.SubtractCurrency("Gold", requiredCost))
-            {
-                float currentFillTime = giftBoxController.GetFillTime();
-                float newFillTime = currentFillTime - decreaseFilltime;
-                giftBoxController.SetFillTime(newFillTime);
-                createSpeedLevel++;
-                
-                Debug.Log($"생산 쿨타임 감소! 현재 레벨: {createSpeedLevel}, 새로운 쿨타임: {newFillTime}");
-            }
-            else
-            {
-                Debug.Log("골드가 부족합니다.");
-            }
+            float currentFillTime = giftBoxController.GetFillTime();
+            float newFillTime = currentFillTime - decreaseFilltime;
+            giftBoxController.SetFillTime(newFillTime);
+            createSpeedLevel++;
+
+            // 비용을 1.4배로 증가시킵니다.
+            BigInteger multiplier = new BigInteger(14);  // 1.4 * 10
+            BigInteger newCost = (currentCreateSpeedUpCost * multiplier) / 10;  // 1.4배
+            currentCreateSpeedUpCost = newCost;
+
+            Debug.Log($"생산 쿨타임 감소! 현재 레벨: {createSpeedLevel}, 새로운 쿨타임: {newFillTime}, 새로운 비용: {currentCreateSpeedUpCost}");
         }
         else
         {
-            Debug.Log("레벨에 대한 정보가 없습니다. 레벨을 확인해 주세요.");
+            Debug.Log("골드가 부족합니다.");
         }
     }
 
-
-
-
-
-
+    
     
    public void RemoveLocked() // Locked 오브젝트 해제 보유 캔디 증가 업 (스킬3)
 {
@@ -228,8 +209,8 @@ public class UpgradeManager : MonoBehaviour
                         actualRemovedLockedCount = removeLockedLevel;
                         
                         // 비용을 1.5배로 증가시키는 부분
-                        BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
-                        BigInteger newCost = (currentRemoveLockedCost * multiplier) / 10;  // 1.5배
+                        BigInteger multiplier = new BigInteger(30);  // 1.5 * 10  1.5배설정
+                        BigInteger newCost = (currentRemoveLockedCost * multiplier) / 10;  
                         currentRemoveLockedCost = newCost;
 
                         Debug.Log($"Locked 오브젝트 제거 완료! 남은 골드: {currencyManager.GetCurrencyAmount("Gold")}, 새로운 비용: {currentRemoveLockedCost}");
