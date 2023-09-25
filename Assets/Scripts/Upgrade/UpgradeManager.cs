@@ -103,7 +103,7 @@ public class UpgradeManager : MonoBehaviour
             luckyCreateLevel++;
 
             // 비용을 1.4배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(14);  // 1.4 * 10
+            BigInteger multiplier = new BigInteger(12);  // 1.4 * 10
             BigInteger newCost = (currentLuckyCreateUpCost * multiplier) / 10;  // 1.4배
             currentLuckyCreateUpCost = newCost;
 
@@ -132,7 +132,7 @@ public class UpgradeManager : MonoBehaviour
             createSpeedLevel++;
 
             // 비용을 1.4배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(14);  // 1.4 * 10
+            BigInteger multiplier = new BigInteger(13);  // 1.4 * 10
             BigInteger newCost = (currentCreateSpeedUpCost * multiplier) / 10;  // 1.4배
             currentCreateSpeedUpCost = newCost;
 
@@ -419,7 +419,7 @@ public void LuckyCreateUp(int luckyCreateLevel)
         float currentLuckyCreate = giftBoxController.GetLuckyCreate();
 
             // 비용을 1.4배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(14);  // 1.4 * 10
+            BigInteger multiplier = new BigInteger(12);  // 1.4 * 10
             BigInteger newCost = (currentLuckyCreateUpCost * multiplier) / 10;  // 1.4배
             currentLuckyCreateUpCost = newCost;
 
@@ -439,7 +439,7 @@ public void CreateSpeedUp(int createSpeedLevel)
         float currentFillTime = giftBoxController.GetFillTime();
 
             // 비용을 1.4배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(14);  // 1.4 * 10
+            BigInteger multiplier = new BigInteger(13);  // 1.4 * 10
             BigInteger newCost = (currentCreateSpeedUpCost * multiplier) / 10;  // 1.4배
             currentCreateSpeedUpCost = newCost;
 
