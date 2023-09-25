@@ -29,7 +29,7 @@ public class OfflineRewardManager : MonoBehaviour
     }
 
 
-    void Start()
+    public void Start_Offline()
     {
         if (ES3.KeyExists("LAST_LOGIN") && !DidUserClaimReward())
         {
@@ -49,10 +49,11 @@ public class OfflineRewardManager : MonoBehaviour
             //Debug.Log(string.Format("{0} Days {1} Hours {2} Minutes {3} Seconds Ago", ts.Days, ts.Hours, ts.Minutes, ts.Seconds));
             Debug.Log(GetCurrentRewardTimeAsString());
 
-            if (totalAccumulatedTime.Hours >= 1)
-            {
-                GetOfflineReward();
-            }
+            //if (totalAccumulatedTime.Hours >= 1)
+            //{
+            //    GetOfflineReward();
+            //}
+            GetOfflineReward();
             Debug.Log((int)ts.TotalMinutes + "g");
         }
         else
@@ -65,7 +66,10 @@ public class OfflineRewardManager : MonoBehaviour
 
     void GetOfflineReward()
     {
-        goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Hours;
+        //goldReward = (QuestManager.instance.candyPriceByLevel[CandyStatus.baseLevel] * 40) * totalAccumulatedTime.Hours;
+        goldReward = (QuestManager.instance.candyPriceByLevel[GameData.candyLevel+1] * 40) * 3;
+        Debug.Log("CandyStatus.baseLevel: " + GameData.candyLevel);
+
 
         // 두 증가율을 더한 값으로 적용합니다.
         float totalIncreament = offLineRewardIncreament + equipOffLineRewardIncreament;

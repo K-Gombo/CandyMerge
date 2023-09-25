@@ -35,6 +35,7 @@ public class LoadingBar : MonoBehaviour
         gameObject.SetActive(false);
         CurrencyManager.instance.LoadCurrencies();
         BoxManager.instance.UpdateCandyCount();
+        OfflineRewardManager.instance.Start_Offline();
     }
 
 }
