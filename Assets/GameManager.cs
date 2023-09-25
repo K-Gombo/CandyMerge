@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent DownImage = new UnityEvent();
 
+    public GameObject LoadingCanvas;
+
 
     private void Awake()
     {
@@ -21,5 +23,9 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlayBackgroundMusic();
 
         DataController.instance.ALL_LOAD();
+        
+        LoadingCanvas.SetActive(true);
     }
+    
+   
 }

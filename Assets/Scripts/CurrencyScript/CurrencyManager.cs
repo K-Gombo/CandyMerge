@@ -61,13 +61,14 @@ public class CurrencyManager : MonoBehaviour
         }
 
     }
-
+    
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("uhguygg");
-            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, "9999999999");
+            RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Gold, "1000000000000");
         }
 
         if (Input.GetKeyDown(KeyCode.H))
@@ -75,7 +76,7 @@ public class CurrencyManager : MonoBehaviour
             RewardMovingManager.instance.RequestMovingCurrency(5, CurrencyType.Dia, "100");
         }
     }
-
+#endif
     public void AddCurrency(string currencyName, BigInteger value)
     {
         Currency currency = currencies.Find(c => c.currencyName == currencyName);

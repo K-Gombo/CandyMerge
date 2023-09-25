@@ -7,7 +7,7 @@ public class FlurryManager : MonoBehaviour
 {
 #if UNITY_ANDROID
     private readonly string FLURRY_API_KEY = "HBGDY7NP45TNHT2C3WWQ";
-#else
+#else 
     private readonly string FLURRY_API_KEY = null;
 #endif
 

@@ -7,7 +7,7 @@ public class TestButton : MonoBehaviour
     public EquipmentManager equipmentManager; 
     public Transform equipSpawnLocation; 
 
-   
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P)) 
@@ -20,4 +20,5 @@ public class TestButton : MonoBehaviour
             equipmentManager.CreateEquipPrefab(equipSpawnLocation, probabilities);
         }
     }
+#endif
 }

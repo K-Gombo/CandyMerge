@@ -17,24 +17,24 @@ public class UpgradeManager : MonoBehaviour
     public int actualRemovedLockedCount = 0;
 
     
-    public float increaseLuckyCreate = 0.5f;
-    public float decreaseFilltime = 0.05f; // 캔디 생성 속도 감소조절
+    public float increaseLuckyCreate = 0.05f;
+    public float decreaseFilltime = 0.01f; // 캔디 생성 속도 감소조절
     public int increaseMaxCandies = 1;
     public int increaseBaseLevel = 1;
-    public float increasePassiveAutoCreateSpeed = 0.1f;
-    public float increaseGoldUp = 0.2f;
-    public float increaseLuckyGold = 0.2f;
-    public float increaseOffLineRewardBonus = 0.3f;
+    public float increasePassiveAutoCreateSpeed = 0.01f;
+    public float increaseGoldUp = 0.02f;
+    public float increaseLuckyGold = 0.02f;
+    public float increaseOffLineRewardBonus = 0.03f;
     
      
-    private int luckyCreateUpCost = 1000;
-    private int createSpeedUpCost = 800;
-    private int removeLockedCost = 1500;
-    private int maxCandiesUpCost = 1000;
-    private int candyLevelUpCost = 1000;
-    private int passiveAutoCreateSpeedUpCost = 1500;
+    private int luckyCreateUpCost = 1600;
+    private int createSpeedUpCost = 3000;
+    private int removeLockedCost = 500;
+    private int maxCandiesUpCost = 500;
+    private int candyLevelUpCost = 400;
+    private int passiveAutoCreateSpeedUpCost = 900;
     private int goldUpCost = 1500;
-    private int luckyGoldUpCost = 1500;
+    private int luckyGoldUpCost = 1000;
     private int offLineRewardBonusCost = 2000;
     
     // 각 업그레이드의 현재 비용
@@ -60,15 +60,15 @@ public class UpgradeManager : MonoBehaviour
     public int offLineRewardBonusLevel;
     
     //각 업그레이드의 맥스레벨
-    public int maxLuckyCreateUpgradeLevel = 40;
-    public int maxCreateSpeedUpgradeLevel = 50;
-    public int maxRemoveLockedUpgradeLevel = 34;
+    public int maxLuckyCreateUpgradeLevel = 400;
+    public int maxCreateSpeedUpgradeLevel = 250;
+    public int maxRemoveLockedUpgradeLevel = 33;
     public int maxCandiesUpgradeLevel = 30;
     public int maxCandyLevelUpgradeLevel = 57;
-    public int maxPassiveAutoCreateSpeedUpgradeLevel = 100;
-    public int maxGoldUpUpgradeLevel = 100;
-    public int maxLuckyGoldUpgradeLevel = 150;
-    public int maxOffLineRewardBonusLevel = 100;
+    public int maxPassiveAutoCreateSpeedUpgradeLevel = 1000;
+    public int maxGoldUpUpgradeLevel = 1000;
+    public int maxLuckyGoldUpgradeLevel = 1500;
+    public int maxOffLineRewardBonusLevel = 1000;
     
 
     
@@ -243,8 +243,8 @@ public class UpgradeManager : MonoBehaviour
            maxCandiesLevel++;
 
            // 비용을 1.5배로 증가시킵니다.
-           BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
-           BigInteger newCost = (currentMaxCandiesUpCost * multiplier) / 10;  // 1.5배
+           BigInteger multiplier = new BigInteger(30);  // 
+           BigInteger newCost = (currentMaxCandiesUpCost * multiplier) / 10;  // 
            currentMaxCandiesUpCost = newCost;
 
            Debug.Log($"캔디 생성 증가!:{newMaxCandies}, 새로운 비용: {currentMaxCandiesUpCost}");
@@ -273,8 +273,8 @@ public class UpgradeManager : MonoBehaviour
             candyLevel++;
 
             // 비용을 1.5배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(15);  // 1.5 * 10
-            BigInteger newCost = (currentCandyLevelUpCost * multiplier) / 10;  // 1.5배
+            BigInteger multiplier = new BigInteger(35);  // 
+            BigInteger newCost = (currentCandyLevelUpCost * multiplier) / 10;  // 4.5배
             currentCandyLevelUpCost = newCost;
 
             Debug.Log($"캔디 레벨업!:{newBaseLevel}, 새로운 비용: {currentCandyLevelUpCost}");
@@ -349,7 +349,6 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log("골드가 부족합니다.");
         }
     }
-
 
     
 
