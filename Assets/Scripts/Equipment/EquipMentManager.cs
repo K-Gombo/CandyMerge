@@ -882,6 +882,7 @@ public class EquipmentManager : MonoBehaviour
         equipSkillManager.EquipLuckyCreatKeyUp(equipmentStatus);
         equipSkillManager.EquipKeyDoubleUp(equipmentStatus);
         equipSkillManager.EquipOffLineRewardUp(equipmentStatus);
+        DataController.instance.Player_EquipScore_Save();
     }
     else
     {
@@ -937,8 +938,6 @@ public class EquipmentManager : MonoBehaviour
 
         SaveEquipData(equipmentStatus);
     }
-
-    public GameObject mask;
 
 
     // 다른 멤버 변수 및 메서드 정의
@@ -1007,6 +1006,7 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.skillIds = savedEquipData.skillIds;
             equipComponent.skillRanks = savedEquipData.skillRanks;
             equipComponent.skillPoints = savedEquipData.skillPoints;
+            equipComponent.skillNames = savedEquipData.skillNames;
             equipComponent.skillUnlocked = savedEquipData.skillUnlocked;
             equipComponent.equipRank = chosenRank;
             equipComponent.equipExplain = savedEquipData.equipExplain;

@@ -38,10 +38,10 @@ public class DataController : MonoBehaviour
         Upgrade_goldUpLevel_Load();
         Upgrade_luckyGoldLevel_Load();
         Upgrade_OffLineRewardBonusUpLevel_Load();
-        Player_EquipScore_Load();
         //Auto_Create_Load();
         CurrencyManager.instance.LoadCurrencies();
         EquipmentManager.instance.LoadEquipData();
+        Player_EquipScore_Load();
 
 
         HappyLevel.instance.InitUI();

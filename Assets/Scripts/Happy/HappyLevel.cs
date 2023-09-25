@@ -119,6 +119,7 @@ public class HappyLevel : MonoBehaviour
         levelPanel.SetActive(true);
     }
     
+    
     public void UpdateHappinessBar()
     {
         // HappylevelUp 딕셔너리에서 현재 레벨의 다음 레벨 경험치 가져오기
