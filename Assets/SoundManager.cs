@@ -77,6 +77,7 @@ public class SoundManager : MonoBehaviour
         // 재사용된 AudioSource 설정
         audioSource.clip = clip;
         audioSource.volume = BGMmasterVolume;
+        audioSource.loop = true;
         audioSource.Play();
     }
 
