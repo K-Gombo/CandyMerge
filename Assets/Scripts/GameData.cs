@@ -7,6 +7,7 @@ public static class GameData
     // Player
     public static int player_Level = 1;
     public static int player_Experience = 0;
+    public static int EquipScore = 0;
 
     public static int candiesRemaining = 0;
 

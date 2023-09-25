@@ -67,6 +67,17 @@ public class DataController : MonoBehaviour
         giftBoxController.candiesRemaining = GameData.candiesRemaining;
     }
 
+    public void Player_EquipScore_DataSave()
+    {
+        ES3.Save("player_EquipScore", GameData.EquipScore);
+    }
+    
+    public void Player_EquipScore_Save()
+    {
+        GameData.EquipScore = EquipmentManager.instance.totalEquipScore;
+        Player_EquipScore_DataSave();
+    }
+
 
     private void Player_Level_DataSave()
     {
