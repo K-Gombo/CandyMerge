@@ -20,6 +20,7 @@ public struct CurrencyMetaData
     public GameObject fadeOut;
 }
 
+
 public class RewardMovingManager : MonoBehaviour
 {
     public static RewardMovingManager instance;

@@ -5,10 +5,8 @@ using FlurrySDK;
 
 public class FlurryManager : MonoBehaviour
 {
-#if UNITYANDROID
-    private readonly string FLURRY_API_KEY = HBGDY7NP45TNHT2C3WWQ;
-#elif UNITYIPHONE
-    private readonly string FLURRY_API_KEY = FLURRY_IOS_API_KEY;
+#if UNITY_ANDROID
+    private readonly string FLURRY_API_KEY = "HBGDY7NP45TNHT2C3WWQ";
 #else
     private readonly string FLURRY_API_KEY = null;
 #endif
