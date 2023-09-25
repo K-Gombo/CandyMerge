@@ -38,6 +38,7 @@ public class DataController : MonoBehaviour
         Upgrade_goldUpLevel_Load();
         Upgrade_luckyGoldLevel_Load();
         Upgrade_OffLineRewardBonusUpLevel_Load();
+        Player_EquipScore_Load();
         //Auto_Create_Load();
         CurrencyManager.instance.LoadCurrencies();
         EquipmentManager.instance.LoadEquipData();
@@ -67,7 +68,7 @@ public class DataController : MonoBehaviour
         giftBoxController.candiesRemaining = GameData.candiesRemaining;
     }
 
-    public void Player_EquipScore_DataSave()
+    private void Player_EquipScore_DataSave()
     {
         ES3.Save("player_EquipScore", GameData.EquipScore);
     }
@@ -76,6 +77,16 @@ public class DataController : MonoBehaviour
     {
         GameData.EquipScore = EquipmentManager.instance.totalEquipScore;
         Player_EquipScore_DataSave();
+    }
+
+    private void Player_EquipScore_DataLoad()
+    {
+        GameData.EquipScore = ES3.Load("player_EquipScore", GameData.EquipScore);
+    }
+    public void Player_EquipScore_Load()
+    {
+        Player_EquipScore_DataLoad();
+        EquipmentManager.instance.totalEquipScore = GameData.EquipScore;
     }
 
 

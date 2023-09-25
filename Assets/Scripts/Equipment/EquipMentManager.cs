@@ -350,6 +350,7 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.equipName = selectedEquip.equipName;
             equipComponent.skillIds = selectedEquip.skillIds;
             equipComponent.skillRanks = selectedEquip.skillRanks;
+            equipComponent.skillPoints = selectedEquip.skillPoints;
             equipComponent.equipRank = chosenRank;
             equipComponent.equipExplain = selectedEquip.equipExplain;
             equipComponent.isEquipped = selectedEquip.isEquiped;
@@ -1005,6 +1006,8 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.equipName = savedEquipData.equipName;
             equipComponent.skillIds = savedEquipData.skillIds;
             equipComponent.skillRanks = savedEquipData.skillRanks;
+            equipComponent.skillPoints = savedEquipData.skillPoints;
+            equipComponent.skillUnlocked = savedEquipData.skillUnlocked;
             equipComponent.equipRank = chosenRank;
             equipComponent.equipExplain = savedEquipData.equipExplain;
             equipComponent.isEquipped = savedEquipData.isEquipped;
