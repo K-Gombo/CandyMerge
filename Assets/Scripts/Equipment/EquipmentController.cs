@@ -553,12 +553,12 @@ public class EquipmentController : MonoBehaviour
         if (clickedEquipForUpgrade.isEquipped)
         {
             // 이미 장착되어 있다면 해제
-            equipmentManager.EquipmentSlotUnequip(clickedEquipForUpgrade);
+            equipmentManager.EquipmentSlotUnequip(clickedEquipForUpgrade, false);
         }
         else
         {
             // 장착되어 있지 않다면 장착
-            equipmentManager.EquipmentSlotEquip(clickedEquipForUpgrade);
+            equipmentManager.EquipmentSlotEquip(clickedEquipForUpgrade, false);
         }
         
         // 생성된 클론을 제거

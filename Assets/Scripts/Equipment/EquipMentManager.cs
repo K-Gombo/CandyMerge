@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static EquipmentManager;
@@ -17,11 +18,13 @@ public class EquipmentManager : MonoBehaviour
     {
         public int id;
         public Rank rank;
+        public bool isEquipped;
 
-        public DataType(int id, Rank rank)
+        public DataType(int id, Rank rank, bool isEquipped)
         {
             this.id = id;
             this.rank = rank;
+            this.isEquipped = isEquipped;
         }
     }
 
@@ -355,7 +358,7 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.equipExplain = selectedEquip.equipExplain;
             equipComponent.isEquipped = selectedEquip.isEquiped;
 
-            allEquipIds.Add(new DataType(equipComponent.equipId, chosenRank));
+            allEquipIds.Add(new DataType(equipComponent.equipId, chosenRank, equipComponent.isEquipped));
 
             SaveEquipData(equipComponent);
 
@@ -498,7 +501,7 @@ public class EquipmentManager : MonoBehaviour
                 CurrencyManager.instance.AddCurrency("Gold", returnGoldBigInt);
             }
 
-            allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+            allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank, mainEquipment.isEquipped));
 
 
             int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
@@ -534,7 +537,7 @@ public class EquipmentManager : MonoBehaviour
 
             mainEquipment.UpdateLevelUI();
 
-            allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+            allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank, mainEquipment.isEquipped));
             SaveEquipData(mainEquipment);
 
             // EquipMixbox[1]과 EquipMixbox[2]의 원본을 풀로 리턴하고 클론 제거
@@ -544,7 +547,7 @@ public class EquipmentManager : MonoBehaviour
                 EquipmentStatus otherEquipment = cloneObj.GetComponent<EquipmentStatus>().originalEquipment;
                 EquipmentStatus cloneStatus = cloneObj.GetComponent<EquipmentStatus>();
 
-                allEquipIds.Remove(new DataType(cloneStatus.equipId, cloneStatus.equipRank));
+                allEquipIds.Remove(new DataType(cloneStatus.equipId, cloneStatus.equipRank, cloneStatus.isEquipped));
                 Debug.Log("아니 너 뭐 돼?" +allEquipIds.Count);
                 DeleteEquipData(cloneStatus);
 
@@ -696,7 +699,7 @@ public class EquipmentManager : MonoBehaviour
                 // 나머지 로직은 UpdateRankLevelOnMerge 메서드와 유사
                 int maxRankLevel = maxLevelsPerRank.ContainsKey(mainEquipment.equipRank) ? maxLevelsPerRank[mainEquipment.equipRank] : 0;
 
-                allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+                allEquipIds.Remove(new DataType(mainEquipment.equipId, mainEquipment.equipRank, mainEquipment.isEquipped));
                 
                 if (mainEquipment.rankLevel >= maxRankLevel)
                 {
@@ -729,7 +732,7 @@ public class EquipmentManager : MonoBehaviour
 
                 mainEquipment.UpdateLevelUI();
 
-                allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank));
+                allEquipIds.Add(new DataType(mainEquipment.equipId, mainEquipment.equipRank, mainEquipment.isEquipped));
                 SaveEquipData(mainEquipment);
                 
                 // 2개의 장비를 풀로 리턴 및 골드 반환
@@ -745,7 +748,7 @@ public class EquipmentManager : MonoBehaviour
                         CurrencyManager.instance.AddCurrency("Gold", otherReturnGoldBigInt);
                     }
 
-                    allEquipIds.Remove(new DataType(otherEquipment.equipId, otherEquipment.equipRank));
+                    allEquipIds.Remove(new DataType(otherEquipment.equipId, otherEquipment.equipRank, otherEquipment.isEquipped));
                     GameObject originalObj = otherEquipment.gameObject;
                     ReturnEquipToPool(originalObj);
                 }
@@ -822,7 +825,7 @@ public class EquipmentManager : MonoBehaviour
         
     }
 
-    public void EquipmentSlotEquip(EquipmentStatus equipmentStatus)
+    public void EquipmentSlotEquip(EquipmentStatus equipmentStatus, bool isInit)
 {
     if (equipmentStatus == null) return;
 
@@ -840,7 +843,7 @@ public class EquipmentManager : MonoBehaviour
             EquipmentStatus equippedItem = equipSlotBoxes[slotIndex].transform.GetChild(0).GetComponent<EquipmentStatus>();
             if (equippedItem)
             {
-                EquipmentSlotUnequip(equippedItem);
+                EquipmentSlotUnequip(equippedItem, isInit);
             }
         }
 
@@ -853,12 +856,18 @@ public class EquipmentManager : MonoBehaviour
         // 장비를 부모의 정중앙에 위치시킴
         equipmentStatus.transform.localPosition = Vector3.zero;
 
-        equipSlotBoxesImage[slotIndex].SetActive(false);
+            if (!isInit)
+                allEquipIds.Remove(new DataType(equipmentStatus.equipId, equipmentStatus.equipRank, equipmentStatus.isEquipped));
+
+            equipSlotBoxesImage[slotIndex].SetActive(false);
 
         equipmentStatus.isEquipped = true;
-        
-        // 디버그 코드 추가
-        Debug.Log("장비 스킬 해금 상태:");
+
+            if (!isInit)
+                allEquipIds.Add(new DataType(equipmentStatus.equipId, equipmentStatus.equipRank, equipmentStatus.isEquipped));
+
+            // 디버그 코드 추가
+            Debug.Log("장비 스킬 해금 상태:");
         for (int i = 0; i < equipmentStatus.skillIds.Length; i++)
         {
             string unlockStatus = equipmentStatus.skillUnlocked[i] ? "해금됨" : "잠김";
@@ -903,7 +912,7 @@ public class EquipmentManager : MonoBehaviour
     }
     
     
-    public void EquipmentSlotUnequip(EquipmentStatus equipmentStatus)
+    public void EquipmentSlotUnequip(EquipmentStatus equipmentStatus, bool isInit)
     {
         if (equipmentStatus == null || equipmentStatus.originalParent == null) return;
 
@@ -915,11 +924,17 @@ public class EquipmentManager : MonoBehaviour
 
         // 원래의 위치로 장비를 이동
         equipmentStatus.transform.localPosition = Vector3.zero;
-        
+
+        if (!isInit)
+            allEquipIds.Remove(new DataType(equipmentStatus.equipId, equipmentStatus.equipRank, equipmentStatus.isEquipped));
+
         equipSlotBoxesImage[(int)equipmentStatus.slotType].SetActive(true);
         
         equipmentStatus.isEquipped = false;
-        
+
+        if (!isInit)
+            allEquipIds.Add(new DataType(equipmentStatus.equipId, equipmentStatus.equipRank, equipmentStatus.isEquipped));
+
         if (RankEquipScroe.TryGetValue(equipmentStatus.equipRank, out int equipScore))
         {
             totalEquipScore -= equipScore;
@@ -968,13 +983,14 @@ public class EquipmentManager : MonoBehaviour
                 EquipmentStatus savedEquipData = ES3.Load<EquipmentStatus>("Equip_" + equipId.id);
 
                 savedEquipData.equipRank = equipId.rank;
-
+                savedEquipData.isEquipped = equipId.isEquipped;
 
                 // 불러온 정보를 기반으로 장비 생성 또는 처리
                 GameObject newEquip = CreateEquipFromSavedData(equipSpawnLocation, savedEquipData);
 
                 var newEquipStatus = newEquip.GetComponent<EquipmentStatus>();
                 newEquipStatus.rankLevel = ConvertRankToLevel(savedEquipData.equipRank);
+
                 // 장비를 원하는 위치에 배치 또는 처리
                 // 예를 들어, 원하는 위치에 장비를 배치하려면 다음과 같이 하면 됩니다.
                 //newEquip.transform.position = desiredPosition;
@@ -1059,7 +1075,7 @@ public class EquipmentManager : MonoBehaviour
 
             if (equipComponent.isEquipped)
             {
-                EquipmentSlotEquip(equipComponent);
+                EquipmentSlotEquip(equipComponent, true);
             }
         }
 
