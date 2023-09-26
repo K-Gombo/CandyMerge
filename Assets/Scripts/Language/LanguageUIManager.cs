@@ -7,6 +7,100 @@ public class LanguageUIManager : MonoBehaviour
 {
     [Header("[ UI 언어 번역 ]")]
     public Text[] UILanguageList;
+    public int LanguageCode;
+    public static LanguageUIManager instance = null;
+
+
+    void Awake()
+    {
+	    //싱글턴 인스턴스 할당
+	    instance = this;
+
+	    if (LanguageCode == 0)
+	    {
+		    switch (Application.systemLanguage)
+		    {
+			    //case SystemLanguage.Afrikaans: FlagCode = 0; break;
+			    //case SystemLanguage.Arabic: LanguageCode = 1; break; // 아랍어
+			    //case SystemLanguage.Basque: FlagCode = 2; break;
+			    //case SystemLanguage.Belarusian: FlagCode = 3; break;
+			    //case SystemLanguage.Bulgarian: FlagCode = 4; break;
+			    //case SystemLanguage.Catalan: FlagCode = 5; break;
+			    //case SystemLanguage.Chinese: FlagCode = 6; break;
+			    //case SystemLanguage.ChineseSimplified: FlagCode = 6; break;
+			    //case SystemLanguage.ChineseTraditional: FlagCode = 6; break;
+			    //case SystemLanguage.Czech: FlagCode = 7; break;
+			    //case SystemLanguage.Danish: FlagCode = 8; break;
+			    //case SystemLanguage.Dutch: FlagCode = 9; break;
+			    //case SystemLanguage.English: FlagCode = 10; break;
+			    //case SystemLanguage.Estonian: FlagCode = 11; break;
+			    //case SystemLanguage.Faroese: FlagCode = 12; break;
+			    //case SystemLanguage.Finnish: FlagCode = 13; break;
+			    //case SystemLanguage.French: FlagCode = 14; break;
+			    //case SystemLanguage.German: FlagCode = 15; break;
+			    //case SystemLanguage.Greek: FlagCode = 16; break;
+			    //case SystemLanguage.Hebrew: FlagCode = 17; break;
+			    //case SystemLanguage.Hungarian: FlagCode = 18; break;
+			    //case SystemLanguage.Icelandic: FlagCode = 19; break;
+			    //case SystemLanguage.Indonesian: LanguageCode = 20; break;
+			    //case SystemLanguage.Italian: FlagCode = 21; break;
+			    //case SystemLanguage.Japanese: LanguageCode = 22; break;
+			    case SystemLanguage.Korean:
+				    LanguageCode = 23;
+				    break;
+			    //case SystemLanguage.Latvian: FlagCode = 24; break;
+			    //case SystemLanguage.Lithuanian: FlagCode = 25; break;
+			    //case SystemLanguage.Norwegian: FlagCode = 26; break;
+			    //case SystemLanguage.Polish: FlagCode = 27; break;
+			    //case SystemLanguage.Portuguese: FlagCode = 28; break;
+			    //case SystemLanguage.Romanian: FlagCode = 29; break;
+			    //case SystemLanguage.Russian: LanguageCode = 30; break;
+			    //case SystemLanguage.SerboCroatian: FlagCode = 31; break;
+			    //case SystemLanguage.Slovak: FlagCode = 32; break;
+			    //case SystemLanguage.Slovenian: FlagCode = 33; break;
+			    //case SystemLanguage.Spanish: LanguageCode = 34; break; // 스페인어
+			    //case SystemLanguage.Swedish: FlagCode = 35; break;
+			    //case SystemLanguage.Thai: FlagCode = 36; break;	
+			    //case SystemLanguage.Turkish: LanguageCode = 37; break;
+			    //case SystemLanguage.Ukrainian: FlagCode = 38; break;
+			    //case SystemLanguage.Vietnamese: LanguageCode = 39; break;
+
+			    case SystemLanguage.Unknown:
+				    LanguageCode = 200;
+				    break; // 기타 다른나라는 모두 영어로
+			    default:
+				    LanguageCode = 200;
+				    break;
+		    }
+	    }
+
+	    //LanguageCodeSaveLoad ();
+
+	    LanguageStart();
+    }
+
+
+    // Update is called once per frame
+    public void LanguageStart()
+    {
+
+	    //Test용 170Line 빌드전 무조건 주석처리
+	    //LanguageCode = 0;
+	    
+	    // 한국어
+	    if (LanguageCode == 23)
+	    {
+		    ChangeLanguage(Language.Korean);
+	    }
+
+	    // 영어
+	    else
+	    {
+		    ChangeLanguage(Language.English);
+	    }
+	    
+	    EquipmentManager.instance.EquipLanguageStart();
+    }
 
     public enum UILanguageIndex
     {
@@ -66,7 +160,8 @@ public class LanguageUIManager : MonoBehaviour
         NormalBoxExplain,
         SpecialBoxTitle,
         NormalBoxTitle,
-        MixSumLevel
+        MixSumLevel,
+        EquipStatusClose
         
     }
 
@@ -78,13 +173,13 @@ public class LanguageUIManager : MonoBehaviour
         English
     }
 
-    private Language currentLanguage = Language.English; // 기본설정 영어
+    private Language currentLanguage;
 
-    void Start()
-    {
-        // 초기 언어 설정
-        ChangeLanguage(currentLanguage);
-    }
+    // void Start()
+    // {
+    //     // 초기 언어 설정
+    //     ChangeLanguage(currentLanguage);
+    // }
 
     public void ChangeLanguage(Language newLanguage)
     {
@@ -155,6 +250,7 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.SpecialBoxTitle].text = "특별 선물 상자";
                 UILanguageList[(int)UILanguageIndex.NormalBoxTitle].text = "일반 선물 상자";
                 UILanguageList[(int)UILanguageIndex.MixSumLevel].text = "믹스 레벨";
+                UILanguageList[(int)UILanguageIndex.EquipStatusClose].text = "터치하여 닫기";
                 
                 
                 break;
@@ -217,25 +313,10 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.SpecialBoxTitle].text = "Special Gift Box";
                 UILanguageList[(int)UILanguageIndex.NormalBoxTitle].text = "Normal Gift Box";
                 UILanguageList[(int)UILanguageIndex.MixSumLevel].text = "Mix Level";
-                
+                UILanguageList[(int)UILanguageIndex.EquipStatusClose].text = "Tap To Close";
                 
                 break;
         }
-    }
-    
-    
-    
-    
-    
-    public void OnClickChangeToEnglish()
-    {
-        ChangeLanguage(Language.English);
-    }
-    
-    
-    public void OnClickChangeToKorean()
-    {
-        ChangeLanguage(Language.Korean);
     }
     
     

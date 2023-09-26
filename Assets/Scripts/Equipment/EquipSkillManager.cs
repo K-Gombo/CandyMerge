@@ -20,7 +20,7 @@ public class EquipSkillManager : MonoBehaviour
 
     private void Awake()
     {
-        CsvData = Resources.Load<TextAsset>("EquipSkillData");
+        CsvData = Resources.Load<TextAsset>("EquipSkillData_EN");
         if (CsvData == null)
         {
             Debug.LogError("CSV 파일을 찾을 수 없습니다.");
@@ -52,6 +52,19 @@ public class EquipSkillManager : MonoBehaviour
             {
                 Debug.LogError($"Error processing line {i}: {e.Message}");
             }
+        }
+    }
+    
+    
+    private void Start()
+    {
+        if (LanguageUIManager.instance.LanguageCode == 23)
+        {
+            CsvData = Resources.Load<TextAsset>("EquipSkillData_KR");
+        }
+        else
+        {
+            CsvData = Resources.Load<TextAsset>("EquipSkillData_EN");
         }
     }
     
