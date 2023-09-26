@@ -97,7 +97,7 @@ public class EquipmentManager : MonoBehaviour
         public Rank[] skillRanks = new Rank[4];
         public string equipExplain;
         public Rank equipRank; // 랜덤으로 할당될 장비 등급
-        public bool isEquiped;
+        //public bool isEquiped;
         public int level = 1;
     }
     
@@ -371,7 +371,7 @@ public class EquipmentManager : MonoBehaviour
             equipComponent.skillPoints = selectedEquip.skillPoints;
             equipComponent.equipRank = chosenRank;
             equipComponent.equipExplain = selectedEquip.equipExplain;
-            equipComponent.isEquipped = selectedEquip.isEquiped;
+            //equipComponent.isEquipped = selectedEquip.isEquiped;
             equipmentStatus.equipLevel = 1;
                 
             allEquipIds.Add(new DataType(equipComponent.equipId, chosenRank, equipComponent.isEquipped, equipComponent.equipLevel));
@@ -898,7 +898,7 @@ public class EquipmentManager : MonoBehaviour
             EquipmentStatus equippedItem = equipSlotBoxes[slotIndex].transform.GetChild(0).GetComponent<EquipmentStatus>();
             if (equippedItem)
             {
-                EquipmentSlotUnequip(equippedItem, isInit);
+                EquipmentSlotUnequip(equippedItem, true);
             }
         }
 
@@ -920,6 +920,8 @@ public class EquipmentManager : MonoBehaviour
 
             if (!isInit)
                 allEquipIds.Add(new DataType(equipmentStatus.equipId, equipmentStatus.equipRank, equipmentStatus.isEquipped, equipmentStatus.equipLevel));
+
+            SaveEquipData(equipmentStatus);
 
             // 디버그 코드 추가
             Debug.Log("장비 스킬 해금 상태:");
@@ -980,15 +982,15 @@ public class EquipmentManager : MonoBehaviour
         // 원래의 위치로 장비를 이동
         equipmentStatus.transform.localPosition = Vector3.zero;
 
-        if (!isInit)
             allEquipIds.Remove(new DataType(equipmentStatus.equipId, equipmentStatus.equipRank, equipmentStatus.isEquipped, equipmentStatus.equipLevel));
 
         equipSlotBoxesImage[(int)equipmentStatus.slotType].SetActive(true);
         
         equipmentStatus.isEquipped = false;
 
-        if (!isInit)
             allEquipIds.Add(new DataType(equipmentStatus.equipId, equipmentStatus.equipRank, equipmentStatus.isEquipped, equipmentStatus.equipLevel));
+
+        SaveEquipData(equipmentStatus);
 
         if (RankEquipScroe.TryGetValue(equipmentStatus.equipRank, out int equipScore))
         {
