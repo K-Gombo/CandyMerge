@@ -165,11 +165,15 @@ public class QuestManager : MonoBehaviour
     }
 
     public int RandomCandyLevel()
-    {
+    {   
         int baseLevel = candyStatus.GetBaseLevel(); // 기본 제작 캔디 레벨 가져오기
         int randomLevel;
 
-        if (HappyLevel.instance.CurrentLevel < 3)
+        if (TutorialManager.instance.isTutorialActive)
+        {
+            return baseLevel; // 튜토리얼 중일 때는 baseLevel을 그대로 반환
+        }
+        else if (HappyLevel.instance.CurrentLevel < 3)
         {
             randomLevel = Random.Range(baseLevel, baseLevel + 2); // n, n+1 중 하나를 랜덤하게 선택
         }
@@ -180,6 +184,7 @@ public class QuestManager : MonoBehaviour
 
         return Mathf.Min(randomLevel, candyStatus.GetMaxCandyLevel()); // 선택된 레벨과 최대 캔디 레벨 중 작은 값 반환
     }
+
     
     public void UpdateQuestCandyCount(Quest quest)
     {

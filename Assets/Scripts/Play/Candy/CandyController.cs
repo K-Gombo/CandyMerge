@@ -114,6 +114,12 @@ public class CandyController : MonoBehaviour
         {
             MergeCandies(hit.collider.transform, mergeTarget);
             hit.collider.transform.position = startPosition;
+            // 튜토리얼이 활성화되어 있고, 현재 상태가 MergeBasicCandy일 경우 다음 단계로 이동
+            if (TutorialManager.instance.isTutorialActive && 
+                TutorialManager.instance.currentState == TutorialState.MergeBasicCandy)
+            {
+                TutorialManager.instance.NextTutorialStep();
+            }
         }
         else
         {

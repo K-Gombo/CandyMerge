@@ -99,7 +99,9 @@ public class Quest : MonoBehaviour
     
     
     public void CreateQuest(Quest quest)
-{
+{   
+    bool isTutorialActive = TutorialManager.instance.isTutorialActive;
+    
     float randProbability = Random.Range(0f, 100f);
     if (randProbability <= diaQuestProbability)
     {   
@@ -121,7 +123,7 @@ public class Quest : MonoBehaviour
     }
 
     int numberOfCandyTypes;
-    if (HappyLevel.instance.CurrentLevel < 4)
+    if (isTutorialActive || HappyLevel.instance.CurrentLevel < 4)
     {
         numberOfCandyTypes = 1;
         RequestCandy2.SetActive(false);
@@ -141,7 +143,11 @@ public class Quest : MonoBehaviour
 
     int candyLevel1 = QuestManager.instance.RandomCandyLevel();
     int candyCount1;
-    if (HappyLevel.instance.CurrentLevel < 3)
+    if (isTutorialActive)
+    {
+        candyCount1 = 2;
+    }
+    else if (HappyLevel.instance.CurrentLevel < 3)
     {
         candyCount1 = Random.Range(2, 5);
     }

@@ -1017,7 +1017,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3845670523660619352}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8341716896059214030}
+        m_TargetAssemblyTypeName: AutoCreateBtn, Assembly-CSharp
+        m_MethodName: ToggleAutoMerge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1043341054437947117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,12 +1758,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a33e72ee07e7541ba333491f874526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ACOffBtn: {fileID: 6500265460896798045}
-  ACOnBtn: {fileID: 13084598609945343}
+  durationText: {fileID: 4944139542042688435}
+  adChoicePanel: {fileID: 0}
+  onButton: {fileID: 13084598609945343}
+  offButton: {fileID: 6500265460896798045}
   giftBoxController: {fileID: 0}
-  candycontroller: {fileID: 0}
-  isOn: 0
-  cooldownText: {fileID: 4944139542042688435}
+  candyController: {fileID: 0}
 --- !u!1 &1589725371724339963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,7 +2934,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 60}
+  m_SizeDelta: {x: 220, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5874185257183074793
 CanvasRenderer:
@@ -2965,7 +2977,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0/15
+  m_Text: ' 0/15'
 --- !u!1 &2717632503352654759
 GameObject:
   m_ObjectHideFlags: 0
@@ -7553,7 +7565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -550.1, y: 1802}
+  m_AnchoredPosition: {x: -550, y: 1802}
   m_SizeDelta: {x: 250, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4333806565504271061
@@ -10693,7 +10705,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 716234603536930623}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8341716896059214030}
+        m_TargetAssemblyTypeName: AutoCreateBtn, Assembly-CSharp
+        m_MethodName: ToggleAutoMerge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7792143566765460966
 GameObject:
   m_ObjectHideFlags: 0

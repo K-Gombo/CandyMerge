@@ -267,6 +267,14 @@ public class RewardButton : MonoBehaviour
 
         QuestManager.instance.CompleteQuest(parentQuest);
         parentQuest = null; // 부모 퀘스트 참조를 끊음
+        
+        // 튜토리얼 체크 및 업데이트
+        if (TutorialManager.instance.isTutorialActive && 
+            TutorialManager.instance.currentState == TutorialState.ClaimQuestReward)
+        {
+            // 튜토리얼의 다음 단계로 이동
+            TutorialManager.instance.NextTutorialStep();
+        }
     }
 
 
