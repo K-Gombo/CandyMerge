@@ -104,6 +104,7 @@ public class HappyLevel : MonoBehaviour
         int reward = HappylevelUpReward[CurrentLevel]; // 현재 레벨의 보상 가져오기
         CurrentDia += reward; // 다이아몬드에 보상 더하기
         UpdateDiaText(); // 다이아몬드 텍스트 업데이트
+        
     }
 
     private void LevelUp()
@@ -157,5 +158,7 @@ public class HappyLevel : MonoBehaviour
         RewardMovingManager.instance.RequestMovingCurrency(10, CurrencyType.Dia, (HappylevelUpReward[CurrentLevel] * 2).ToString());
 
         levelPanel.SetActive(false);
+        openBtnList.SetActive(true);
+        button_Get.SetActive(false);
     }
 }
