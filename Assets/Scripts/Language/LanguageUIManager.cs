@@ -10,12 +10,14 @@ public class LanguageUIManager : MonoBehaviour
     public int LanguageCode;
     public static LanguageUIManager instance = null;
 
-
     void Awake()
     {
 	    //싱글턴 인스턴스 할당
 	    instance = this;
+    }
 
+    void Start()
+    {
 	    if (LanguageCode == 0)
 	    {
 		    switch (Application.systemLanguage)
@@ -100,6 +102,7 @@ public class LanguageUIManager : MonoBehaviour
 	    }
 	    
 	    EquipmentManager.instance.EquipLanguageStart();
+	    EquipSkillManager.instance.EquipSkillStart();
     }
 
     public enum UILanguageIndex

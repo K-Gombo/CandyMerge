@@ -117,8 +117,7 @@ public class EquipmentManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        CsvData = Resources.Load<TextAsset>("EquipmentData_EN");
-        LoadEquipmentData(); 
+        CsvData = Resources.Load<TextAsset>("EquipmentDataEN");
         
         LevelCsvData = Resources.Load<TextAsset>("EquipLevelData");
         if(LevelCsvData == null) {
@@ -130,15 +129,14 @@ public class EquipmentManager : MonoBehaviour
     }
 
     public void EquipLanguageStart()
-    {   
-        Debug.Log("------------------------들어는 왔어");
+    {
         if (LanguageUIManager.instance.LanguageCode == 23)
         {
-            CsvData = Resources.Load<TextAsset>("EquipmentData_KR");
+            CsvData = Resources.Load<TextAsset>("EquipmentDataKR");
         }
         else
         {
-            CsvData = Resources.Load<TextAsset>("EquipmentData_EN");
+            CsvData = Resources.Load<TextAsset>("EquipmentDataEN");
         }
         LoadEquipmentData(); 
     }
