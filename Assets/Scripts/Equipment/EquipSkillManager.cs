@@ -17,15 +17,24 @@ public class EquipSkillManager : MonoBehaviour
 {
     public TextAsset CsvData { get; set; }
     public Dictionary<int, EquipSkill> skillMap = new Dictionary<int, EquipSkill>(); // skillId를 key로 하는 딕셔너리
+    public static EquipSkillManager instance;
 
     private void Awake()
     {
-        CsvData = Resources.Load<TextAsset>("EquipSkillData_EN");
+        instance = this;
+        CsvData = Resources.Load<TextAsset>("EquipSkillDataEN");
+    }
+    
+    
+    
+    private void EquipSkillLoad()
+    {
         if (CsvData == null)
         {
             Debug.LogError("CSV 파일을 찾을 수 없습니다.");
             return;
         }
+
         var csvText = CsvData.text;
         var csvData = csvText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
@@ -56,16 +65,18 @@ public class EquipSkillManager : MonoBehaviour
     }
     
     
-    private void Start()
+    public void EquipSkillStart()
     {
         if (LanguageUIManager.instance.LanguageCode == 23)
         {
-            CsvData = Resources.Load<TextAsset>("EquipSkillData_KR");
+            CsvData = Resources.Load<TextAsset>("EquipSkillDataKR");
         }
         else
         {
-            CsvData = Resources.Load<TextAsset>("EquipSkillData_EN");
+            CsvData = Resources.Load<TextAsset>("EquipSkillDataEN");
         }
+
+        EquipSkillLoad();
     }
     
     
