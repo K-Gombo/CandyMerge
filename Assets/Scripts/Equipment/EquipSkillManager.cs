@@ -23,6 +23,7 @@ public class EquipSkillManager : MonoBehaviour
     {
         instance = this;
         CsvData = Resources.Load<TextAsset>("EquipSkillDataEN");
+        
     }
     
     
