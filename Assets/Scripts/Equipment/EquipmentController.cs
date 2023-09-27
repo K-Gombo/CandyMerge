@@ -542,7 +542,14 @@ public class EquipmentController : MonoBehaviour
 
         string formattedGold = currencyUI.goldText.text;
         string formattedUpgradeGoldCost = BigIntegerCtrl_global.bigInteger.ChangeMoney(clickedEquipment.upgradeGoldCost.ToString());
-        equipStatusGoldText.text = $"{formattedGold}/{formattedUpgradeGoldCost}";
+        if (clickedEquipment.equipLevel == clickedEquipment.maxEquipLevel)
+        {
+            equipStatusGoldText.text = $"{formattedGold}/Max";
+        }
+        else
+        {
+            equipStatusGoldText.text = $"{formattedGold}/{formattedUpgradeGoldCost}";
+        }
     }
 
     

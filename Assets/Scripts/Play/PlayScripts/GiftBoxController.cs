@@ -615,20 +615,41 @@ public class GiftBoxController : MonoBehaviour
     
     public void TogglePassiveAutoCreate(bool isEnabled)
     {
-        if (isEnabled && !isPassiveAutoCreateRunning && delayCompleted)
+        if (isEnabled)
         {
-            StartCoroutine(DelayStartPassiveAutoCreate());
+            if (!isPassiveAutoCreateRunning && delayCompleted)
+            {
+                // 코루틴 시작
+                StartCoroutine(DelayStartPassiveAutoCreate());
+            }
+            else if (isPassiveAutoCreateRunning && !delayCompleted)
+            {
+                // 이미 실행 중이지만 딜레이가 끝나지 않았을 때
+                // 현재 실행 중인 코루틴을 멈추고 새로 시작
+                StopCoroutine(passiveAutoCreateCoroutine);
+                StartCoroutine(DelayStartPassiveAutoCreate());
+            }
         }
-        else if (!isEnabled && isPassiveAutoCreateRunning)
+        else
         {
-            isPassiveAutoCreateRunning = false;
-            StopCoroutine(passiveAutoCreateCoroutine);  // 저장된 코루틴 인스턴스로 멈춤
+            if (isPassiveAutoCreateRunning)
+            {
+                // 코루틴 멈춤
+                isPassiveAutoCreateRunning = false;
+                StopCoroutine(passiveAutoCreateCoroutine);
+            }
+            // 선택적: 딜레이가 끝나지 않았다면 reset
+            if (!delayCompleted)
+            {
+                delayCompleted = true;
+            }
         }
     }
+
     
     IEnumerator DelayStartPassiveAutoCreate()
     {
-        yield return new WaitForSeconds(1f); // 1초 딜레이
+        yield return new WaitForSeconds(0.1f); // 1초 딜레이
         isPassiveAutoCreateRunning = true;
         passiveAutoCreateCoroutine = StartCoroutine(PassiveAutoCreateCandy());
         delayCompleted = true;  // 딜레이가 끝났음을 표시

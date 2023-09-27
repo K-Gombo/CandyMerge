@@ -636,11 +636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentQuest: {fileID: 0}
   rewardButton: {fileID: 6933008789301289784}
-  goldIncreaseRate: 0
   maxGoldIncreaseRate: 30
-  equipGoldIncreaseRate: 0
-  equipLuckyGoldProbability: 0
-  luckyGoldProbability: 0
   maxLuckyGoldProbability: 40
   Check1: {fileID: 3207905030570394797}
   Check2: {fileID: 3571808693680839395}

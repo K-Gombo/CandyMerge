@@ -103,8 +103,8 @@ public class UpgradeManager : MonoBehaviour
             luckyCreateLevel++;
 
             // 비용을 1.4배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(12);  // 1.4 * 10
-            BigInteger newCost = (currentLuckyCreateUpCost * multiplier) / 10;  // 1.4배
+            BigInteger multiplier = new BigInteger(12);  
+            BigInteger newCost = (currentLuckyCreateUpCost * multiplier) / 10; 
             currentLuckyCreateUpCost = newCost;
 
             Debug.Log($"캔디 확률 업!: {newLuckyCreate}, 새로운 비용: {currentLuckyCreateUpCost}");
@@ -132,8 +132,8 @@ public class UpgradeManager : MonoBehaviour
             createSpeedLevel++;
 
             // 비용을 1.4배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(13);  // 1.4 * 10
-            BigInteger newCost = (currentCreateSpeedUpCost * multiplier) / 10;  // 1.4배
+            BigInteger multiplier = new BigInteger(13);  
+            BigInteger newCost = (currentCreateSpeedUpCost * multiplier) / 10;  
             currentCreateSpeedUpCost = newCost;
 
             Debug.Log($"생산 쿨타임 감소! 현재 레벨: {createSpeedLevel}, 새로운 쿨타임: {newFillTime}, 새로운 비용: {currentCreateSpeedUpCost}");
@@ -369,8 +369,8 @@ public class UpgradeManager : MonoBehaviour
             luckyGoldLevel++;
 
             // 비용을 1.2배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(114);  // 1.2 * 10
-            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 100;  // 1.2배
+            BigInteger multiplier = new BigInteger(114);  //1.14배
+            BigInteger newCost = (currentLuckyGoldUpCost * multiplier) / 100;  
             currentLuckyGoldUpCost = newCost;
 
             Debug.Log($"골드 2배 확률 업!: {newLuckyGoldUp}, 새로운 비용: {currentLuckyGoldUpCost}");
@@ -398,7 +398,7 @@ public class UpgradeManager : MonoBehaviour
             offLineRewardBonusLevel++;
 
             // 비용을 1.3배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(115);  // 1.3 * 10
+            BigInteger multiplier = new BigInteger(115);  // 1.13 배
             BigInteger newCost = (currentOffLineRewardBonusCost * multiplier) / 100;  // 1.3배
             currentOffLineRewardBonusCost = newCost;
 
@@ -419,7 +419,7 @@ public void LuckyCreateUp(int luckyCreateLevel)
         float currentLuckyCreate = giftBoxController.GetLuckyCreate();
 
             // 비용을 1.4배로 증가시킵니다.
-            BigInteger multiplier = new BigInteger(12);  // 1.4 * 10
+            BigInteger multiplier = new BigInteger(12);  // 1.2배
             BigInteger newCost = (currentLuckyCreateUpCost * multiplier) / 10;  // 1.4배
             currentLuckyCreateUpCost = newCost;
 
@@ -497,7 +497,7 @@ public void RemoveLocked(int count)
             currentRemoveLockedCost = newCost;
         }
 
-    BigInteger totalCost = currentRemoveLockedCost * count; // 요청한 잠금 해제 개수에 따른 전체 비용
+        BigInteger totalCost = currentRemoveLockedCost * count; // 요청한 잠금 해제 개수에 따른 전체 비용
 
 
     for (int i = 0; i < count; i++)
