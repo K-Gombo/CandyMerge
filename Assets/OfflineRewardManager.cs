@@ -30,7 +30,12 @@ public class OfflineRewardManager : MonoBehaviour
 
 
     public void Start_Offline()
-    {
+    {   
+        if (TutorialManager.instance.isTutorialActive)
+        {  
+            return;
+        }
+        
         if (ES3.KeyExists("LAST_LOGIN") && !DidUserClaimReward())
         {
             DateTime lastLogIn = ES3.Load<DateTime>("LAST_LOGIN");

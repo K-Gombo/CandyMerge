@@ -26,7 +26,7 @@ public class EquipmentStatus : MonoBehaviour
     public float goldIncrement;
     public float upgradeGoldIncrement;
     public float maxGoldIncrement;
-    public int upgradeGoldCost;
+    public BigInteger upgradeGoldCost;
     public Text equipLevelText;
     public Text rankLevelText;
     public Button EquipButton; 

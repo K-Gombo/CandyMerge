@@ -22,8 +22,6 @@ public class CurrencyUI : MonoBehaviour
         if (currencyName == "Gold")
         {
             goldText.text = BigIntegerCtrl_global.bigInteger.ChangeMoney(amount);
-            
-
         }
 
         if (currencyName == "Dia")

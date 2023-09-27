@@ -512,8 +512,8 @@ public class EquipmentManager : MonoBehaviour
             // 장비의 equipLevel이 1보다 큰 경우에만 환급
             if (mainEquipment.equipLevel > 1)
             {
-                int returnGold = mainEquipment.upgradeGoldCost / 2;
-                Keiwando.BigInteger.BigInteger returnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)returnGold);
+                Keiwando.BigInteger.BigInteger returnGold = mainEquipment.upgradeGoldCost / 2;
+                Keiwando.BigInteger.BigInteger returnGoldBigInt = returnGold;
                 CurrencyManager.instance.AddCurrency("Gold", returnGoldBigInt);
             }
 
@@ -571,8 +571,8 @@ public class EquipmentManager : MonoBehaviour
                 // 장비의 equipLevel이 1보다 큰 경우에만 환급
                 if (otherEquipment.equipLevel > 1)
                 {
-                    int otherReturnGold = otherEquipment.upgradeGoldCost / 2;
-                    Keiwando.BigInteger.BigInteger otherReturnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)otherReturnGold);
+                    Keiwando.BigInteger.BigInteger otherReturnGold = otherEquipment.upgradeGoldCost / 2;
+                    Keiwando.BigInteger.BigInteger otherReturnGoldBigInt = otherReturnGold;
                     CurrencyManager.instance.AddCurrency("Gold", otherReturnGoldBigInt);
                 }
 
@@ -707,8 +707,8 @@ public class EquipmentManager : MonoBehaviour
                 // mainEquipment의 골드 반환
                 if (mainEquipment.equipLevel > 1)
                 {
-                    int returnGold = mainEquipment.upgradeGoldCost / 2;
-                    Keiwando.BigInteger.BigInteger returnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)returnGold);
+                    Keiwando.BigInteger.BigInteger returnGold = mainEquipment.upgradeGoldCost / 2;
+                    Keiwando.BigInteger.BigInteger returnGoldBigInt = returnGold;
                     CurrencyManager.instance.AddCurrency("Gold", returnGoldBigInt);
                 }
 
@@ -759,8 +759,8 @@ public class EquipmentManager : MonoBehaviour
                     // 장비의 equipLevel이 1보다 큰 경우에만 환급
                     if (otherEquipment.equipLevel > 1)
                     {
-                        int otherReturnGold = otherEquipment.upgradeGoldCost / 2;
-                        Keiwando.BigInteger.BigInteger otherReturnGoldBigInt = new Keiwando.BigInteger.BigInteger((ulong)otherReturnGold);
+                        Keiwando.BigInteger.BigInteger otherReturnGold = otherEquipment.upgradeGoldCost / 2;
+                        Keiwando.BigInteger.BigInteger otherReturnGoldBigInt = otherReturnGold;
                         CurrencyManager.instance.AddCurrency("Gold", otherReturnGoldBigInt);
                     }
 
