@@ -164,7 +164,10 @@ public class LanguageUIManager : MonoBehaviour
         SpecialBoxTitle,
         NormalBoxTitle,
         MixSumLevel,
-        EquipStatusClose
+        EquipStatusClose,
+        TutorialCreate,
+        TutorialMerge,
+        TutorialQuest
         
     }
 
@@ -254,6 +257,9 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.NormalBoxTitle].text = "일반 선물 상자";
                 UILanguageList[(int)UILanguageIndex.MixSumLevel].text = "믹스 레벨";
                 UILanguageList[(int)UILanguageIndex.EquipStatusClose].text = "터치하여 닫기";
+                UILanguageList[(int)UILanguageIndex.TutorialCreate].text = "선물상자를 터치하세요 !";
+                UILanguageList[(int)UILanguageIndex.TutorialMerge].text = "캔디를 이동시켜 합치세요 !";
+                UILanguageList[(int)UILanguageIndex.TutorialQuest].text = "퀘스트를 완료하세요 !";
                 
                 
                 break;
@@ -317,6 +323,9 @@ public class LanguageUIManager : MonoBehaviour
                 UILanguageList[(int)UILanguageIndex.NormalBoxTitle].text = "Normal Gift Box";
                 UILanguageList[(int)UILanguageIndex.MixSumLevel].text = "Mix Level";
                 UILanguageList[(int)UILanguageIndex.EquipStatusClose].text = "Tap To Close";
+                UILanguageList[(int)UILanguageIndex.TutorialCreate].text = "Touch The GiftBox !";
+                UILanguageList[(int)UILanguageIndex.TutorialMerge].text = "Drag To Merge !";
+                UILanguageList[(int)UILanguageIndex.TutorialQuest].text = "Complete the quest !";
                 
                 break;
         }

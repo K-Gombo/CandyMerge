@@ -582,7 +582,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -409, y: 186}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &28690979
 MonoBehaviour:
@@ -6325,6 +6325,9 @@ MonoBehaviour:
   - {fileID: 1189504125}
   - {fileID: 2124135870}
   - {fileID: 936513391}
+  - {fileID: 810526246}
+  - {fileID: 28690979}
+  - {fileID: 1742478000}
   LanguageCode: 0
 --- !u!1 &530248622 stripped
 GameObject:
@@ -34463,7 +34466,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -463, y: 571}
-  m_SizeDelta: {x: 500, y: 100}
+  m_SizeDelta: {x: 550, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1742478000
 MonoBehaviour:
